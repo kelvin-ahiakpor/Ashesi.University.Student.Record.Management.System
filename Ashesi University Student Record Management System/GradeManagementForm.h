@@ -41,6 +41,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	private: System::Windows::Forms::ComboBox^ cboxCourses;
 	private: System::Windows::Forms::TextBox^ txtStudentID;
 	private: System::Windows::Forms::ComboBox^ cboxGrades;
+	private: System::Windows::Forms::Button^ btnSubmitGrade;
 
 	private:
 		/// <summary>
@@ -61,6 +62,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->cboxCourses = (gcnew System::Windows::Forms::ComboBox());
 			this->txtStudentID = (gcnew System::Windows::Forms::TextBox());
 			this->cboxGrades = (gcnew System::Windows::Forms::ComboBox());
+			this->btnSubmitGrade = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// lblStudentID
@@ -113,11 +115,22 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->cboxGrades->Size = System::Drawing::Size(451, 33);
 			this->cboxGrades->TabIndex = 6;
 			// 
+			// btnSubmitGrade
+			// 
+			this->btnSubmitGrade->Location = System::Drawing::Point(107, 556);
+			this->btnSubmitGrade->Name = L"btnSubmitGrade";
+			this->btnSubmitGrade->Size = System::Drawing::Size(176, 47);
+			this->btnSubmitGrade->TabIndex = 7;
+			this->btnSubmitGrade->Text = L"Submit Grade";
+			this->btnSubmitGrade->UseVisualStyleBackColor = true;
+			this->btnSubmitGrade->Click += gcnew System::EventHandler(this, &GradeManagementForm::btnSubmitGrade_Click);
+			// 
 			// GradeManagementForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(12, 25);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1258, 738);
+			this->ClientSize = System::Drawing::Size(818, 672);
+			this->Controls->Add(this->btnSubmitGrade);
 			this->Controls->Add(this->cboxGrades);
 			this->Controls->Add(this->txtStudentID);
 			this->Controls->Add(this->cboxCourses);
@@ -131,5 +144,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 
 		}
 #pragma endregion
-	};
+	private: System::Void btnSubmitGrade_Click(System::Object^ sender, System::EventArgs^ e) {
+		MessageBox::Show("Grade submitted successfully.");
+	}
+};
 }

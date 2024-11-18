@@ -83,6 +83,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->btnEnroll->TabIndex = 2;
 			this->btnEnroll->Text = L"Enroll";
 			this->btnEnroll->UseVisualStyleBackColor = true;
+			this->btnEnroll->Click += gcnew System::EventHandler(this, &StudentEnrollmentForm::btnEnroll_Click);
 			// 
 			// StudentEnrollmentForm
 			// 
@@ -99,5 +100,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 
 		}
 #pragma endregion
+	private: System::Void btnEnroll_Click(System::Object^ sender, System::EventArgs^ e) {
+		MessageBox::Show("Enrollment functionality coming soon.");
+	}
 	};
 }

@@ -1,4 +1,7 @@
 #pragma once
+#include "StudentDashboardForm.h"
+#include "FacultyDashboardForm.h"
+#include "AdminDashboardForm.h"
 
 namespace AshesiUniversityStudentRecordManagementSystem {
 
@@ -79,6 +82,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->btnStudentDashboard->TabIndex = 1;
 			this->btnStudentDashboard->Text = L"STUDENTS";
 			this->btnStudentDashboard->UseVisualStyleBackColor = true;
+			this->btnStudentDashboard->Click += gcnew System::EventHandler(this, &MainMenuForm::btnStudentDashboard_Click);
 			// 
 			// btnFacultyDashboard
 			// 
@@ -88,6 +92,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->btnFacultyDashboard->TabIndex = 2;
 			this->btnFacultyDashboard->Text = L"FACULTY";
 			this->btnFacultyDashboard->UseVisualStyleBackColor = true;
+			this->btnFacultyDashboard->Click += gcnew System::EventHandler(this, &MainMenuForm::btnFacultyDashboard_Click);
 			// 
 			// btnAdminDashboard
 			// 
@@ -97,6 +102,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->btnAdminDashboard->TabIndex = 3;
 			this->btnAdminDashboard->Text = L"ADMIN";
 			this->btnAdminDashboard->UseVisualStyleBackColor = true;
+			this->btnAdminDashboard->Click += gcnew System::EventHandler(this, &MainMenuForm::btnAdminDashboard_Click);
 			// 
 			// MainMenuForm
 			// 
@@ -109,10 +115,32 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->Controls->Add(this->lblWelcome);
 			this->Name = L"MainMenuForm";
 			this->Text = L"MainMenuForm";
+			this->Load += gcnew System::EventHandler(this, &MainMenuForm::MainMenuForm_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
-	};
+	private: System::Void btnStudentDashboard_Click(System::Object^ sender, System::EventArgs^ e) {
+		StudentDashboardForm^ studentForm = gcnew StudentDashboardForm();
+		this->Hide();
+		studentForm->ShowDialog();
+		this->Show();  // Re-show MainMenuForm after closing StudentDashboardForm
+
+	}
+private: System::Void btnFacultyDashboard_Click(System::Object^ sender, System::EventArgs^ e) {
+	FacultyDashboardForm^ facultyForm = gcnew FacultyDashboardForm();
+	this->Hide();
+	facultyForm->ShowDialog();
+	this->Show();
+}
+private: System::Void btnAdminDashboard_Click(System::Object^ sender, System::EventArgs^ e) {
+	AdminDashboardForm^ adminForm = gcnew AdminDashboardForm();
+	this->Hide();
+	adminForm->ShowDialog();
+	this->Show();
+}
+private: System::Void MainMenuForm_Load(System::Object^ sender, System::EventArgs^ e) {
+}
+};
 }

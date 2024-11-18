@@ -1,4 +1,9 @@
 #pragma once
+#include "AdminDashboardForm.h"
+#include "StudentEnrollmentForm.h"
+#include "FacultyDashboardForm.h"
+#include "CourseManagementForm.h"
+#include "TranscriptForm.h"
 
 namespace AshesiUniversityStudentRecordManagementSystem {
 
@@ -83,6 +88,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->btnManageStudents->TabIndex = 1;
 			this->btnManageStudents->Text = L"Manage Students";
 			this->btnManageStudents->UseVisualStyleBackColor = true;
+			this->btnManageStudents->Click += gcnew System::EventHandler(this, &AdminDashboardForm::btnManageStudents_Click);
 			// 
 			// btnManageFaculty
 			// 
@@ -92,6 +98,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->btnManageFaculty->TabIndex = 2;
 			this->btnManageFaculty->Text = L"Manage Faculty";
 			this->btnManageFaculty->UseVisualStyleBackColor = true;
+			this->btnManageFaculty->Click += gcnew System::EventHandler(this, &AdminDashboardForm::btnManageFaculty_Click);
 			// 
 			// btnManageCourses
 			// 
@@ -101,6 +108,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->btnManageCourses->TabIndex = 3;
 			this->btnManageCourses->Text = L"Manage Courses";
 			this->btnManageCourses->UseVisualStyleBackColor = true;
+			this->btnManageCourses->Click += gcnew System::EventHandler(this, &AdminDashboardForm::btnManageCourses_Click);
 			// 
 			// btnGenerateReports
 			// 
@@ -110,6 +118,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->btnGenerateReports->TabIndex = 4;
 			this->btnGenerateReports->Text = L"Generate Reports";
 			this->btnGenerateReports->UseVisualStyleBackColor = true;
+			this->btnGenerateReports->Click += gcnew System::EventHandler(this, &AdminDashboardForm::btnGenerateReports_Click);
 			// 
 			// AdminDashboardForm
 			// 
@@ -128,5 +137,29 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 
 		}
 #pragma endregion
-	};
+	private: System::Void btnManageStudents_Click(System::Object^ sender, System::EventArgs^ e) {
+		StudentEnrollmentForm^ studentForm = gcnew StudentEnrollmentForm();
+		this->Hide();
+		studentForm->ShowDialog();
+		this->Show();
+	}
+private: System::Void btnManageFaculty_Click(System::Object^ sender, System::EventArgs^ e) {
+	FacultyDashboardForm^ facultyForm = gcnew FacultyDashboardForm();
+	this->Hide();
+	facultyForm->ShowDialog();
+	this->Show();
+}
+private: System::Void btnManageCourses_Click(System::Object^ sender, System::EventArgs^ e) {
+	CourseManagementForm^ courseForm = gcnew CourseManagementForm();
+	this->Hide();
+	courseForm->ShowDialog();
+	this->Show();
+}
+private: System::Void btnGenerateReports_Click(System::Object^ sender, System::EventArgs^ e) {
+	TranscriptForm^ transcriptForm = gcnew TranscriptForm();
+	this->Hide();
+	transcriptForm->ShowDialog();
+	this->Show();
+}
+};
 }

@@ -1,4 +1,8 @@
 #pragma once
+#include "StudentEnrollmentForm.h"
+#include "GradeManagementForm.h"
+#include "TranscriptForm.h"
+#include "ProfileManagementForm.h"
 
 namespace AshesiUniversityStudentRecordManagementSystem {
 
@@ -78,6 +82,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->btnEnrollInCourse->TabIndex = 1;
 			this->btnEnrollInCourse->Text = L"Enroll Course";
 			this->btnEnrollInCourse->UseVisualStyleBackColor = true;
+			this->btnEnrollInCourse->Click += gcnew System::EventHandler(this, &StudentDashboardForm::btnEnrollInCourse_Click);
 			// 
 			// btnViewGrades
 			// 
@@ -87,6 +92,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->btnViewGrades->TabIndex = 2;
 			this->btnViewGrades->Text = L"View Grades";
 			this->btnViewGrades->UseVisualStyleBackColor = true;
+			this->btnViewGrades->Click += gcnew System::EventHandler(this, &StudentDashboardForm::btnViewGrades_Click);
 			// 
 			// btnViewTranscript
 			// 
@@ -96,6 +102,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->btnViewTranscript->TabIndex = 3;
 			this->btnViewTranscript->Text = L"View Transcript";
 			this->btnViewTranscript->UseVisualStyleBackColor = true;
+			this->btnViewTranscript->Click += gcnew System::EventHandler(this, &StudentDashboardForm::btnViewTranscript_Click);
 			// 
 			// btnManageProfile
 			// 
@@ -105,6 +112,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->btnManageProfile->TabIndex = 4;
 			this->btnManageProfile->Text = L"Manage Profile";
 			this->btnManageProfile->UseVisualStyleBackColor = true;
+			this->btnManageProfile->Click += gcnew System::EventHandler(this, &StudentDashboardForm::btnManageProfile_Click);
 			// 
 			// StudentDashboardForm
 			// 
@@ -123,5 +131,29 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 
 		}
 #pragma endregion
-	};
+	private: System::Void btnEnrollInCourse_Click(System::Object^ sender, System::EventArgs^ e) {
+		StudentEnrollmentForm^ enrollForm = gcnew StudentEnrollmentForm();
+		this->Hide();  // Hide the Student Dashboard
+		enrollForm->ShowDialog();  // Show the Enrollment Form
+		this->Show();  // Re-show the Student Dashboard after closing Enrollment Form
+	}
+private: System::Void btnViewGrades_Click(System::Object^ sender, System::EventArgs^ e) {
+	GradeManagementForm^ gradeForm = gcnew GradeManagementForm();
+	this->Hide();
+	gradeForm->ShowDialog();
+	this->Show();
+}
+private: System::Void btnViewTranscript_Click(System::Object^ sender, System::EventArgs^ e) {
+	TranscriptForm^ transcriptForm = gcnew TranscriptForm();
+	this->Hide();
+	transcriptForm->ShowDialog();
+	this->Show();
+}
+private: System::Void btnManageProfile_Click(System::Object^ sender, System::EventArgs^ e) {
+	ProfileManagementForm^ profileForm = gcnew ProfileManagementForm();
+	this->Hide();
+	profileForm->ShowDialog();
+	this->Show();
+}
+};
 }

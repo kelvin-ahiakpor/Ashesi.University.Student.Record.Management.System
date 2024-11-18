@@ -147,6 +147,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->btnSaveProfile->TabIndex = 8;
 			this->btnSaveProfile->Text = L"Save Profile";
 			this->btnSaveProfile->UseVisualStyleBackColor = true;
+			this->btnSaveProfile->Click += gcnew System::EventHandler(this, &ProfileManagementForm::btnSaveProfile_Click);
 			// 
 			// ProfileManagementForm
 			// 
@@ -169,5 +170,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 
 		}
 #pragma endregion
-	};
+	private: System::Void btnSaveProfile_Click(System::Object^ sender, System::EventArgs^ e) {
+		MessageBox::Show("Profile saved successfully.");
+	}
+};
 }

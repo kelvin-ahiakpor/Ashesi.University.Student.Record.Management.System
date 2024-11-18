@@ -85,6 +85,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->btnViewTranscript->TabIndex = 2;
 			this->btnViewTranscript->Text = L"View Transcript";
 			this->btnViewTranscript->UseVisualStyleBackColor = true;
+			this->btnViewTranscript->Click += gcnew System::EventHandler(this, &TranscriptForm::btnViewTranscript_Click);
 			// 
 			// richTxtTranscript
 			// 
@@ -102,6 +103,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->btnPrintTranscript->TabIndex = 4;
 			this->btnPrintTranscript->Text = L"Print Transcript";
 			this->btnPrintTranscript->UseVisualStyleBackColor = true;
+			this->btnPrintTranscript->Click += gcnew System::EventHandler(this, &TranscriptForm::btnPrintTranscript_Click);
 			// 
 			// TranscriptForm
 			// 
@@ -120,5 +122,11 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 
 		}
 #pragma endregion
-	};
+	private: System::Void btnViewTranscript_Click(System::Object^ sender, System::EventArgs^ e) {
+		MessageBox::Show("Transcript viewing functionality coming soon.");
+	}
+private: System::Void btnPrintTranscript_Click(System::Object^ sender, System::EventArgs^ e) {
+	MessageBox::Show("Transcript printing functionality coming soon.");
+}
+};
 }

@@ -1,4 +1,7 @@
 #pragma once
+#include "CourseManagementForm.h"
+#include "GradeManagementForm.h"
+#include "FacultyDashboardForm.h"
 
 namespace AshesiUniversityStudentRecordManagementSystem {
 
@@ -86,6 +89,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->btnManageCourses->TabIndex = 1;
 			this->btnManageCourses->Text = L"Manage Courses";
 			this->btnManageCourses->UseVisualStyleBackColor = true;
+			this->btnManageCourses->Click += gcnew System::EventHandler(this, &FacultyDashboardForm::btnManageCourses_Click);
 			// 
 			// btnEnterGrades
 			// 
@@ -95,6 +99,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->btnEnterGrades->TabIndex = 2;
 			this->btnEnterGrades->Text = L"Enter Grades";
 			this->btnEnterGrades->UseVisualStyleBackColor = true;
+			this->btnEnterGrades->Click += gcnew System::EventHandler(this, &FacultyDashboardForm::btnEnterGrades_Click);
 			// 
 			// btnViewRoster
 			// 
@@ -104,6 +109,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->btnViewRoster->TabIndex = 3;
 			this->btnViewRoster->Text = L"View Roster";
 			this->btnViewRoster->UseVisualStyleBackColor = true;
+			this->btnViewRoster->Click += gcnew System::EventHandler(this, &FacultyDashboardForm::btnViewRoster_Click);
 			// 
 			// btnManageProfile
 			// 
@@ -131,5 +137,20 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 
 		}
 #pragma endregion
-	};
+	private: System::Void btnManageCourses_Click(System::Object^ sender, System::EventArgs^ e) {
+		CourseManagementForm^ courseForm = gcnew CourseManagementForm();
+		this->Hide();
+		courseForm->ShowDialog();
+		this->Show();
+	}
+private: System::Void btnEnterGrades_Click(System::Object^ sender, System::EventArgs^ e) {
+	GradeManagementForm^ gradeForm = gcnew GradeManagementForm();
+	this->Hide();
+	gradeForm->ShowDialog();
+	this->Show();
+}
+private: System::Void btnViewRoster_Click(System::Object^ sender, System::EventArgs^ e) {
+	MessageBox::Show("Class roster functionality coming soon.");
+}
+};
 }

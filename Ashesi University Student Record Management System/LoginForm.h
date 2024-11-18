@@ -1,4 +1,5 @@
 #pragma once
+#include "MainMenuForm.h"
 
 namespace AshesiUniversityStudentRecordManagementSystem {
 
@@ -116,6 +117,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->btnLogin->TabIndex = 5;
 			this->btnLogin->Text = L"Login";
 			this->btnLogin->UseVisualStyleBackColor = true;
+			this->btnLogin->Click += gcnew System::EventHandler(this, &LoginForm::btnLogin_Click);
 			// 
 			// LoginForm
 			// 
@@ -135,5 +137,12 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 
 		}
 #pragma endregion
-	};
+	private: System::Void btnLogin_Click(System::Object^ sender, System::EventArgs^ e) {
+		// Example login logic
+		MainMenuForm^ mainMenu = gcnew MainMenuForm();
+		this->Hide();  // Hide LoginForm
+		mainMenu->ShowDialog();
+		this->Show();  // Re-show LoginForm after MainMenuForm is closed (optional)
+	}
+};
 }

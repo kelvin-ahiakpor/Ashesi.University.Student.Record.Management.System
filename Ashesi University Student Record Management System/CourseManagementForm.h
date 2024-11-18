@@ -126,6 +126,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->btnSaveCourse->TabIndex = 6;
 			this->btnSaveCourse->Text = L"Save Course";
 			this->btnSaveCourse->UseVisualStyleBackColor = true;
+			this->btnSaveCourse->Click += gcnew System::EventHandler(this, &CourseManagementForm::btnSaveCourse_Click);
 			// 
 			// btnDeleteCourse
 			// 
@@ -135,6 +136,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->btnDeleteCourse->TabIndex = 7;
 			this->btnDeleteCourse->Text = L"Delete Course";
 			this->btnDeleteCourse->UseVisualStyleBackColor = true;
+			this->btnDeleteCourse->Click += gcnew System::EventHandler(this, &CourseManagementForm::btnDeleteCourse_Click);
 			// 
 			// btnEditCourse
 			// 
@@ -166,5 +168,11 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 
 		}
 #pragma endregion
-	};
+	private: System::Void btnSaveCourse_Click(System::Object^ sender, System::EventArgs^ e) {
+		MessageBox::Show("Course saved successfully.");
+	}
+private: System::Void btnDeleteCourse_Click(System::Object^ sender, System::EventArgs^ e) {
+	MessageBox::Show("Course deleted successfully.");
+}
+};
 }
