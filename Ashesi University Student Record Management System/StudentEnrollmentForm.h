@@ -34,6 +34,11 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 				delete components;
 			}
 		}
+	private: System::Windows::Forms::Label^ lblAvailableCourses;
+	private: System::Windows::Forms::ComboBox^ cboxAvailableCourses;
+	protected:
+
+	private: System::Windows::Forms::Button^ btnEnroll;
 
 	private:
 		/// <summary>
@@ -48,16 +53,49 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			this->lblAvailableCourses = (gcnew System::Windows::Forms::Label());
+			this->cboxAvailableCourses = (gcnew System::Windows::Forms::ComboBox());
+			this->btnEnroll = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
+			// 
+			// lblAvailableCourses
+			// 
+			this->lblAvailableCourses->AutoSize = true;
+			this->lblAvailableCourses->Location = System::Drawing::Point(67, 64);
+			this->lblAvailableCourses->Name = L"lblAvailableCourses";
+			this->lblAvailableCourses->Size = System::Drawing::Size(186, 25);
+			this->lblAvailableCourses->TabIndex = 0;
+			this->lblAvailableCourses->Text = L"Available Courses";
+			// 
+			// cboxAvailableCourses
+			// 
+			this->cboxAvailableCourses->FormattingEnabled = true;
+			this->cboxAvailableCourses->Location = System::Drawing::Point(72, 149);
+			this->cboxAvailableCourses->Name = L"cboxAvailableCourses";
+			this->cboxAvailableCourses->Size = System::Drawing::Size(437, 33);
+			this->cboxAvailableCourses->TabIndex = 1;
+			// 
+			// btnEnroll
+			// 
+			this->btnEnroll->Location = System::Drawing::Point(581, 149);
+			this->btnEnroll->Name = L"btnEnroll";
+			this->btnEnroll->Size = System::Drawing::Size(181, 33);
+			this->btnEnroll->TabIndex = 2;
+			this->btnEnroll->Text = L"Enroll";
+			this->btnEnroll->UseVisualStyleBackColor = true;
 			// 
 			// StudentEnrollmentForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(12, 25);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1405, 760);
+			this->ClientSize = System::Drawing::Size(799, 546);
+			this->Controls->Add(this->btnEnroll);
+			this->Controls->Add(this->cboxAvailableCourses);
+			this->Controls->Add(this->lblAvailableCourses);
 			this->Name = L"StudentEnrollmentForm";
 			this->Text = L"StudentEnrollmentForm";
 			this->ResumeLayout(false);
+			this->PerformLayout();
 
 		}
 #pragma endregion

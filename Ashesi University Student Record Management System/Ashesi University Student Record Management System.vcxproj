@@ -80,6 +80,7 @@
     <ClCompile Include="LoginForm.cpp" />
     <ClCompile Include="MainMenuForm.cpp" />
     <ClCompile Include="ProfileManagementForm.cpp" />
+    <ClCompile Include="Program.cpp" />
     <ClCompile Include="StudentDashboardForm.cpp" />
     <ClCompile Include="StudentEnrollmentForm.cpp" />
     <ClCompile Include="TranscriptForm.cpp" />
