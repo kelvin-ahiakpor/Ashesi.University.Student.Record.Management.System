@@ -27,13 +27,94 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AdminDashboardForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="CourseManagementForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Faculty.h" />
     <ClInclude Include="Course.h" />
     <ClInclude Include="DatabaseManager.h" />
     <ClInclude Include="Enrollment.h" />
     <ClInclude Include="CourseOffering.h" />
+    <ClInclude Include="FacultyDashboardForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="GradeManagementForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="LoginForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="MainMenuForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="ProfileManagementForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Student.h" />
+    <ClInclude Include="StudentDashboardForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="StudentEnrollmentForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="TranscriptForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="User.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AdminDashboardForm.cpp" />
+    <ClCompile Include="CourseManagementForm.cpp" />
+    <ClCompile Include="FacultyDashboardForm.cpp" />
+    <ClCompile Include="GradeManagementForm.cpp" />
+    <ClCompile Include="LoginForm.cpp" />
+    <ClCompile Include="MainMenuForm.cpp" />
+    <ClCompile Include="ProfileManagementForm.cpp" />
+    <ClCompile Include="StudentDashboardForm.cpp" />
+    <ClCompile Include="StudentEnrollmentForm.cpp" />
+    <ClCompile Include="TranscriptForm.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AdminDashboardForm.resx">
+      <DependentUpon>AdminDashboardForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CourseManagementForm.resx">
+      <DependentUpon>CourseManagementForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FacultyDashboardForm.resx">
+      <DependentUpon>FacultyDashboardForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GradeManagementForm.resx">
+      <DependentUpon>GradeManagementForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginForm.resx">
+      <DependentUpon>LoginForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainMenuForm.resx">
+      <DependentUpon>MainMenuForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProfileManagementForm.resx">
+      <DependentUpon>ProfileManagementForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StudentDashboardForm.resx">
+      <DependentUpon>StudentDashboardForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StudentEnrollmentForm.resx">
+      <DependentUpon>StudentEnrollmentForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TranscriptForm.resx">
+      <DependentUpon>TranscriptForm.h</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -118,6 +199,8 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies />
+      <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>main</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
