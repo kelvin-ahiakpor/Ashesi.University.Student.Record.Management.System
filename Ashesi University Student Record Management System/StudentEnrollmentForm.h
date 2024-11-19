@@ -93,7 +93,9 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->Controls->Add(this->btnEnroll);
 			this->Controls->Add(this->cboxAvailableCourses);
 			this->Controls->Add(this->lblAvailableCourses);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 			this->Name = L"StudentEnrollmentForm";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
 			this->Text = L"StudentEnrollmentForm";
 			this->ResumeLayout(false);
 			this->PerformLayout();

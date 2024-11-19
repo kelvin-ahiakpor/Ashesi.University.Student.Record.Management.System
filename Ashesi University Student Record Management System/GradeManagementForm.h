@@ -137,7 +137,9 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->Controls->Add(this->lblGrade);
 			this->Controls->Add(this->lblCourses);
 			this->Controls->Add(this->lblStudentID);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 			this->Name = L"GradeManagementForm";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
 			this->Text = L"GradeManagementForm";
 			this->ResumeLayout(false);
 			this->PerformLayout();

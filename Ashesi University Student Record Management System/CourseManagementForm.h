@@ -161,7 +161,9 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->Controls->Add(this->lblPrerequisites);
 			this->Controls->Add(this->lblCredits);
 			this->Controls->Add(this->lblCourseName);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 			this->Name = L"CourseManagementForm";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
 			this->Text = L"CourseManagementForm";
 			this->ResumeLayout(false);
 			this->PerformLayout();

@@ -163,7 +163,9 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->Controls->Add(this->lblEmail);
 			this->Controls->Add(this->lblLastName);
 			this->Controls->Add(this->lblFirstName);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 			this->Name = L"ProfileManagementForm";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
 			this->Text = L"ProfileManagementForm";
 			this->ResumeLayout(false);
 			this->PerformLayout();

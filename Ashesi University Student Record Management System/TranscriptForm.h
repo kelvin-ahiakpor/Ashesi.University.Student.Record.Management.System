@@ -115,7 +115,9 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->Controls->Add(this->btnViewTranscript);
 			this->Controls->Add(this->txtStudentID);
 			this->Controls->Add(this->lblStudentID);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 			this->Name = L"TranscriptForm";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
 			this->Text = L"TranscriptForm";
 			this->ResumeLayout(false);
 			this->PerformLayout();

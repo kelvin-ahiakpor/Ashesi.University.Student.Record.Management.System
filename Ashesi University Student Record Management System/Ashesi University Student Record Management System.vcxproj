@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -47,12 +47,16 @@
     <ClInclude Include="LoginForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="MainApplicationForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="MainMenuForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="ProfileManagementForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Student.h" />
     <ClInclude Include="StudentDashboardForm.h">
       <FileType>CppForm</FileType>
@@ -66,6 +70,9 @@
     <ClInclude Include="User.h" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\MySQL\MySQL Connector NET 9.1\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -78,6 +85,7 @@
     <ClCompile Include="FacultyDashboardForm.cpp" />
     <ClCompile Include="GradeManagementForm.cpp" />
     <ClCompile Include="LoginForm.cpp" />
+    <ClCompile Include="MainApplicationForm.cpp" />
     <ClCompile Include="MainMenuForm.cpp" />
     <ClCompile Include="ProfileManagementForm.cpp" />
     <ClCompile Include="Program.cpp" />
@@ -101,6 +109,9 @@
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MainApplicationForm.resx">
+      <DependentUpon>MainApplicationForm.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainMenuForm.resx">
       <DependentUpon>MainMenuForm.h</DependentUpon>
     </EmbeddedResource>
@@ -116,6 +127,12 @@
     <EmbeddedResource Include="TranscriptForm.resx">
       <DependentUpon>TranscriptForm.h</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ProjectResources.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="\\.psf\Home\Library\CloudStorage\OneDrive-AshesiUniversity\ASHESI\3RD YEAR\SEM 1\Intermediate Computer Programming\project\ashesi-logo.ico" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
