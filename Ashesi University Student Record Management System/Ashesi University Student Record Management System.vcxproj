@@ -50,9 +50,6 @@
     <ClInclude Include="MainApplicationForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="MainMenuForm.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
     <ClInclude Include="ProfileManagementForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -71,7 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MySql.Data">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\MySQL\MySQL Connector NET 9.1\MySql.Data.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\MySQL\mysql-for-visualstudio-2\v46\mysql.data.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -86,7 +83,6 @@
     <ClCompile Include="GradeManagementForm.cpp" />
     <ClCompile Include="LoginForm.cpp" />
     <ClCompile Include="MainApplicationForm.cpp" />
-    <ClCompile Include="MainMenuForm.cpp" />
     <ClCompile Include="ProfileManagementForm.cpp" />
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="StudentDashboardForm.cpp" />
@@ -96,6 +92,7 @@
   <ItemGroup>
     <EmbeddedResource Include="AdminDashboardForm.resx">
       <DependentUpon>AdminDashboardForm.h</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="CourseManagementForm.resx">
       <DependentUpon>CourseManagementForm.h</DependentUpon>
@@ -111,9 +108,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainApplicationForm.resx">
       <DependentUpon>MainApplicationForm.h</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MainMenuForm.resx">
-      <DependentUpon>MainMenuForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProfileManagementForm.resx">
       <DependentUpon>ProfileManagementForm.h</DependentUpon>

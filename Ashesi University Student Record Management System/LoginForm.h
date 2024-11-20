@@ -1,5 +1,5 @@
 #pragma once
-#include "MainMenuForm.h"
+#include "MainApplicationForm.h"
 
 namespace AshesiUniversityStudentRecordManagementSystem {
 
@@ -9,20 +9,31 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace MySql::Data::MySqlClient;
 
 	/// <summary>
 	/// Summary for LoginForm
 	/// </summary>
 	public ref class LoginForm : public System::Windows::Forms::Form
 	{
+		MySqlConnection^ sqlConn;
+		MySqlCommand^ sqlCmd;
+		DataTable^ sqlDt;
+		MySqlDataAdapter^ sqlDtA;
+
 	public:
 		LoginForm(void)
 		{
 			InitializeComponent();
+			sqlConn = gcnew MySqlConnection();
+			sqlCmd = gcnew MySqlCommand();
+			sqlDt = gcnew DataTable();
+			sqlDtA = gcnew MySqlDataAdapter();
 			//
 			//TODO: Add the constructor code here
 			//
 		}
+		MySqlDataReader^ sqlRd;
 
 	protected:
 		/// <summary>
@@ -162,17 +173,14 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->Name = L"LoginForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
 			this->Text = L"LoginForm";
+			this->Load += gcnew System::EventHandler(this, &LoginForm::LoginForm_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
-	private: System::Void btnLogin_Click(System::Object^ sender, System::EventArgs^ e) {
-		// Example login logic
-		MainMenuForm^ mainMenu = gcnew MainMenuForm();
-		this->Hide();  // Hide LoginForm
-		mainMenu->ShowDialog();
-		this->Show();  // Re-show LoginForm after MainMenuForm is closed (optional)
-	}
+	private: System::Void btnLogin_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void LoginForm_Load(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void ConnectToDatabase(); // Add the method declaration
 };
 }
