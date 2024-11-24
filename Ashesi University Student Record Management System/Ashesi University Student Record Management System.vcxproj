@@ -33,9 +33,9 @@
     <ClInclude Include="CourseManagementForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="DatabaseManager.h" />
     <ClInclude Include="Faculty.h" />
     <ClInclude Include="Course.h" />
-    <ClInclude Include="DatabaseManager.h" />
     <ClInclude Include="Enrollment.h" />
     <ClInclude Include="CourseOffering.h" />
     <ClInclude Include="FacultyDashboardForm.h">
