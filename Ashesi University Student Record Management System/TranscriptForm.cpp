@@ -5,7 +5,7 @@ using namespace System;
 using namespace System::Windows::Forms;
 
 
-System::Void btnViewTranscript_Click(System::Object^ sender, System::EventArgs^ e) {
+System::Void TranscriptForm::btnViewTranscript_Click(System::Object^ sender, System::EventArgs^ e) {
     try {
         // Get the database manager instance
         DatabaseManager^ db = DatabaseManager::GetInstance();
@@ -63,3 +63,4 @@ System::Void btnViewTranscript_Click(System::Object^ sender, System::EventArgs^ 
         MessageBox::Show("Error retrieving transcript: " + ex->Message, "Database Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
     }
 }
+
