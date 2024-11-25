@@ -148,6 +148,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// btnCancel
 			// 
+			this->btnCancel->DialogResult = System::Windows::Forms::DialogResult::Cancel;
 			this->btnCancel->Location = System::Drawing::Point(401, 403);
 			this->btnCancel->Name = L"btnCancel";
 			this->btnCancel->Size = System::Drawing::Size(153, 52);
@@ -157,8 +158,10 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// LoginForm
 			// 
+			this->AcceptButton = this->btnLogin;
 			this->AutoScaleDimensions = System::Drawing::SizeF(12, 25);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->CancelButton = this->btnCancel;
 			this->ClientSize = System::Drawing::Size(772, 534);
 			this->Controls->Add(this->btnCancel);
 			this->Controls->Add(this->lnklblPasswordReset);
@@ -181,6 +184,5 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 #pragma endregion
 	private: System::Void btnLogin_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void LoginForm_Load(System::Object^ sender, System::EventArgs^ e);
-	private: System::Void ConnectToDatabase(); // Add the method declaration
 };
 }
