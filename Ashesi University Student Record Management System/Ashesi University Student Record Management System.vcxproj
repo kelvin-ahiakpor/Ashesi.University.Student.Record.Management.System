@@ -33,9 +33,10 @@
     <ClInclude Include="CourseManagementForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="DatabaseManager.h" />
+    <ClInclude Include="EnvLoader.h" />
     <ClInclude Include="Faculty.h" />
     <ClInclude Include="Course.h" />
+    <ClInclude Include="DatabaseManager.h" />
     <ClInclude Include="Enrollment.h" />
     <ClInclude Include="CourseOffering.h" />
     <ClInclude Include="FacultyDashboardForm.h">
@@ -68,7 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MySql.Data">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\MySQL\MySQL Connector NET 9.1\MySql.Data.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\mysql-for-visualstudio-2.0.5-noinstall\v46\mysql.data.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
