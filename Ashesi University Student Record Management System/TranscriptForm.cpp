@@ -9,7 +9,6 @@ System::Void TranscriptForm::btnViewTranscript_Click(System::Object^ sender, Sys
     try {
         // Get the database manager instance
         DatabaseManager^ db = DatabaseManager::GetInstance();
-        db->ConnectToDatabase();
 
         // Get the UserID from the input field
         String^ userID = txtStudentID->Text;
@@ -20,12 +19,37 @@ System::Void TranscriptForm::btnViewTranscript_Click(System::Object^ sender, Sys
             return;
         }
 
-        // Define the SQL query
-        String^ query = "SELECT * FROM Transcripts WHERE UserID = @userID";
+        // Define the SQL query to retrieve the transcript information
+        String^ query = R"(
+            SELECT 
+        s.StudentID, 
+        c.CourseName, 
+        eo.Semester, 
+        eo.Year, 
+        eo.Schedule, 
+        eo.Room, 
+        eo.Status AS OfferingStatus, 
+        f.FacultyName, 
+        e.Grade
+    FROM 
+        Enrollments e
+    JOIN 
+        Students s ON e.StudentID = s.StudentID
+    JOIN 
+        CourseOfferings eo ON e.OfferingID = eo.OfferingID
+    JOIN 
+        Courses c ON eo.CourseID = c.CourseID
+    JOIN 
+        Faculty f ON eo.FacultyID = f.FacultyID
+    WHERE 
+        s.StudentID = @userID
+    ORDER BY 
+        eo.Year DESC, eo.Semester DESC;
+        )";
 
         // Create the command
         MySqlCommand^ cmd = gcnew MySqlCommand(query, db->GetConnection());
-        cmd->Parameters->AddWithValue("@userID", userID);
+        cmd->Parameters->AddWithValue("@userID", userID); // Bind the student ID parameter
 
         // Execute the query
         MySqlDataReader^ reader = cmd->ExecuteReader();
@@ -40,23 +64,30 @@ System::Void TranscriptForm::btnViewTranscript_Click(System::Object^ sender, Sys
 
             // Loop through the results and display them
             while (reader->Read()) {
-                String^ transcriptID = reader["TranscriptID"]->ToString();
+                String^ studentid = reader["StudentID"]->ToString();
                 String^ courseName = reader["CourseName"]->ToString();
+                String^ semester = reader["Semester"]->ToString();
+                String^ year = reader["Year"]->ToString();
+                String^ schedule = reader["Schedule"]->ToString();
+                String^ room = reader["Room"]->ToString();
+                String^ offeringStatus = reader["OfferingStatus"]->ToString();
+                String^ facultyName = reader["FacultyName"]->ToString();
                 String^ grade = reader["Grade"]->ToString();
-                String^ term = reader["Term"]->ToString();
 
                 // Append the transcript details to the RichTextBox
-                richTxtTranscript->AppendText("Transcript ID: " + transcriptID + "\n");
+                richTxtTranscript->AppendText("Student: " + studentid + "\n");
                 richTxtTranscript->AppendText("Course: " + courseName + "\n");
+                richTxtTranscript->AppendText("Semester: " + semester + ", Year: " + year + "\n");
+                richTxtTranscript->AppendText("Schedule: " + schedule + ", Room: " + room + "\n");
+                richTxtTranscript->AppendText("Offering Status: " + offeringStatus + "\n");
+                richTxtTranscript->AppendText("Faculty: " + facultyName + "\n");
                 richTxtTranscript->AppendText("Grade: " + grade + "\n");
-                richTxtTranscript->AppendText("Term: " + term + "\n");
                 richTxtTranscript->AppendText("-------------------------------\n");
             }
         }
 
-        // Close the reader and database connection
+        // Close the reader
         reader->Close();
-        db->CloseConnection();
     }
     catch (Exception^ ex) {
         // Handle errors
