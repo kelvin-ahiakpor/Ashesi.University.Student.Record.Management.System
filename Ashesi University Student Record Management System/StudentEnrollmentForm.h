@@ -61,25 +61,29 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// lblAvailableCourses
 			// 
 			this->lblAvailableCourses->AutoSize = true;
-			this->lblAvailableCourses->Location = System::Drawing::Point(67, 64);
+			this->lblAvailableCourses->Location = System::Drawing::Point(45, 41);
+			this->lblAvailableCourses->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->lblAvailableCourses->Name = L"lblAvailableCourses";
-			this->lblAvailableCourses->Size = System::Drawing::Size(186, 25);
+			this->lblAvailableCourses->Size = System::Drawing::Size(117, 16);
 			this->lblAvailableCourses->TabIndex = 0;
 			this->lblAvailableCourses->Text = L"Available Courses";
 			// 
 			// cboxAvailableCourses
 			// 
 			this->cboxAvailableCourses->FormattingEnabled = true;
-			this->cboxAvailableCourses->Location = System::Drawing::Point(72, 149);
+			this->cboxAvailableCourses->Location = System::Drawing::Point(48, 95);
+			this->cboxAvailableCourses->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->cboxAvailableCourses->Name = L"cboxAvailableCourses";
-			this->cboxAvailableCourses->Size = System::Drawing::Size(437, 33);
+			this->cboxAvailableCourses->Size = System::Drawing::Size(293, 24);
 			this->cboxAvailableCourses->TabIndex = 1;
+			this->cboxAvailableCourses->SelectedIndexChanged += gcnew System::EventHandler(this, &StudentEnrollmentForm::cboxAvailableCourses_SelectedIndexChanged);
 			// 
 			// btnEnroll
 			// 
-			this->btnEnroll->Location = System::Drawing::Point(581, 149);
+			this->btnEnroll->Location = System::Drawing::Point(387, 95);
+			this->btnEnroll->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->btnEnroll->Name = L"btnEnroll";
-			this->btnEnroll->Size = System::Drawing::Size(181, 33);
+			this->btnEnroll->Size = System::Drawing::Size(121, 21);
 			this->btnEnroll->TabIndex = 2;
 			this->btnEnroll->Text = L"Enroll";
 			this->btnEnroll->UseVisualStyleBackColor = true;
@@ -87,13 +91,14 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// StudentEnrollmentForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(12, 25);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(799, 546);
+			this->ClientSize = System::Drawing::Size(533, 349);
 			this->Controls->Add(this->btnEnroll);
 			this->Controls->Add(this->cboxAvailableCourses);
 			this->Controls->Add(this->lblAvailableCourses);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
+			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->Name = L"StudentEnrollmentForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
 			this->Text = L"StudentEnrollmentForm";
@@ -104,6 +109,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 #pragma endregion
 	private: System::Void btnEnroll_Click(System::Object^ sender, System::EventArgs^ e) {
 		MessageBox::Show("Enrollment functionality coming soon.");
+	}
+	private: System::Void cboxAvailableCourses_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 	}
 	};
 }

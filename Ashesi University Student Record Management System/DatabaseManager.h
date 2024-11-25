@@ -1,47 +1,65 @@
-// DatabaseManager.h
+// DatabaseManager.h// DatabaseConnection.h
 #pragma once
-#include <mysql/mysql.h>
-#include <memory>
-#include <string>
-#include "Course.h"
-#include "User.h"
-#include "Enrollment.h"
-#include "Faculty.h"
-#include "CourseOffering.h"
-#include "Student.h"
 
+using namespace AshesiUniversityStudentRecordManagementSystem;
+using namespace System;
+using namespace System::Windows::Forms;
+using namespace MySql::Data::MySqlClient;
 
-
-
-
-
-class DatabaseManager {
-private:
-    MYSQL* conn;
-    static DatabaseManager* instance;
-    DatabaseManager(); // Private constructor for singleton
+public ref class DatabaseManager
+{
+protected:
+    static DatabaseManager^ instance = nullptr;
+    MySqlConnection^ sqlConn;
 
 public:
-    static DatabaseManager* getInstance();
-    ~DatabaseManager();
+    // Constructor
 
-    // Connection management
-    bool connect(const std::string& host, const std::string& user,
-        const std::string& password, const std::string& database);
+    DatabaseManager()
+    {
+        sqlConn = gcnew MySqlConnection();
+    }
 
-    void disconnect();
+    static DatabaseManager^ GetInstance() {
+        if (instance == nullptr) {
+            instance = gcnew DatabaseManager();
+        }
+        return instance;
+    }
 
-    // Generic query methods
-    bool executeQuery(const std::string& query);
-    MYSQL_RES* executeSelect(const std::string& query);
 
-    // Specific database operations
-    bool insertUser(const User& user);
-    bool updateUser(const User& user);
-    bool deleteUser(const std::string& userID);
-    bool insertStudent(const Student& student);
-    bool insertFaculty(const Faculty& faculty);
-    bool insertCourse(const Course& course);
-    bool insertEnrollment(const Enrollment& enrollment);
+    // Method to connect to the database
+    System::Void ConnectToDatabase()
+    {
+        try {
+            // Set up the connection string
+            this->sqlConn->ConnectionString = "datasource=sql8.freesqldatabase.com; port=3306; username=sql8744026; password=4ussz7Rekc; database=sql8744026";
+
+            // Open the connection
+            this->sqlConn->Open();
+
+            // Show success message
+            MessageBox::Show("Database connection successful!", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
+
+        }
+        catch (Exception^ ex) {
+            // Show error message if connection fails
+            MessageBox::Show("Failed to connect to database: " + ex->Message, "Connection Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+        }
+    }
+
+    // Method to close the connection
+    System::Void CloseConnection()
+    {
+        if (sqlConn->State == System::Data::ConnectionState::Open) {
+            sqlConn->Close();
+            MessageBox::Show("Database connection closed!", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
+        }
+    }
+
+    // Get the connection object
+    MySqlConnection^ GetConnection()
+    {
+        return sqlConn;
+    }
 };
-
