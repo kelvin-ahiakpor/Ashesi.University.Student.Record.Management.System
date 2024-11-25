@@ -95,3 +95,38 @@ System::Void TranscriptForm::btnViewTranscript_Click(System::Object^ sender, Sys
     }
 }
 
+System::Void AshesiUniversityStudentRecordManagementSystem::TranscriptForm::btnPrintTranscript_Click(System::Object^ sender, System::EventArgs^ e) {
+    try {
+        // Check if the RichTextBox contains any text
+        if (String::IsNullOrWhiteSpace(richTxtTranscript->Text)) {
+            MessageBox::Show("No transcript data available to print.", "Print Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+            return;
+        }
+
+        // Open a SaveFileDialog to specify the output file
+        SaveFileDialog^ saveFileDialog = gcnew SaveFileDialog();
+        saveFileDialog->Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+        saveFileDialog->Title = "Save Transcript As";
+        saveFileDialog->FileName = "Transcript.txt"; // Default file name
+
+        // Check if the user selected a file
+        if (saveFileDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+            // Get the file path
+            String^ filePath = saveFileDialog->FileName;
+
+            // Write the transcript content to the file
+            System::IO::StreamWriter^ writer = gcnew System::IO::StreamWriter(filePath);
+            writer->Write(richTxtTranscript->Text);
+            writer->Close();
+
+            // Notify the user
+            MessageBox::Show("Transcript saved successfully to: " + filePath, "Print Successful", MessageBoxButtons::OK, MessageBoxIcon::Information);
+        }
+    }
+    catch (Exception^ ex) {
+        // Handle any errors during the process
+        MessageBox::Show("Error saving transcript: " + ex->Message, "File Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+    }
+}
+
+
