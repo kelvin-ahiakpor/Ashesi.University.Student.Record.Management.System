@@ -11,12 +11,11 @@ protected:
     string email;
     string password;
     enum class UserType { Student, Faculty, Administrator };
-    UserType userType;
 
 public:
-    User(const string& id, const string& fname, const string& lname, const string& mail, const UserType& user)
-        : userID(id), firstName(fname), lastName(lname), email(mail),
-        userType(user) {}
+    User(const string& id, const string& fname, const string& lname, const string& mail)
+        : userID(id), firstName(fname), lastName(lname), email(mail)
+        {}
 
     virtual ~User() = default;
 

@@ -3,8 +3,19 @@
 #include "DatabaseManager.h"
 #include "StudentDashboardForm.h"
 #include "FacultyDashboardForm.h"
-#include "DatabaseManager.h"
 #include "Student.h"
+
+std::string ConvertString(System::String^ managedString) {
+    if (managedString == nullptr)
+        return "";
+
+    using namespace System::Runtime::InteropServices;
+    IntPtr ptr = Marshal::StringToHGlobalAnsi(managedString);
+    std::string str = static_cast<const char*>(ptr.ToPointer());
+    Marshal::FreeHGlobal(ptr);
+    return str;
+}
+
 
 using namespace AshesiUniversityStudentRecordManagementSystem;
 using namespace System;
@@ -21,50 +32,64 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
         lblError->Text = "Please fill in both email and password.";
         return;
     }
+
     DatabaseManager^ db = DatabaseManager::GetInstance();
 
     try {
         // Open the database connection
-        
         db->ConnectToDatabase();
 
+        // Create the SQL query with JOIN (fixed missing comma and added space)
+        String^ query = "SELECT s.StudentID, u.UserID, u.FirstName, u.LastName, u.Email, u.UserType, s.Major " +
+            "FROM Users u " +
+            "INNER JOIN Students s ON u.UserID = s.UserID " +
+            "WHERE u.Email = @Email AND u.Password = @Password";
 
-        // Create the SQL query to check for valid login
-        String^ query = "SELECT UserID, UserType FROM Users WHERE Email = @Email AND Password = @Password";
+        // Prepare the SQL command (added initialization for sqlCmd and sqlRd)
+        MySqlCommand^ sqlCmd = gcnew MySqlCommand();
+        MySqlDataReader^ sqlRd;
 
-        // Prepare the SQL command
         sqlCmd->Connection = db->GetConnection();
         sqlCmd->CommandText = query;
 
         // Add parameters to avoid SQL injection
         sqlCmd->Parameters->AddWithValue("@Email", email);
         sqlCmd->Parameters->AddWithValue("@Password", password);
+
         // Execute the query
-        sqlRd = sqlCmd->ExecuteReader();
+        sqlRd = safe_cast<MySqlDataReader^>(sqlCmd->ExecuteReader());
 
         // Check if the query returns any data
         if (sqlRd->Read()) {
+            // Fetch user details from the database
             String^ userID = sqlRd["UserID"]->ToString();
+            String^ studentID = sqlRd["StudentID"]->ToString();
+            String^ firstName = sqlRd["FirstName"]->ToString();
+            String^ lastName = sqlRd["LastName"]->ToString();
             String^ userType = sqlRd["UserType"]->ToString();
-            if(userType == "Student") {
-                // Navigate to student dashboard
-                MessageBox::Show("Login successful! Welcome Student.", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
-                // Replace with your student dashboard form
-                //Student newStudent = new Student();
+            String^ major = sqlRd["Major"]->ToString();
 
-                MainApplicationForm^ studentDashboard = gcnew MainApplicationForm();
+            // Store user data in objects
+            if (userType == "Student") {
+                Student currentStudent(
+                    ConvertString(userID),
+                    ConvertString(firstName),
+                    ConvertString(lastName),
+                    ConvertString(email),
+                    ConvertString(studentID),
+                    ConvertString(major)
+                );
+
+     
+
+                MessageBox::Show("Login successful! Welcome, " + firstName + ".", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
+
+                // Navigate to the student dashboard
+                StudentDashboardForm^ studentDashboard = gcnew StudentDashboardForm();
                 studentDashboard->Show();
-
-            }
-            else if (userType == "Faculty") {
-                // Navigate to faculty dashboard
-                MessageBox::Show("Login successful! Welcome Faculty Member.", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
-                // Replace with your faculty dashboard form
-                MainApplicationForm^ facultyDashboard = gcnew MainApplicationForm();
-                facultyDashboard->Show();
             }
             else {
-                MessageBox::Show("Unknown user type.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+                MessageBox::Show("User type not recognized.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
             }
 
             // Hide the login form after successful login
@@ -87,8 +112,6 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
         db->CloseConnection();
     }
 }
-
-
 
 System::Void LoginForm::LoginForm_Load(System::Object^ sender, System::EventArgs^ e) {
     txtEmail->Text = "";
