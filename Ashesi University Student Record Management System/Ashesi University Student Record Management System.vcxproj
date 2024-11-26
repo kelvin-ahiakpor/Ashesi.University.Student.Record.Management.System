@@ -83,6 +83,7 @@
   <ItemGroup>
     <ClCompile Include="AdminDashboardForm.cpp" />
     <ClCompile Include="CourseManagementForm.cpp" />
+    <ClCompile Include="Faculty.cpp" />
     <ClCompile Include="FacultyDashboardForm.cpp" />
     <ClCompile Include="GradeManagementForm.cpp" />
     <ClCompile Include="LoginForm.cpp" />
@@ -239,8 +240,9 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies />
-      <SubSystem>Windows</SubSystem>
-      <EntryPointSymbol>main</EntryPointSymbol>
+      <SubSystem>Console</SubSystem>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

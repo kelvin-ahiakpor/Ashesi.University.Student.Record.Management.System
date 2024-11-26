@@ -113,6 +113,9 @@
     <ClCompile Include="ViewGrades.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Faculty.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ProjectResources.rc">

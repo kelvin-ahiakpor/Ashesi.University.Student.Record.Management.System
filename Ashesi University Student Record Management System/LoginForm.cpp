@@ -11,26 +11,6 @@ using namespace System;
 using namespace System::Windows::Forms;
 using namespace MySql::Data::MySqlClient;
 
-System::Void LoginForm::ConnectToDatabase() {
-    try {
-        // Set up the connection string
-        this->sqlConn->ConnectionString = "datasource=sql8.freesqldatabase.com; port=3306; username=sql8744026; password=4ussz7Rekc; database=sql8744026";
-
-        // Open the connection
-        this->sqlConn->Open();
-
-        // Show success message
-       // MessageBox::Show("Database connection successful!", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
-
-        // Close the connection
-        this->sqlConn->Close();
-    }
-    catch (Exception^ ex) {
-        // Show error message if connection fails
-        MessageBox::Show("Failed to connect to database: " + ex->Message, "Connection Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-    }
-}
-
 System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs^ e) {
     // Get the email and password from the textboxes
     String^ email = txtEmail->Text;
@@ -41,10 +21,11 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
         lblError->Text = "Please fill in both email and password.";
         return;
     }
+    DatabaseManager^ db = DatabaseManager::GetInstance();
 
     try {
         // Open the database connection
-        DatabaseManager^ db = DatabaseManager::GetInstance();
+        
         db->ConnectToDatabase();
 
 
@@ -103,7 +84,7 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
     }
     finally {
         // Close the connection
-        sqlConn->Close();
+        db->CloseConnection();
     }
 }
 
@@ -113,5 +94,4 @@ System::Void LoginForm::LoginForm_Load(System::Object^ sender, System::EventArgs
     txtEmail->Text = "";
     txtPassword->Text = "";
     lblError->Text = "";
-    ConnectToDatabase();
 }
