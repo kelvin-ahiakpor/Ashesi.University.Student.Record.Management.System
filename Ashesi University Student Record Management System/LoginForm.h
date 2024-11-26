@@ -181,6 +181,5 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 #pragma endregion
 	private: System::Void btnLogin_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void LoginForm_Load(System::Object^ sender, System::EventArgs^ e);
-	private: System::Void ConnectToDatabase(); // Add the method declaration
 };
 }
