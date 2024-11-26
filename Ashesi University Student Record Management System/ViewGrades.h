@@ -92,8 +92,11 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		}
 #pragma endregion
 	private: System::Void ViewGrades_Load(System::Object^ sender, System::EventArgs^ e) {
+
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e);
-	private: System::Void richTxtGrades_TextChanged(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void richTxtGrades_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+	}
+
 	};
 }

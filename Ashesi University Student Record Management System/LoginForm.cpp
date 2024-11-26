@@ -4,6 +4,7 @@
 #include "StudentDashboardForm.h"
 #include "FacultyDashboardForm.h"
 #include "DatabaseManager.h"
+#include "Student.h"
 
 using namespace AshesiUniversityStudentRecordManagementSystem;
 using namespace System;
@@ -68,8 +69,11 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
                 // Navigate to student dashboard
                 MessageBox::Show("Login successful! Welcome Student.", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
                 // Replace with your student dashboard form
+                //Student newStudent = new Student();
+
                 MainApplicationForm^ studentDashboard = gcnew MainApplicationForm();
                 studentDashboard->Show();
+
             }
             else if (userType == "Faculty") {
                 // Navigate to faculty dashboard
