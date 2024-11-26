@@ -139,9 +139,9 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		this->Show();  // Re-show the Student Dashboard after closing Enrollment Form
 	}
 private: System::Void btnViewGrades_Click(System::Object^ sender, System::EventArgs^ e) {
-	ViewGrades^ gradeForm = gcnew ViewGrades();
+	//ViewGrades^ gradeForm = gcnew ViewGrades();
 	this->Hide();
-	gradeForm->ShowDialog();
+	//gradeForm->ShowDialog();
 	this->Show();
 }
 private: System::Void btnViewTranscript_Click(System::Object^ sender, System::EventArgs^ e) {
