@@ -1,7 +1,9 @@
 #pragma once
 #include "User.h"
 #include <vector>
-#include <memory>
+#include <string>
+#include <utility>
+
 using namespace std;
 
 class Student : public User {
@@ -16,24 +18,13 @@ private:
     Status status;
 
 public:
-    Student(const string& id, const string& fname, const string& lname,
-        const string& email, const string& dob, const string& major);
+    Student(const string& id, const string& fname, const string& lname, const string& mail, const string& studID, const string& dob, const string& maj, UserType& user)
+        : User(id, fname, lname, mail, user), studentID(studID), dateOfBirth(dob), major(maj), status(Status::Active) {}
 
     // Getters
     string getStudentID() const { return studentID; }
     string getMajor() const { return major; }
     Status getStatus() const { return status; }
 
-    // Course-related methods
-    bool enrollInCourse(const string& courseID);
-    bool withdrawFromCourse(const string& courseID);
-    float getGPA() const;
-    vector<pair<string, string>> getGrades() const; // Course ID, Grade
-    bool viewTranscript() const;
 
-    // Override virtual functions
-    bool login(const string& password) override;
-    bool logout() override;
-    bool updateProfile() override;
 };
-

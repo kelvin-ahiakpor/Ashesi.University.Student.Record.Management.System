@@ -51,6 +51,9 @@
     <ClInclude Include="MainApplicationForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="ViewGrades.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="ProfileManagementForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -89,6 +92,7 @@
     <ClCompile Include="StudentDashboardForm.cpp" />
     <ClCompile Include="StudentEnrollmentForm.cpp" />
     <ClCompile Include="TranscriptForm.cpp" />
+    <ClCompile Include="ViewGrades.cpp" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AdminDashboardForm.resx">
@@ -121,6 +125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TranscriptForm.resx">
       <DependentUpon>TranscriptForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewGrades.resx">
+      <DependentUpon>ViewGrades.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -232,6 +239,8 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies />
+      <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>main</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

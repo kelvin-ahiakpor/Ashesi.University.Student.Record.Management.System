@@ -3,6 +3,7 @@
 #include "GradeManagementForm.h"
 #include "TranscriptForm.h"
 #include "ProfileManagementForm.h"
+#include "ViewGrades.h"
 
 namespace AshesiUniversityStudentRecordManagementSystem {
 
@@ -138,9 +139,9 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		this->Show();  // Re-show the Student Dashboard after closing Enrollment Form
 	}
 private: System::Void btnViewGrades_Click(System::Object^ sender, System::EventArgs^ e) {
-	GradeManagementForm^ gradeForm = gcnew GradeManagementForm();
+	//ViewGrades^ gradeForm = gcnew ViewGrades();
 	this->Hide();
-	gradeForm->ShowDialog();
+	//gradeForm->ShowDialog();
 	this->Show();
 }
 private: System::Void btnViewTranscript_Click(System::Object^ sender, System::EventArgs^ e) {
