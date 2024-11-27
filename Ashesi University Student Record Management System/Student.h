@@ -1,39 +1,25 @@
 #pragma once
 #include "User.h"
 #include <vector>
-#include <memory>
-using namespace std;
+#include <string>
 
-class Student : public User {
+using namespace System;
+using namespace System::Collections::Generic;
+
+public ref class Student : public User {
 private:
-    string studentID;
-    string dateOfBirth;
-    string major;
-    string enrollmentDate;
-    vector<uint8_t> profilePicture;
-    string expectedGraduation;
-    enum class Status { Active, Graduated, Suspended, Withdrawn };
-    Status status;
+    String^ studentID;  // Managed string type
+    String^ major;      // Managed string type
 
 public:
-    Student(const string& id, const string& fname, const string& lname,
-        const string& email, const string& dob, const string& major);
+    // Constructor
+    Student(String^ id, String^ fname, String^ lname, String^ mail, String^ studID, String^ maj)
+        : User(id, fname, lname, mail), studentID(studID), major(maj)
+    {
+    }
 
     // Getters
-    string getStudentID() const { return studentID; }
-    string getMajor() const { return major; }
-    Status getStatus() const { return status; }
+    String^ getStudentID() { return studentID; }
+    String^ getMajor() { return major; }
 
-    // Course-related methods
-    bool enrollInCourse(const string& courseID);
-    bool withdrawFromCourse(const string& courseID);
-    float getGPA() const;
-    vector<pair<string, string>> getGrades() const; // Course ID, Grade
-    bool viewTranscript() const;
-
-    // Override virtual functions
-    bool login(const string& password) override;
-    bool logout() override;
-    bool updateProfile() override;
 };
-

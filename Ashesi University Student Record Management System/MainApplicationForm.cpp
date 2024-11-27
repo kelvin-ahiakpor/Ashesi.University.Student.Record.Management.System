@@ -9,33 +9,49 @@ using namespace AshesiUniversityStudentRecordManagementSystem;
 using namespace System;
 using namespace System::Windows::Forms;
 
-void MainApplicationForm::OpenChildForm(Type^ formType) {
-    for each (Form^ form in this->MdiChildren) {
+void MainApplicationForm::OpenChildForm(Type^ formType, Object^ parameter) {
+    for each (Form ^ form in this->MdiChildren) {
         if (form->GetType() == formType) {
             form->Activate();
             return;
         }
     }
 
-    Form^ childForm = (Form^)Activator::CreateInstance(formType);
+    // Check for specific forms requiring parameters
+    Form^ childForm;
+    if (formType == StudentDashboardForm::typeid && parameter != nullptr) {
+        Student^ student = dynamic_cast<Student^>(parameter);
+        if (student != nullptr) {
+            childForm = gcnew StudentDashboardForm(student);
+        }
+        else {
+            throw gcnew ArgumentException("Invalid parameter for StudentDashboardForm");
+        }
+    }
+    else {
+        // Default case for forms without parameters
+        childForm = (Form^)Activator::CreateInstance(formType);
+    }
+
     childForm->MdiParent = this;
     childForm->Show();
 }
 
+
 System::Void MainApplicationForm::studentsToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-    OpenChildForm(StudentDashboardForm::typeid);
+    OpenChildForm(StudentDashboardForm::typeid, current);
 }
 
 System::Void MainApplicationForm::facultyToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-    OpenChildForm(FacultyDashboardForm::typeid);
+    OpenChildForm(FacultyDashboardForm::typeid, NULL);
 }
 
 System::Void MainApplicationForm::coursesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-    OpenChildForm(CourseManagementForm::typeid);
+    OpenChildForm(CourseManagementForm::typeid, NULL);
 }
 
 System::Void MainApplicationForm::generateTranscriptToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-    OpenChildForm(TranscriptForm::typeid);
+    OpenChildForm(TranscriptForm::typeid, NULL);
 }
 
 void MainApplicationForm::UpdateMenuForRole(String^ userRole) {
