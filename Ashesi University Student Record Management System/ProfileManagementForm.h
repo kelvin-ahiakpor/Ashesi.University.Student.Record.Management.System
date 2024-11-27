@@ -1,4 +1,5 @@
 #pragma once
+#include "Student.h"
 
 namespace AshesiUniversityStudentRecordManagementSystem {
 
@@ -15,8 +16,18 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	public ref class ProfileManagementForm : public System::Windows::Forms::Form
 	{
 	public:
+		Student^ stud;
 		ProfileManagementForm(void)
 		{
+			InitializeComponent();
+			//
+			//TODO: Add the constructor code here
+			//
+		}
+
+		ProfileManagementForm(Student^ student)
+		{
+			stud = student;
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
