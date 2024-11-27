@@ -4,6 +4,7 @@
 #include "TranscriptForm.h"
 #include "ProfileManagementForm.h"
 #include "ViewGrades.h"
+#include "Student.h"
 
 namespace AshesiUniversityStudentRecordManagementSystem {
 
@@ -14,19 +15,26 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
+
 	/// <summary>
 	/// Summary for StudentDashboardForm
 	/// </summary>
 	public ref class StudentDashboardForm : public System::Windows::Forms::Form
 	{
 	public:
+		Student^ stud;  // Use a managed reference
+
 		StudentDashboardForm(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
 		}
+
+		StudentDashboardForm(Student^ student)  // Use a managed reference here as well
+		{
+			stud = student;
+			InitializeComponent();
+		}
+		
 
 	protected:
 		/// <summary>
@@ -139,9 +147,9 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		this->Show();  // Re-show the Student Dashboard after closing Enrollment Form
 	}
 private: System::Void btnViewGrades_Click(System::Object^ sender, System::EventArgs^ e) {
-	//ViewGrades^ gradeForm = gcnew ViewGrades();
+	ViewGrades^ gradeForm = gcnew ViewGrades(stud);
 	this->Hide();
-	//gradeForm->ShowDialog();
+	gradeForm->ShowDialog();
 	this->Show();
 }
 private: System::Void btnViewTranscript_Click(System::Object^ sender, System::EventArgs^ e) {

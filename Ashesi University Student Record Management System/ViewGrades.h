@@ -1,4 +1,6 @@
 #pragma once
+#include "Student.h"
+#include <string>
 
 namespace AshesiUniversityStudentRecordManagementSystem {
 
@@ -15,8 +17,20 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	public ref class ViewGrades : public System::Windows::Forms::Form
 	{
 	public:
+		String^ studentid;
+
 		ViewGrades(void)
 		{
+			InitializeComponent();
+			//
+			//TODO: Add the constructor code here
+			//
+		}
+		ViewGrades(Student^ student)
+
+		{
+			studentid = student->getStudentID();
+
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here

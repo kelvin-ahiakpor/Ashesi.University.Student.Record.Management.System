@@ -1,34 +1,37 @@
 #pragma once
-#include <string>
-#include <ctime>
-using namespace std;
+using namespace System;
 
-class User {
+public ref class User {
 protected:
-    string userID;
-    string firstName;
-    string lastName;
-    string email;
-    string password;
+    String^ userID;        // Managed string type
+    String^ firstName;     // Managed string type
+    String^ lastName;      // Managed string type
+    String^ email;         // Managed string type
+    String^ password;      // Managed string type
+
     enum class UserType { Student, Faculty, Administrator };
 
 public:
-    User(const string& id, const string& fname, const string& lname, const string& mail)
+    // Constructor
+    User(String^ id, String^ fname, String^ lname, String^ mail)
         : userID(id), firstName(fname), lastName(lname), email(mail)
-        {}
+    {}
 
-    virtual ~User() = default;
+    // Destructor
+    virtual ~User() {}
 
     // Getters
-    string getUserID() const { return userID; }
-    string getFirstName() const { return firstName; }
-    string getLastName() const { return lastName; }
-    string getEmail() const { return email; }
+    String^ getUserID() { return userID; }
+    String^ getFirstName() { return firstName; }
+    String^ getLastName() { return lastName; }
+    String^ getEmail() { return email; }
 
     // Setters
-    void setFirstName(const string& fname) { firstName = fname; }
-    void setLastName(const string& lname) { lastName = lname; }
-    void setEmail(const string& newEmail) { email = newEmail; }
+    void setFirstName(String^ fname) { firstName = fname; }
+    void setLastName(String^ lname) { lastName = lname; }
+    void setEmail(String^ newEmail) { email = newEmail; }
 
+    // Password management (if needed)
+    void setPassword(String^ newPassword) { password = newPassword; }
+    String^ getPassword() { return password; }  // For demonstration only; consider encryption for security.
 };
-

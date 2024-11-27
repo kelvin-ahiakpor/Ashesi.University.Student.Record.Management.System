@@ -5,18 +5,6 @@
 #include "FacultyDashboardForm.h"
 #include "Student.h"
 
-std::string ConvertString(System::String^ managedString) {
-    if (managedString == nullptr)
-        return "";
-
-    using namespace System::Runtime::InteropServices;
-    IntPtr ptr = Marshal::StringToHGlobalAnsi(managedString);
-    std::string str = static_cast<const char*>(ptr.ToPointer());
-    Marshal::FreeHGlobal(ptr);
-    return str;
-}
-
-
 using namespace AshesiUniversityStudentRecordManagementSystem;
 using namespace System;
 using namespace System::Windows::Forms;
@@ -71,13 +59,13 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
 
             // Store user data in objects
             if (userType == "Student") {
-                Student currentStudent(
-                    ConvertString(userID),
-                    ConvertString(firstName),
-                    ConvertString(lastName),
-                    ConvertString(email),
-                    ConvertString(studentID),
-                    ConvertString(major)
+                Student^ currentStudent = gcnew Student(
+                    userID,  // These are managed String^ types
+                    firstName,
+                    lastName,
+                    email,
+                    studentID,
+                    major
                 );
 
      
@@ -85,7 +73,7 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
                 MessageBox::Show("Login successful! Welcome, " + firstName + ".", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
 
                 // Navigate to the student dashboard
-                StudentDashboardForm^ studentDashboard = gcnew StudentDashboardForm();
+                MainApplicationForm^ studentDashboard = gcnew MainApplicationForm(currentStudent);
                 studentDashboard->Show();
             }
             else {

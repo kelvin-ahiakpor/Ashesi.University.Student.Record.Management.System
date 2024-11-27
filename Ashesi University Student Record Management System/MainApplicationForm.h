@@ -2,6 +2,8 @@
 #include "StudentDashboardForm.h"
 #include "FacultyDashboardForm.h"
 #include "TranscriptForm.h"
+#include "Student.h"
+
 
 namespace AshesiUniversityStudentRecordManagementSystem {
 
@@ -18,8 +20,20 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	public ref class MainApplicationForm : public System::Windows::Forms::Form
 	{
 	public:
+		Student^ current;
+
 		MainApplicationForm(void)
 		{
+			InitializeComponent();
+			//
+			//TODO: Add the constructor code here
+			//
+			//this->Icon = gcnew System::Drawing::Icon(GetType()->Assembly->GetManifestResourceStream("AshesiUniversityStudentRecordManagementSystem.IDI_ASHESI_LOGO"));
+		}
+
+		MainApplicationForm(Student^ student)
+		{
+			current = student;
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
@@ -249,7 +263,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		System::Void coursesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 		System::Void generateTranscriptToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 		void UpdateMenuForRole(String^ userRole);
-		void OpenChildForm(Type^ formType);
+		void OpenChildForm(Type^ formType, Object^ parameter);
 
 		private: System::Void exitToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 			Application::Exit();
