@@ -53,7 +53,6 @@ public:
     {
         if (sqlConn->State == System::Data::ConnectionState::Open) {
             sqlConn->Close();
-            MessageBox::Show("Database connection closed!", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
         }
     }
 
