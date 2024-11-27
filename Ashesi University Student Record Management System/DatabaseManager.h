@@ -40,6 +40,7 @@ public:
 
             // Show success message
             //MessageBox::Show("Database connection successful!", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
+
         }
         catch (Exception^ ex) {
             // Show error message if connection fails

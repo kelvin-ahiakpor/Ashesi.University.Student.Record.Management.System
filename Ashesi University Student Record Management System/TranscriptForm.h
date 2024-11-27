@@ -134,9 +134,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 #pragma endregion
 	private: System::Void btnViewTranscript_Click(System::Object^ sender, System::EventArgs^ e);
 
-private: System::Void btnPrintTranscript_Click(System::Object^ sender, System::EventArgs^ e) {
-	MessageBox::Show("Transcript printing functionality coming soon.");
-}
+private: System::Void btnPrintTranscript_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void txtStudentID_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void richTxtTranscript_TextChanged(System::Object^ sender, System::EventArgs^ e) {
