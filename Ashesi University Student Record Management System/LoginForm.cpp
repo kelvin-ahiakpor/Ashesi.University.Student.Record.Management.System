@@ -29,7 +29,7 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
         db->ConnectToDatabase();
 
         // Create the SQL query with JOIN (fixed missing comma and added space)
-        String^ query = "SELECT s.StudentID, u.UserID, u.FirstName, u.LastName, u.Email, u.UserType, s.Major " +
+        String^ query = "SELECT s.StudentID, u.UserID, u.FirstName, u.LastName, u.Email, u.UserType, s.DepartmentID " +
             "FROM Users u " +
             "INNER JOIN Students s ON u.UserID = s.UserID " +
             "WHERE u.Email = @Email AND u.Password = @Password";
@@ -56,7 +56,7 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
             String^ firstName = sqlRd["FirstName"]->ToString();
             String^ lastName = sqlRd["LastName"]->ToString();
             String^ userType = sqlRd["UserType"]->ToString();
-            String^ major = sqlRd["Major"]->ToString();
+            String^ major = sqlRd["DepartmentID"]->ToString();
 
             // Store user data in objects
             if (userType == "Student") {
