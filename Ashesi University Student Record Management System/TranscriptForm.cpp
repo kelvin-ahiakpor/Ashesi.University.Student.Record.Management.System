@@ -5,6 +5,17 @@ using namespace System;
 using namespace System::Windows::Forms;
 
 
+void AshesiUniversityStudentRecordManagementSystem::TranscriptForm::DisablePrintButtonBasedOnUserRole()
+{
+    // Disable the 'Print Transcript' button for students and faculty
+    if (userRole == "Student" || userRole == "Faculty") {
+        btnPrintTranscript->Enabled = false;
+    }
+    else if (userRole == "Administrator") {
+        btnPrintTranscript->Enabled = true;
+    }
+}
+
 System::Void TranscriptForm::btnViewTranscript_Click(System::Object^ sender, System::EventArgs^ e) {
     DatabaseManager^ db = DatabaseManager::GetInstance();
 
@@ -130,6 +141,11 @@ System::Void AshesiUniversityStudentRecordManagementSystem::TranscriptForm::btnP
         // Handle any errors during the process
         MessageBox::Show("Error saving transcript: " + ex->Message, "File Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
     }
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::TranscriptForm::TranscriptForm_Load(System::Object^ sender, System::EventArgs^ e)
+{
+    DisablePrintButtonBasedOnUserRole();
 }
 
 

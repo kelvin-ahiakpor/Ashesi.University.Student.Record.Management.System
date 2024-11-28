@@ -27,6 +27,15 @@ void MainApplicationForm::OpenChildForm(Type^ formType, Object^ parameter) {
         else {
             throw gcnew ArgumentException("Invalid parameter for StudentDashboardForm");
         }
+    } 
+    else if (formType == TranscriptForm::typeid && parameter != nullptr){
+        User^ user = dynamic_cast<User^>(parameter);
+        if (user != nullptr) {
+            childForm = gcnew TranscriptForm(user);
+        }
+        else {
+            throw gcnew ArgumentException("Invalid parameter for TranscriptForm");
+        }
     }
     else {
         // Default case for forms without parameters
@@ -43,9 +52,14 @@ System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm:
     return System::Void();
 }
 
+System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm::gradesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	OpenChildForm(ViewGrades::typeid, student);
+}
+
 
 System::Void MainApplicationForm::studentsToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-    OpenChildForm(StudentDashboardForm::typeid, current);
+    OpenChildForm(StudentDashboardForm::typeid, student);
 }
 
 System::Void MainApplicationForm::facultyToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -57,7 +71,7 @@ System::Void MainApplicationForm::coursesToolStripMenuItem_Click(System::Object^
 }
 
 System::Void MainApplicationForm::generateTranscriptToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-    OpenChildForm(TranscriptForm::typeid, NULL);
+    OpenChildForm(TranscriptForm::typeid, globalUser);
 }
 
 void MainApplicationForm::UpdateMenuForRole(String^ userRole) {
