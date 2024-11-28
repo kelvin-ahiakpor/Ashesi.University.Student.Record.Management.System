@@ -73,56 +73,63 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// lblCourseName
 			// 
 			this->lblCourseName->AutoSize = true;
-			this->lblCourseName->Location = System::Drawing::Point(51, 46);
+			this->lblCourseName->Location = System::Drawing::Point(34, 29);
+			this->lblCourseName->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->lblCourseName->Name = L"lblCourseName";
-			this->lblCourseName->Size = System::Drawing::Size(143, 25);
+			this->lblCourseName->Size = System::Drawing::Size(90, 16);
 			this->lblCourseName->TabIndex = 0;
 			this->lblCourseName->Text = L"Course Name";
 			// 
 			// lblCredits
 			// 
 			this->lblCredits->AutoSize = true;
-			this->lblCredits->Location = System::Drawing::Point(51, 182);
+			this->lblCredits->Location = System::Drawing::Point(34, 116);
+			this->lblCredits->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->lblCredits->Name = L"lblCredits";
-			this->lblCredits->Size = System::Drawing::Size(80, 25);
+			this->lblCredits->Size = System::Drawing::Size(49, 16);
 			this->lblCredits->TabIndex = 1;
 			this->lblCredits->Text = L"Credits";
 			// 
 			// lblPrerequisites
 			// 
 			this->lblPrerequisites->AutoSize = true;
-			this->lblPrerequisites->Location = System::Drawing::Point(51, 285);
+			this->lblPrerequisites->Location = System::Drawing::Point(34, 182);
+			this->lblPrerequisites->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->lblPrerequisites->Name = L"lblPrerequisites";
-			this->lblPrerequisites->Size = System::Drawing::Size(138, 25);
+			this->lblPrerequisites->Size = System::Drawing::Size(86, 16);
 			this->lblPrerequisites->TabIndex = 2;
 			this->lblPrerequisites->Text = L"Prerequisites";
 			// 
 			// txtCourseName
 			// 
-			this->txtCourseName->Location = System::Drawing::Point(56, 74);
+			this->txtCourseName->Location = System::Drawing::Point(37, 47);
+			this->txtCourseName->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->txtCourseName->Name = L"txtCourseName";
-			this->txtCourseName->Size = System::Drawing::Size(310, 31);
+			this->txtCourseName->Size = System::Drawing::Size(208, 22);
 			this->txtCourseName->TabIndex = 3;
 			// 
 			// txtCredits
 			// 
-			this->txtCredits->Location = System::Drawing::Point(56, 210);
+			this->txtCredits->Location = System::Drawing::Point(37, 134);
+			this->txtCredits->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->txtCredits->Name = L"txtCredits";
-			this->txtCredits->Size = System::Drawing::Size(310, 31);
+			this->txtCredits->Size = System::Drawing::Size(208, 22);
 			this->txtCredits->TabIndex = 4;
 			// 
 			// txtPrerequisites
 			// 
-			this->txtPrerequisites->Location = System::Drawing::Point(56, 313);
+			this->txtPrerequisites->Location = System::Drawing::Point(37, 200);
+			this->txtPrerequisites->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->txtPrerequisites->Name = L"txtPrerequisites";
-			this->txtPrerequisites->Size = System::Drawing::Size(310, 31);
+			this->txtPrerequisites->Size = System::Drawing::Size(208, 22);
 			this->txtPrerequisites->TabIndex = 5;
 			// 
 			// btnSaveCourse
 			// 
-			this->btnSaveCourse->Location = System::Drawing::Point(56, 444);
+			this->btnSaveCourse->Location = System::Drawing::Point(37, 284);
+			this->btnSaveCourse->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->btnSaveCourse->Name = L"btnSaveCourse";
-			this->btnSaveCourse->Size = System::Drawing::Size(167, 42);
+			this->btnSaveCourse->Size = System::Drawing::Size(111, 27);
 			this->btnSaveCourse->TabIndex = 6;
 			this->btnSaveCourse->Text = L"Save Course";
 			this->btnSaveCourse->UseVisualStyleBackColor = true;
@@ -130,9 +137,10 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// btnDeleteCourse
 			// 
-			this->btnDeleteCourse->Location = System::Drawing::Point(785, 529);
+			this->btnDeleteCourse->Location = System::Drawing::Point(523, 339);
+			this->btnDeleteCourse->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->btnDeleteCourse->Name = L"btnDeleteCourse";
-			this->btnDeleteCourse->Size = System::Drawing::Size(167, 42);
+			this->btnDeleteCourse->Size = System::Drawing::Size(111, 27);
 			this->btnDeleteCourse->TabIndex = 7;
 			this->btnDeleteCourse->Text = L"Delete Course";
 			this->btnDeleteCourse->UseVisualStyleBackColor = true;
@@ -140,18 +148,19 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// btnEditCourse
 			// 
-			this->btnEditCourse->Location = System::Drawing::Point(56, 529);
+			this->btnEditCourse->Location = System::Drawing::Point(37, 339);
+			this->btnEditCourse->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->btnEditCourse->Name = L"btnEditCourse";
-			this->btnEditCourse->Size = System::Drawing::Size(167, 42);
+			this->btnEditCourse->Size = System::Drawing::Size(111, 27);
 			this->btnEditCourse->TabIndex = 8;
 			this->btnEditCourse->Text = L"Edit Course";
 			this->btnEditCourse->UseVisualStyleBackColor = true;
 			// 
 			// CourseManagementForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(12, 25);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1053, 635);
+			this->ClientSize = System::Drawing::Size(702, 406);
 			this->Controls->Add(this->btnEditCourse);
 			this->Controls->Add(this->btnDeleteCourse);
 			this->Controls->Add(this->btnSaveCourse);
@@ -162,6 +171,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->Controls->Add(this->lblCredits);
 			this->Controls->Add(this->lblCourseName);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
+			this->IsMdiContainer = true;
+			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->Name = L"CourseManagementForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
 			this->Text = L"CourseManagementForm";
