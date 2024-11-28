@@ -4,6 +4,7 @@
 #include "StudentDashboardForm.h"
 #include "FacultyDashboardForm.h"
 #include "Student.h"
+#include "ForgotPasswordForm.h"
 
 using namespace AshesiUniversityStudentRecordManagementSystem;
 using namespace System;
@@ -105,4 +106,10 @@ System::Void LoginForm::LoginForm_Load(System::Object^ sender, System::EventArgs
     txtEmail->Text = "";
     txtPassword->Text = "";
     lblError->Text = "";
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::LoginForm::lnklblPasswordReset_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e)
+{
+    ForgotPasswordForm^ passwordreset = gcnew ForgotPasswordForm(txtEmail->Text);
+    return System::Void();
 }

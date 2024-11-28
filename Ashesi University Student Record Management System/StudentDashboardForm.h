@@ -77,17 +77,20 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// lblWelcome
 			// 
 			this->lblWelcome->AutoSize = true;
-			this->lblWelcome->Location = System::Drawing::Point(434, 148);
+			this->lblWelcome->Location = System::Drawing::Point(289, 95);
+			this->lblWelcome->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->lblWelcome->Name = L"lblWelcome";
-			this->lblWelcome->Size = System::Drawing::Size(267, 25);
+			this->lblWelcome->Size = System::Drawing::Size(167, 16);
 			this->lblWelcome->TabIndex = 0;
-			this->lblWelcome->Text = L"Welcome  <StudentName>";
+			this->lblWelcome->Text = L"Welcome" + stud->getFirstName();
+			this->lblWelcome->Click += gcnew System::EventHandler(this, &StudentDashboardForm::lblWelcome_Click);
 			// 
 			// btnEnrollInCourse
 			// 
-			this->btnEnrollInCourse->Location = System::Drawing::Point(133, 391);
+			this->btnEnrollInCourse->Location = System::Drawing::Point(89, 250);
+			this->btnEnrollInCourse->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->btnEnrollInCourse->Name = L"btnEnrollInCourse";
-			this->btnEnrollInCourse->Size = System::Drawing::Size(183, 53);
+			this->btnEnrollInCourse->Size = System::Drawing::Size(122, 34);
 			this->btnEnrollInCourse->TabIndex = 1;
 			this->btnEnrollInCourse->Text = L"Enroll Course";
 			this->btnEnrollInCourse->UseVisualStyleBackColor = true;
@@ -95,9 +98,10 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// btnViewGrades
 			// 
-			this->btnViewGrades->Location = System::Drawing::Point(354, 391);
+			this->btnViewGrades->Location = System::Drawing::Point(236, 250);
+			this->btnViewGrades->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->btnViewGrades->Name = L"btnViewGrades";
-			this->btnViewGrades->Size = System::Drawing::Size(183, 53);
+			this->btnViewGrades->Size = System::Drawing::Size(122, 34);
 			this->btnViewGrades->TabIndex = 2;
 			this->btnViewGrades->Text = L"View Grades";
 			this->btnViewGrades->UseVisualStyleBackColor = true;
@@ -105,9 +109,10 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// btnViewTranscript
 			// 
-			this->btnViewTranscript->Location = System::Drawing::Point(570, 391);
+			this->btnViewTranscript->Location = System::Drawing::Point(380, 250);
+			this->btnViewTranscript->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->btnViewTranscript->Name = L"btnViewTranscript";
-			this->btnViewTranscript->Size = System::Drawing::Size(183, 53);
+			this->btnViewTranscript->Size = System::Drawing::Size(122, 34);
 			this->btnViewTranscript->TabIndex = 3;
 			this->btnViewTranscript->Text = L"View Transcript";
 			this->btnViewTranscript->UseVisualStyleBackColor = true;
@@ -115,9 +120,10 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// btnManageProfile
 			// 
-			this->btnManageProfile->Location = System::Drawing::Point(793, 391);
+			this->btnManageProfile->Location = System::Drawing::Point(529, 250);
+			this->btnManageProfile->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->btnManageProfile->Name = L"btnManageProfile";
-			this->btnManageProfile->Size = System::Drawing::Size(183, 53);
+			this->btnManageProfile->Size = System::Drawing::Size(122, 34);
 			this->btnManageProfile->TabIndex = 4;
 			this->btnManageProfile->Text = L"Manage Profile";
 			this->btnManageProfile->UseVisualStyleBackColor = true;
@@ -125,14 +131,15 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// StudentDashboardForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(12, 25);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1154, 685);
+			this->ClientSize = System::Drawing::Size(769, 438);
 			this->Controls->Add(this->btnManageProfile);
 			this->Controls->Add(this->btnViewTranscript);
 			this->Controls->Add(this->btnViewGrades);
 			this->Controls->Add(this->btnEnrollInCourse);
 			this->Controls->Add(this->lblWelcome);
+			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->Name = L"StudentDashboardForm";
 			this->Text = L"StudentDashboardForm";
 			this->ResumeLayout(false);
@@ -159,10 +166,12 @@ private: System::Void btnViewTranscript_Click(System::Object^ sender, System::Ev
 	this->Show();
 }
 private: System::Void btnManageProfile_Click(System::Object^ sender, System::EventArgs^ e) {
-	ProfileManagementForm^ profileForm = gcnew ProfileManagementForm();
+	ProfileManagementForm^ profileForm = gcnew ProfileManagementForm(stud);
 	this->Hide();
 	profileForm->ShowDialog();
 	this->Show();
+}
+private: System::Void lblWelcome_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }

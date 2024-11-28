@@ -39,7 +39,7 @@ public:
             this->sqlConn->Open();
 
             // Show success message
-            MessageBox::Show("Database connection successful!", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
+            //MessageBox::Show("Database connection successful!", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
 
         }
         catch (Exception^ ex) {

@@ -6,9 +6,12 @@ using namespace System::Windows::Forms;
 
 
 System::Void TranscriptForm::btnViewTranscript_Click(System::Object^ sender, System::EventArgs^ e) {
+    DatabaseManager^ db = DatabaseManager::GetInstance();
+
     try {
         // Get the database manager instance
-        DatabaseManager^ db = DatabaseManager::GetInstance();
+        
+        db->ConnectToDatabase();
 
         // Get the UserID from the input field
         String^ userID = txtStudentID->Text;
