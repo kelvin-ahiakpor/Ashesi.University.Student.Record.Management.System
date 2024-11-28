@@ -5,8 +5,6 @@
 using namespace System;
 
 public ref class Admin : public User {
-private:
-    String^ Adminid;// Managed string typeAdmin
 
 public:
     // Constructor
@@ -14,6 +12,5 @@ public:
         : User(id, fname, lname, mail)
     {
     }
-    // Getters
-    String^ getAdminid() { return Adminid;}
+
 };
