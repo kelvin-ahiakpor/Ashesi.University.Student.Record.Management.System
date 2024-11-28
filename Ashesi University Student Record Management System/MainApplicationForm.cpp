@@ -71,6 +71,7 @@ void MainApplicationForm::UpdateMenuForRole(String^ userRole) {
         studentsToolStripMenuItem->Enabled = false;
         adminToolStripMenuItem->Enabled = false;
         coursesToolStripMenuItem->Enabled = false;
+		viewToolStripMenuItem->Enabled = false;
     }
     else if (userRole == "Administrator") {
         // Admin has access to all menus, so no need to disable anything
