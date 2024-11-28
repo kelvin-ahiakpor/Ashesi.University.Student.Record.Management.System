@@ -62,6 +62,11 @@ System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm:
     OpenChildForm(CourseManagementForm::typeid, globalUser);
 }
 
+System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm::profileToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+{
+    OpenChildForm(ProfileManagementForm::typeid, globalUser);
+}
+
 
 System::Void MainApplicationForm::studentsToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
     OpenChildForm(StudentDashboardForm::typeid, globalUser);

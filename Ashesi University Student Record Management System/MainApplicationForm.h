@@ -221,7 +221,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// generateTranscriptToolStripMenuItem
 			// 
 			this->generateTranscriptToolStripMenuItem->Name = L"generateTranscriptToolStripMenuItem";
-			this->generateTranscriptToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->generateTranscriptToolStripMenuItem->Size = System::Drawing::Size(175, 22);
 			this->generateTranscriptToolStripMenuItem->Text = L"Generate Transcript";
 			this->generateTranscriptToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainApplicationForm::generateTranscriptToolStripMenuItem_Click);
 			// 
@@ -254,6 +254,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->profileToolStripMenuItem->Name = L"profileToolStripMenuItem";
 			this->profileToolStripMenuItem->Size = System::Drawing::Size(53, 22);
 			this->profileToolStripMenuItem->Text = L"Profile";
+			this->profileToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainApplicationForm::profileToolStripMenuItem_Click);
 			// 
 			// tlstripCommonActions
 			// 
@@ -367,5 +368,6 @@ private: System::Void adminToolStripMenuItem_Click(System::Object^ sender, Syste
 }
 private: System::Void gradesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void coursesToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void profileToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }
