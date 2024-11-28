@@ -57,17 +57,22 @@ System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm:
 	OpenChildForm(ViewGrades::typeid, student);
 }
 
+System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm::coursesToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e)
+{
+    OpenChildForm(CourseManagementForm::typeid, globalUser);
+}
+
 
 System::Void MainApplicationForm::studentsToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-    OpenChildForm(StudentDashboardForm::typeid, student);
+    OpenChildForm(StudentDashboardForm::typeid, globalUser);
 }
 
 System::Void MainApplicationForm::facultyToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-    OpenChildForm(FacultyDashboardForm::typeid, NULL);
+    OpenChildForm(FacultyDashboardForm::typeid, globalUser);
 }
 
 System::Void MainApplicationForm::coursesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-    OpenChildForm(CourseManagementForm::typeid, NULL);
+    OpenChildForm(CourseManagementForm::typeid, globalUser);
 }
 
 System::Void MainApplicationForm::generateTranscriptToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {

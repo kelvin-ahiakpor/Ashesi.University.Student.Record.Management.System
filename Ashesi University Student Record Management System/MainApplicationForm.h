@@ -186,28 +186,28 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// studentsToolStripMenuItem
 			// 
 			this->studentsToolStripMenuItem->Name = L"studentsToolStripMenuItem";
-			this->studentsToolStripMenuItem->Size = System::Drawing::Size(120, 22);
+			this->studentsToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			this->studentsToolStripMenuItem->Text = L"Students";
 			this->studentsToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainApplicationForm::studentsToolStripMenuItem_Click);
 			// 
 			// facultyToolStripMenuItem
 			// 
 			this->facultyToolStripMenuItem->Name = L"facultyToolStripMenuItem";
-			this->facultyToolStripMenuItem->Size = System::Drawing::Size(120, 22);
+			this->facultyToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			this->facultyToolStripMenuItem->Text = L"Faculty";
 			this->facultyToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainApplicationForm::facultyToolStripMenuItem_Click);
 			// 
 			// coursesToolStripMenuItem
 			// 
 			this->coursesToolStripMenuItem->Name = L"coursesToolStripMenuItem";
-			this->coursesToolStripMenuItem->Size = System::Drawing::Size(120, 22);
+			this->coursesToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			this->coursesToolStripMenuItem->Text = L"Courses";
 			this->coursesToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainApplicationForm::coursesToolStripMenuItem_Click);
 			// 
 			// adminToolStripMenuItem
 			// 
 			this->adminToolStripMenuItem->Name = L"adminToolStripMenuItem";
-			this->adminToolStripMenuItem->Size = System::Drawing::Size(120, 22);
+			this->adminToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			this->adminToolStripMenuItem->Text = L"Admin";
 			this->adminToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainApplicationForm::adminToolStripMenuItem_Click);
 			// 
@@ -221,7 +221,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// generateTranscriptToolStripMenuItem
 			// 
 			this->generateTranscriptToolStripMenuItem->Name = L"generateTranscriptToolStripMenuItem";
-			this->generateTranscriptToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->generateTranscriptToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			this->generateTranscriptToolStripMenuItem->Text = L"Generate Transcript";
 			this->generateTranscriptToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainApplicationForm::generateTranscriptToolStripMenuItem_Click);
 			// 
@@ -240,6 +240,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->coursesToolStripMenuItem1->Name = L"coursesToolStripMenuItem1";
 			this->coursesToolStripMenuItem1->Size = System::Drawing::Size(180, 22);
 			this->coursesToolStripMenuItem1->Text = L"Courses";
+			this->coursesToolStripMenuItem1->Click += gcnew System::EventHandler(this, &MainApplicationForm::coursesToolStripMenuItem1_Click);
 			// 
 			// gradesToolStripMenuItem
 			// 
@@ -365,5 +366,6 @@ private: System::Void fileToolStripMenuItem_Click(System::Object^ sender, System
 private: System::Void adminToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void gradesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void coursesToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }
