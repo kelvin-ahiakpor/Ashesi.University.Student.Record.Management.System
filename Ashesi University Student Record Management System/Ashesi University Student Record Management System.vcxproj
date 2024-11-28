@@ -27,6 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Admin.h" />
     <ClInclude Include="AdminDashboardForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>

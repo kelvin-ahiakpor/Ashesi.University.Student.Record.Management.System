@@ -10,6 +10,7 @@ using namespace AshesiUniversityStudentRecordManagementSystem;
 using namespace System;
 using namespace System::Windows::Forms;
 using namespace MySql::Data::MySqlClient;
+
 System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs^ e) {
     // Get the email and password from the textboxes
     String^ email = txtEmail->Text;
@@ -57,7 +58,7 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
             sqlRd->Close();
 
             if (userType == "Student") {
-                // Construct the SQL query
+                // Query for student details
                 String^ studentQuery = "SELECT s.StudentID, s.DepartmentID " +
                     "FROM Students s " +
                     "WHERE s.UserID = @userID";
@@ -71,19 +72,13 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
                 sqlRd = safe_cast<MySqlDataReader^>(sqlCmd->ExecuteReader());
 
                 if (sqlRd->Read()) {
-                    // Extract StudentID and DepartmentID from the reader
+                    // Extract StudentID and DepartmentID
                     String^ studentID = sqlRd["StudentID"]->ToString();
-                    String^ major = sqlRd["DepartmentID"]->ToString(); // Assuming DepartmentID maps to major
+                    String^ major = sqlRd["DepartmentID"]->ToString();
 
                     // Create the Student object
                     Student^ currentStudent = gcnew Student(
-                        userID,       // User ID
-                        firstName,    // First Name
-                        lastName,     // Last Name
-                        email,        // Email
-                        studentID,    // Retrieved Student ID
-                        major         // Retrieved Major
-                    );
+                        userID, firstName, lastName, email, studentID, major);
 
                     // Show a success message
                     MessageBox::Show("Login successful! Welcome, " + firstName + ".",
@@ -92,31 +87,41 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
                     // Navigate to the student dashboard
                     MainApplicationForm^ studentDashboard = gcnew MainApplicationForm(currentStudent);
                     studentDashboard->Show();
+                    this->Hide();
                 }
                 else {
-                    // No matching student found
                     MessageBox::Show("No student record found for the provided user ID.",
                         "Login Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
                 }
 
-                // Close the student details reader
                 sqlRd->Close();
             }
-            else {
-                MessageBox::Show("User type not recognized.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-            }
+            else if (userType == "Administrator") {
+                // Handle Administrator login
+                Admin^ admin = gcnew Admin(userID, firstName, lastName, email);
 
-            // Hide the login form after successful login
-            this->Hide();
+                MessageBox::Show("Login successful! Welcome, " + firstName + ".",
+                    "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
+
+                MainApplicationForm^ adminDashboard = gcnew MainApplicationForm(admin);
+                adminDashboard->Show();
+                this->Hide();
+            }
+            else {
+                MessageBox::Show("User type not recognized.",
+                    "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+            }
         }
         else {
             // Invalid login
-            MessageBox::Show("Invalid email or password.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+            MessageBox::Show("Invalid email or password.",
+                "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
         }
     }
     catch (Exception^ ex) {
         // Handle any database errors
-        MessageBox::Show("An error occurred while logging in: " + ex->Message, "Connection Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+        MessageBox::Show("An error occurred while logging in: " + ex->Message,
+            "Connection Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
     }
     finally {
         // Ensure the reader is closed and resources are released
@@ -135,8 +140,7 @@ System::Void LoginForm::LoginForm_Load(System::Object^ sender, System::EventArgs
     lblError->Text = "";
 }
 
-System::Void AshesiUniversityStudentRecordManagementSystem::LoginForm::lnklblPasswordReset_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e)
-{
-    ForgotPasswordForm^ passwordreset = gcnew ForgotPasswordForm(txtEmail->Text);
-    return System::Void();
+System::Void AshesiUniversityStudentRecordManagementSystem::LoginForm::lnklblPasswordReset_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
+    ForgotPasswordForm^ passwordReset = gcnew ForgotPasswordForm(txtEmail->Text);
+    passwordReset->ShowDialog();
 }
