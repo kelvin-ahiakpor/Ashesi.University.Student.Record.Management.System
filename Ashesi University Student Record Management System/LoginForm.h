@@ -86,10 +86,10 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// lblEmail
 			// 
 			this->lblEmail->AutoSize = true;
-			this->lblEmail->Location = System::Drawing::Point(89, 50);
+			this->lblEmail->Location = System::Drawing::Point(119, 61);
 			this->lblEmail->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->lblEmail->Name = L"lblEmail";
-			this->lblEmail->Size = System::Drawing::Size(33, 17);
+			this->lblEmail->Size = System::Drawing::Size(38, 20);
 			this->lblEmail->TabIndex = 0;
 			this->lblEmail->Text = L"Email";
 			this->lblEmail->UseCompatibleTextRendering = true;
@@ -97,46 +97,46 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// lblPassword
 			// 
 			this->lblPassword->AutoSize = true;
-			this->lblPassword->Location = System::Drawing::Point(86, 110);
+			this->lblPassword->Location = System::Drawing::Point(115, 135);
 			this->lblPassword->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->lblPassword->Name = L"lblPassword";
-			this->lblPassword->Size = System::Drawing::Size(53, 13);
+			this->lblPassword->Size = System::Drawing::Size(67, 16);
 			this->lblPassword->TabIndex = 1;
 			this->lblPassword->Text = L"Password";
 			// 
 			// lblError
 			// 
 			this->lblError->AutoSize = true;
-			this->lblError->Location = System::Drawing::Point(86, 158);
+			this->lblError->Location = System::Drawing::Point(115, 194);
 			this->lblError->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->lblError->Name = L"lblError";
-			this->lblError->Size = System::Drawing::Size(32, 13);
+			this->lblError->Size = System::Drawing::Size(39, 16);
 			this->lblError->TabIndex = 2;
 			this->lblError->Text = L"Error:";
 			// 
 			// txtEmail
 			// 
-			this->txtEmail->Location = System::Drawing::Point(89, 67);
+			this->txtEmail->Location = System::Drawing::Point(119, 82);
 			this->txtEmail->Margin = System::Windows::Forms::Padding(2);
 			this->txtEmail->Name = L"txtEmail";
-			this->txtEmail->Size = System::Drawing::Size(190, 20);
+			this->txtEmail->Size = System::Drawing::Size(252, 22);
 			this->txtEmail->TabIndex = 3;
 			// 
 			// txtPassword
 			// 
-			this->txtPassword->Location = System::Drawing::Point(89, 124);
+			this->txtPassword->Location = System::Drawing::Point(119, 153);
 			this->txtPassword->Margin = System::Windows::Forms::Padding(2);
 			this->txtPassword->Name = L"txtPassword";
 			this->txtPassword->PasswordChar = '*';
-			this->txtPassword->Size = System::Drawing::Size(190, 20);
+			this->txtPassword->Size = System::Drawing::Size(252, 22);
 			this->txtPassword->TabIndex = 4;
 			// 
 			// btnLogin
 			// 
-			this->btnLogin->Location = System::Drawing::Point(89, 210);
+			this->btnLogin->Location = System::Drawing::Point(119, 258);
 			this->btnLogin->Margin = System::Windows::Forms::Padding(2);
 			this->btnLogin->Name = L"btnLogin";
-			this->btnLogin->Size = System::Drawing::Size(76, 27);
+			this->btnLogin->Size = System::Drawing::Size(102, 33);
 			this->btnLogin->TabIndex = 5;
 			this->btnLogin->Text = L"Login";
 			this->btnLogin->UseVisualStyleBackColor = true;
@@ -145,10 +145,10 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// lnklblPasswordReset
 			// 
 			this->lnklblPasswordReset->AutoSize = true;
-			this->lnklblPasswordReset->Location = System::Drawing::Point(86, 187);
+			this->lnklblPasswordReset->Location = System::Drawing::Point(115, 230);
 			this->lnklblPasswordReset->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->lnklblPasswordReset->Name = L"lnklblPasswordReset";
-			this->lnklblPasswordReset->Size = System::Drawing::Size(92, 13);
+			this->lnklblPasswordReset->Size = System::Drawing::Size(116, 16);
 			this->lnklblPasswordReset->TabIndex = 7;
 			this->lnklblPasswordReset->TabStop = true;
 			this->lnklblPasswordReset->Text = L"Forgot Password\?";
@@ -157,21 +157,22 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// btnCancel
 			// 
 			this->btnCancel->DialogResult = System::Windows::Forms::DialogResult::Cancel;
-			this->btnCancel->Location = System::Drawing::Point(200, 210);
+			this->btnCancel->Location = System::Drawing::Point(267, 258);
 			this->btnCancel->Margin = System::Windows::Forms::Padding(2);
 			this->btnCancel->Name = L"btnCancel";
-			this->btnCancel->Size = System::Drawing::Size(76, 27);
+			this->btnCancel->Size = System::Drawing::Size(102, 33);
 			this->btnCancel->TabIndex = 8;
 			this->btnCancel->Text = L"Cancel";
 			this->btnCancel->UseVisualStyleBackColor = true;
+			this->btnCancel->Click += gcnew System::EventHandler(this, &LoginForm::btnCancel_Click);
 			// 
 			// LoginForm
 			// 
 			this->AcceptButton = this->btnLogin;
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->CancelButton = this->btnCancel;
-			this->ClientSize = System::Drawing::Size(386, 278);
+			this->ClientSize = System::Drawing::Size(515, 342);
 			this->Controls->Add(this->btnCancel);
 			this->Controls->Add(this->lnklblPasswordReset);
 			this->Controls->Add(this->btnLogin);
@@ -195,5 +196,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	private: System::Void btnLogin_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void LoginForm_Load(System::Object^ sender, System::EventArgs^ e);
 private: System::Void lnklblPasswordReset_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e);
+private: System::Void btnCancel_Click(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }
