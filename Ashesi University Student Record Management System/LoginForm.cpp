@@ -10,7 +10,6 @@ using namespace AshesiUniversityStudentRecordManagementSystem;
 using namespace System;
 using namespace System::Windows::Forms;
 using namespace MySql::Data::MySqlClient;
-
 System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs^ e) {
     // Get the email and password from the textboxes
     String^ email = txtEmail->Text;
@@ -23,21 +22,19 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
     }
 
     DatabaseManager^ db = DatabaseManager::GetInstance();
+    MySqlCommand^ sqlCmd = gcnew MySqlCommand();
+    MySqlDataReader^ sqlRd = nullptr;
 
     try {
         // Open the database connection
         db->ConnectToDatabase();
 
-        // Create the SQL query with JOIN (fixed missing comma and added space)
-        String^ query = "SELECT s.StudentID, u.UserID, u.FirstName, u.LastName, u.Email, u.UserType, s.Major " +
+        // Create the SQL query
+        String^ query = "SELECT u.UserID, u.FirstName, u.LastName, u.Email, u.UserType " +
             "FROM Users u " +
-            "INNER JOIN Students s ON u.UserID = s.UserID " +
             "WHERE u.Email = @Email AND u.Password = @Password";
 
-        // Prepare the SQL command (added initialization for sqlCmd and sqlRd)
-        MySqlCommand^ sqlCmd = gcnew MySqlCommand();
-        MySqlDataReader^ sqlRd;
-
+        // Prepare the SQL command
         sqlCmd->Connection = db->GetConnection();
         sqlCmd->CommandText = query;
 
@@ -52,30 +49,58 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
         if (sqlRd->Read()) {
             // Fetch user details from the database
             String^ userID = sqlRd["UserID"]->ToString();
-            String^ studentID = sqlRd["StudentID"]->ToString();
             String^ firstName = sqlRd["FirstName"]->ToString();
             String^ lastName = sqlRd["LastName"]->ToString();
             String^ userType = sqlRd["UserType"]->ToString();
-            String^ major = sqlRd["Major"]->ToString();
 
-            // Store user data in objects
+            // Close the current reader before executing another query
+            sqlRd->Close();
+
             if (userType == "Student") {
-                Student^ currentStudent = gcnew Student(
-                    userID,  // These are managed String^ types
-                    firstName,
-                    lastName,
-                    email,
-                    studentID,
-                    major
-                );
+                // Construct the SQL query
+                String^ studentQuery = "SELECT s.StudentID, s.DepartmentID " +
+                    "FROM Students s " +
+                    "WHERE s.UserID = @userID";
 
-     
+                // Update the command and parameters
+                sqlCmd->CommandText = studentQuery;
+                sqlCmd->Parameters->Clear();
+                sqlCmd->Parameters->AddWithValue("@userID", userID);
 
-                MessageBox::Show("Login successful! Welcome, " + firstName + ".", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
+                // Execute the query for student details
+                sqlRd = safe_cast<MySqlDataReader^>(sqlCmd->ExecuteReader());
 
-                // Navigate to the student dashboard
-                MainApplicationForm^ studentDashboard = gcnew MainApplicationForm(currentStudent);
-                studentDashboard->Show();
+                if (sqlRd->Read()) {
+                    // Extract StudentID and DepartmentID from the reader
+                    String^ studentID = sqlRd["StudentID"]->ToString();
+                    String^ major = sqlRd["DepartmentID"]->ToString(); // Assuming DepartmentID maps to major
+
+                    // Create the Student object
+                    Student^ currentStudent = gcnew Student(
+                        userID,       // User ID
+                        firstName,    // First Name
+                        lastName,     // Last Name
+                        email,        // Email
+                        studentID,    // Retrieved Student ID
+                        major         // Retrieved Major
+                    );
+
+                    // Show a success message
+                    MessageBox::Show("Login successful! Welcome, " + firstName + ".",
+                        "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
+
+                    // Navigate to the student dashboard
+                    MainApplicationForm^ studentDashboard = gcnew MainApplicationForm(currentStudent);
+                    studentDashboard->Show();
+                }
+                else {
+                    // No matching student found
+                    MessageBox::Show("No student record found for the provided user ID.",
+                        "Login Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+                }
+
+                // Close the student details reader
+                sqlRd->Close();
             }
             else {
                 MessageBox::Show("User type not recognized.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -88,16 +113,18 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
             // Invalid login
             MessageBox::Show("Invalid email or password.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
         }
-
-        // Close the data reader
-        sqlRd->Close();
     }
     catch (Exception^ ex) {
         // Handle any database errors
-        MessageBox::Show("Failed to connect to database: " + ex->Message, "Connection Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+        MessageBox::Show("An error occurred while logging in: " + ex->Message, "Connection Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
     }
     finally {
-        // Close the connection
+        // Ensure the reader is closed and resources are released
+        if (sqlRd != nullptr && !sqlRd->IsClosed) {
+            sqlRd->Close();
+        }
+
+        // Close the database connection
         db->CloseConnection();
     }
 }

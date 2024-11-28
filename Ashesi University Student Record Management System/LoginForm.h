@@ -117,7 +117,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// txtEmail
 			// 
 			this->txtEmail->Location = System::Drawing::Point(119, 82);
-			this->txtEmail->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->txtEmail->Margin = System::Windows::Forms::Padding(2);
 			this->txtEmail->Name = L"txtEmail";
 			this->txtEmail->Size = System::Drawing::Size(252, 22);
 			this->txtEmail->TabIndex = 3;
@@ -125,7 +125,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// txtPassword
 			// 
 			this->txtPassword->Location = System::Drawing::Point(119, 153);
-			this->txtPassword->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->txtPassword->Margin = System::Windows::Forms::Padding(2);
 			this->txtPassword->Name = L"txtPassword";
 			this->txtPassword->PasswordChar = '*';
 			this->txtPassword->Size = System::Drawing::Size(252, 22);
@@ -134,7 +134,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// btnLogin
 			// 
 			this->btnLogin->Location = System::Drawing::Point(119, 258);
-			this->btnLogin->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->btnLogin->Margin = System::Windows::Forms::Padding(2);
 			this->btnLogin->Name = L"btnLogin";
 			this->btnLogin->Size = System::Drawing::Size(102, 33);
 			this->btnLogin->TabIndex = 5;
@@ -156,18 +156,22 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// btnCancel
 			// 
+			this->btnCancel->DialogResult = System::Windows::Forms::DialogResult::Cancel;
 			this->btnCancel->Location = System::Drawing::Point(267, 258);
-			this->btnCancel->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->btnCancel->Margin = System::Windows::Forms::Padding(2);
 			this->btnCancel->Name = L"btnCancel";
 			this->btnCancel->Size = System::Drawing::Size(102, 33);
 			this->btnCancel->TabIndex = 8;
 			this->btnCancel->Text = L"Cancel";
 			this->btnCancel->UseVisualStyleBackColor = true;
+			this->btnCancel->Click += gcnew System::EventHandler(this, &LoginForm::btnCancel_Click);
 			// 
 			// LoginForm
 			// 
+			this->AcceptButton = this->btnLogin;
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->CancelButton = this->btnCancel;
 			this->ClientSize = System::Drawing::Size(515, 342);
 			this->Controls->Add(this->btnCancel);
 			this->Controls->Add(this->lnklblPasswordReset);
@@ -179,7 +183,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->Controls->Add(this->lblEmail);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
-			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"LoginForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
 			this->Text = L"LoginForm";
@@ -192,5 +196,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	private: System::Void btnLogin_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void LoginForm_Load(System::Object^ sender, System::EventArgs^ e);
 private: System::Void lnklblPasswordReset_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e);
+private: System::Void btnCancel_Click(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }
