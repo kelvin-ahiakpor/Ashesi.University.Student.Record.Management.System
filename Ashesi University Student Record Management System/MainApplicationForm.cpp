@@ -62,15 +62,13 @@ System::Void MainApplicationForm::generateTranscriptToolStripMenuItem_Click(Syst
 
 void MainApplicationForm::UpdateMenuForRole(String^ userRole) {
     if (userRole == "Student") {
-        studentsToolStripMenuItem->Enabled = true;
-        facultyToolStripMenuItem->Enabled = false;
-        coursesToolStripMenuItem->Enabled = false;
-        adminToolStripMenuItem->Enabled = false;
+		manageToolStripMenuItem->Enabled = false;
     }
     else if (userRole == "Faculty") {
         studentsToolStripMenuItem->Enabled = false;
         adminToolStripMenuItem->Enabled = false;
         coursesToolStripMenuItem->Enabled = false;
+		viewToolStripMenuItem->Enabled = false;
     }
     else if (userRole == "Administrator") {
         // Admin has access to all menus, so no need to disable anything
