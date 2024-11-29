@@ -4,6 +4,8 @@
 #include "CourseManagementForm.h"
 #include "TranscriptForm.h"
 #include "resource.h" 
+#include "ViewGradesAdmin.h"
+#include "ViewGrades.h"
 
 using namespace AshesiUniversityStudentRecordManagementSystem;
 using namespace System;
@@ -40,6 +42,34 @@ void MainApplicationForm::OpenChildForm(Type^ formType, Object^ parameter) {
 System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm::MainApplicationForm_Load(System::Object^ sender, System::EventArgs^ e)
 {
     UpdateMenuForRole(userRole);
+    return System::Void();
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm::gradesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+{
+    if (userRole == "Administrator") {
+        ViewGradesAdmin^ adminview = gcnew ViewGradesAdmin();
+        adminview->ShowDialog();
+    }
+    else if (userRole == "Student"){
+        ViewGrades^ studentview = gcnew ViewGrades(current);
+        studentview->ShowDialog();
+    }
+
+    return System::Void();
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm::profileToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e){
+    if (userRole == "Administrator") {
+        ProfileManagementForm^ profile = gcnew ProfileManagementForm(adminuser);
+        profile->ShowDialog();
+    }
+    else if (userRole == "Student") {
+        ProfileManagementForm^ profile = gcnew ProfileManagementForm(current);
+        profile->ShowDialog();
+    }
+
+    
     return System::Void();
 }
 

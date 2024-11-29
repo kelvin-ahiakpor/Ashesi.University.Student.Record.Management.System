@@ -1,7 +1,6 @@
-// DatabaseManager.h// DatabaseConnection.h
 #pragma once
 
-using namespace AshesiUniversityStudentRecordManagementSystem;
+namespace AshesiUniversityStudentRecordManagementSystem {
 using namespace System;
 using namespace System::Windows::Forms;
 using namespace MySql::Data::MySqlClient;
@@ -61,4 +60,5 @@ public:
     {
         return sqlConn;
     }
+};
 };
