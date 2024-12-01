@@ -43,6 +43,9 @@
     <ClInclude Include="FacultyDashboardForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="FacultyManagementForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="ForgotPasswordForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -54,6 +57,12 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="MainApplicationForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="StudentManagementForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="ViewCoursesAdmin.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="ViewGrades.h">
@@ -93,6 +102,7 @@
     <ClCompile Include="CourseManagementForm.cpp" />
     <ClCompile Include="Faculty.cpp" />
     <ClCompile Include="FacultyDashboardForm.cpp" />
+    <ClCompile Include="FacultyManagementForm.cpp" />
     <ClCompile Include="ForgotPasswordForm.cpp" />
     <ClCompile Include="GradeManagementForm.cpp" />
     <ClCompile Include="LoginForm.cpp" />
@@ -101,7 +111,9 @@
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="StudentDashboardForm.cpp" />
     <ClCompile Include="StudentEnrollmentForm.cpp" />
+    <ClCompile Include="StudentManagementForm.cpp" />
     <ClCompile Include="TranscriptForm.cpp" />
+    <ClCompile Include="ViewCoursesAdmin.cpp" />
     <ClCompile Include="ViewGrades.cpp" />
     <ClCompile Include="ViewGradesAdmin.cpp" />
   </ItemGroup>
@@ -115,6 +127,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FacultyDashboardForm.resx">
       <DependentUpon>FacultyDashboardForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FacultyManagementForm.resx">
+      <DependentUpon>FacultyManagementForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ForgotPasswordForm.resx">
       <DependentUpon>ForgotPasswordForm.h</DependentUpon>
@@ -136,6 +151,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="StudentEnrollmentForm.resx">
       <DependentUpon>StudentEnrollmentForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StudentManagementForm.resx">
+      <DependentUpon>StudentManagementForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TranscriptForm.resx">
       <DependentUpon>TranscriptForm.h</DependentUpon>

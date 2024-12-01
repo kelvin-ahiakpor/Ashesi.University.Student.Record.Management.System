@@ -1,5 +1,5 @@
 #include "MainApplicationForm.h"
-#include "StudentDashboardForm.h"
+#include "StudentManagementForm.h"
 #include "FacultyDashboardForm.h"
 #include "CourseManagementForm.h"
 #include "TranscriptForm.h"
@@ -75,7 +75,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm:
 
 
 System::Void MainApplicationForm::studentsToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-    OpenChildForm(StudentDashboardForm::typeid, current);
+    OpenChildForm(StudentManagementForm::typeid, current);
 }
 
 System::Void MainApplicationForm::facultyToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
