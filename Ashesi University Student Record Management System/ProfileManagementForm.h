@@ -56,10 +56,12 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 				this->admin = a;
 				this->globalUser = a;  // Assigning user to globalUser
 				userRole = "Administrator";
+				userID = admin->getUserID();
 			}
 			else {
 				throw gcnew System::ArgumentException("Unsupported user type.");
 			}
+			LoadAdminProfile();
 		}
 
 	protected:
