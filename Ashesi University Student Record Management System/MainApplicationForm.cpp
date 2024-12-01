@@ -52,18 +52,18 @@ System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm:
         adminview->ShowDialog();
     }
     else if (userRole == "Student") {
-        ViewGrades^ studentview = gcnew ViewGrades(current);
+        ViewGrades^ studentview = gcnew ViewGrades(globalUser);
         studentview->ShowDialog();
     }
 }
 
 System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm::profileToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
     if (userRole == "Administrator") {
-        ProfileManagementForm^ profile = gcnew ProfileManagementForm(adminuser);
+        ProfileManagementForm^ profile = gcnew ProfileManagementForm(globalUser);
         profile->ShowDialog();
     }
     else if (userRole == "Student") {
-        ProfileManagementForm^ profile = gcnew ProfileManagementForm(current);
+        ProfileManagementForm^ profile = gcnew ProfileManagementForm(globalUser);
         profile->ShowDialog();
     }
 }
@@ -75,24 +75,24 @@ System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm:
 
 System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm::enrollmentsToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 {
-    OpenChildForm(StudentEnrollmentForm::typeid, current);
+    OpenChildForm(StudentEnrollmentForm::typeid, globalUser);
     return System::Void();
 }
 
 System::Void MainApplicationForm::studentsToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-    OpenChildForm(StudentManagementForm::typeid, current);
+    OpenChildForm(StudentManagementForm::typeid, globalUser);
 }
 
 System::Void MainApplicationForm::facultyToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-    OpenChildForm(FacultyManagementForm::typeid, nullptr);
+    OpenChildForm(FacultyManagementForm::typeid, globalUser);
 }
 
 System::Void MainApplicationForm::coursesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-    OpenChildForm(CourseManagementForm::typeid, nullptr);
+    OpenChildForm(CourseManagementForm::typeid, globalUser);
 }
 
 System::Void MainApplicationForm::generateTranscriptToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-    OpenChildForm(TranscriptForm::typeid, nullptr);
+    OpenChildForm(TranscriptForm::typeid, globalUser);
 }
 
 void MainApplicationForm::UpdateMenuForRole(String^ userRole) {

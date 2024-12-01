@@ -27,7 +27,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		Faculty^ faculty;
 		Admin^ admin;
 		String^ userRole;
-		String^ studentid;
+		int^ studentid;
 
 		FacultyDashboardForm(void)
 		{

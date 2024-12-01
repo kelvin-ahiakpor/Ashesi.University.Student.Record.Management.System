@@ -1,4 +1,8 @@
 #pragma once
+#include "User.h"
+#include "Student.h"
+#include "Faculty.h"
+#include "Admin.h"
 #include "StudentDashboardForm.h"
 #include "FacultyDashboardForm.h"
 #include "TranscriptForm.h"
@@ -22,25 +26,14 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	public ref class MainApplicationForm : public System::Windows::Forms::Form
 	{
 	public:
-		Student^ current;
-
-	public:
-		Admin^ adminuser;
+		User^ globalUser;
+		Student^ student;
+		Faculty^ faculty;
+		Admin^ admin;
 		String^ userRole;
-	private: System::Windows::Forms::ToolStripMenuItem^ viewToolStripMenuItem;
-	public:
-	private: System::Windows::Forms::ToolStripMenuItem^ coursesToolStripMenuItem1;
-	private: System::Windows::Forms::ToolStripMenuItem^ gradesToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^ profileToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^ enrollmentsToolStripMenuItem;
+		int^ studentid;
 
-
-	public:
-
-
-
-		   Faculty^ facultyrole;
-		
+		Faculty^ facultyrole;
 
 		MainApplicationForm(void)
 		{
@@ -51,37 +44,36 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			//this->Icon = gcnew System::Drawing::Icon(GetType()->Assembly->GetManifestResourceStream("AshesiUniversityStudentRecordManagementSystem.IDI_ASHESI_LOGO"));
 		}
 
-		MainApplicationForm(Student^ student)
+		MainApplicationForm(User^ user)
 		{
-			userRole = "Student";
-			current = student;
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
-			//this->Icon = gcnew System::Drawing::Icon(GetType()->Assembly->GetManifestResourceStream("AshesiUniversityStudentRecordManagementSystem.IDI_ASHESI_LOGO"));
+			// Perform dynamic casting once and then check the user type
+			if (Student^ s = dynamic_cast<Student^>(user)) {
+				this->student = s;
+				this->globalUser = s;  // Assigning user to globalUser
+				userRole = "Student";
+				studentid = student->getStudentID();
+			}
+			else if (Faculty^ f = dynamic_cast<Faculty^>(user)) {
+				this->faculty = f;
+				this->globalUser = f;  // Assigning user to globalUser
+				userRole = "Faculty";
+			}
+			else if (Admin^ a = dynamic_cast<Admin^>(user)) {
+				this->admin = a;
+				this->globalUser = a;  // Assigning user to globalUser
+				userRole = "Administrator";
+			}
+			else {
+				throw gcnew System::ArgumentException("Unsupported user type.");
+			}
 		}
-
-		MainApplicationForm(Faculty^ faculty)
-		{
-			userRole = "Faculty";
-			facultyrole = faculty;
-			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
-			//this->Icon = gcnew System::Drawing::Icon(GetType()->Assembly->GetManifestResourceStream("AshesiUniversityStudentRecordManagementSystem.IDI_ASHESI_LOGO"));
-		}
-
-		MainApplicationForm(Admin^ admin){
-			adminuser = admin;
-			userRole = "Administrator";
-			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
-			//this->Icon = gcnew System::Drawing::Icon(GetType()->Assembly->GetManifestResourceStream("AshesiUniversityStudentRecordManagementSystem.IDI_ASHESI_LOGO"));
-		}
+	private: System::Windows::Forms::ToolStripMenuItem^ viewToolStripMenuItem;
+	public:
+	private: System::Windows::Forms::ToolStripMenuItem^ coursesToolStripMenuItem1;
+	private: System::Windows::Forms::ToolStripMenuItem^ gradesToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ profileToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ enrollmentsToolStripMenuItem;
 
 	protected:
 		/// <summary>
