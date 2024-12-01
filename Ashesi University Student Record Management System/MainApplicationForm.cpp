@@ -13,7 +13,12 @@ using namespace System;
 using namespace System::Windows::Forms;
 
 void MainApplicationForm::OpenChildForm(Type^ formType, Object^ parameter) {
-    // Check if the form is already open
+    // Ensure that the parameter is of type User
+    User^ user = dynamic_cast<User^>(parameter);
+    if (user == nullptr && parameter != nullptr) {
+        throw gcnew ArgumentException("Invalid parameter type. Expected User.");
+    }
+
     for each (Form ^ form in this->MdiChildren) {
         if (form->GetType() == formType) {
             form->Activate();
@@ -21,20 +26,22 @@ void MainApplicationForm::OpenChildForm(Type^ formType, Object^ parameter) {
         }
     }
 
-    Form^ childForm;
+    // Find the constructor that accepts a User parameter
+    array<System::Reflection::ConstructorInfo^>^ constructors = formType->GetConstructors();
+    Form^ childForm = nullptr;
 
-    // Check for specific forms requiring parameters
-    if (formType == StudentManagementForm::typeid && parameter != nullptr) {
-        Student^ student = dynamic_cast<Student^>(parameter);
-        if (student != nullptr) {
-            childForm = gcnew StudentManagementForm();
-        }
-        else {
-            throw gcnew ArgumentException("Invalid parameter for StudentManagementForm");
+    // Try to find a constructor that accepts a User^ parameter
+    for each (System::Reflection::ConstructorInfo ^ constructor in constructors) {
+        array<System::Reflection::ParameterInfo^>^ parameters = constructor->GetParameters();
+        if (parameters->Length == 1 && parameters[0]->ParameterType == User::typeid) {
+            // If we found a matching constructor, create the form with the User parameter
+            childForm = (Form^)constructor->Invoke(gcnew array<Object^> { user });
+            break;  // Exit after creating the form
         }
     }
-    else {
-        // Default case for forms without parameters
+
+    // If no constructor with User^ parameter was found, fall back to default constructor (no parameters)
+    if (childForm == nullptr) {
         childForm = (Form^)Activator::CreateInstance(formType);
     }
 
