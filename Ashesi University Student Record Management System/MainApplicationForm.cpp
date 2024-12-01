@@ -1,6 +1,6 @@
 #include "MainApplicationForm.h"
 #include "StudentManagementForm.h"
-#include "FacultyManagementForm.h"  // Ensure this is included
+#include "FacultyManagementForm.h"  
 #include "CourseManagementForm.h"
 #include "TranscriptForm.h"
 #include "resource.h"
