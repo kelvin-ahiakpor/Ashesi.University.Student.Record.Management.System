@@ -1,5 +1,7 @@
 #pragma once
 #include "Student.h"
+#include "DatabaseManager.h"
+#include "Admin.h"
 
 namespace AshesiUniversityStudentRecordManagementSystem {
 
@@ -17,6 +19,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	{
 	public:
 		Student^ stud;
+		Admin^ Adminuser;
+		int^ userID;
 		ProfileManagementForm(void)
 		{
 			InitializeComponent();
@@ -28,7 +32,19 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		ProfileManagementForm(Student^ student)
 		{
 			stud = student;
+			userID = stud->getUserID();
 			InitializeComponent();
+			LoadAdminProfile();
+			//
+			//TODO: Add the constructor code here
+			//
+		}
+		ProfileManagementForm(Admin^ admin)
+		{
+			Adminuser = admin;
+			userID = Adminuser->getUserID();
+			InitializeComponent();
+			LoadAdminProfile();
 			//
 			//TODO: Add the constructor code here
 			//
@@ -45,6 +61,12 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 				delete components;
 			}
 		}
+	private:
+		System::Void LoadAdminProfile();
+
+				
+	
+
 	private: System::Windows::Forms::Label^ lblFirstName;
 	private: System::Windows::Forms::Label^ lblLastName;
 	private: System::Windows::Forms::Label^ lblEmail;
@@ -183,8 +205,6 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 
 		}
 #pragma endregion
-	private: System::Void btnSaveProfile_Click(System::Object^ sender, System::EventArgs^ e) {
-		MessageBox::Show("Profile saved successfully.");
-	}
+	private: System::Void btnSaveProfile_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

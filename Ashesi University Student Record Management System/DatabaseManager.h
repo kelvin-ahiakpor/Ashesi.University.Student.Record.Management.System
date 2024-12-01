@@ -1,7 +1,6 @@
-// DatabaseManager.h// DatabaseConnection.h
 #pragma once
 
-using namespace AshesiUniversityStudentRecordManagementSystem;
+namespace AshesiUniversityStudentRecordManagementSystem {
 using namespace System;
 using namespace System::Windows::Forms;
 using namespace MySql::Data::MySqlClient;
@@ -53,7 +52,6 @@ public:
     {
         if (sqlConn->State == System::Data::ConnectionState::Open) {
             sqlConn->Close();
-            MessageBox::Show("Database connection closed!", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
         }
     }
 
@@ -62,4 +60,5 @@ public:
     {
         return sqlConn;
     }
+};
 };
