@@ -5,6 +5,7 @@
 
 System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementForm::button3_Click(System::Object^ sender, System::EventArgs^ e)
 {
+
     return System::Void();
 }
 
@@ -191,6 +192,8 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
             DELETE FROM Users
             WHERE UserID = @UserID;
             )";
+
+
 
             // Create and execute MySQL command for Users table
             MySqlCommand^ deleteUserCmd = gcnew MySqlCommand(deleteUserQuery, db->GetConnection());

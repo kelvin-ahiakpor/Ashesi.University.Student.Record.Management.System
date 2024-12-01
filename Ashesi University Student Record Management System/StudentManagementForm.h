@@ -164,7 +164,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(208, 35);
 			this->button1->TabIndex = 5;
-			this->button1->Text = L"View Users Of StudentType";
+			this->button1->Text = L"View Student Users";
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &StudentManagementForm::button1_Click);
 			// 
