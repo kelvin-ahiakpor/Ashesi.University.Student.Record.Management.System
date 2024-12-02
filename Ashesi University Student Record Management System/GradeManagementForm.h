@@ -89,6 +89,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(GradeManagementForm::typeid));
 			this->lblStudentID = (gcnew System::Windows::Forms::Label());
 			this->lblCourses = (gcnew System::Windows::Forms::Label());
 			this->lblGrade = (gcnew System::Windows::Forms::Label());
@@ -101,58 +102,65 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// lblStudentID
 			// 
 			this->lblStudentID->AutoSize = true;
-			this->lblStudentID->Location = System::Drawing::Point(102, 82);
+			this->lblStudentID->Location = System::Drawing::Point(51, 43);
+			this->lblStudentID->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->lblStudentID->Name = L"lblStudentID";
-			this->lblStudentID->Size = System::Drawing::Size(112, 25);
+			this->lblStudentID->Size = System::Drawing::Size(58, 13);
 			this->lblStudentID->TabIndex = 0;
 			this->lblStudentID->Text = L"Student ID";
 			// 
 			// lblCourses
 			// 
 			this->lblCourses->AutoSize = true;
-			this->lblCourses->Location = System::Drawing::Point(102, 231);
+			this->lblCourses->Location = System::Drawing::Point(51, 120);
+			this->lblCourses->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->lblCourses->Name = L"lblCourses";
-			this->lblCourses->Size = System::Drawing::Size(92, 25);
+			this->lblCourses->Size = System::Drawing::Size(45, 13);
 			this->lblCourses->TabIndex = 1;
 			this->lblCourses->Text = L"Courses";
 			// 
 			// lblGrade
 			// 
 			this->lblGrade->AutoSize = true;
-			this->lblGrade->Location = System::Drawing::Point(102, 361);
+			this->lblGrade->Location = System::Drawing::Point(51, 188);
+			this->lblGrade->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->lblGrade->Name = L"lblGrade";
-			this->lblGrade->Size = System::Drawing::Size(71, 25);
+			this->lblGrade->Size = System::Drawing::Size(36, 13);
 			this->lblGrade->TabIndex = 2;
 			this->lblGrade->Text = L"Grade";
 			// 
 			// cboxCourses
 			// 
 			this->cboxCourses->FormattingEnabled = true;
-			this->cboxCourses->Location = System::Drawing::Point(107, 259);
+			this->cboxCourses->Location = System::Drawing::Point(54, 135);
+			this->cboxCourses->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->cboxCourses->Name = L"cboxCourses";
-			this->cboxCourses->Size = System::Drawing::Size(451, 33);
+			this->cboxCourses->Size = System::Drawing::Size(228, 21);
 			this->cboxCourses->TabIndex = 3;
 			// 
 			// txtStudentID
 			// 
-			this->txtStudentID->Location = System::Drawing::Point(107, 110);
+			this->txtStudentID->Location = System::Drawing::Point(54, 57);
+			this->txtStudentID->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->txtStudentID->Name = L"txtStudentID";
-			this->txtStudentID->Size = System::Drawing::Size(301, 31);
+			this->txtStudentID->Size = System::Drawing::Size(152, 20);
 			this->txtStudentID->TabIndex = 5;
 			// 
 			// cboxGrades
 			// 
 			this->cboxGrades->FormattingEnabled = true;
-			this->cboxGrades->Location = System::Drawing::Point(107, 418);
+			this->cboxGrades->Location = System::Drawing::Point(54, 217);
+			this->cboxGrades->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->cboxGrades->Name = L"cboxGrades";
-			this->cboxGrades->Size = System::Drawing::Size(451, 33);
+			this->cboxGrades->Size = System::Drawing::Size(228, 21);
 			this->cboxGrades->TabIndex = 6;
 			// 
 			// btnSubmitGrade
 			// 
-			this->btnSubmitGrade->Location = System::Drawing::Point(107, 556);
+			this->btnSubmitGrade->Location = System::Drawing::Point(54, 289);
+			this->btnSubmitGrade->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->btnSubmitGrade->Name = L"btnSubmitGrade";
-			this->btnSubmitGrade->Size = System::Drawing::Size(176, 47);
+			this->btnSubmitGrade->Size = System::Drawing::Size(88, 24);
 			this->btnSubmitGrade->TabIndex = 7;
 			this->btnSubmitGrade->Text = L"Submit Grade";
 			this->btnSubmitGrade->UseVisualStyleBackColor = true;
@@ -160,9 +168,9 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// GradeManagementForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(12, 25);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(818, 672);
+			this->ClientSize = System::Drawing::Size(409, 349);
 			this->Controls->Add(this->btnSubmitGrade);
 			this->Controls->Add(this->cboxGrades);
 			this->Controls->Add(this->txtStudentID);
@@ -171,6 +179,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->Controls->Add(this->lblCourses);
 			this->Controls->Add(this->lblStudentID);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->Name = L"GradeManagementForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
 			this->Text = L"GradeManagementForm";

@@ -95,13 +95,13 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	private: System::Windows::Forms::ToolStripMenuItem^ coursesToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ reportsToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ generateTranscriptToolStripMenuItem;
-	private: System::Windows::Forms::ToolStrip^ tlstripCommonActions;
-	private: System::Windows::Forms::ToolStripButton^ tsbtnStudentsDashboard;
+
+
 
 
 	private: System::Windows::Forms::StatusStrip^ statusStrip1;
 	private: System::Windows::Forms::ToolStripStatusLabel^ tsstatMessage;
-	private: System::Windows::Forms::ToolStripLabel^ tlstpLabel;
+
 
 
 
@@ -136,13 +136,9 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->coursesToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->gradesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->profileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->tlstripCommonActions = (gcnew System::Windows::Forms::ToolStrip());
-			this->tsbtnStudentsDashboard = (gcnew System::Windows::Forms::ToolStripButton());
-			this->tlstpLabel = (gcnew System::Windows::Forms::ToolStripLabel());
 			this->statusStrip1 = (gcnew System::Windows::Forms::StatusStrip());
 			this->tsstatMessage = (gcnew System::Windows::Forms::ToolStripStatusLabel());
 			this->menuStrip1->SuspendLayout();
-			this->tlstripCommonActions->SuspendLayout();
 			this->statusStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -171,7 +167,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// exitToolStripMenuItem
 			// 
 			this->exitToolStripMenuItem->Name = L"exitToolStripMenuItem";
-			this->exitToolStripMenuItem->Size = System::Drawing::Size(93, 22);
+			this->exitToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			this->exitToolStripMenuItem->Text = L"Exit";
 			this->exitToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainApplicationForm::exitToolStripMenuItem_Click);
 			// 
@@ -189,28 +185,28 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// studentsToolStripMenuItem
 			// 
 			this->studentsToolStripMenuItem->Name = L"studentsToolStripMenuItem";
-			this->studentsToolStripMenuItem->Size = System::Drawing::Size(137, 22);
+			this->studentsToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			this->studentsToolStripMenuItem->Text = L"Students";
 			this->studentsToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainApplicationForm::studentsToolStripMenuItem_Click);
 			// 
 			// facultyToolStripMenuItem
 			// 
 			this->facultyToolStripMenuItem->Name = L"facultyToolStripMenuItem";
-			this->facultyToolStripMenuItem->Size = System::Drawing::Size(137, 22);
+			this->facultyToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			this->facultyToolStripMenuItem->Text = L"Faculty";
 			this->facultyToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainApplicationForm::facultyToolStripMenuItem_Click);
 			// 
 			// coursesToolStripMenuItem
 			// 
 			this->coursesToolStripMenuItem->Name = L"coursesToolStripMenuItem";
-			this->coursesToolStripMenuItem->Size = System::Drawing::Size(137, 22);
+			this->coursesToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			this->coursesToolStripMenuItem->Text = L"Courses";
 			this->coursesToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainApplicationForm::coursesToolStripMenuItem_Click);
 			// 
 			// enrollmentsToolStripMenuItem
 			// 
 			this->enrollmentsToolStripMenuItem->Name = L"enrollmentsToolStripMenuItem";
-			this->enrollmentsToolStripMenuItem->Size = System::Drawing::Size(137, 22);
+			this->enrollmentsToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			this->enrollmentsToolStripMenuItem->Text = L"Enrollments";
 			this->enrollmentsToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainApplicationForm::enrollmentsToolStripMenuItem_Click);
 			// 
@@ -224,7 +220,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// generateTranscriptToolStripMenuItem
 			// 
 			this->generateTranscriptToolStripMenuItem->Name = L"generateTranscriptToolStripMenuItem";
-			this->generateTranscriptToolStripMenuItem->Size = System::Drawing::Size(175, 22);
+			this->generateTranscriptToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			this->generateTranscriptToolStripMenuItem->Text = L"Generate Transcript";
 			this->generateTranscriptToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainApplicationForm::generateTranscriptToolStripMenuItem_Click);
 			// 
@@ -241,14 +237,14 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// coursesToolStripMenuItem1
 			// 
 			this->coursesToolStripMenuItem1->Name = L"coursesToolStripMenuItem1";
-			this->coursesToolStripMenuItem1->Size = System::Drawing::Size(137, 22);
+			this->coursesToolStripMenuItem1->Size = System::Drawing::Size(180, 22);
 			this->coursesToolStripMenuItem1->Text = L"Enrollments";
 			this->coursesToolStripMenuItem1->Click += gcnew System::EventHandler(this, &MainApplicationForm::coursesToolStripMenuItem1_Click);
 			// 
 			// gradesToolStripMenuItem
 			// 
 			this->gradesToolStripMenuItem->Name = L"gradesToolStripMenuItem";
-			this->gradesToolStripMenuItem->Size = System::Drawing::Size(137, 22);
+			this->gradesToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			this->gradesToolStripMenuItem->Text = L"Grades";
 			this->gradesToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainApplicationForm::gradesToolStripMenuItem_Click);
 			// 
@@ -258,38 +254,6 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->profileToolStripMenuItem->Size = System::Drawing::Size(53, 22);
 			this->profileToolStripMenuItem->Text = L"Profile";
 			this->profileToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainApplicationForm::profileToolStripMenuItem_Click);
-			// 
-			// tlstripCommonActions
-			// 
-			this->tlstripCommonActions->ImageScalingSize = System::Drawing::Size(32, 32);
-			this->tlstripCommonActions->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->tsbtnStudentsDashboard,
-					this->tlstpLabel
-			});
-			this->tlstripCommonActions->Location = System::Drawing::Point(0, 24);
-			this->tlstripCommonActions->Name = L"tlstripCommonActions";
-			this->tlstripCommonActions->Size = System::Drawing::Size(644, 39);
-			this->tlstripCommonActions->TabIndex = 3;
-			this->tlstripCommonActions->Text = L"tlstripCommonActions";
-			// 
-			// tsbtnStudentsDashboard
-			// 
-			this->tsbtnStudentsDashboard->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
-			this->tsbtnStudentsDashboard->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"tsbtnStudentsDashboard.Image")));
-			this->tsbtnStudentsDashboard->ImageTransparentColor = System::Drawing::Color::Magenta;
-			this->tsbtnStudentsDashboard->Name = L"tsbtnStudentsDashboard";
-			this->tsbtnStudentsDashboard->Size = System::Drawing::Size(36, 36);
-			this->tsbtnStudentsDashboard->Text = L"Student Dashboard";
-			// 
-			// tlstpLabel
-			// 
-			this->tlstpLabel->Name = L"tlstpLabel";
-			this->tlstpLabel->Size = System::Drawing::Size(108, 36);
-			this->tlstpLabel->Text = L"Student Dashboard";
-			this->tlstpLabel->Click += gcnew System::EventHandler(this, &MainApplicationForm::tlstpLabel_Click);
-			this->tlstpLabel->MouseEnter += gcnew System::EventHandler(this, &MainApplicationForm::tlstpLabel_MouseEnter);
-			this->tlstpLabel->MouseLeave += gcnew System::EventHandler(this, &MainApplicationForm::tlstpLabel_MouseLeave);
-			this->tlstpLabel->MouseHover += gcnew System::EventHandler(this, &MainApplicationForm::tlstpLabel_MouseHover);
 			// 
 			// statusStrip1
 			// 
@@ -314,12 +278,11 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(644, 435);
 			this->Controls->Add(this->statusStrip1);
-			this->Controls->Add(this->tlstripCommonActions);
 			this->Controls->Add(this->menuStrip1);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->IsMdiContainer = true;
 			this->MainMenuStrip = this->menuStrip1;
-			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"MainApplicationForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"MainApplicationForm";
@@ -327,8 +290,6 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->Load += gcnew System::EventHandler(this, &MainApplicationForm::MainApplicationForm_Load);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
-			this->tlstripCommonActions->ResumeLayout(false);
-			this->tlstripCommonActions->PerformLayout();
 			this->statusStrip1->ResumeLayout(false);
 			this->statusStrip1->PerformLayout();
 			this->ResumeLayout(false);

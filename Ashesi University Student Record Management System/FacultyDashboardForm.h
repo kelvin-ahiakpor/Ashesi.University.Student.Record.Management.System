@@ -101,6 +101,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(FacultyDashboardForm::typeid));
 			this->lblWelcome = (gcnew System::Windows::Forms::Label());
 			this->btnManageCourses = (gcnew System::Windows::Forms::Button());
 			this->btnEnterGrades = (gcnew System::Windows::Forms::Button());
@@ -111,17 +112,19 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// lblWelcome
 			// 
 			this->lblWelcome->AutoSize = true;
-			this->lblWelcome->Location = System::Drawing::Point(464, 142);
+			this->lblWelcome->Location = System::Drawing::Point(232, 74);
+			this->lblWelcome->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->lblWelcome->Name = L"lblWelcome";
-			this->lblWelcome->Size = System::Drawing::Size(263, 25);
+			this->lblWelcome->Size = System::Drawing::Size(132, 13);
 			this->lblWelcome->TabIndex = 0;
 			this->lblWelcome->Text = L"Welcome <Faculty Name>";
 			// 
 			// btnManageCourses
 			// 
-			this->btnManageCourses->Location = System::Drawing::Point(112, 417);
+			this->btnManageCourses->Location = System::Drawing::Point(56, 217);
+			this->btnManageCourses->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->btnManageCourses->Name = L"btnManageCourses";
-			this->btnManageCourses->Size = System::Drawing::Size(216, 53);
+			this->btnManageCourses->Size = System::Drawing::Size(108, 28);
 			this->btnManageCourses->TabIndex = 1;
 			this->btnManageCourses->Text = L"Manage Courses";
 			this->btnManageCourses->UseVisualStyleBackColor = true;
@@ -129,9 +132,10 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// btnEnterGrades
 			// 
-			this->btnEnterGrades->Location = System::Drawing::Point(354, 417);
+			this->btnEnterGrades->Location = System::Drawing::Point(177, 217);
+			this->btnEnterGrades->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->btnEnterGrades->Name = L"btnEnterGrades";
-			this->btnEnterGrades->Size = System::Drawing::Size(216, 53);
+			this->btnEnterGrades->Size = System::Drawing::Size(108, 28);
 			this->btnEnterGrades->TabIndex = 2;
 			this->btnEnterGrades->Text = L"Enter Grades";
 			this->btnEnterGrades->UseVisualStyleBackColor = true;
@@ -139,9 +143,10 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// btnViewRoster
 			// 
-			this->btnViewRoster->Location = System::Drawing::Point(605, 417);
+			this->btnViewRoster->Location = System::Drawing::Point(302, 217);
+			this->btnViewRoster->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->btnViewRoster->Name = L"btnViewRoster";
-			this->btnViewRoster->Size = System::Drawing::Size(216, 53);
+			this->btnViewRoster->Size = System::Drawing::Size(108, 28);
 			this->btnViewRoster->TabIndex = 3;
 			this->btnViewRoster->Text = L"View Roster";
 			this->btnViewRoster->UseVisualStyleBackColor = true;
@@ -149,23 +154,26 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// btnManageProfile
 			// 
-			this->btnManageProfile->Location = System::Drawing::Point(849, 417);
+			this->btnManageProfile->Location = System::Drawing::Point(424, 217);
+			this->btnManageProfile->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->btnManageProfile->Name = L"btnManageProfile";
-			this->btnManageProfile->Size = System::Drawing::Size(216, 53);
+			this->btnManageProfile->Size = System::Drawing::Size(108, 28);
 			this->btnManageProfile->TabIndex = 4;
 			this->btnManageProfile->Text = L"Manage Profile";
 			this->btnManageProfile->UseVisualStyleBackColor = true;
 			// 
 			// FacultyDashboardForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(12, 25);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1179, 597);
+			this->ClientSize = System::Drawing::Size(590, 310);
 			this->Controls->Add(this->btnManageProfile);
 			this->Controls->Add(this->btnViewRoster);
 			this->Controls->Add(this->btnEnterGrades);
 			this->Controls->Add(this->btnManageCourses);
 			this->Controls->Add(this->lblWelcome);
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->Name = L"FacultyDashboardForm";
 			this->Text = L"FacultyDashboardForm";
 			this->ResumeLayout(false);

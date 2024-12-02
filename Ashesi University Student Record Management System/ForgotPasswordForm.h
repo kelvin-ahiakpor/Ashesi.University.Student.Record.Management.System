@@ -62,6 +62,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(ForgotPasswordForm::typeid));
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
@@ -73,24 +74,27 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// textBox1
 			// 
-			this->textBox1->Location = System::Drawing::Point(303, 141);
+			this->textBox1->Location = System::Drawing::Point(227, 115);
+			this->textBox1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(277, 22);
+			this->textBox1->Size = System::Drawing::Size(209, 20);
 			this->textBox1->TabIndex = 0;
 			// 
 			// textBox2
 			// 
-			this->textBox2->Location = System::Drawing::Point(303, 197);
+			this->textBox2->Location = System::Drawing::Point(227, 160);
+			this->textBox2->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(277, 22);
+			this->textBox2->Size = System::Drawing::Size(209, 20);
 			this->textBox2->TabIndex = 1;
 			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(234, 144);
+			this->label1->Location = System::Drawing::Point(176, 117);
+			this->label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(74, 16);
+			this->label1->Size = System::Drawing::Size(60, 13);
 			this->label1->TabIndex = 2;
 			this->label1->Text = L"Enter Code";
 			this->label1->Click += gcnew System::EventHandler(this, &ForgotPasswordForm::label1_Click_1);
@@ -98,9 +102,10 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(211, 203);
+			this->label2->Location = System::Drawing::Point(158, 165);
+			this->label2->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(97, 16);
+			this->label2->Size = System::Drawing::Size(78, 13);
 			this->label2->TabIndex = 3;
 			this->label2->Text = L"New Password";
 			this->label2->Click += gcnew System::EventHandler(this, &ForgotPasswordForm::label2_Click);
@@ -108,18 +113,20 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(350, 71);
+			this->label3->Location = System::Drawing::Point(262, 58);
+			this->label3->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(146, 16);
+			this->label3->Size = System::Drawing::Size(118, 13);
 			this->label3->TabIndex = 4;
 			this->label3->Text = L"FORGOT PASSWORD";
 			this->label3->Click += gcnew System::EventHandler(this, &ForgotPasswordForm::label3_Click);
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(327, 242);
+			this->button1->Location = System::Drawing::Point(245, 197);
+			this->button1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(184, 50);
+			this->button1->Size = System::Drawing::Size(138, 41);
 			this->button1->TabIndex = 5;
 			this->button1->Text = L"CHANGE PASSWORD";
 			this->button1->UseVisualStyleBackColor = true;
@@ -128,18 +135,19 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(290, 100);
+			this->label4->Location = System::Drawing::Point(218, 81);
+			this->label4->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(276, 16);
+			this->label4->Size = System::Drawing::Size(219, 13);
 			this->label4->TabIndex = 6;
 			this->label4->Text = L"An code has been sent to your email address";
 			this->label4->Click += gcnew System::EventHandler(this, &ForgotPasswordForm::label4_Click);
 			// 
 			// ForgotPasswordForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(869, 372);
+			this->ClientSize = System::Drawing::Size(652, 302);
 			this->Controls->Add(this->label4);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->label3);
@@ -147,6 +155,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->textBox2);
 			this->Controls->Add(this->textBox1);
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->Name = L"ForgotPasswordForm";
 			this->Text = L"ForgotPasswordForm";
 			this->ResumeLayout(false);

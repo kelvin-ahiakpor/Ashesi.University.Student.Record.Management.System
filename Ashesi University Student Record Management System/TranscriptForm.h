@@ -89,6 +89,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(TranscriptForm::typeid));
 			this->lblStudentID = (gcnew System::Windows::Forms::Label());
 			this->txtStudentID = (gcnew System::Windows::Forms::TextBox());
 			this->btnViewTranscript = (gcnew System::Windows::Forms::Button());
@@ -158,6 +159,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->Controls->Add(this->txtStudentID);
 			this->Controls->Add(this->lblStudentID);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"TranscriptForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;

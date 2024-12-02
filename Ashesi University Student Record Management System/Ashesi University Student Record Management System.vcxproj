@@ -158,6 +158,9 @@
     <EmbeddedResource Include="TranscriptForm.resx">
       <DependentUpon>TranscriptForm.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ViewCoursesAdmin.resx">
+      <DependentUpon>ViewCoursesAdmin.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ViewGrades.resx">
       <DependentUpon>ViewGrades.h</DependentUpon>
     </EmbeddedResource>
