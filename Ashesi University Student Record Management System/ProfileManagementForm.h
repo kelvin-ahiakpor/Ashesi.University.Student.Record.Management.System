@@ -80,9 +80,6 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	private:
 		System::Void LoadAdminProfile();
 
-				
-	
-
 	private: System::Windows::Forms::Label^ lblFirstName;
 	private: System::Windows::Forms::Label^ lblLastName;
 	private: System::Windows::Forms::Label^ lblEmail;

@@ -73,7 +73,11 @@ System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm:
     else if (userRole == "Student") {
         ProfileManagementForm^ profile = gcnew ProfileManagementForm(globalUser);
         profile->ShowDialog();
-    }
+	}
+	else if (userRole == "Faculty") {
+		ProfileManagementForm^ profile = gcnew ProfileManagementForm(globalUser);
+		profile->ShowDialog();
+	}
 }
 
 System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm::coursesToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e)
