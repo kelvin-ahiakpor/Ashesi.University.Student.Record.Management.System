@@ -47,8 +47,10 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 
 			InitializeComponent();
 		}
+	private: System::Windows::Forms::Button^ btnSave;
+	public:
 
-	private: System::Windows::Forms::Button^ button3;
+
 	private: System::Windows::Forms::Label^ label8;
 	private: System::Windows::Forms::TextBox^ textBox5;
 	private: System::Windows::Forms::Label^ label7;
@@ -104,7 +106,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		void InitializeComponent(void)
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(FacultyEnrollmentManagement::typeid));
-			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->btnSave = (gcnew System::Windows::Forms::Button());
 			this->label8 = (gcnew System::Windows::Forms::Label());
 			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
 			this->label7 = (gcnew System::Windows::Forms::Label());
@@ -131,15 +133,15 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->groupBox1->SuspendLayout();
 			this->SuspendLayout();
 			// 
-			// button3
+			// btnSave
 			// 
-			this->button3->Location = System::Drawing::Point(532, 199);
-			this->button3->Margin = System::Windows::Forms::Padding(2);
-			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(86, 23);
-			this->button3->TabIndex = 39;
-			this->button3->Text = L"Save";
-			this->button3->UseVisualStyleBackColor = true;
+			this->btnSave->Location = System::Drawing::Point(532, 171);
+			this->btnSave->Margin = System::Windows::Forms::Padding(2);
+			this->btnSave->Name = L"btnSave";
+			this->btnSave->Size = System::Drawing::Size(86, 23);
+			this->btnSave->TabIndex = 39;
+			this->btnSave->Text = L"Save";
+			this->btnSave->UseVisualStyleBackColor = true;
 			// 
 			// label8
 			// 
@@ -237,7 +239,6 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->textBox2->ReadOnly = true;
 			this->textBox2->Size = System::Drawing::Size(536, 20);
 			this->textBox2->TabIndex = 27;
-			this->textBox2->TextChanged += gcnew System::EventHandler(this, &FacultyEnrollmentManagement::textBox2_TextChanged);
 			// 
 			// label1
 			// 
@@ -340,7 +341,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// btnCancel
 			// 
-			this->btnCancel->Location = System::Drawing::Point(452, 198);
+			this->btnCancel->Location = System::Drawing::Point(452, 170);
 			this->btnCancel->Name = L"btnCancel";
 			this->btnCancel->Size = System::Drawing::Size(75, 23);
 			this->btnCancel->TabIndex = 46;
@@ -358,13 +359,13 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->groupBox1->Controls->Add(this->textBox5);
 			this->groupBox1->Controls->Add(this->CourseName);
 			this->groupBox1->Controls->Add(this->dateTimePicker3);
-			this->groupBox1->Controls->Add(this->button3);
+			this->groupBox1->Controls->Add(this->btnSave);
 			this->groupBox1->Controls->Add(this->btnCancel);
 			this->groupBox1->Controls->Add(this->EnrollmentDate);
 			this->groupBox1->Controls->Add(this->Student_Name);
 			this->groupBox1->Location = System::Drawing::Point(16, 218);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(623, 227);
+			this->groupBox1->Size = System::Drawing::Size(623, 204);
 			this->groupBox1->TabIndex = 47;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Edit";
@@ -373,7 +374,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(664, 457);
+			this->ClientSize = System::Drawing::Size(664, 428);
 			this->Controls->Add(this->ViewEnroll);
 			this->Controls->Add(this->label8);
 			this->Controls->Add(this->label7);
