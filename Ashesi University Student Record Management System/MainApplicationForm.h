@@ -33,6 +33,11 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		String^ userRole;
 		int^ studentid;
 	private: System::Windows::Forms::ToolStripMenuItem^ enrollmentHistoryToolStripMenuItem;
+
+	private: System::Windows::Forms::ToolStrip^ toolStrip1;
+	private: System::Windows::Forms::ToolStripSeparator^ toolStripSeparator1;
+	private: System::Windows::Forms::ToolStripButton^ tsbtnLogOut;
+
 	public:
 
 		Faculty^ facultyrole;
@@ -141,8 +146,12 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->profileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->statusStrip1 = (gcnew System::Windows::Forms::StatusStrip());
 			this->tsstatWelcomeMessage = (gcnew System::Windows::Forms::ToolStripStatusLabel());
+			this->toolStrip1 = (gcnew System::Windows::Forms::ToolStrip());
+			this->toolStripSeparator1 = (gcnew System::Windows::Forms::ToolStripSeparator());
+			this->tsbtnLogOut = (gcnew System::Windows::Forms::ToolStripButton());
 			this->menuStrip1->SuspendLayout();
 			this->statusStrip1->SuspendLayout();
+			this->toolStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// menuStrip1
@@ -275,26 +284,61 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->tsstatWelcomeMessage->Size = System::Drawing::Size(112, 17);
 			this->tsstatWelcomeMessage->Text = L"Welcome <Admin>";
 			// 
+			// toolStrip1
+			// 
+			this->toolStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->toolStripSeparator1,
+					this->tsbtnLogOut
+			});
+			this->toolStrip1->Location = System::Drawing::Point(0, 24);
+			this->toolStrip1->Name = L"toolStrip1";
+			this->toolStrip1->Size = System::Drawing::Size(644, 25);
+			this->toolStrip1->TabIndex = 8;
+			this->toolStrip1->Text = L"toolStrip1";
+			// 
+			// toolStripSeparator1
+			// 
+			this->toolStripSeparator1->Name = L"toolStripSeparator1";
+			this->toolStripSeparator1->Size = System::Drawing::Size(6, 25);
+			// 
+			// tsbtnLogOut
+			// 
+			this->tsbtnLogOut->Alignment = System::Windows::Forms::ToolStripItemAlignment::Right;
+			this->tsbtnLogOut->BackColor = System::Drawing::SystemColors::Control;
+			this->tsbtnLogOut->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Text;
+			this->tsbtnLogOut->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+			this->tsbtnLogOut->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"tsbtnLogOut.Image")));
+			this->tsbtnLogOut->ImageTransparentColor = System::Drawing::Color::Magenta;
+			this->tsbtnLogOut->Margin = System::Windows::Forms::Padding(0, 1, 8, 2);
+			this->tsbtnLogOut->Name = L"tsbtnLogOut";
+			this->tsbtnLogOut->Size = System::Drawing::Size(51, 22);
+			this->tsbtnLogOut->Text = L"LogOut";
+			this->tsbtnLogOut->Click += gcnew System::EventHandler(this, &MainApplicationForm::btnLogOut_Click);
+			// 
 			// MainApplicationForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(644, 435);
+			this->Controls->Add(this->toolStrip1);
 			this->Controls->Add(this->statusStrip1);
 			this->Controls->Add(this->menuStrip1);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->IsMdiContainer = true;
 			this->MainMenuStrip = this->menuStrip1;
-			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"MainApplicationForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"MainApplicationForm";
 			this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
+			this->FormClosing += gcnew System::Windows::Forms::FormClosingEventHandler(this, &MainApplicationForm::MainApplicationForm_FormClosing);
 			this->Load += gcnew System::EventHandler(this, &MainApplicationForm::MainApplicationForm_Load);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
 			this->statusStrip1->ResumeLayout(false);
 			this->statusStrip1->PerformLayout();
+			this->toolStrip1->ResumeLayout(false);
+			this->toolStrip1->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -324,5 +368,7 @@ private: System::Void profileToolStripMenuItem_Click(System::Object^ sender, Sys
 private: System::Void coursesToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void enrollmentsToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void enrollmentHistoryToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void btnLogOut_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void MainApplicationForm_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e);
 };
 }

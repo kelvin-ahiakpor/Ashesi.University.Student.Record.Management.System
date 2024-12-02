@@ -9,6 +9,7 @@
 #include "ViewGrades.h"
 #include "StudentEnrollmentForm.h"
 #include "EnrollmentHistory.h"
+#include "LoginForm.h"
 
 using namespace AshesiUniversityStudentRecordManagementSystem;
 using namespace System;
@@ -86,15 +87,53 @@ System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm:
     else if (userRole == "Faculty") {
         OpenChildForm(FacultyEnrollmentManagement::typeid, globalUser);
     }
-    
-    return System::Void();
+   
 }
 
 System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm::enrollmentHistoryToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 {    
     OpenChildForm(EnrollmentHistory::typeid, globalUser);
+}
 
-    return System::Void();
+System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm::btnLogOut_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	DialogResult = MessageBox::Show("Are you sure you want to log out?", "Log Out", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
+    if (DialogResult == System::Windows::Forms::DialogResult::Yes) {
+        globalUser->logout();
+
+        // Close all child forms
+        for each (Form ^ childForm in this->MdiChildren) {
+            childForm->Close();
+        }
+
+        // Cast and cleanup specific user types
+        Student^ student = dynamic_cast<Student^>(globalUser);
+        Faculty^ faculty = dynamic_cast<Faculty^>(globalUser);
+        Admin^ admin = dynamic_cast<Admin^>(globalUser);
+
+        if (student != nullptr) {
+            student = nullptr;
+        }
+        else if (faculty != nullptr) {
+            faculty = nullptr;
+        }
+        else if (admin != nullptr) {
+            admin = nullptr;
+        }
+
+        // Clear the base user object
+        globalUser = nullptr;
+
+        // Create and show new login form
+        LoginForm^ loginForm = gcnew LoginForm();
+        loginForm->Show();
+
+        // Close the current form
+        this->Close();
+    }
+    else {
+        return;
+    }
 }
 
 System::Void MainApplicationForm::studentsToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -123,4 +162,25 @@ void MainApplicationForm::UpdateMenuForRole(String^ userRole) {
     facultyToolStripMenuItem->Enabled = (userRole != "Student");
 
 
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm::MainApplicationForm_FormClosing(System::Object^ sender, System::Windows::Forms::FormClosingEventArgs^ e)
+{
+    if (globalUser != nullptr) {
+        Student^ student = dynamic_cast<Student^>(globalUser);
+        Faculty^ faculty = dynamic_cast<Faculty^>(globalUser);
+        Admin^ admin = dynamic_cast<Admin^>(globalUser);
+
+        if (student != nullptr) {
+            student = nullptr;
+        }
+        else if (faculty != nullptr) {
+            faculty = nullptr;
+        }
+        else if (admin != nullptr) {
+            admin = nullptr;
+        }
+
+        globalUser = nullptr;
+    }
 }
