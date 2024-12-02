@@ -1,6 +1,7 @@
 #pragma once
 #include "ProfileManagementForm.h"
 #include "DatabaseManager.h"
+#include "PasswordManager.h"
 
 bool AshesiUniversityStudentRecordManagementSystem::ProfileManagementForm::isProfileChanged()
 {
@@ -84,26 +85,6 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ProfileManagementFor
    
 }
 
-System::String^ AshesiUniversityStudentRecordManagementSystem::ProfileManagementForm::HashPassword(String^ password)
-{
-	// Convert password to byte array
-	array<Byte>^ bytes = System::Text::Encoding::UTF8->GetBytes(password);
-
-	// Create SHA256 instance
-	SHA256^ sha256 = SHA256::Create();
-
-	// Compute the hash
-	array<Byte>^ hashBytes = sha256->ComputeHash(bytes);
-
-	// Convert the hash bytes to a hexadecimal string
-	StringBuilder^ sb = gcnew StringBuilder();
-	for (int i = 0; i < hashBytes->Length; i++)
-	{
-		sb->Append(hashBytes[i].ToString("x2"));  // Format bytes as hex
-	}
-	return sb->ToString();
-}
-
 System::Void AshesiUniversityStudentRecordManagementSystem::ProfileManagementForm::btnSaveProfile_Click(System::Object^ sender, System::EventArgs^ e)
 {
 	if (!isProfileChanged()) {
@@ -115,7 +96,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ProfileManagementFor
 		db->ConnectToDatabase();
 
 		// Hash the new password before updating
-		String^ hashedPassword = HashPassword(this->textBox4->Text);
+		String^ hashedPassword = PasswordManager::HashPassword(this->textBox4->Text);
 
 		String^ query = R"(
 			UPDATE Users

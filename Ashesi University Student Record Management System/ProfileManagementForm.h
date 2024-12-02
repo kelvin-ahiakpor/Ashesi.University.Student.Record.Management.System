@@ -13,8 +13,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-	using namespace System::Security::Cryptography;
-	using namespace System::Text;  
+ 
 
 
 	/// <summary>
@@ -278,7 +277,6 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 
 		}
 #pragma endregion
-		private: System::String^ HashPassword(String^ password);
 	private: System::Void btnSaveProfile_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void btnCancel_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void ProfileManagementForm_Load(System::Object^ sender, System::EventArgs^ e) {
