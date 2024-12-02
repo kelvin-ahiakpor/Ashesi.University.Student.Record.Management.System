@@ -208,7 +208,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
                this->dgvCourses->Margin = System::Windows::Forms::Padding(2);
                this->dgvCourses->Name = L"dgvCourses";
                this->dgvCourses->RowHeadersWidth = 51;
-               this->dgvCourses->Size = System::Drawing::Size(361, 212);
+               this->dgvCourses->Size = System::Drawing::Size(361, 215);
                this->dgvCourses->TabIndex = 9;
                this->dgvCourses->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &CourseManagementForm::dgvCourses_CellClick);
                // 
@@ -254,7 +254,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
                this->groupBoxCourseActions->Controls->Add(this->btnSaveCourse);
                this->groupBoxCourseActions->Controls->Add(this->btnEditCourse);
                this->groupBoxCourseActions->Controls->Add(this->btnDeleteCourse);
-               this->groupBoxCourseActions->Location = System::Drawing::Point(243, 250);
+               this->groupBoxCourseActions->Location = System::Drawing::Point(223, 250);
                this->groupBoxCourseActions->Name = L"groupBoxCourseActions";
                this->groupBoxCourseActions->Size = System::Drawing::Size(371, 35);
                this->groupBoxCourseActions->TabIndex = 14;
@@ -265,9 +265,9 @@ namespace AshesiUniversityStudentRecordManagementSystem {
                // groupBoxSelect
                // 
                this->groupBoxSelect->Controls->Add(this->dgvCourses);
-               this->groupBoxSelect->Location = System::Drawing::Point(243, 12);
+               this->groupBoxSelect->Location = System::Drawing::Point(223, 12);
                this->groupBoxSelect->Name = L"groupBoxSelect";
-               this->groupBoxSelect->Size = System::Drawing::Size(371, 229);
+               this->groupBoxSelect->Size = System::Drawing::Size(371, 232);
                this->groupBoxSelect->TabIndex = 15;
                this->groupBoxSelect->TabStop = false;
                this->groupBoxSelect->Text = L"Select";
@@ -295,7 +295,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
                // 
                this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
                this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-               this->ClientSize = System::Drawing::Size(626, 301);
+               this->ClientSize = System::Drawing::Size(611, 301);
                this->Controls->Add(this->groupBoxEdit);
                this->Controls->Add(this->groupBoxSelect);
                this->Controls->Add(this->groupBoxCourseActions);
