@@ -13,6 +13,9 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Security::Cryptography;
+	using namespace System::Text;  
+
 
 	/// <summary>
 	/// Summary for ProfileManagementForm
@@ -27,11 +30,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		String^ userRole;
 		int^ studentid;
 		int^ userID;
-	private: System::Windows::Forms::Button^ btnCancel;
-	public:
-
-	private: System::Windows::Forms::Label^ lblProfile;
-	private: System::Windows::Forms::PictureBox^ pboxLogo;
+	
 	public:
 		bool isProfileUpdated = false;
 		bool isProfileChanged();
@@ -83,6 +82,9 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 				delete components;
 			}
 		}
+	private: System::Windows::Forms::Button^ btnCancel;
+	private: System::Windows::Forms::Label^ lblProfile;
+	private: System::Windows::Forms::PictureBox^ pboxLogo;
 	private:
 		System::Void LoadAdminProfile();
 
@@ -95,13 +97,6 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	private: System::Windows::Forms::TextBox^ textBox3;
 	private: System::Windows::Forms::TextBox^ textBox4;
 	private: System::Windows::Forms::Button^ btnSaveProfile;
-	protected:
-
-	protected:
-
-
-
-
 	private:
 		/// <summary>
 		/// Required designer variable.
@@ -276,13 +271,17 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->Name = L"ProfileManagementForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
 			this->Text = L"Your Profile";
+			this->Load += gcnew System::EventHandler(this, &ProfileManagementForm::ProfileManagementForm_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pboxLogo))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
+		private: System::String^ HashPassword(String^ password);
 	private: System::Void btnSaveProfile_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void btnCancel_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void ProfileManagementForm_Load(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }
