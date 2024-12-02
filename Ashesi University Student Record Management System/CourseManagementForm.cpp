@@ -115,7 +115,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::CourseManagementForm
         cmd->Parameters->AddWithValue("@CourseName", txtCourseName->Text);
         cmd->Parameters->AddWithValue("@DepartmentID", departmentID); // Use the fetched DepartmentID
         cmd->Parameters->AddWithValue("@Credits", txtCredits->Text);
-        cmd->Parameters->AddWithValue("@Description", richTextBox1->Text);
+        cmd->Parameters->AddWithValue("@Description", rtboxDescription->Text);
         cmd->Parameters->AddWithValue("@Prerequisites", txtPrerequisites->Text);
 
         cmd->ExecuteNonQuery(); // Execute the insert query
@@ -226,7 +226,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::CourseManagementForm
         cmd->Parameters->AddWithValue("@CourseName", txtCourseName->Text);
         cmd->Parameters->AddWithValue("@DepartmentID", departmentID); // Use the fetched DepartmentID
         cmd->Parameters->AddWithValue("@Credits", txtCredits->Text);
-        cmd->Parameters->AddWithValue("@Description", richTextBox1->Text);
+        cmd->Parameters->AddWithValue("@Description", rtboxDescription->Text);
         cmd->Parameters->AddWithValue("@Prerequisites", txtPrerequisites->Text);
 
         cmd->ExecuteNonQuery();
@@ -252,6 +252,6 @@ void AshesiUniversityStudentRecordManagementSystem::CourseManagementForm::dgvCou
         txtCourseName->Text = selectedRow->Cells["CourseName"]->Value->ToString();
         txtCredits->Text = selectedRow->Cells["Credits"]->Value->ToString();
         txtPrerequisites->Text = selectedRow->Cells["Prerequisites"]->Value->ToString();
-        richTextBox1->Text = selectedRow->Cells["Description"]->Value->ToString();
+        rtboxDescription->Text = selectedRow->Cells["Description"]->Value->ToString();
     }
 }

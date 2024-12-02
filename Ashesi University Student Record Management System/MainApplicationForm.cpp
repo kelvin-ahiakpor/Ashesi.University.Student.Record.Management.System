@@ -1,6 +1,6 @@
 #include "MainApplicationForm.h"
 #include "StudentManagementForm.h"
-#include "FacultyManagementForm.h"  // Ensure this is included
+#include "FacultyManagementForm.h"  
 #include "CourseManagementForm.h"
 #include "TranscriptForm.h"
 #include "resource.h"
@@ -13,7 +13,12 @@ using namespace System;
 using namespace System::Windows::Forms;
 
 void MainApplicationForm::OpenChildForm(Type^ formType, Object^ parameter) {
-    // Check if the form is already open
+    // Ensure that the parameter is of type User
+    User^ user = dynamic_cast<User^>(parameter);
+    if (user == nullptr && parameter != nullptr) {
+        throw gcnew ArgumentException("Invalid parameter type. Expected User.");
+    }
+
     for each (Form ^ form in this->MdiChildren) {
         if (form->GetType() == formType) {
             form->Activate();
@@ -21,20 +26,22 @@ void MainApplicationForm::OpenChildForm(Type^ formType, Object^ parameter) {
         }
     }
 
-    Form^ childForm;
+    // Find the constructor that accepts a User parameter
+    array<System::Reflection::ConstructorInfo^>^ constructors = formType->GetConstructors();
+    Form^ childForm = nullptr;
 
-    // Check for specific forms requiring parameters
-    if (formType == StudentManagementForm::typeid && parameter != nullptr) {
-        Student^ student = dynamic_cast<Student^>(parameter);
-        if (student != nullptr) {
-            childForm = gcnew StudentManagementForm();
-        }
-        else {
-            throw gcnew ArgumentException("Invalid parameter for StudentManagementForm");
+    // Try to find a constructor that accepts a User^ parameter
+    for each (System::Reflection::ConstructorInfo ^ constructor in constructors) {
+        array<System::Reflection::ParameterInfo^>^ parameters = constructor->GetParameters();
+        if (parameters->Length == 1 && parameters[0]->ParameterType == User::typeid) {
+            // If we found a matching constructor, create the form with the User parameter
+            childForm = (Form^)constructor->Invoke(gcnew array<Object^> { user });
+            break;  // Exit after creating the form
         }
     }
-    else {
-        // Default case for forms without parameters
+
+    // If no constructor with User^ parameter was found, fall back to default constructor (no parameters)
+    if (childForm == nullptr) {
         childForm = (Form^)Activator::CreateInstance(formType);
     }
 
@@ -52,18 +59,18 @@ System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm:
         adminview->ShowDialog();
     }
     else if (userRole == "Student") {
-        ViewGrades^ studentview = gcnew ViewGrades(current);
+        ViewGrades^ studentview = gcnew ViewGrades(globalUser);
         studentview->ShowDialog();
     }
 }
 
 System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm::profileToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
     if (userRole == "Administrator") {
-        ProfileManagementForm^ profile = gcnew ProfileManagementForm(adminuser);
+        ProfileManagementForm^ profile = gcnew ProfileManagementForm(globalUser);
         profile->ShowDialog();
     }
     else if (userRole == "Student") {
-        ProfileManagementForm^ profile = gcnew ProfileManagementForm(current);
+        ProfileManagementForm^ profile = gcnew ProfileManagementForm(globalUser);
         profile->ShowDialog();
     }
 }
@@ -75,24 +82,24 @@ System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm:
 
 System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm::enrollmentsToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 {
-    OpenChildForm(StudentEnrollmentForm::typeid, current);
+    OpenChildForm(StudentEnrollmentForm::typeid, globalUser);
     return System::Void();
 }
 
 System::Void MainApplicationForm::studentsToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-    OpenChildForm(StudentManagementForm::typeid, current);
+    OpenChildForm(StudentManagementForm::typeid, globalUser);
 }
 
 System::Void MainApplicationForm::facultyToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-    OpenChildForm(FacultyManagementForm::typeid, nullptr);
+    OpenChildForm(FacultyManagementForm::typeid, globalUser);
 }
 
 System::Void MainApplicationForm::coursesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-    OpenChildForm(CourseManagementForm::typeid, nullptr);
+    OpenChildForm(CourseManagementForm::typeid, globalUser);
 }
 
 System::Void MainApplicationForm::generateTranscriptToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-    OpenChildForm(TranscriptForm::typeid, nullptr);
+    OpenChildForm(TranscriptForm::typeid, globalUser);
 }
 
 void MainApplicationForm::UpdateMenuForRole(String^ userRole) {

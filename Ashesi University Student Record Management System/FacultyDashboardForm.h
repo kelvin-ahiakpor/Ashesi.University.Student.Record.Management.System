@@ -1,4 +1,8 @@
 #pragma once
+#include "User.h"
+#include "Student.h"
+#include "Faculty.h"
+#include "Admin.h"
 #include "CourseManagementForm.h"
 #include "GradeManagementForm.h"
 #include "FacultyDashboardForm.h"
@@ -18,12 +22,44 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	public ref class FacultyDashboardForm : public System::Windows::Forms::Form
 	{
 	public:
+		User^ globalUser;
+		Student^ student;
+		Faculty^ faculty;
+		Admin^ admin;
+		String^ userRole;
+		int^ studentid;
+
 		FacultyDashboardForm(void)
 		{
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
 			//
+		}
+
+		FacultyDashboardForm(User^ user)
+		{
+			InitializeComponent();
+			// Perform dynamic casting once and then check the user type
+			if (Student^ s = dynamic_cast<Student^>(user)) {
+				this->student = s;
+				this->globalUser = s;  // Assigning user to globalUser
+				userRole = "Student";
+				studentid = student->getStudentID();
+			}
+			else if (Faculty^ f = dynamic_cast<Faculty^>(user)) {
+				this->faculty = f;
+				this->globalUser = f;  // Assigning user to globalUser
+				userRole = "Faculty";
+			}
+			else if (Admin^ a = dynamic_cast<Admin^>(user)) {
+				this->admin = a;
+				this->globalUser = a;  // Assigning user to globalUser
+				userRole = "Administrator";
+			}
+			else {
+				throw gcnew System::ArgumentException("Unsupported user type.");
+			}
 		}
 
 	protected:

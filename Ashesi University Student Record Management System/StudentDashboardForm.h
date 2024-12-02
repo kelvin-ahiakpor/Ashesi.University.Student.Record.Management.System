@@ -22,17 +22,39 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	public ref class StudentDashboardForm : public System::Windows::Forms::Form
 	{
 	public:
-		Student^ stud;  // Use a managed reference
+		User^ globalUser;
+		Student^ student;
+		Faculty^ faculty;
+		Admin^ admin;
+		String^ userRole;
 
 		StudentDashboardForm(void)
 		{
 			InitializeComponent();
 		}
 
-		StudentDashboardForm(Student^ student)  // Use a managed reference here as well
+		StudentDashboardForm(User^ user)
 		{
-			stud = student;
 			InitializeComponent();
+			// Perform dynamic casting once and then check the user type
+			if (Student^ s = dynamic_cast<Student^>(user)) {
+				this->student = s;
+				this->globalUser = s;  // Assigning user to globalUser
+				userRole = "Student";
+			}
+			else if (Faculty^ f = dynamic_cast<Faculty^>(user)) {
+				this->faculty = f;
+				this->globalUser = f;  // Assigning user to globalUser
+				userRole = "Faculty";
+			}
+			else if (Admin^ a = dynamic_cast<Admin^>(user)) {
+				this->admin = a;
+				this->globalUser = a;  // Assigning user to globalUser
+				userRole = "Administrator";
+			}
+			else {
+				throw gcnew System::ArgumentException("Unsupported user type.");
+			}
 		}
 		
 
@@ -82,7 +104,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->lblWelcome->Name = L"lblWelcome";
 			this->lblWelcome->Size = System::Drawing::Size(167, 16);
 			this->lblWelcome->TabIndex = 0;
-			this->lblWelcome->Text = L"Welcome" + stud->getFirstName();
+			this->lblWelcome->Text = L"Welcome" + student->getFirstName();
 			this->lblWelcome->Click += gcnew System::EventHandler(this, &StudentDashboardForm::lblWelcome_Click);
 			// 
 			// btnEnrollInCourse
@@ -154,19 +176,19 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		this->Show();  // Re-show the Student Dashboard after closing Enrollment Form
 	}
 private: System::Void btnViewGrades_Click(System::Object^ sender, System::EventArgs^ e) {
-	ViewGrades^ gradeForm = gcnew ViewGrades(stud);
+	ViewGrades^ gradeForm = gcnew ViewGrades(student);
 	this->Hide();
 	gradeForm->ShowDialog();
 	this->Show();
 }
 private: System::Void btnViewTranscript_Click(System::Object^ sender, System::EventArgs^ e) {
-	TranscriptForm^ transcriptForm = gcnew TranscriptForm();
+	TranscriptForm^ transcriptForm = gcnew TranscriptForm(student);
 	this->Hide();
 	transcriptForm->ShowDialog();
 	this->Show();
 }
 private: System::Void btnManageProfile_Click(System::Object^ sender, System::EventArgs^ e) {
-	ProfileManagementForm^ profileForm = gcnew ProfileManagementForm(stud);
+	ProfileManagementForm^ profileForm = gcnew ProfileManagementForm(student);
 	this->Hide();
 	profileForm->ShowDialog();
 	this->Show();

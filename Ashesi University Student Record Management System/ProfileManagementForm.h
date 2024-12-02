@@ -1,7 +1,9 @@
 #pragma once
+#include "User.h"
 #include "Student.h"
-#include "DatabaseManager.h"
+#include "Faculty.h"
 #include "Admin.h"
+#include "DatabaseManager.h"
 
 namespace AshesiUniversityStudentRecordManagementSystem {
 
@@ -18,8 +20,12 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	public ref class ProfileManagementForm : public System::Windows::Forms::Form
 	{
 	public:
-		Student^ stud;
-		Admin^ Adminuser;
+		User^ globalUser;
+		Student^ student;
+		Faculty^ faculty;
+		Admin^ admin;
+		String^ userRole;
+		int^ studentid;
 		int^ userID;
 		ProfileManagementForm(void)
 		{
@@ -29,25 +35,33 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			//
 		}
 
-		ProfileManagementForm(Student^ student)
+		ProfileManagementForm(User^ user)
 		{
-			stud = student;
-			userID = stud->getUserID();
 			InitializeComponent();
+			// Perform dynamic casting once and then check the user type
+			if (Student^ s = dynamic_cast<Student^>(user)) {
+				this->student = s;
+				this->globalUser = s;  // Assigning user to globalUser
+				userRole = "Student";
+				studentid = student->getStudentID();
+				userID = student->getUserID();
+			}
+			else if (Faculty^ f = dynamic_cast<Faculty^>(user)) {
+				this->faculty = f;
+				this->globalUser = f;  // Assigning user to globalUser
+				userRole = "Faculty";
+				userID = faculty->getUserID();
+			}
+			else if (Admin^ a = dynamic_cast<Admin^>(user)) {
+				this->admin = a;
+				this->globalUser = a;  // Assigning user to globalUser
+				userRole = "Administrator";
+				userID = admin->getUserID();
+			}
+			else {
+				throw gcnew System::ArgumentException("Unsupported user type.");
+			}
 			LoadAdminProfile();
-			//
-			//TODO: Add the constructor code here
-			//
-		}
-		ProfileManagementForm(Admin^ admin)
-		{
-			Adminuser = admin;
-			userID = Adminuser->getUserID();
-			InitializeComponent();
-			LoadAdminProfile();
-			//
-			//TODO: Add the constructor code here
-			//
 		}
 
 	protected:
