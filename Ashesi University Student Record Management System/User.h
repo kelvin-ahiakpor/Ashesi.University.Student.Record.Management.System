@@ -34,4 +34,7 @@ public:
     // Password management (if needed)
     void setPassword(String^ newPassword) { password = newPassword; }
     String^ getPassword() { return password; }  // For demonstration only; consider encryption for security.
+
+    Void login() { return; }
+    Void logout() { return; }
 };

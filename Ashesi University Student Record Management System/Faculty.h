@@ -8,6 +8,7 @@ public ref class Faculty : public User {
 private:
     int^ facultyID;  // Managed string type
     String^ department; // Managed string type
+   
 
 public:
     // Constructor

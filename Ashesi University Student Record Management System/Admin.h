@@ -13,4 +13,7 @@ public:
     {
     }
 
+    Void login() { return; }
+    Void logout() { return; }
+
 };

@@ -6,6 +6,7 @@
 #include "resource.h"
 #include "ViewGradesAdmin.h"
 #include "ViewGrades.h"
+#include "StudentEnrollmentForm.h"
 
 using namespace AshesiUniversityStudentRecordManagementSystem;
 using namespace System;
@@ -67,6 +68,17 @@ System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm:
     }
 }
 
+System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm::coursesToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e)
+{
+    return System::Void();
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm::enrollmentsToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+{
+    OpenChildForm(StudentEnrollmentForm::typeid, current);
+    return System::Void();
+}
+
 System::Void MainApplicationForm::studentsToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
     OpenChildForm(StudentManagementForm::typeid, current);
 }
@@ -85,9 +97,11 @@ System::Void MainApplicationForm::generateTranscriptToolStripMenuItem_Click(Syst
 
 void MainApplicationForm::UpdateMenuForRole(String^ userRole) {
     // Disable specific menu items based on user role
-    manageToolStripMenuItem->Enabled = (userRole != "Student");
     studentsToolStripMenuItem->Enabled = (userRole == "Administrator" || userRole == "Faculty");
-    adminToolStripMenuItem->Enabled = (userRole == "Administrator");
     coursesToolStripMenuItem->Enabled = (userRole != "Student");
-    viewToolStripMenuItem->Enabled = (userRole == "Administrator" || userRole == "Faculty");
+    viewToolStripMenuItem->Enabled = (userRole == "Administrator" || userRole == "Faculty" || userRole == "Student");
+    coursesToolStripMenuItem1->Enabled = (userRole == "Faculty");
+    enrollmentsToolStripMenuItem->Enabled = (userRole == "Student");
+
+
 }
