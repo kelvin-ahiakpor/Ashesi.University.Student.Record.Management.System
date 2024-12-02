@@ -15,7 +15,6 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ProfileManagementFor
 	if (isProfileUpdated) {
 		try
 		{
-		
 			// Obtain database manager instance
 			DatabaseManager^ db = DatabaseManager::GetInstance();
 
