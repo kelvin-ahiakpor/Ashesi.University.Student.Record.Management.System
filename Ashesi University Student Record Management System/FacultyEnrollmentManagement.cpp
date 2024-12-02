@@ -1,3 +1,4 @@
+#include "FacultyEnrollmentManagement.h"
 //#include "FacultyEnrollmentManagement.h"
 //#include "DatabaseManager.h"
 //
@@ -23,3 +24,9 @@
 //    }
 //    return System::Void();
 //}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::FacultyEnrollmentManagement::btnCancel_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	this->Close();
+}
+

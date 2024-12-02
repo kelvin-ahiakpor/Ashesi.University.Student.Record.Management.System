@@ -126,23 +126,23 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
         MySqlDataReader^ reader = cmd->ExecuteReader();
 
         // Clear any existing rows and columns in the DataGridView
-        dataGridView1->Rows->Clear();
-        dataGridView1->Columns->Clear();
+        dataGridViewFaculty->Rows->Clear();
+        dataGridViewFaculty->Columns->Clear();
 
         // Add the columns to the DataGridView (match the SQL query)
-        dataGridView1->Columns->Add("UserID", "User ID");
-        dataGridView1->Columns->Add("FirstName", "First Name");
-        dataGridView1->Columns->Add("LastName", "Last Name");
-        dataGridView1->Columns->Add("Email", "Email");
-        dataGridView1->Columns->Add("UserType", "User Type");
-        dataGridView1->Columns->Add("FacultyID", "Faculty ID");
-        dataGridView1->Columns->Add("DepartmentID", "Department ID");
-        dataGridView1->Columns->Add("DateOfAppointment", "Date of Appointment");
+        dataGridViewFaculty->Columns->Add("UserID", "User ID");
+        dataGridViewFaculty->Columns->Add("FirstName", "First Name");
+        dataGridViewFaculty->Columns->Add("LastName", "Last Name");
+        dataGridViewFaculty->Columns->Add("Email", "Email");
+        dataGridViewFaculty->Columns->Add("UserType", "User Type");
+        dataGridViewFaculty->Columns->Add("FacultyID", "Faculty ID");
+        dataGridViewFaculty->Columns->Add("DepartmentID", "Department ID");
+        dataGridViewFaculty->Columns->Add("DateOfAppointment", "Date of Appointment");
 
         // Iterate through the result set and populate the DataGridView
         while (reader->Read())
         {
-            dataGridView1->Rows->Add(
+            dataGridViewFaculty->Rows->Add(
                 reader["UserID"]->ToString(),
                 reader["FirstName"]->ToString(),
                 reader["LastName"]->ToString(),
@@ -194,20 +194,20 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
         MySqlDataReader^ reader = cmd->ExecuteReader();
 
         // Clear any existing rows and columns in the DataGridView
-        dataGridView1->Rows->Clear();
-        dataGridView1->Columns->Clear();
+        dataGridViewFaculty->Rows->Clear();
+        dataGridViewFaculty->Columns->Clear();
 
         // Add the columns to the DataGridView (match the SQL query)
-        dataGridView1->Columns->Add("UserID", "User ID");
-        dataGridView1->Columns->Add("FirstName", "First Name");
-        dataGridView1->Columns->Add("LastName", "Last Name");
-        dataGridView1->Columns->Add("Email", "Email");
-        dataGridView1->Columns->Add("UserType", "User Type");
+        dataGridViewFaculty->Columns->Add("UserID", "User ID");
+        dataGridViewFaculty->Columns->Add("FirstName", "First Name");
+        dataGridViewFaculty->Columns->Add("LastName", "Last Name");
+        dataGridViewFaculty->Columns->Add("Email", "Email");
+        dataGridViewFaculty->Columns->Add("UserType", "User Type");
 
         // Iterate through the result set and populate the DataGridView
         while (reader->Read())
         {
-            dataGridView1->Rows->Add(
+            dataGridViewFaculty->Rows->Add(
                 reader["UserID"]->ToString(),
                 reader["FirstName"]->ToString(),
                 reader["LastName"]->ToString(),
@@ -237,13 +237,13 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
         db->ConnectToDatabase();
 
         // Retrieve selected row data
-        if (dataGridView1->SelectedRows->Count == 0)
+        if (dataGridViewFaculty->SelectedRows->Count == 0)
         {
             MessageBox::Show("Please select a faculty to delete.", "No Selection", MessageBoxButtons::OK, MessageBoxIcon::Warning);
             return;
         }
 
-        DataGridViewRow^ selectedRow = dataGridView1->SelectedRows[0];
+        DataGridViewRow^ selectedRow = dataGridViewFaculty->SelectedRows[0];
         int userID = Convert::ToInt32(selectedRow->Cells["UserID"]->Value);
 
         // SQL query to delete from the Faculty table
@@ -412,7 +412,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
     if (e->RowIndex >= 0)
     {
         // Get the selected row from the DataGridView
-        DataGridViewRow^ selectedRow = dataGridView1->Rows[e->RowIndex];
+        DataGridViewRow^ selectedRow = dataGridViewFaculty->Rows[e->RowIndex];
 
         // Check if the columns are present and fill the corresponding TextBoxes with values
         if (selectedRow->Cells["FacultyID"] != nullptr)
