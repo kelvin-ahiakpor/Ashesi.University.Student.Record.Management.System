@@ -36,15 +36,15 @@ System::Void TranscriptForm::btnViewTranscript_Click(System::Object^ sender, Sys
 
         // Define the SQL query to retrieve the transcript information
         String^ query = R"(
-            SELECT 
+    SELECT 
         s.StudentID, 
         c.CourseName, 
         eo.Semester, 
         eo.Year, 
         eo.Schedule, 
-        eo.Room, 
         eo.Status AS OfferingStatus, 
-        f.FacultyName, 
+        u.FirstName, 
+        u.LastName,
         e.Grade
     FROM 
         Enrollments e
@@ -55,12 +55,15 @@ System::Void TranscriptForm::btnViewTranscript_Click(System::Object^ sender, Sys
     JOIN 
         Courses c ON eo.CourseID = c.CourseID
     JOIN 
+        Users u ON u.UserID = s.UserID
+    JOIN 
         Faculty f ON eo.FacultyID = f.FacultyID
     WHERE 
         s.StudentID = @userID
     ORDER BY 
         eo.Year DESC, eo.Semester DESC;
-        )";
+)";
+
 
         // Create the command
         MySqlCommand^ cmd = gcnew MySqlCommand(query, db->GetConnection());
@@ -84,16 +87,15 @@ System::Void TranscriptForm::btnViewTranscript_Click(System::Object^ sender, Sys
                 String^ semester = reader["Semester"]->ToString();
                 String^ year = reader["Year"]->ToString();
                 String^ schedule = reader["Schedule"]->ToString();
-                String^ room = reader["Room"]->ToString();
                 String^ offeringStatus = reader["OfferingStatus"]->ToString();
-                String^ facultyName = reader["FacultyName"]->ToString();
+                String^ facultyName = reader["FirstName"]->ToString() + " " +reader["LastName"]->ToString();
                 String^ grade = reader["Grade"]->ToString();
 
                 // Append the transcript details to the RichTextBox
                 richTxtTranscript->AppendText("Student: " + studentid + "\n");
                 richTxtTranscript->AppendText("Course: " + courseName + "\n");
                 richTxtTranscript->AppendText("Semester: " + semester + ", Year: " + year + "\n");
-                richTxtTranscript->AppendText("Schedule: " + schedule + ", Room: " + room + "\n");
+                richTxtTranscript->AppendText("Schedule: " + schedule + "\n");
                 richTxtTranscript->AppendText("Offering Status: " + offeringStatus + "\n");
                 richTxtTranscript->AppendText("Faculty: " + facultyName + "\n");
                 richTxtTranscript->AppendText("Grade: " + grade + "\n");
@@ -120,9 +122,9 @@ System::Void AshesiUniversityStudentRecordManagementSystem::TranscriptForm::btnP
 
         // Open a SaveFileDialog to specify the output file
         SaveFileDialog^ saveFileDialog = gcnew SaveFileDialog();
-        saveFileDialog->Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+        saveFileDialog->Filter = "Text Files (*.txt)|*.txt|Word Documents (*.docx)|*.docx|PDF Files (*.pdf)|*.pdf|All Files (*.*)|*.*";
         saveFileDialog->Title = "Save Transcript As";
-        saveFileDialog->FileName = "Transcript.txt"; // Default file name
+        saveFileDialog->FileName = "Transcript.pdf";
 
         // Check if the user selected a file
         if (saveFileDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {

@@ -148,7 +148,6 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentFor
         }
 
         String^ enrollmentDate = DateTime::Now.ToString("yyyy-MM-dd");
-        String^ defaultGrade = "N/A";
         double defaultGradePoints = 0.0;
 
         // Check for duplicate enrollment
@@ -173,15 +172,14 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentFor
 
         // Insert the enrollment record
         String^ insertQuery = R"(
-            INSERT INTO Enrollments (StudentID, OfferingID, EnrollmentDate, Grade, GradePoints)
-            VALUES (@StudentID, @OfferingID, @EnrollmentDate, @Grade, @GradePoints)
-        )";
+    INSERT INTO Enrollments (StudentID, OfferingID, EnrollmentDate,GradePoints)
+    VALUES (@StudentID, @OfferingID, @EnrollmentDate, @GradePoints)
+)";
 
         MySqlCommand^ insertCmd = gcnew MySqlCommand(insertQuery, db->GetConnection());
         insertCmd->Parameters->AddWithValue("@StudentID", StudentID);
         insertCmd->Parameters->AddWithValue("@OfferingID", offeringID);
         insertCmd->Parameters->AddWithValue("@EnrollmentDate", enrollmentDate);
-        insertCmd->Parameters->AddWithValue("@Grade", defaultGrade);
         insertCmd->Parameters->AddWithValue("@GradePoints", defaultGradePoints);
 
         int rowsAffected = insertCmd->ExecuteNonQuery();
