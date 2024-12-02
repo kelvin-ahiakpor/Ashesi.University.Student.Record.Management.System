@@ -19,7 +19,31 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		Faculty^ faculty;
 		User^ globalUser;
 
+
 	public:
+		int^ userID;
+		FacultyEnrollmentManagement(void)
+		{
+			InitializeComponent();
+			//
+			//TODO: Add the constructor code here
+			//
+		}
+
+		FacultyEnrollmentManagement(User^ user)
+		{
+			// Perform dynamic casting once and then check the user type
+			if (Faculty^ f = dynamic_cast<Faculty^>(user)) {
+				this->faculty = f;
+				this->globalUser = f;  // Assigning user to globalUser
+				userID = faculty->getUserID();
+			}
+			else {
+				throw gcnew System::ArgumentException("Unsupported user type.");
+			}
+
+			InitializeComponent();
+		}
 
 	private: System::Windows::Forms::Button^ button3;
 	private: System::Windows::Forms::Label^ label8;
@@ -49,28 +73,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	private: System::Windows::Forms::Label^ Semester;
 
 
-		   int^ userID;
-		FacultyEnrollmentManagement(void)
-		{
-			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
-		}
-
-		FacultyEnrollmentManagement(User^ user)
-		{
-			InitializeComponent();
-			// Perform dynamic casting once and then check the user type
-			if (Faculty^ f = dynamic_cast<Faculty^>(user)) {
-				this->faculty = f;
-				this->globalUser = f;  // Assigning user to globalUser
-				userID = faculty->getUserID();
-			}
-			else {
-				throw gcnew System::ArgumentException("Unsupported user type.");
-			}
-		}
+		
 
 		protected:
 			/// <summary>
@@ -342,6 +345,6 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 #pragma endregion
 	private: System::Void dataGridView1_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
 	}
-private: System::Void ViewEnroll_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void ViewEnroll_Click(System::Object^ sender, System::EventArgs^ e) {};
 };
 }

@@ -1,6 +1,7 @@
 #include "MainApplicationForm.h"
 #include "StudentManagementForm.h"
-#include "FacultyManagementForm.h"  
+#include "FacultyManagementForm.h" 
+#include "FacultyEnrollmentManagement.h"
 #include "CourseManagementForm.h"
 #include "TranscriptForm.h"
 #include "resource.h"
@@ -66,18 +67,8 @@ System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm:
 }
 
 System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm::profileToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-    if (userRole == "Administrator") {
         ProfileManagementForm^ profile = gcnew ProfileManagementForm(globalUser);
         profile->ShowDialog();
-    }
-    else if (userRole == "Student") {
-        ProfileManagementForm^ profile = gcnew ProfileManagementForm(globalUser);
-        profile->ShowDialog();
-	}
-	else if (userRole == "Faculty") {
-		ProfileManagementForm^ profile = gcnew ProfileManagementForm(globalUser);
-		profile->ShowDialog();
-	}
 }
 
 System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm::coursesToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e)
@@ -87,7 +78,14 @@ System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm:
 
 System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm::enrollmentsToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
 {
-    OpenChildForm(StudentEnrollmentForm::typeid, globalUser);
+    if (userRole == "Student") {
+        OpenChildForm(StudentEnrollmentForm::typeid, globalUser);
+
+    }
+    else if (userRole == "Faculty") {
+        OpenChildForm(FacultyEnrollmentManagement::typeid, globalUser);
+    }
+    
     return System::Void();
 }
 
@@ -119,8 +117,7 @@ void MainApplicationForm::UpdateMenuForRole(String^ userRole) {
     studentsToolStripMenuItem->Enabled = (userRole == "Administrator" || userRole == "Faculty");
     coursesToolStripMenuItem->Enabled = (userRole != "Student");
     viewToolStripMenuItem->Enabled = (userRole == "Administrator" || userRole == "Faculty" || userRole == "Student");
-    coursesToolStripMenuItem1->Enabled = (userRole == "Faculty");
-    enrollmentsToolStripMenuItem->Enabled = (userRole == "Student");
+    enrollmentsToolStripMenuItem->Enabled = (userRole == "Student"|| userRole == "Faculty");
     enrollmentHistoryToolStripMenuItem->Enabled = (userRole == "Student");
     facultyToolStripMenuItem->Enabled = (userRole != "Student");
 
