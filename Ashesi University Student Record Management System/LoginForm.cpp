@@ -144,3 +144,8 @@ System::Void AshesiUniversityStudentRecordManagementSystem::LoginForm::lnklblPas
     ForgotPasswordForm^ passwordReset = gcnew ForgotPasswordForm(txtEmail->Text);
     passwordReset->ShowDialog();
 }
+
+System::Void AshesiUniversityStudentRecordManagementSystem::LoginForm::btnCancel_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	Application::Exit();
+}
