@@ -308,21 +308,6 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		private: System::Void exitToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 			Application::Exit();
 		}
-		private: System::Void tlstpLabel_Click(System::Object^ sender, System::EventArgs^ e) {
-		}
-		private: System::Void tlstpLabel_MouseHover(System::Object^ sender, System::EventArgs^ e) {
-			tlstpLabel->BackColor = System::Drawing::Color::LightGray; // Highlight on hover
-			tlstpLabel->ForeColor = System::Drawing::Color::Blue;
-		}
-
-		private: System::Void tlstpLabel_MouseLeave(System::Object^ sender, System::EventArgs^ e) {
-			tlstpLabel->BackColor = System::Drawing::Color::Transparent; // Revert to original
-			tlstpLabel->ForeColor = System::Drawing::Color::Black;       // Optional: Revert text color
-		}
-		private: System::Void tlstpLabel_MouseEnter(System::Object^ sender, System::EventArgs^ e) {
-			tlstpLabel->BackColor = System::Drawing::Color::LightGray; // Highlight on hover
-			tlstpLabel->ForeColor = System::Drawing::Color::Blue;
-		}
 
 private: System::Void MainApplicationForm_Load(System::Object^ sender, System::EventArgs^ e);
 private: System::Void manageToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
