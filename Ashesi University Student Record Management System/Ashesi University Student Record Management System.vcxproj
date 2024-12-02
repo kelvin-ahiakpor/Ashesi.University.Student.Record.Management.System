@@ -106,7 +106,6 @@
     <ClCompile Include="MainApplicationForm.cpp" />
     <ClCompile Include="ProfileManagementForm.cpp" />
     <ClCompile Include="Program.cpp" />
-    <ClCompile Include="StudentDashboardForm.cpp" />
     <ClCompile Include="StudentEnrollmentForm.cpp" />
     <ClCompile Include="StudentManagementForm.cpp" />
     <ClCompile Include="TranscriptForm.cpp" />
