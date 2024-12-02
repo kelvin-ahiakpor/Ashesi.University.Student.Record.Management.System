@@ -53,6 +53,7 @@ void MainApplicationForm::OpenChildForm(Type^ formType, Object^ parameter) {
 
 System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm::MainApplicationForm_Load(System::Object^ sender, System::EventArgs^ e) {
     UpdateMenuForRole(userRole);
+	tsstatWelcomeMessage->Text = "Welcome, " + globalUser->getFirstName() + " " + globalUser->getLastName() + "!";
 }
 
 System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm::gradesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
