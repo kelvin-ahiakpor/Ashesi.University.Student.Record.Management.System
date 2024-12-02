@@ -131,3 +131,8 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ProfileManagementFor
 	
 }
 
+System::Void AshesiUniversityStudentRecordManagementSystem::ProfileManagementForm::btnCancel_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	this->Close();
+}
+

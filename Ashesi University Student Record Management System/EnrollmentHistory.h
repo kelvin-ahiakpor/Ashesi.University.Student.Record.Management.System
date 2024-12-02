@@ -93,15 +93,17 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(EnrollmentHistory::typeid));
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->richTxtTranscript = (gcnew System::Windows::Forms::RichTextBox());
 			this->SuspendLayout();
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(25, 12);
+			this->button1->Location = System::Drawing::Point(19, 10);
+			this->button1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(171, 49);
+			this->button1->Size = System::Drawing::Size(128, 25);
 			this->button1->TabIndex = 0;
 			this->button1->Text = L" View Enrollment History";
 			this->button1->UseVisualStyleBackColor = true;
@@ -109,22 +111,24 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// richTxtTranscript
 			// 
-			this->richTxtTranscript->Location = System::Drawing::Point(25, 79);
+			this->richTxtTranscript->Location = System::Drawing::Point(19, 39);
 			this->richTxtTranscript->Margin = System::Windows::Forms::Padding(2);
-			this->richTxtTranscript->Name = L"richTxtGrades";
-			this->richTxtTranscript->Size = System::Drawing::Size(731, 369);
+			this->richTxtTranscript->Name = L"richTxtTranscript";
+			this->richTxtTranscript->Size = System::Drawing::Size(549, 301);
 			this->richTxtTranscript->TabIndex = 4;
 			this->richTxtTranscript->Text = L"";
 			this->richTxtTranscript->TextChanged += gcnew System::EventHandler(this, &EnrollmentHistory::richTxtGrades_TextChanged);
 			// 
-			// MyForm
+			// EnrollmentHistory
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(850, 504);
+			this->ClientSize = System::Drawing::Size(592, 364);
 			this->Controls->Add(this->richTxtTranscript);
 			this->Controls->Add(this->button1);
-			this->Name = L" View Enrollment History";
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->Name = L"EnrollmentHistory";
 			this->Text = L" View Enrollment History";
 			this->Load += gcnew System::EventHandler(this, &EnrollmentHistory::EnrollmentHistory_Load);
 			this->ResumeLayout(false);

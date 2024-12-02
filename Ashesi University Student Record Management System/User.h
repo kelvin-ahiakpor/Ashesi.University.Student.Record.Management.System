@@ -38,6 +38,6 @@ public:
     Void login() { return; }
     Void logout() {
         // Clear sensitive data
-        password = "";
+        password = ""; //In future this will be loaded from an environment variable
     }
 };
