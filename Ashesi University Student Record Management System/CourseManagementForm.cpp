@@ -89,16 +89,16 @@ System::Void AshesiUniversityStudentRecordManagementSystem::CourseManagementForm
 
         MySqlDataReader^ reader = cmd->ExecuteReader();
 
-        String^ departmentID;
+        int^ departmentID =0;
         if (reader->Read())
         {
-            departmentID = reader["DepartmentID"]->ToString();
+            departmentID =(int)reader["DepartmentID"];
         }
 
         reader->Close();
 
         // Check if the department was found
-        if (departmentID == "")
+        if (departmentID == 0)
         {
             MessageBox::Show("Department not found. Please enter a valid department name.", "Validation Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
             return;
@@ -140,7 +140,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::CourseManagementForm
         return;
     }
 
-    String^ courseID = dgvCourses->SelectedRows[0]->Cells["CourseID"]->Value->ToString();
+    int courseID = Convert::ToInt32(dgvCourses->SelectedRows[0]->Cells["CourseID"]->Value);
 
     DatabaseManager^ db = DatabaseManager::GetInstance();
 
@@ -174,7 +174,8 @@ System::Void AshesiUniversityStudentRecordManagementSystem::CourseManagementForm
         return;
     }
 
-    String^ courseID = dgvCourses->SelectedRows[0]->Cells["CourseID"]->Value->ToString();
+    int^ courseID = Convert::ToInt32(dgvCourses->SelectedRows[0]->Cells["CourseID"]->Value);
+
 
     DatabaseManager^ db = DatabaseManager::GetInstance();
 
@@ -194,16 +195,16 @@ System::Void AshesiUniversityStudentRecordManagementSystem::CourseManagementForm
 
         MySqlDataReader^ reader = cmd->ExecuteReader();
 
-        String^ departmentID; // Default to -1 if not found
+        int^ departmentID =0; // Default to -1 if not found
         if (reader->Read())
         {
-            departmentID = reader["DepartmentID"]->ToString();
+            departmentID =(int)reader["DepartmentID"];
         }
 
         reader->Close();
 
         // Check if the department was found
-        if (departmentID == "")
+        if (departmentID == 0)
         {
             MessageBox::Show("Department not found. Please enter a valid department name.", "Validation Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
             return;

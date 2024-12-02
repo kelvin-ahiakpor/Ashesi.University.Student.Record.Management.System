@@ -3,7 +3,7 @@ using namespace System;
 
 public ref class User {
 protected:
-    String^ userID;        // Managed string type
+    int^ userID;        // Managed string type
     String^ firstName;     // Managed string type
     String^ lastName;      // Managed string type
     String^ email;         // Managed string type
@@ -13,7 +13,7 @@ protected:
 
 public:
     // Constructor
-    User(String^ id, String^ fname, String^ lname, String^ mail)
+    User(int^ id, String^ fname, String^ lname, String^ mail)
         : userID(id), firstName(fname), lastName(lname), email(mail)
     {}
 
@@ -21,7 +21,7 @@ public:
     virtual ~User() {}
 
     // Getters
-    String^ getUserID() { return userID; }
+    int^ getUserID() { return userID; }
     String^ getFirstName() { return firstName; }
     String^ getLastName() { return lastName; }
     String^ getEmail() { return email; }

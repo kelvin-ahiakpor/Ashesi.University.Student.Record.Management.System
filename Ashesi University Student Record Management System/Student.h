@@ -8,18 +8,18 @@ using namespace System::Collections::Generic;
 
 public ref class Student : public User {
 private:
-    String^ studentID;  // Managed string type
+    int^ studentID;  // Managed string type
     String^ major;      // Managed string type
 
 public:
     // Constructor
-    Student(String^ id, String^ fname, String^ lname, String^ mail, String^ studID, String^ maj)
+    Student(int^ id, String^ fname, String^ lname, String^ mail, int^ studID, String^ maj)
         : User(id, fname, lname, mail), studentID(studID), major(maj)
     {
     }
 
     // Getters
-    String^ getStudentID() { return studentID; }
+    int^ getStudentID() { return studentID; }
     String^ getMajor() { return major; }
 
 };

@@ -14,11 +14,12 @@ System::Void TranscriptForm::btnViewTranscript_Click(System::Object^ sender, Sys
         db->ConnectToDatabase();
 
         // Get the UserID from the input field
-        String^ userID = txtStudentID->Text;
+        int userID = Convert::ToInt32(txtStudentID->Text);
+
 
         // Check if the UserID field is empty
-        if (String::IsNullOrWhiteSpace(userID)) {
-            MessageBox::Show("Please enter a valid Student ID.", "Input Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+        if (!Int32::TryParse(txtStudentID->Text, userID)) {
+            MessageBox::Show("Please enter a valid number for the Student ID.", "Input Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
             return;
         }
 
@@ -67,7 +68,7 @@ System::Void TranscriptForm::btnViewTranscript_Click(System::Object^ sender, Sys
 
             // Loop through the results and display them
             while (reader->Read()) {
-                String^ studentid = reader["StudentID"]->ToString();
+                int^ studentid = (int)reader["StudentID"];
                 String^ courseName = reader["CourseName"]->ToString();
                 String^ semester = reader["Semester"]->ToString();
                 String^ year = reader["Year"]->ToString();

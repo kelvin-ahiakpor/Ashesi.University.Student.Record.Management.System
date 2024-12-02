@@ -17,7 +17,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	public ref class ViewGrades : public System::Windows::Forms::Form
 	{
 	public:
-		String^ studentid;
+		int^ studentid;
 
 		ViewGrades(void)
 		{

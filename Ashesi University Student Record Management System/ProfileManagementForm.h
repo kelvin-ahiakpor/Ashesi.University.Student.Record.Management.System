@@ -20,7 +20,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	public:
 		Student^ stud;
 		Admin^ Adminuser;
-		String^ userID;
+		int^ userID;
 		ProfileManagementForm(void)
 		{
 			InitializeComponent();

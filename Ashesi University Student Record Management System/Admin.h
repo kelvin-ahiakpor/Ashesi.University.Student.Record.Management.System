@@ -8,7 +8,7 @@ public ref class Admin : public User {
 
 public:
     // Constructor
-    Admin(String^ id, String^ fname, String^ lname, String^ mail)
+    Admin(int^ id, String^ fname, String^ lname, String^ mail)
         : User(id, fname, lname, mail)
     {
     }

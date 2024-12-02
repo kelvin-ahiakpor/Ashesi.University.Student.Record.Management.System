@@ -49,7 +49,7 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
         // Check if the query returns any data
         if (sqlRd->Read()) {
             // Fetch user details from the database
-            String^ userID = sqlRd["UserID"]->ToString();
+            int^ userID = (int)sqlRd["UserID"];
             String^ firstName = sqlRd["FirstName"]->ToString();
             String^ lastName = sqlRd["LastName"]->ToString();
             String^ userType = sqlRd["UserType"]->ToString();
@@ -73,7 +73,7 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
 
                 if (sqlRd->Read()) {
                     // Extract StudentID and DepartmentID
-                    String^ studentID = sqlRd["StudentID"]->ToString();
+                    int studentID = (int)sqlRd["StudentID"];
                     String^ major = sqlRd["DepartmentID"]->ToString();
 
                     // Create the Student object

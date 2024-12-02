@@ -1,13 +1,102 @@
 #include "StudentManagementForm.h"
 #include "DatabaseManager.h"
 
-
+using namespace AshesiUniversityStudentRecordManagementSystem;
+using namespace System;
+using namespace System::Windows::Forms;
+using namespace MySql::Data::MySqlClient;
 
 System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementForm::button3_Click(System::Object^ sender, System::EventArgs^ e)
 {
+    DatabaseManager^ db = DatabaseManager::GetInstance();
 
-    return System::Void();
+    try
+    {
+        // Validate input fields
+        if (String::IsNullOrWhiteSpace(textBox1->Text) || String::IsNullOrWhiteSpace(textBox2->Text) ||
+            String::IsNullOrWhiteSpace(textBox4->Text) || String::IsNullOrWhiteSpace(textBox3->Text))
+        {
+            MessageBox::Show("Please fill in all required fields.", "Validation Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+            return;
+        }
+
+        db->ConnectToDatabase();
+
+        // Insert into Users table
+        String^ insertUserQuery = R"(
+        INSERT INTO Users (FirstName, LastName, Email, Password, UserType)
+        VALUES (@FirstName, @LastName, @Email, 'password123', 'Student');
+        SELECT LAST_INSERT_ID();
+        )";
+
+        MySqlCommand^ cmdInsertUser = gcnew MySqlCommand(insertUserQuery, db->GetConnection());
+        cmdInsertUser->Parameters->AddWithValue("@FirstName", textBox1->Text);
+        cmdInsertUser->Parameters->AddWithValue("@LastName", textBox2->Text);
+        cmdInsertUser->Parameters->AddWithValue("@Email", textBox4->Text);
+
+        // Execute the command and retrieve the new UserID
+        Object^ userIDObj = cmdInsertUser->ExecuteScalar();
+        if (userIDObj == nullptr)
+        {
+            MessageBox::Show("Failed to add user to the Users table.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+            db->CloseConnection();
+            return;
+        }
+
+        int userID = Convert::ToInt32(userIDObj);
+
+        // Get the DepartmentID from the department name
+        String^ getDepartmentIDQuery = R"(
+        SELECT DepartmentID FROM Departments
+        WHERE DepartmentName = @DepartmentName;
+        )";
+
+        MySqlCommand^ departmentCmd = gcnew MySqlCommand(getDepartmentIDQuery, db->GetConnection());
+        departmentCmd->Parameters->AddWithValue("@DepartmentName", textBox3->Text);
+
+        Object^ departmentIDObj = departmentCmd->ExecuteScalar();
+        if (departmentIDObj == nullptr)
+        {
+            MessageBox::Show("Invalid department name.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+            db->CloseConnection();
+            return;
+        }
+
+        int departmentID = Convert::ToInt32(departmentIDObj);
+
+        // Insert into Students table
+        String^ insertStudentQuery = R"(
+        INSERT INTO Students (UserID, DateOfBirth, DepartmentID, EnrollmentDate, ExpectedGraduation)
+        VALUES (@UserID, @DateOfBirth, @DepartmentID, @EnrollmentDate, @ExpectedGraduation);
+        )";
+
+        MySqlCommand^ cmdInsertStudent = gcnew MySqlCommand(insertStudentQuery, db->GetConnection());
+        cmdInsertStudent->Parameters->AddWithValue("@UserID", userID);
+        cmdInsertStudent->Parameters->AddWithValue("@DateOfBirth", dateTimePicker1->Value.ToString("yyyy-MM-dd"));
+        cmdInsertStudent->Parameters->AddWithValue("@DepartmentID", departmentID);
+        cmdInsertStudent->Parameters->AddWithValue("@EnrollmentDate", dateTimePicker2->Value.ToString("yyyy-MM-dd"));
+        cmdInsertStudent->Parameters->AddWithValue("@ExpectedGraduation", dateTimePicker3->Value.ToString("yyyy-MM-dd"));
+
+        int rowsAffected = cmdInsertStudent->ExecuteNonQuery();
+        if (rowsAffected > 0)
+        {
+            MessageBox::Show("Student record created successfully.", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
+        }
+        else
+        {
+            MessageBox::Show("Failed to add student to the Students table.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+        }
+
+        db->CloseConnection();
+    }
+    catch (Exception^ ex)
+    {
+        MessageBox::Show("Error creating student: " + ex->Message, "Database Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+        db->CloseConnection();
+    }
 }
+
+
 
 System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementForm::button2_Click(System::Object^ sender, System::EventArgs^ e)
 {
@@ -148,7 +237,6 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
 
     return System::Void();
 }
-
 System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementForm::button4_Click(System::Object^ sender, System::EventArgs^ e)
 {
     // Delete student record
@@ -158,9 +246,6 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
     {
         db->ConnectToDatabase();
 
-        // Start a database transaction to ensure atomic operations
-        MySqlTransaction^ transaction = db->GetConnection()->BeginTransaction();
-
         // Retrieve selected row data
         if (dataGridView1->SelectedRows->Count == 0)
         {
@@ -169,7 +254,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
         }
 
         DataGridViewRow^ selectedRow = dataGridView1->SelectedRows[0];
-        String^ userID = selectedRow->Cells["UserID"]->Value->ToString();
+        int userID = Convert::ToInt32(selectedRow->Cells["UserID"]->Value);
 
         // SQL query to delete from the Students table
         String^ deleteStudentQuery = R"(
@@ -180,7 +265,6 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
         // Create and execute MySQL command for Students table
         MySqlCommand^ deleteStudentCmd = gcnew MySqlCommand(deleteStudentQuery, db->GetConnection());
         deleteStudentCmd->Parameters->AddWithValue("@UserID", userID);
-        deleteStudentCmd->Transaction = transaction;
 
         int studentRowsAffected = deleteStudentCmd->ExecuteNonQuery();
 
@@ -193,33 +277,24 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
             WHERE UserID = @UserID;
             )";
 
-
-
             // Create and execute MySQL command for Users table
             MySqlCommand^ deleteUserCmd = gcnew MySqlCommand(deleteUserQuery, db->GetConnection());
             deleteUserCmd->Parameters->AddWithValue("@UserID", userID);
-            deleteUserCmd->Transaction = transaction;
 
             int userRowsAffected = deleteUserCmd->ExecuteNonQuery();
 
             if (userRowsAffected > 0)
             {
-                // Commit the transaction if both deletions are successful
-                transaction->Commit();
                 MessageBox::Show("Student deleted successfully!", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
                 button1_Click(sender, e); // Refresh the DataGridView
             }
             else
             {
-                // Rollback if the user deletion fails
-                transaction->Rollback();
                 MessageBox::Show("Failed to delete the user from the Users table.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
             }
         }
         else
         {
-            // Rollback if the student deletion fails
-            transaction->Rollback();
             MessageBox::Show("Failed to delete the student from the Students table.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
         }
 
@@ -228,14 +303,126 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
     catch (Exception^ ex)
     {
         MessageBox::Show("Error deleting student: " + ex->Message, "Database Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+        db->CloseConnection();
     }
 }
 
 
 System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementForm::button5_Click(System::Object^ sender, System::EventArgs^ e)
 {
-    return System::Void();
+    DatabaseManager^ db = DatabaseManager::GetInstance();
+
+    try
+    {
+        // Ensure all necessary fields are filled before updating
+        if (String::IsNullOrWhiteSpace(textBox1->Text) ||
+            String::IsNullOrWhiteSpace(textBox2->Text) ||
+            String::IsNullOrWhiteSpace(textBox4->Text) ||
+            String::IsNullOrWhiteSpace(textBox5->Text))
+        {
+            MessageBox::Show("Please fill in all required fields.", "Validation Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+            return;
+        }
+
+        // Retrieve updated data from the form
+        int^ studentID = Convert::ToInt32(textBox5->Text);
+
+        String^ firstName = textBox1->Text;
+        String^ lastName = textBox2->Text;
+        String^ email = textBox4->Text;
+        String^ dateOfBirth = dateTimePicker1->Value.ToString("yyyy-MM-dd");
+        String^ enrollmentDate = dateTimePicker2->Value.ToString("yyyy-MM-dd");
+        String^ expectedGraduation = dateTimePicker3->Value.ToString("yyyy-MM-dd");
+        String^ departmentName = textBox3->Text;
+
+        db->ConnectToDatabase();
+
+        // Get the DepartmentID from the department name
+        String^ getDepartmentIDQuery = R"(
+        SELECT DepartmentID FROM Departments
+        WHERE DepartmentName = @DepartmentName;
+        )";
+
+        MySqlCommand^ departmentCmd = gcnew MySqlCommand(getDepartmentIDQuery, db->GetConnection());
+        departmentCmd->Parameters->AddWithValue("@DepartmentName", departmentName);
+
+        Object^ departmentIDObj = departmentCmd->ExecuteScalar();
+        if (departmentIDObj == nullptr)
+        {
+            MessageBox::Show("Invalid department name.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+            db->CloseConnection();
+            return;
+        }
+
+        int^ departmentID = (int)departmentIDObj;
+
+        // Update the Users table
+        String^ updateUserQuery = R"(
+        UPDATE Users
+        SET
+            FirstName = @FirstName,
+            LastName = @LastName,
+            Email = @Email
+        WHERE
+            UserID = (
+                SELECT UserID FROM Students WHERE StudentID = @StudentID
+            );
+        )";
+
+        MySqlCommand^ updateUserCmd = gcnew MySqlCommand(updateUserQuery, db->GetConnection());
+        updateUserCmd->Parameters->AddWithValue("@FirstName", firstName);
+        updateUserCmd->Parameters->AddWithValue("@LastName", lastName);
+        updateUserCmd->Parameters->AddWithValue("@Email", email);
+        updateUserCmd->Parameters->AddWithValue("@StudentID", studentID);
+
+        int rowsAffectedUsers = updateUserCmd->ExecuteNonQuery();
+
+        // Update the Students table
+        String^ updateStudentQuery = R"(
+        UPDATE Students
+        SET
+            DateOfBirth = @DateOfBirth,
+            DepartmentID = @DepartmentID,
+            EnrollmentDate = @EnrollmentDate,
+            ExpectedGraduation = @ExpectedGraduation
+        WHERE
+            StudentID = @StudentID;
+        )";
+
+        MySqlCommand^ updateStudentCmd = gcnew MySqlCommand(updateStudentQuery, db->GetConnection());
+        updateStudentCmd->Parameters->AddWithValue("@DateOfBirth", dateOfBirth);
+        updateStudentCmd->Parameters->AddWithValue("@DepartmentID", departmentID);
+        updateStudentCmd->Parameters->AddWithValue("@EnrollmentDate", enrollmentDate);
+        updateStudentCmd->Parameters->AddWithValue("@ExpectedGraduation", expectedGraduation);
+        updateStudentCmd->Parameters->AddWithValue("@StudentID", studentID);
+
+        int rowsAffectedStudents = updateStudentCmd->ExecuteNonQuery();
+
+        // Check the results of the updates
+        if (rowsAffectedUsers > 0 && rowsAffectedStudents > 0)
+        {
+            MessageBox::Show("Student record updated successfully!", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
+            button1_Click(sender, e); // Refresh the DataGridView
+        }
+        else if (rowsAffectedUsers == 0)
+        {
+            MessageBox::Show("No changes were made to the Users table.", "Warning", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+        }
+        else if (rowsAffectedStudents == 0)
+        {
+            MessageBox::Show("No changes were made to the Students table.", "Warning", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+        }
+
+        db->CloseConnection();
+    }
+    catch (Exception^ ex)
+    {
+        MessageBox::Show("Error updating student: " + ex->Message, "Database Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+        db->CloseConnection();
+    }
 }
+
+
 
 System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementForm::dataGridView1_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e)
 {
