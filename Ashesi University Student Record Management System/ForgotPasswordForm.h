@@ -43,9 +43,13 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	private: System::Windows::Forms::TextBox^ textBox2;
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::Label^ label3;
-	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Button^ btnChangePassword;
+
+
 	private: System::Windows::Forms::Label^ label4;
+	private: System::Windows::Forms::PictureBox^ pboxLogo;
+	private: System::Windows::Forms::Label^ lblProfile;
+	private: System::Windows::Forms::Button^ btnCancel;
 
 	protected:
 
@@ -67,98 +71,130 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->btnChangePassword = (gcnew System::Windows::Forms::Button());
 			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->pboxLogo = (gcnew System::Windows::Forms::PictureBox());
+			this->lblProfile = (gcnew System::Windows::Forms::Label());
+			this->btnCancel = (gcnew System::Windows::Forms::Button());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pboxLogo))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// textBox1
 			// 
-			this->textBox1->Location = System::Drawing::Point(227, 115);
-			this->textBox1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->textBox1->Location = System::Drawing::Point(29, 104);
+			this->textBox1->Margin = System::Windows::Forms::Padding(2);
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(209, 20);
+			this->textBox1->Size = System::Drawing::Size(254, 20);
 			this->textBox1->TabIndex = 0;
 			// 
 			// textBox2
 			// 
-			this->textBox2->Location = System::Drawing::Point(227, 160);
-			this->textBox2->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->textBox2->Location = System::Drawing::Point(29, 149);
+			this->textBox2->Margin = System::Windows::Forms::Padding(2);
 			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(209, 20);
+			this->textBox2->Size = System::Drawing::Size(254, 20);
 			this->textBox2->TabIndex = 1;
 			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(176, 117);
+			this->label1->Location = System::Drawing::Point(26, 89);
 			this->label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(60, 13);
 			this->label1->TabIndex = 2;
 			this->label1->Text = L"Enter Code";
-			this->label1->Click += gcnew System::EventHandler(this, &ForgotPasswordForm::label1_Click_1);
 			// 
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(158, 165);
+			this->label2->Location = System::Drawing::Point(26, 134);
 			this->label2->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(78, 13);
 			this->label2->TabIndex = 3;
 			this->label2->Text = L"New Password";
-			this->label2->Click += gcnew System::EventHandler(this, &ForgotPasswordForm::label2_Click);
 			// 
-			// label3
+			// btnChangePassword
 			// 
-			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(262, 58);
-			this->label3->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
-			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(118, 13);
-			this->label3->TabIndex = 4;
-			this->label3->Text = L"FORGOT PASSWORD";
-			this->label3->Click += gcnew System::EventHandler(this, &ForgotPasswordForm::label3_Click);
-			// 
-			// button1
-			// 
-			this->button1->Location = System::Drawing::Point(245, 197);
-			this->button1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(138, 41);
-			this->button1->TabIndex = 5;
-			this->button1->Text = L"CHANGE PASSWORD";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &ForgotPasswordForm::button1_Click);
+			this->btnChangePassword->Location = System::Drawing::Point(30, 184);
+			this->btnChangePassword->Margin = System::Windows::Forms::Padding(2);
+			this->btnChangePassword->Name = L"btnChangePassword";
+			this->btnChangePassword->Size = System::Drawing::Size(105, 25);
+			this->btnChangePassword->TabIndex = 5;
+			this->btnChangePassword->Text = L"Change Password";
+			this->btnChangePassword->UseVisualStyleBackColor = true;
+			this->btnChangePassword->Click += gcnew System::EventHandler(this, &ForgotPasswordForm::btnChangePassword_Click);
 			// 
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(218, 81);
+			this->label4->Location = System::Drawing::Point(27, 58);
 			this->label4->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(219, 13);
+			this->label4->Size = System::Drawing::Size(213, 13);
 			this->label4->TabIndex = 6;
-			this->label4->Text = L"An code has been sent to your email address";
-			this->label4->Click += gcnew System::EventHandler(this, &ForgotPasswordForm::label4_Click);
+			this->label4->Text = L"A code has been sent to your email address";
+			// 
+			// pboxLogo
+			// 
+			this->pboxLogo->BackColor = System::Drawing::Color::Transparent;
+			this->pboxLogo->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pboxLogo.BackgroundImage")));
+			this->pboxLogo->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
+			this->pboxLogo->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pboxLogo.Image")));
+			this->pboxLogo->Location = System::Drawing::Point(253, 21);
+			this->pboxLogo->Name = L"pboxLogo";
+			this->pboxLogo->Size = System::Drawing::Size(30, 30);
+			this->pboxLogo->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
+			this->pboxLogo->TabIndex = 15;
+			this->pboxLogo->TabStop = false;
+			// 
+			// lblProfile
+			// 
+			this->lblProfile->AutoSize = true;
+			this->lblProfile->Font = (gcnew System::Drawing::Font(L"Consolas", 15, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->lblProfile->Location = System::Drawing::Point(26, 21);
+			this->lblProfile->Name = L"lblProfile";
+			this->lblProfile->Size = System::Drawing::Size(175, 23);
+			this->lblProfile->TabIndex = 14;
+			this->lblProfile->Text = L"FORGOT PASSWORD";
+			// 
+			// btnCancel
+			// 
+			this->btnCancel->Location = System::Drawing::Point(178, 184);
+			this->btnCancel->Margin = System::Windows::Forms::Padding(2);
+			this->btnCancel->Name = L"btnCancel";
+			this->btnCancel->Size = System::Drawing::Size(105, 25);
+			this->btnCancel->TabIndex = 16;
+			this->btnCancel->Text = L"Cancel";
+			this->btnCancel->UseVisualStyleBackColor = true;
+			this->btnCancel->Click += gcnew System::EventHandler(this, &ForgotPasswordForm::btnCancel_Click);
 			// 
 			// ForgotPasswordForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(652, 302);
+			this->BackColor = System::Drawing::Color::Linen;
+			this->ClientSize = System::Drawing::Size(312, 229);
+			this->Controls->Add(this->btnCancel);
+			this->Controls->Add(this->pboxLogo);
+			this->Controls->Add(this->lblProfile);
 			this->Controls->Add(this->label4);
-			this->Controls->Add(this->button1);
-			this->Controls->Add(this->label3);
+			this->Controls->Add(this->btnChangePassword);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->textBox2);
 			this->Controls->Add(this->textBox1);
+			this->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
+				static_cast<System::Int32>(static_cast<System::Byte>(0)));
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
-			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"ForgotPasswordForm";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"ForgotPasswordForm";
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pboxLogo))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -172,9 +208,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	}
 private: System::Void label3_Click(System::Object^ sender, System::EventArgs^ e) {
 }
-private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-}
-private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
-}
+private: System::Void btnCancel_Click(System::Object^ sender, System::EventArgs^ e);
+
+private: System::Void btnChangePassword_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

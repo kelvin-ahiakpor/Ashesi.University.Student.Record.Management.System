@@ -73,3 +73,8 @@ System::Void AshesiUniversityStudentRecordManagementSystem::EnrollmentHistory::b
         db->CloseConnection();
     }
 }
+
+System::Void AshesiUniversityStudentRecordManagementSystem::EnrollmentHistory::btnCancel_Click(System::Object^ sender, System::EventArgs^ e)
+{
+    this->Close();
+}

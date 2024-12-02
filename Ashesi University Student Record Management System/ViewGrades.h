@@ -25,6 +25,9 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		Faculty^ faculty;
 		Admin^ admin;
 		String^ userRole;
+	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::Button^ btnCancel;
+	public:
 		int^ studentid;
 
 		ViewGrades(void)
@@ -74,7 +77,9 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Button^ button1;
+	private: System::Windows::Forms::Button^ btnViewGrades;
+	protected:
+
 	private: System::Windows::Forms::RichTextBox^ richTxtTranscript;
 
 
@@ -94,49 +99,82 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		void InitializeComponent(void)
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(ViewGrades::typeid));
-			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->btnViewGrades = (gcnew System::Windows::Forms::Button());
 			this->richTxtTranscript = (gcnew System::Windows::Forms::RichTextBox());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->btnCancel = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
-			// button1
+			// btnViewGrades
 			// 
-			this->button1->Location = System::Drawing::Point(227, 319);
-			this->button1->Margin = System::Windows::Forms::Padding(2);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(128, 28);
-			this->button1->TabIndex = 0;
-			this->button1->Text = L"View Grades";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &ViewGrades::button1_Click);
+			this->btnViewGrades->Location = System::Drawing::Point(202, 324);
+			this->btnViewGrades->Margin = System::Windows::Forms::Padding(2);
+			this->btnViewGrades->Name = L"btnViewGrades";
+			this->btnViewGrades->Size = System::Drawing::Size(92, 23);
+			this->btnViewGrades->TabIndex = 0;
+			this->btnViewGrades->Text = L"View Grades";
+			this->btnViewGrades->UseVisualStyleBackColor = true;
+			this->btnViewGrades->Click += gcnew System::EventHandler(this, &ViewGrades::btnViewGrades_Click);
 			// 
 			// richTxtTranscript
 			// 
-			this->richTxtTranscript->Location = System::Drawing::Point(11, 11);
+			this->richTxtTranscript->Location = System::Drawing::Point(11, 43);
 			this->richTxtTranscript->Margin = System::Windows::Forms::Padding(2);
 			this->richTxtTranscript->Name = L"richTxtTranscript";
-			this->richTxtTranscript->Size = System::Drawing::Size(549, 301);
+			this->richTxtTranscript->Size = System::Drawing::Size(549, 269);
 			this->richTxtTranscript->TabIndex = 4;
 			this->richTxtTranscript->Text = L"";
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Consolas", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label1->Location = System::Drawing::Point(12, 9);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(120, 22);
+			this->label1->TabIndex = 5;
+			this->label1->Text = L"View Grades";
+			// 
+			// btnCancel
+			// 
+			this->btnCancel->Location = System::Drawing::Point(298, 324);
+			this->btnCancel->Margin = System::Windows::Forms::Padding(2);
+			this->btnCancel->Name = L"btnCancel";
+			this->btnCancel->Size = System::Drawing::Size(92, 23);
+			this->btnCancel->TabIndex = 6;
+			this->btnCancel->Text = L"Cancel";
+			this->btnCancel->UseVisualStyleBackColor = true;
+			this->btnCancel->Click += gcnew System::EventHandler(this, &ViewGrades::btnCancel_Click);
 			// 
 			// ViewGrades
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackColor = System::Drawing::Color::Linen;
 			this->ClientSize = System::Drawing::Size(574, 358);
+			this->Controls->Add(this->btnCancel);
+			this->Controls->Add(this->label1);
 			this->Controls->Add(this->richTxtTranscript);
-			this->Controls->Add(this->button1);
+			this->Controls->Add(this->btnViewGrades);
+			this->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
+				static_cast<System::Int32>(static_cast<System::Byte>(0)));
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"ViewGrades";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"View Grades";
 			this->Load += gcnew System::EventHandler(this, &ViewGrades::ViewGrades_Load);
 			this->ResumeLayout(false);
+			this->PerformLayout();
 
 		}
 #pragma endregion
 	private: System::Void ViewGrades_Load(System::Object^ sender, System::EventArgs^ e) {
 
 	}
-	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e);
-	};
+	private: System::Void btnViewGrades_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void btnCancel_Click(System::Object^ sender, System::EventArgs^ e);
+};
 }

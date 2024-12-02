@@ -6,7 +6,7 @@ using namespace System;
 using namespace System::Windows::Forms;
 using namespace MySql::Data::MySqlClient;
 
-System::Void AshesiUniversityStudentRecordManagementSystem::ViewGrades::button1_Click(System::Object^ sender, System::EventArgs^ e)
+System::Void AshesiUniversityStudentRecordManagementSystem::ViewGrades::btnViewGrades_Click(System::Object^ sender, System::EventArgs^ e)
 {
     studentid;
 
@@ -67,4 +67,9 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ViewGrades::button1_
         MessageBox::Show("Error retrieving grades: " + ex->Message, "Database Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
     }
     return System::Void();
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::ViewGrades::btnCancel_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	this->Close();
 }

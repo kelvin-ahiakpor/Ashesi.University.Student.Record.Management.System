@@ -100,7 +100,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// lblStudentID
 			// 
 			this->lblStudentID->AutoSize = true;
-			this->lblStudentID->Location = System::Drawing::Point(31, 28);
+			this->lblStudentID->Location = System::Drawing::Point(31, 12);
 			this->lblStudentID->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->lblStudentID->Name = L"lblStudentID";
 			this->lblStudentID->Size = System::Drawing::Size(58, 13);
@@ -109,7 +109,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// txtStudentID
 			// 
-			this->txtStudentID->Location = System::Drawing::Point(34, 42);
+			this->txtStudentID->Location = System::Drawing::Point(34, 26);
 			this->txtStudentID->Margin = System::Windows::Forms::Padding(2);
 			this->txtStudentID->Name = L"txtStudentID";
 			this->txtStudentID->Size = System::Drawing::Size(157, 20);
@@ -118,7 +118,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// btnViewTranscript
 			// 
-			this->btnViewTranscript->Location = System::Drawing::Point(34, 90);
+			this->btnViewTranscript->Location = System::Drawing::Point(388, 23);
 			this->btnViewTranscript->Margin = System::Windows::Forms::Padding(2);
 			this->btnViewTranscript->Name = L"btnViewTranscript";
 			this->btnViewTranscript->Size = System::Drawing::Size(88, 23);
@@ -129,7 +129,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// richTxtTranscript
 			// 
-			this->richTxtTranscript->Location = System::Drawing::Point(34, 128);
+			this->richTxtTranscript->Location = System::Drawing::Point(34, 68);
 			this->richTxtTranscript->Margin = System::Windows::Forms::Padding(2);
 			this->richTxtTranscript->Name = L"richTxtTranscript";
 			this->richTxtTranscript->Size = System::Drawing::Size(549, 301);
@@ -139,10 +139,10 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// btnPrintTranscript
 			// 
-			this->btnPrintTranscript->Location = System::Drawing::Point(478, 28);
+			this->btnPrintTranscript->Location = System::Drawing::Point(480, 23);
 			this->btnPrintTranscript->Margin = System::Windows::Forms::Padding(2);
 			this->btnPrintTranscript->Name = L"btnPrintTranscript";
-			this->btnPrintTranscript->Size = System::Drawing::Size(103, 28);
+			this->btnPrintTranscript->Size = System::Drawing::Size(103, 23);
 			this->btnPrintTranscript->TabIndex = 4;
 			this->btnPrintTranscript->Text = L"Print Transcript";
 			this->btnPrintTranscript->UseVisualStyleBackColor = true;
@@ -152,18 +152,19 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(620, 467);
+			this->ClientSize = System::Drawing::Size(620, 386);
 			this->Controls->Add(this->btnPrintTranscript);
 			this->Controls->Add(this->richTxtTranscript);
 			this->Controls->Add(this->btnViewTranscript);
 			this->Controls->Add(this->txtStudentID);
 			this->Controls->Add(this->lblStudentID);
-			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
+			this->ForeColor = System::Drawing::Color::Maroon;
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"TranscriptForm";
-			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
-			this->Text = L"TranscriptForm";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
+			this->Text = L"Transcripts";
 			this->Load += gcnew System::EventHandler(this, &TranscriptForm::TranscriptForm_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();

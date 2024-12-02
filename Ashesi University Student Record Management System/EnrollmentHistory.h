@@ -25,7 +25,11 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		Faculty^ faculty;
 		Admin^ admin;
 		String^ userRole;
-		int^ studentid;
+	private: System::Windows::Forms::PictureBox^ pboxLogo;
+	public:
+	private: System::Windows::Forms::Button^ btnCancel;
+	private: System::Windows::Forms::Label^ lblProfile;
+		   int^ studentid;
 
 		EnrollmentHistory(void)
 		{
@@ -96,12 +100,16 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(EnrollmentHistory::typeid));
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->richTxtTranscript = (gcnew System::Windows::Forms::RichTextBox());
+			this->pboxLogo = (gcnew System::Windows::Forms::PictureBox());
+			this->btnCancel = (gcnew System::Windows::Forms::Button());
+			this->lblProfile = (gcnew System::Windows::Forms::Label());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pboxLogo))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(19, 10);
-			this->button1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->button1->Location = System::Drawing::Point(153, 347);
+			this->button1->Margin = System::Windows::Forms::Padding(2);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(128, 25);
 			this->button1->TabIndex = 0;
@@ -111,27 +119,73 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// richTxtTranscript
 			// 
-			this->richTxtTranscript->Location = System::Drawing::Point(19, 39);
+			this->richTxtTranscript->BackColor = System::Drawing::SystemColors::GradientActiveCaption;
+			this->richTxtTranscript->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			this->richTxtTranscript->Location = System::Drawing::Point(19, 57);
 			this->richTxtTranscript->Margin = System::Windows::Forms::Padding(2);
 			this->richTxtTranscript->Name = L"richTxtTranscript";
-			this->richTxtTranscript->Size = System::Drawing::Size(549, 301);
+			this->richTxtTranscript->Size = System::Drawing::Size(549, 283);
 			this->richTxtTranscript->TabIndex = 4;
 			this->richTxtTranscript->Text = L"";
 			this->richTxtTranscript->TextChanged += gcnew System::EventHandler(this, &EnrollmentHistory::richTxtGrades_TextChanged);
+			// 
+			// pboxLogo
+			// 
+			this->pboxLogo->BackColor = System::Drawing::Color::Transparent;
+			this->pboxLogo->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pboxLogo.BackgroundImage")));
+			this->pboxLogo->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
+			this->pboxLogo->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pboxLogo.Image")));
+			this->pboxLogo->Location = System::Drawing::Point(538, 17);
+			this->pboxLogo->Name = L"pboxLogo";
+			this->pboxLogo->Size = System::Drawing::Size(30, 30);
+			this->pboxLogo->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
+			this->pboxLogo->TabIndex = 10;
+			this->pboxLogo->TabStop = false;
+			// 
+			// btnCancel
+			// 
+			this->btnCancel->Location = System::Drawing::Point(285, 347);
+			this->btnCancel->Margin = System::Windows::Forms::Padding(2);
+			this->btnCancel->Name = L"btnCancel";
+			this->btnCancel->Size = System::Drawing::Size(128, 25);
+			this->btnCancel->TabIndex = 11;
+			this->btnCancel->Text = L"Cancel";
+			this->btnCancel->UseVisualStyleBackColor = true;
+			this->btnCancel->Click += gcnew System::EventHandler(this, &EnrollmentHistory::btnCancel_Click);
+			// 
+			// lblProfile
+			// 
+			this->lblProfile->AutoSize = true;
+			this->lblProfile->Font = (gcnew System::Drawing::Font(L"Consolas", 15, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->lblProfile->Location = System::Drawing::Point(15, 17);
+			this->lblProfile->Name = L"lblProfile";
+			this->lblProfile->Size = System::Drawing::Size(208, 23);
+			this->lblProfile->TabIndex = 12;
+			this->lblProfile->Text = L"ENROLLMENT HISTORY";
 			// 
 			// EnrollmentHistory
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(592, 364);
+			this->BackColor = System::Drawing::Color::Linen;
+			this->ClientSize = System::Drawing::Size(592, 380);
+			this->Controls->Add(this->lblProfile);
+			this->Controls->Add(this->btnCancel);
+			this->Controls->Add(this->pboxLogo);
 			this->Controls->Add(this->richTxtTranscript);
 			this->Controls->Add(this->button1);
+			this->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
+				static_cast<System::Int32>(static_cast<System::Byte>(0)));
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
-			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"EnrollmentHistory";
 			this->Text = L" View Enrollment History";
 			this->Load += gcnew System::EventHandler(this, &EnrollmentHistory::EnrollmentHistory_Load);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pboxLogo))->EndInit();
 			this->ResumeLayout(false);
+			this->PerformLayout();
 
 		}
 #pragma endregion
@@ -141,6 +195,6 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void richTxtGrades_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 	}
-
-	};
+	private: System::Void btnCancel_Click(System::Object^ sender, System::EventArgs^ e);
+};
 }
