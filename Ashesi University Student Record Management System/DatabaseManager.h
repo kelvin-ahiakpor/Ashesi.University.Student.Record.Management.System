@@ -32,7 +32,7 @@ public:
     {
         try {
             // Set up the connection string
-            this->sqlConn->ConnectionString = "datasource=sql8.freesqldatabase.com; port=3306; username=sql8744026; password=4ussz7Rekc; database=sql8744026";
+            this->sqlConn->ConnectionString = "datasource=localhost; port=3306; username=root; password=; database=icpfinalproject";
 
             // Open the connection
             this->sqlConn->Open();
