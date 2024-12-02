@@ -10,6 +10,7 @@
 #include "StudentEnrollmentForm.h"
 #include "EnrollmentHistory.h"
 #include "LoginForm.h"
+#include "ProfileManagementForm.h"
 
 using namespace AshesiUniversityStudentRecordManagementSystem;
 using namespace System;

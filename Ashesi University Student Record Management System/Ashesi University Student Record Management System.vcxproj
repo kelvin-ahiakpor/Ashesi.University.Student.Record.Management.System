@@ -95,11 +95,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AdminDashboardForm.cpp" />
     <ClCompile Include="CourseManagementForm.cpp" />
     <ClCompile Include="EnrollmentHistory.cpp" />
     <ClCompile Include="Faculty.cpp" />
-    <ClCompile Include="FacultyDashboardForm.cpp" />
     <ClCompile Include="FacultyEnrollmentManagement.cpp" />
     <ClCompile Include="FacultyManagementForm.cpp" />
     <ClCompile Include="ForgotPasswordForm.cpp" />
