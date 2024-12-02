@@ -100,10 +100,10 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(19, 10);
-			this->button1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->button1->Location = System::Drawing::Point(227, 319);
+			this->button1->Margin = System::Windows::Forms::Padding(2);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(128, 40);
+			this->button1->Size = System::Drawing::Size(128, 28);
 			this->button1->TabIndex = 0;
 			this->button1->Text = L"View Grades";
 			this->button1->UseVisualStyleBackColor = true;
@@ -111,23 +111,22 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// richTxtTranscript
 			// 
-			this->richTxtTranscript->Location = System::Drawing::Point(19, 64);
+			this->richTxtTranscript->Location = System::Drawing::Point(11, 11);
 			this->richTxtTranscript->Margin = System::Windows::Forms::Padding(2);
 			this->richTxtTranscript->Name = L"richTxtTranscript";
 			this->richTxtTranscript->Size = System::Drawing::Size(549, 301);
 			this->richTxtTranscript->TabIndex = 4;
 			this->richTxtTranscript->Text = L"";
-			this->richTxtTranscript->TextChanged += gcnew System::EventHandler(this, &ViewGrades::richTxtGrades_TextChanged);
 			// 
 			// ViewGrades
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(638, 410);
+			this->ClientSize = System::Drawing::Size(574, 358);
 			this->Controls->Add(this->richTxtTranscript);
 			this->Controls->Add(this->button1);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
-			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"ViewGrades";
 			this->Text = L"View Grades";
 			this->Load += gcnew System::EventHandler(this, &ViewGrades::ViewGrades_Load);
@@ -139,8 +138,5 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e);
-	private: System::Void richTxtGrades_TextChanged(System::Object^ sender, System::EventArgs^ e) {
-	}
-
 	};
 }
