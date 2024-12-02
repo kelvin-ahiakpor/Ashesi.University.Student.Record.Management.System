@@ -32,7 +32,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ViewGrades::button1_
             WHERE 
                 s.StudentID = @userID
             ORDER BY 
-                eo.Year DESC, eo.Semester DESC;
+                eo.Year DESC;
         )";
 
         // Create the command

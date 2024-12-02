@@ -93,7 +93,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ViewGradesAdmin::btn
             WHERE 
                 s.StudentID = @userID
             ORDER BY 
-                eo.Year DESC, eo.Semester DESC;
+                eo.Year DESC;
         )";
 
 	try {

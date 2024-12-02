@@ -246,6 +246,8 @@ void AshesiUniversityStudentRecordManagementSystem::CourseManagementForm::dgvCou
     System::Object^ sender,
     System::Windows::Forms::DataGridViewCellEventArgs^ e)
 {
+    DatabaseManager^ db = DatabaseManager::GetInstance();
+
     if (e->RowIndex >= 0)
     {
         DataGridViewRow^ selectedRow = dgvCourses->Rows[e->RowIndex];
@@ -253,5 +255,32 @@ void AshesiUniversityStudentRecordManagementSystem::CourseManagementForm::dgvCou
         txtCredits->Text = selectedRow->Cells["Credits"]->Value->ToString();
         txtPrerequisites->Text = selectedRow->Cells["Prerequisites"]->Value->ToString();
         rtboxDescription->Text = selectedRow->Cells["Description"]->Value->ToString();
+
+        String^ departmentID = selectedRow->Cells["DepartmentID"]->Value->ToString();
+        String^ query = "SELECT DepartmentName FROM Departments WHERE DepartmentID = @DepartmentID";
+        
+        db->ConnectToDatabase();
+        MySqlCommand^ cmd = gcnew MySqlCommand(query, db->GetConnection());
+
+        cmd->Parameters->AddWithValue("@DepartmentID", departmentID);
+
+        try
+        {
+            MySqlDataReader^ reader = cmd->ExecuteReader();
+
+            if (reader->Read())
+            {
+                textBox1->Text = reader["DepartmentName"]->ToString();
+            }
+            reader->Close();
+        }
+        catch (Exception^ ex)
+        {
+            MessageBox::Show("Error fetching Department Name: " + ex->Message);
+        }
+        finally
+        {
+            db->CloseConnection();
+        }
     }
 }
