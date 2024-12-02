@@ -8,13 +8,14 @@ protected:
     String^ lastName;      // Managed string type
     String^ email;         // Managed string type
     String^ password;      // Managed string type
+	String^ securityAnswer; // Managed string type
 
     enum class UserType { Student, Faculty, Administrator };
 
 public:
     // Constructor
     User(int^ id, String^ fname, String^ lname, String^ mail)
-        : userID(id), firstName(fname), lastName(lname), email(mail)
+        : userID(id), firstName(fname), lastName(lname), email(mail), securityAnswer("")
     {}
 
     // Destructor
@@ -25,11 +26,13 @@ public:
     String^ getFirstName() { return firstName; }
     String^ getLastName() { return lastName; }
     String^ getEmail() { return email; }
+    String^ getSecurityAnswer() { return securityAnswer; }
 
     // Setters
     void setFirstName(String^ fname) { firstName = fname; }
     void setLastName(String^ lname) { lastName = lname; }
     void setEmail(String^ newEmail) { email = newEmail; }
+    void setSecurityAnswer(String^ answer) { securityAnswer = answer; }
 
     // Password management (if needed)
     void setPassword(String^ newPassword) { password = newPassword; }

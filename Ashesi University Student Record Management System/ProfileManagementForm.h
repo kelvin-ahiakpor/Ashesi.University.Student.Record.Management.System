@@ -4,6 +4,7 @@
 #include "Faculty.h"
 #include "Admin.h"
 #include "DatabaseManager.h"
+#include "SecurityQuestionForm.h"
 
 namespace AshesiUniversityStudentRecordManagementSystem {
 
@@ -279,7 +280,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 #pragma endregion
 	private: System::Void btnSaveProfile_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void btnCancel_Click(System::Object^ sender, System::EventArgs^ e);
-private: System::Void ProfileManagementForm_Load(System::Object^ sender, System::EventArgs^ e) {
-}
+private: System::Void ProfileManagementForm_Load(System::Object^ sender, System::EventArgs^ e);
+	   private: System::Void SetSecurityQuestion(String^ userId, String^ question, String^ answer);
 };
 }

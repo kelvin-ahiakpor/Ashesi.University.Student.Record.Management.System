@@ -2,6 +2,7 @@
 #include "ProfileManagementForm.h"
 #include "DatabaseManager.h"
 #include "PasswordManager.h"
+#include "SecurityQuestionForm.h"
 
 bool AshesiUniversityStudentRecordManagementSystem::ProfileManagementForm::isProfileChanged()
 {
@@ -138,5 +139,51 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ProfileManagementFor
 System::Void AshesiUniversityStudentRecordManagementSystem::ProfileManagementForm::btnCancel_Click(System::Object^ sender, System::EventArgs^ e)
 {
 	this->Close();
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::ProfileManagementForm::ProfileManagementForm_Load(System::Object^ sender, System::EventArgs^ e)
+{
+	if (String::IsNullOrEmpty(globalUser->getSecurityAnswer()))
+	{
+		MessageBox::Show("Please set your security question and answer.", "Info", MessageBoxButtons::OK, MessageBoxIcon::Information);
+		SecurityQuestionForm^ securityForm = gcnew SecurityQuestionForm(globalUser);
+		securityForm->ShowDialog(); // Show the form and wait for the user to complete it
+		this->Close();  // Close the profile form until the question is set
+	}
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::ProfileManagementForm::SetSecurityQuestion(String^ userId, String^ question, String^ answer)
+{
+	// Hash the answer before storing it
+	String^ hashedAnswer = PasswordManager::HashPassword(answer);
+
+	try
+	{
+		DatabaseManager^ db = DatabaseManager::GetInstance();
+		db->ConnectToDatabase();
+
+		// SQL query to update the user's security question and answer
+		String^ query = R"(
+            UPDATE Users
+            SET SecurityQuestion = @question,
+                SecurityAnswer = @answer
+            WHERE UserID = @userID
+        )";
+
+		MySqlCommand^ cmd = gcnew MySqlCommand(query, db->GetConnection());
+		cmd->Parameters->AddWithValue("@question", question);
+		cmd->Parameters->AddWithValue("@answer", hashedAnswer);
+		cmd->Parameters->AddWithValue("@userID", userId);
+
+		cmd->ExecuteNonQuery();
+		MessageBox::Show("Security question set successfully.", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
+	}
+	catch (Exception^ ex) {
+		MessageBox::Show("Failed to set security question: " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}
+	finally {
+		DatabaseManager^ db = DatabaseManager::GetInstance();
+		db->CloseConnection();
+	}
 }
 
