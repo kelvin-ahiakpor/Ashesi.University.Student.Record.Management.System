@@ -32,6 +32,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		Admin^ admin;
 		String^ userRole;
 		int^ studentid;
+	private: System::Windows::Forms::ToolStripMenuItem^ enrollmentHistoryToolStripMenuItem;
+	public:
 
 		Faculty^ facultyrole;
 
@@ -129,18 +131,19 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->studentsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->facultyToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->coursesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->enrollmentsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->reportsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->generateTranscriptToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->viewToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->coursesToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->gradesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->enrollmentHistoryToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->profileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tlstripCommonActions = (gcnew System::Windows::Forms::ToolStrip());
 			this->tsbtnStudentsDashboard = (gcnew System::Windows::Forms::ToolStripButton());
 			this->tlstpLabel = (gcnew System::Windows::Forms::ToolStripLabel());
 			this->statusStrip1 = (gcnew System::Windows::Forms::StatusStrip());
 			this->tsstatMessage = (gcnew System::Windows::Forms::ToolStripStatusLabel());
-			this->enrollmentsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->menuStrip1->SuspendLayout();
 			this->tlstripCommonActions->SuspendLayout();
 			this->statusStrip1->SuspendLayout();
@@ -189,23 +192,30 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// studentsToolStripMenuItem
 			// 
 			this->studentsToolStripMenuItem->Name = L"studentsToolStripMenuItem";
-			this->studentsToolStripMenuItem->Size = System::Drawing::Size(224, 26);
+			this->studentsToolStripMenuItem->Size = System::Drawing::Size(170, 26);
 			this->studentsToolStripMenuItem->Text = L"Students";
 			this->studentsToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainApplicationForm::studentsToolStripMenuItem_Click);
 			// 
 			// facultyToolStripMenuItem
 			// 
 			this->facultyToolStripMenuItem->Name = L"facultyToolStripMenuItem";
-			this->facultyToolStripMenuItem->Size = System::Drawing::Size(224, 26);
+			this->facultyToolStripMenuItem->Size = System::Drawing::Size(170, 26);
 			this->facultyToolStripMenuItem->Text = L"Faculty";
 			this->facultyToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainApplicationForm::facultyToolStripMenuItem_Click);
 			// 
 			// coursesToolStripMenuItem
 			// 
 			this->coursesToolStripMenuItem->Name = L"coursesToolStripMenuItem";
-			this->coursesToolStripMenuItem->Size = System::Drawing::Size(224, 26);
+			this->coursesToolStripMenuItem->Size = System::Drawing::Size(170, 26);
 			this->coursesToolStripMenuItem->Text = L"Courses";
 			this->coursesToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainApplicationForm::coursesToolStripMenuItem_Click);
+			// 
+			// enrollmentsToolStripMenuItem
+			// 
+			this->enrollmentsToolStripMenuItem->Name = L"enrollmentsToolStripMenuItem";
+			this->enrollmentsToolStripMenuItem->Size = System::Drawing::Size(170, 26);
+			this->enrollmentsToolStripMenuItem->Text = L"Enrollments";
+			this->enrollmentsToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainApplicationForm::enrollmentsToolStripMenuItem_Click);
 			// 
 			// reportsToolStripMenuItem
 			// 
@@ -223,9 +233,9 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// viewToolStripMenuItem
 			// 
-			this->viewToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+			this->viewToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
 				this->coursesToolStripMenuItem1,
-					this->gradesToolStripMenuItem
+					this->gradesToolStripMenuItem, this->enrollmentHistoryToolStripMenuItem
 			});
 			this->viewToolStripMenuItem->Name = L"viewToolStripMenuItem";
 			this->viewToolStripMenuItem->Size = System::Drawing::Size(55, 24);
@@ -244,6 +254,13 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->gradesToolStripMenuItem->Size = System::Drawing::Size(224, 26);
 			this->gradesToolStripMenuItem->Text = L"Grades";
 			this->gradesToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainApplicationForm::gradesToolStripMenuItem_Click);
+			// 
+			// enrollmentHistoryToolStripMenuItem
+			// 
+			this->enrollmentHistoryToolStripMenuItem->Name = L"enrollmentHistoryToolStripMenuItem";
+			this->enrollmentHistoryToolStripMenuItem->Size = System::Drawing::Size(224, 26);
+			this->enrollmentHistoryToolStripMenuItem->Text = L"Enrollment History";
+			this->enrollmentHistoryToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainApplicationForm::enrollmentHistoryToolStripMenuItem_Click);
 			// 
 			// profileToolStripMenuItem
 			// 
@@ -300,13 +317,6 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->tsstatMessage->Name = L"tsstatMessage";
 			this->tsstatMessage->Size = System::Drawing::Size(139, 20);
 			this->tsstatMessage->Text = L"Welcome <Admin>";
-			// 
-			// enrollmentsToolStripMenuItem
-			// 
-			this->enrollmentsToolStripMenuItem->Name = L"enrollmentsToolStripMenuItem";
-			this->enrollmentsToolStripMenuItem->Size = System::Drawing::Size(224, 26);
-			this->enrollmentsToolStripMenuItem->Text = L"Enrollments";
-			this->enrollmentsToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainApplicationForm::enrollmentsToolStripMenuItem_Click);
 			// 
 			// MainApplicationForm
 			// 
@@ -373,5 +383,6 @@ private: System::Void gradesToolStripMenuItem_Click(System::Object^ sender, Syst
 private: System::Void profileToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void coursesToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void enrollmentsToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void enrollmentHistoryToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

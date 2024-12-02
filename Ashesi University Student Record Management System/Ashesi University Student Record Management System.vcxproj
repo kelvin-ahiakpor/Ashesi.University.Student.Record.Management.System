@@ -34,6 +34,9 @@
     <ClInclude Include="CourseManagementForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="EnrollmentHistory.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="EnvLoader.h" />
     <ClInclude Include="Faculty.h" />
     <ClInclude Include="Course.h" />
@@ -100,6 +103,7 @@
   <ItemGroup>
     <ClCompile Include="AdminDashboardForm.cpp" />
     <ClCompile Include="CourseManagementForm.cpp" />
+    <ClCompile Include="EnrollmentHistory.cpp" />
     <ClCompile Include="Faculty.cpp" />
     <ClCompile Include="FacultyDashboardForm.cpp" />
     <ClCompile Include="FacultyManagementForm.cpp" />

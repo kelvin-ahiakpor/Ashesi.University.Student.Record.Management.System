@@ -7,6 +7,7 @@
 #include "ViewGradesAdmin.h"
 #include "ViewGrades.h"
 #include "StudentEnrollmentForm.h"
+#include "EnrollmentHistory.h"
 
 using namespace AshesiUniversityStudentRecordManagementSystem;
 using namespace System;
@@ -86,6 +87,13 @@ System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm:
     return System::Void();
 }
 
+System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm::enrollmentHistoryToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+{    
+    OpenChildForm(EnrollmentHistory::typeid, globalUser);
+
+    return System::Void();
+}
+
 System::Void MainApplicationForm::studentsToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
     OpenChildForm(StudentManagementForm::typeid, globalUser);
 }
@@ -109,6 +117,8 @@ void MainApplicationForm::UpdateMenuForRole(String^ userRole) {
     viewToolStripMenuItem->Enabled = (userRole == "Administrator" || userRole == "Faculty" || userRole == "Student");
     coursesToolStripMenuItem1->Enabled = (userRole == "Faculty");
     enrollmentsToolStripMenuItem->Enabled = (userRole == "Student");
+    enrollmentHistoryToolStripMenuItem->Enabled = (userRole == "Student");
+    facultyToolStripMenuItem->Enabled = (userRole != "Student");
 
 
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "Student.h"
+#include "User.h"
 
 namespace AshesiUniversityStudentRecordManagementSystem {
 
@@ -17,6 +18,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	{
 	public:
 		int^ StudentID;
+		User^ globalUser;
+		Student^ student;
 
 		StudentEnrollmentForm(void)
 		{
@@ -26,9 +29,17 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			//
 		}
 
-		StudentEnrollmentForm(Student^ user)
+		StudentEnrollmentForm(User^ user)
 		{
-			StudentID = user->getStudentID();
+			if (Student^ s = dynamic_cast<Student^>(user)) {
+				this->student = s;
+				this->globalUser = s;  // Assigning user to globalUser
+				StudentID = student->getStudentID();
+
+			}
+			else {
+				throw gcnew System::ArgumentException("Unsupported user type.");
+			}
 
 			InitializeComponent();
 			//
@@ -258,6 +269,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			   this->button1->TabIndex = 17;
 			   this->button1->Text = L"Enroll";
 			   this->button1->UseVisualStyleBackColor = true;
+			   this->button1->Click += gcnew System::EventHandler(this, &StudentEnrollmentForm::button1_Click);
 			   // 
 			   // label8
 			   // 
@@ -333,6 +345,7 @@ private: System::Void richTextBox3_TextChanged(System::Object^ sender, System::E
 }
 private: System::Void SearchButton_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void dataGridView1_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e);
+private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e);
 };
 	
 
