@@ -80,6 +80,8 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
                     Student^ currentStudent = gcnew Student(
                         userID, firstName, lastName, email, studentID, major);
 
+					currentStudent->setPassword(password);
+
                     // Show a success message
                     MessageBox::Show("Login successful! Welcome, " + firstName + ".",
                         "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
@@ -107,7 +109,7 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
                 adminDashboard->Show();
                 this->Hide();
             }
-            if (userType == "Faculty") {
+            else if (userType == "Faculty") {
                 // Query for student details
                 String^ studentQuery = "SELECT f.FacultyID, f.DepartmentID " +
                     "FROM Faculty f " +
@@ -182,4 +184,9 @@ System::Void LoginForm::LoginForm_Load(System::Object^ sender, System::EventArgs
 System::Void AshesiUniversityStudentRecordManagementSystem::LoginForm::lnklblPasswordReset_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
     ForgotPasswordForm^ passwordReset = gcnew ForgotPasswordForm(txtEmail->Text);
     passwordReset->ShowDialog();
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::LoginForm::btnCancel_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	Application::Exit();
 }

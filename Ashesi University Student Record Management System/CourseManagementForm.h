@@ -21,6 +21,10 @@ namespace AshesiUniversityStudentRecordManagementSystem {
         Faculty^ faculty;
         Admin^ admin;
         String^ userRole;
+    private: System::Windows::Forms::GroupBox^ groupBoxCourseActions;
+    private: System::Windows::Forms::GroupBox^ groupBoxSelect;
+    private: System::Windows::Forms::GroupBox^ groupBoxEdit;
+    public:
         int^ studentid;
 
         Void LoadCourse();
@@ -86,6 +90,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 #pragma region Windows Form Designer generated code
            void InitializeComponent(void)
            {
+               System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(CourseManagementForm::typeid));
                this->lblCourseName = (gcnew System::Windows::Forms::Label());
                this->lblCredits = (gcnew System::Windows::Forms::Label());
                this->lblPrerequisites = (gcnew System::Windows::Forms::Label());
@@ -100,13 +105,19 @@ namespace AshesiUniversityStudentRecordManagementSystem {
                this->rtboxDescription = (gcnew System::Windows::Forms::RichTextBox());
                this->label2 = (gcnew System::Windows::Forms::Label());
                this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+               this->groupBoxCourseActions = (gcnew System::Windows::Forms::GroupBox());
+               this->groupBoxSelect = (gcnew System::Windows::Forms::GroupBox());
+               this->groupBoxEdit = (gcnew System::Windows::Forms::GroupBox());
                (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvCourses))->BeginInit();
+               this->groupBoxCourseActions->SuspendLayout();
+               this->groupBoxSelect->SuspendLayout();
+               this->groupBoxEdit->SuspendLayout();
                this->SuspendLayout();
                // 
                // lblCourseName
                // 
                this->lblCourseName->AutoSize = true;
-               this->lblCourseName->Location = System::Drawing::Point(26, 24);
+               this->lblCourseName->Location = System::Drawing::Point(3, 16);
                this->lblCourseName->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
                this->lblCourseName->Name = L"lblCourseName";
                this->lblCourseName->Size = System::Drawing::Size(71, 13);
@@ -116,7 +127,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
                // lblCredits
                // 
                this->lblCredits->AutoSize = true;
-               this->lblCredits->Location = System::Drawing::Point(26, 183);
+               this->lblCredits->Location = System::Drawing::Point(5, 151);
                this->lblCredits->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
                this->lblCredits->Name = L"lblCredits";
                this->lblCredits->Size = System::Drawing::Size(39, 13);
@@ -126,7 +137,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
                // lblPrerequisites
                // 
                this->lblPrerequisites->AutoSize = true;
-               this->lblPrerequisites->Location = System::Drawing::Point(26, 218);
+               this->lblPrerequisites->Location = System::Drawing::Point(5, 186);
                this->lblPrerequisites->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
                this->lblPrerequisites->Name = L"lblPrerequisites";
                this->lblPrerequisites->Size = System::Drawing::Size(67, 13);
@@ -135,32 +146,32 @@ namespace AshesiUniversityStudentRecordManagementSystem {
                // 
                // txtCourseName
                // 
-               this->txtCourseName->Location = System::Drawing::Point(28, 38);
-               this->txtCourseName->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+               this->txtCourseName->Location = System::Drawing::Point(5, 30);
+               this->txtCourseName->Margin = System::Windows::Forms::Padding(2);
                this->txtCourseName->Name = L"txtCourseName";
                this->txtCourseName->Size = System::Drawing::Size(180, 20);
                this->txtCourseName->TabIndex = 3;
                // 
                // txtCredits
                // 
-               this->txtCredits->Location = System::Drawing::Point(28, 197);
-               this->txtCredits->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+               this->txtCredits->Location = System::Drawing::Point(7, 165);
+               this->txtCredits->Margin = System::Windows::Forms::Padding(2);
                this->txtCredits->Name = L"txtCredits";
                this->txtCredits->Size = System::Drawing::Size(180, 20);
                this->txtCredits->TabIndex = 4;
                // 
                // txtPrerequisites
                // 
-               this->txtPrerequisites->Location = System::Drawing::Point(28, 233);
-               this->txtPrerequisites->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+               this->txtPrerequisites->Location = System::Drawing::Point(7, 201);
+               this->txtPrerequisites->Margin = System::Windows::Forms::Padding(2);
                this->txtPrerequisites->Name = L"txtPrerequisites";
                this->txtPrerequisites->Size = System::Drawing::Size(180, 20);
                this->txtPrerequisites->TabIndex = 5;
                // 
                // btnSaveCourse
                // 
-               this->btnSaveCourse->Location = System::Drawing::Point(220, 273);
-               this->btnSaveCourse->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+               this->btnSaveCourse->Location = System::Drawing::Point(66, 9);
+               this->btnSaveCourse->Margin = System::Windows::Forms::Padding(2);
                this->btnSaveCourse->Name = L"btnSaveCourse";
                this->btnSaveCourse->Size = System::Drawing::Size(83, 22);
                this->btnSaveCourse->TabIndex = 6;
@@ -170,8 +181,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
                // 
                // btnDeleteCourse
                // 
-               this->btnDeleteCourse->Location = System::Drawing::Point(413, 273);
-               this->btnDeleteCourse->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+               this->btnDeleteCourse->Location = System::Drawing::Point(240, 9);
+               this->btnDeleteCourse->Margin = System::Windows::Forms::Padding(2);
                this->btnDeleteCourse->Name = L"btnDeleteCourse";
                this->btnDeleteCourse->Size = System::Drawing::Size(83, 22);
                this->btnDeleteCourse->TabIndex = 7;
@@ -181,8 +192,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
                // 
                // btnEditCourse
                // 
-               this->btnEditCourse->Location = System::Drawing::Point(315, 273);
-               this->btnEditCourse->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+               this->btnEditCourse->Location = System::Drawing::Point(153, 9);
+               this->btnEditCourse->Margin = System::Windows::Forms::Padding(2);
                this->btnEditCourse->Name = L"btnEditCourse";
                this->btnEditCourse->Size = System::Drawing::Size(83, 22);
                this->btnEditCourse->TabIndex = 8;
@@ -193,18 +204,18 @@ namespace AshesiUniversityStudentRecordManagementSystem {
                // dgvCourses
                // 
                this->dgvCourses->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-               this->dgvCourses->Location = System::Drawing::Point(220, 38);
-               this->dgvCourses->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+               this->dgvCourses->Location = System::Drawing::Point(5, 12);
+               this->dgvCourses->Margin = System::Windows::Forms::Padding(2);
                this->dgvCourses->Name = L"dgvCourses";
                this->dgvCourses->RowHeadersWidth = 51;
-               this->dgvCourses->Size = System::Drawing::Size(389, 230);
+               this->dgvCourses->Size = System::Drawing::Size(361, 215);
                this->dgvCourses->TabIndex = 9;
                this->dgvCourses->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &CourseManagementForm::dgvCourses_CellClick);
                // 
                // label1
                // 
                this->label1->AutoSize = true;
-               this->label1->Location = System::Drawing::Point(26, 69);
+               this->label1->Location = System::Drawing::Point(3, 55);
                this->label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
                this->label1->Name = L"label1";
                this->label1->Size = System::Drawing::Size(60, 13);
@@ -213,8 +224,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
                // 
                // rtboxDescription
                // 
-               this->rtboxDescription->Location = System::Drawing::Point(28, 84);
-               this->rtboxDescription->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+               this->rtboxDescription->Location = System::Drawing::Point(5, 70);
+               this->rtboxDescription->Margin = System::Windows::Forms::Padding(2);
                this->rtboxDescription->Name = L"rtboxDescription";
                this->rtboxDescription->Size = System::Drawing::Size(180, 79);
                this->rtboxDescription->TabIndex = 11;
@@ -223,7 +234,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
                // label2
                // 
                this->label2->AutoSize = true;
-               this->label2->Location = System::Drawing::Point(26, 262);
+               this->label2->Location = System::Drawing::Point(5, 230);
                this->label2->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
                this->label2->Name = L"label2";
                this->label2->Size = System::Drawing::Size(93, 13);
@@ -232,37 +243,72 @@ namespace AshesiUniversityStudentRecordManagementSystem {
                // 
                // textBox1
                // 
-               this->textBox1->Location = System::Drawing::Point(28, 277);
-               this->textBox1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+               this->textBox1->Location = System::Drawing::Point(7, 245);
+               this->textBox1->Margin = System::Windows::Forms::Padding(2);
                this->textBox1->Name = L"textBox1";
                this->textBox1->Size = System::Drawing::Size(180, 20);
                this->textBox1->TabIndex = 13;
+               // 
+               // groupBoxCourseActions
+               // 
+               this->groupBoxCourseActions->Controls->Add(this->btnSaveCourse);
+               this->groupBoxCourseActions->Controls->Add(this->btnEditCourse);
+               this->groupBoxCourseActions->Controls->Add(this->btnDeleteCourse);
+               this->groupBoxCourseActions->Location = System::Drawing::Point(223, 250);
+               this->groupBoxCourseActions->Name = L"groupBoxCourseActions";
+               this->groupBoxCourseActions->Size = System::Drawing::Size(371, 35);
+               this->groupBoxCourseActions->TabIndex = 14;
+               this->groupBoxCourseActions->TabStop = false;
+               this->groupBoxCourseActions->Text = L"Actions";
+               this->groupBoxCourseActions->Enter += gcnew System::EventHandler(this, &CourseManagementForm::groupBoxCourseActions_Enter);
+               // 
+               // groupBoxSelect
+               // 
+               this->groupBoxSelect->Controls->Add(this->dgvCourses);
+               this->groupBoxSelect->Location = System::Drawing::Point(223, 12);
+               this->groupBoxSelect->Name = L"groupBoxSelect";
+               this->groupBoxSelect->Size = System::Drawing::Size(371, 232);
+               this->groupBoxSelect->TabIndex = 15;
+               this->groupBoxSelect->TabStop = false;
+               this->groupBoxSelect->Text = L"Select";
+               // 
+               // groupBoxEdit
+               // 
+               this->groupBoxEdit->Controls->Add(this->txtCourseName);
+               this->groupBoxEdit->Controls->Add(this->lblCourseName);
+               this->groupBoxEdit->Controls->Add(this->rtboxDescription);
+               this->groupBoxEdit->Controls->Add(this->textBox1);
+               this->groupBoxEdit->Controls->Add(this->label1);
+               this->groupBoxEdit->Controls->Add(this->label2);
+               this->groupBoxEdit->Controls->Add(this->lblCredits);
+               this->groupBoxEdit->Controls->Add(this->txtPrerequisites);
+               this->groupBoxEdit->Controls->Add(this->lblPrerequisites);
+               this->groupBoxEdit->Controls->Add(this->txtCredits);
+               this->groupBoxEdit->Location = System::Drawing::Point(17, 12);
+               this->groupBoxEdit->Name = L"groupBoxEdit";
+               this->groupBoxEdit->Size = System::Drawing::Size(200, 273);
+               this->groupBoxEdit->TabIndex = 16;
+               this->groupBoxEdit->TabStop = false;
+               this->groupBoxEdit->Text = L"Edit";
                // 
                // CourseManagementForm
                // 
                this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
                this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-               this->ClientSize = System::Drawing::Size(626, 303);
-               this->Controls->Add(this->textBox1);
-               this->Controls->Add(this->label2);
-               this->Controls->Add(this->rtboxDescription);
-               this->Controls->Add(this->label1);
-               this->Controls->Add(this->dgvCourses);
-               this->Controls->Add(this->btnEditCourse);
-               this->Controls->Add(this->btnDeleteCourse);
-               this->Controls->Add(this->btnSaveCourse);
-               this->Controls->Add(this->txtPrerequisites);
-               this->Controls->Add(this->txtCredits);
-               this->Controls->Add(this->txtCourseName);
-               this->Controls->Add(this->lblPrerequisites);
-               this->Controls->Add(this->lblCredits);
-               this->Controls->Add(this->lblCourseName);
-               this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+               this->ClientSize = System::Drawing::Size(611, 301);
+               this->Controls->Add(this->groupBoxEdit);
+               this->Controls->Add(this->groupBoxSelect);
+               this->Controls->Add(this->groupBoxCourseActions);
+               this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+               this->Margin = System::Windows::Forms::Padding(2);
                this->Name = L"CourseManagementForm";
                this->Text = L"Course Management";
                (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvCourses))->EndInit();
+               this->groupBoxCourseActions->ResumeLayout(false);
+               this->groupBoxSelect->ResumeLayout(false);
+               this->groupBoxEdit->ResumeLayout(false);
+               this->groupBoxEdit->PerformLayout();
                this->ResumeLayout(false);
-               this->PerformLayout();
 
            }
            private: System::Void btnSaveCourse_Click(System::Object^ sender, System::EventArgs^ e);
@@ -271,5 +317,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
            private: System::Void dgvCourses_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e);
                   
 #pragma endregion
+private: System::Void groupBoxCourseActions_Enter(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }

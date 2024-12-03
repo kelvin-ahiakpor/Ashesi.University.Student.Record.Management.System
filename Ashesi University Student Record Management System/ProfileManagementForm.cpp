@@ -2,97 +2,126 @@
 #include "ProfileManagementForm.h"
 #include "DatabaseManager.h"
 
+bool AshesiUniversityStudentRecordManagementSystem::ProfileManagementForm::isProfileChanged()
+{
+	return (this->textBox1->Text != student->getFirstName() ||
+		this->textBox2->Text != student->getLastName() ||
+		this->textBox3->Text != student->getEmail() ||
+		this->textBox4->Text != student->getPassword());
+}
+
 System::Void AshesiUniversityStudentRecordManagementSystem::ProfileManagementForm::LoadAdminProfile()
 {
-	try
-	{
-		// Obtain database manager instance
-		DatabaseManager^ db = DatabaseManager::GetInstance();
-
-		// Open the database connection
-		db->ConnectToDatabase();
-
-		// Define the SQL query
-		String^ query = R"(
-                    SELECT 
-                        u.FirstName,
-                        u.LastName,
-                        u.Email,
-                        u.Password
-                    FROM 
-                        Users u
-                    WHERE 
-                        u.UserID = @userID
-                )";
-
-		// Create SQL command
-		MySqlCommand^ cmd = gcnew MySqlCommand(query, db->GetConnection());
-
-		// Assuming userID is a member variable of the class
-		cmd->Parameters->AddWithValue("@userID", userID);
-
-		// Execute the query and read results
-		MySqlDataReader^ reader = cmd->ExecuteReader();
-		if (reader->Read())
+	if (isProfileUpdated) {
+		try
 		{
-			// Retrieve data from the result set
-			String^ firstName = reader["FirstName"]->ToString();
-			String^ lastName = reader["LastName"]->ToString();
-			String^ email = reader["Email"]->ToString();
-			String^ password = reader["Password"]->ToString();
+		
+			// Obtain database manager instance
+			DatabaseManager^ db = DatabaseManager::GetInstance();
 
-			// Assign the retrieved values to the appropriate UI fields or variables
-			this->textBox1->Text = firstName;
-			this->textBox2->Text = lastName;
-			this->textBox3->Text = email;
-			this->textBox4->Text = password;
+			// Open the database connection
+			db->ConnectToDatabase();
+
+			// Define the SQL query
+			String^ query = R"(
+						SELECT 
+							u.FirstName,
+							u.LastName,
+							u.Email,
+							u.Password
+						FROM 
+							Users u
+						WHERE 
+							u.UserID = @userID
+					)";
+
+			// Create SQL command
+			MySqlCommand^ cmd = gcnew MySqlCommand(query, db->GetConnection());
+
+			// Assuming userID is a member variable of the class
+			cmd->Parameters->AddWithValue("@userID", userID);
+
+			// Execute the query and read results
+			MySqlDataReader^ reader = cmd->ExecuteReader();
+			if (reader->Read())
+			{
+				// Retrieve data from the result set
+				String^ firstName = reader["FirstName"]->ToString();
+				String^ lastName = reader["LastName"]->ToString();
+				String^ email = reader["Email"]->ToString();
+				String^ password = reader["Password"]->ToString();
+
+				// Assign the retrieved values to the appropriate UI fields or variables
+				this->textBox1->Text = firstName;
+				this->textBox2->Text = lastName;
+				this->textBox3->Text = email;
+				this->textBox4->Text = password;
+			}
+			else
+			{
+				MessageBox::Show("No profile found for the specified user ID.", "Info", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			}
+
+			// Close the reader
+			reader->Close();
 		}
-		else
+		catch (Exception^ ex)
 		{
-			MessageBox::Show("No profile found for the specified user ID.", "Info", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			// Handle any exceptions that occur
+			MessageBox::Show("An error occurred while loading the admin profile: " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
-
-		// Close the reader
-		reader->Close();
+		finally
+		{
+			// Ensure the database connection is closed
+			DatabaseManager^ db = DatabaseManager::GetInstance();
+			db->CloseConnection();
+		}
 	}
-	catch (Exception^ ex)
-	{
-		// Handle any exceptions that occur
-		MessageBox::Show("An error occurred while loading the admin profile: " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	else {
+		this->textBox1->Text = student->getFirstName();
+		this->textBox2->Text = student->getLastName();
+		this->textBox3->Text = student->getEmail();
+		this->textBox4->Text = student->getPassword();
 	}
-	finally
-	{
-		// Ensure the database connection is closed
-		DatabaseManager^ db = DatabaseManager::GetInstance();
-		db->CloseConnection();
-	}
-    return System::Void();
+   
 }
 
 System::Void AshesiUniversityStudentRecordManagementSystem::ProfileManagementForm::btnSaveProfile_Click(System::Object^ sender, System::EventArgs^ e)
 {
+	if (!isProfileChanged()) {
+		MessageBox::Show("No changes detected. Please make changes to update profile.", "Info", MessageBoxButtons::OK, MessageBoxIcon::Information);
+		return;
+	}
 	try {
 		DatabaseManager^ db = DatabaseManager::GetInstance();
 		db->ConnectToDatabase();
 
 		String^ query = R"(
-            UPDATE Users
-            SET FirstName = @firstName,
-                LastName = @lastName,
-                Email = @Email,
-                Password = @Password
-            WHERE UserID = @userID
-        )";
+			UPDATE Users
+			SET FirstName = @firstName,
+				LastName = @lastName,
+				Email = @Email,
+				Password = @Password
+			WHERE UserID = @userID
+		)";
 
 		MySqlCommand^ cmd = gcnew MySqlCommand(query, db->GetConnection());
 		cmd->Parameters->AddWithValue("@firstName", this->textBox1->Text);
 		cmd->Parameters->AddWithValue("@lastName", this->textBox2->Text);
 		cmd->Parameters->AddWithValue("@Email", this->textBox3->Text);
-		cmd->Parameters->AddWithValue("@Password", this->textBox4->Text); 
+		cmd->Parameters->AddWithValue("@Password", this->textBox4->Text);
 		cmd->Parameters->AddWithValue("@userID", userID);
 
 		cmd->ExecuteNonQuery();
 		MessageBox::Show("Profile updated successfully.", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
+		
+		// Update the student object with new values
+		student->setFirstName(this->textBox1->Text);
+		student->setLastName(this->textBox2->Text);
+		student->setEmail(this->textBox3->Text);
+		student->setPassword(this->textBox4->Text);
+
+		isProfileUpdated = true;
 	}
 	catch (Exception^ ex) {
 		MessageBox::Show("Failed to save profile: " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -101,5 +130,6 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ProfileManagementFor
 		DatabaseManager^ db = DatabaseManager::GetInstance();
 		db->CloseConnection();
 	}
-	return System::Void();
+	
 }
+

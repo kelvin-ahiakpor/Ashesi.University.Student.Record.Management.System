@@ -41,6 +41,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 #pragma region Windows Form Designer generated code
         void InitializeComponent(void)
         {
+            System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(ViewGradesAdmin::typeid));
             this->richTxtGrades = (gcnew System::Windows::Forms::RichTextBox());
             this->btnSearch = (gcnew System::Windows::Forms::Button());
             this->btnViewGrades = (gcnew System::Windows::Forms::Button());
@@ -84,14 +85,14 @@ namespace AshesiUniversityStudentRecordManagementSystem {
             // 
             this->txtFirstName->Location = System::Drawing::Point(50, 30);
             this->txtFirstName->Name = L"txtFirstName";
-            this->txtFirstName->Size = System::Drawing::Size(150, 22);
+            this->txtFirstName->Size = System::Drawing::Size(150, 20);
             this->txtFirstName->TabIndex = 3;
             // 
             // txtLastName
             // 
             this->txtLastName->Location = System::Drawing::Point(250, 30);
             this->txtLastName->Name = L"txtLastName";
-            this->txtLastName->Size = System::Drawing::Size(150, 22);
+            this->txtLastName->Size = System::Drawing::Size(150, 20);
             this->txtLastName->TabIndex = 4;
             // 
             // lblFirstName
@@ -131,6 +132,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
             this->Controls->Add(this->lblFirstName);
             this->Controls->Add(this->lblLastName);
             this->Controls->Add(this->dgvStudentList);
+            this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
             this->Name = L"ViewGradesAdmin";
             this->Text = L"View Grades Admin";
             (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvStudentList))->EndInit();

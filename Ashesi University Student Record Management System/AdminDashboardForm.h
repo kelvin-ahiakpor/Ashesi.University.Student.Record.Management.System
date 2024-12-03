@@ -64,6 +64,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(AdminDashboardForm::typeid));
 			this->lblWelcome = (gcnew System::Windows::Forms::Label());
 			this->btnManageStudents = (gcnew System::Windows::Forms::Button());
 			this->btnManageFaculty = (gcnew System::Windows::Forms::Button());
@@ -74,19 +75,19 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// lblWelcome
 			// 
 			this->lblWelcome->AutoSize = true;
-			this->lblWelcome->Location = System::Drawing::Point(277, 85);
+			this->lblWelcome->Location = System::Drawing::Point(208, 69);
 			this->lblWelcome->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->lblWelcome->Name = L"lblWelcome";
-			this->lblWelcome->Size = System::Drawing::Size(160, 16);
+			this->lblWelcome->Size = System::Drawing::Size(127, 13);
 			this->lblWelcome->TabIndex = 0;
 			this->lblWelcome->Text = L"Welcome <Admin Name>";
 			// 
 			// btnManageStudents
 			// 
-			this->btnManageStudents->Location = System::Drawing::Point(53, 249);
-			this->btnManageStudents->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->btnManageStudents->Location = System::Drawing::Point(40, 202);
+			this->btnManageStudents->Margin = System::Windows::Forms::Padding(2);
 			this->btnManageStudents->Name = L"btnManageStudents";
-			this->btnManageStudents->Size = System::Drawing::Size(134, 35);
+			this->btnManageStudents->Size = System::Drawing::Size(100, 28);
 			this->btnManageStudents->TabIndex = 1;
 			this->btnManageStudents->Text = L"Manage Students";
 			this->btnManageStudents->UseVisualStyleBackColor = true;
@@ -94,10 +95,10 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// btnManageFaculty
 			// 
-			this->btnManageFaculty->Location = System::Drawing::Point(214, 249);
-			this->btnManageFaculty->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->btnManageFaculty->Location = System::Drawing::Point(160, 202);
+			this->btnManageFaculty->Margin = System::Windows::Forms::Padding(2);
 			this->btnManageFaculty->Name = L"btnManageFaculty";
-			this->btnManageFaculty->Size = System::Drawing::Size(134, 35);
+			this->btnManageFaculty->Size = System::Drawing::Size(100, 28);
 			this->btnManageFaculty->TabIndex = 2;
 			this->btnManageFaculty->Text = L"Manage Faculty";
 			this->btnManageFaculty->UseVisualStyleBackColor = true;
@@ -105,10 +106,10 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// btnManageCourses
 			// 
-			this->btnManageCourses->Location = System::Drawing::Point(374, 249);
-			this->btnManageCourses->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->btnManageCourses->Location = System::Drawing::Point(280, 202);
+			this->btnManageCourses->Margin = System::Windows::Forms::Padding(2);
 			this->btnManageCourses->Name = L"btnManageCourses";
-			this->btnManageCourses->Size = System::Drawing::Size(134, 35);
+			this->btnManageCourses->Size = System::Drawing::Size(100, 28);
 			this->btnManageCourses->TabIndex = 3;
 			this->btnManageCourses->Text = L"Manage Courses";
 			this->btnManageCourses->UseVisualStyleBackColor = true;
@@ -116,10 +117,10 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// btnGenerateReports
 			// 
-			this->btnGenerateReports->Location = System::Drawing::Point(534, 249);
-			this->btnGenerateReports->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->btnGenerateReports->Location = System::Drawing::Point(400, 202);
+			this->btnGenerateReports->Margin = System::Windows::Forms::Padding(2);
 			this->btnGenerateReports->Name = L"btnGenerateReports";
-			this->btnGenerateReports->Size = System::Drawing::Size(134, 35);
+			this->btnGenerateReports->Size = System::Drawing::Size(100, 28);
 			this->btnGenerateReports->TabIndex = 4;
 			this->btnGenerateReports->Text = L"Generate Reports";
 			this->btnGenerateReports->UseVisualStyleBackColor = true;
@@ -127,15 +128,16 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// AdminDashboardForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(730, 372);
+			this->ClientSize = System::Drawing::Size(548, 302);
 			this->Controls->Add(this->btnGenerateReports);
 			this->Controls->Add(this->btnManageCourses);
 			this->Controls->Add(this->btnManageFaculty);
 			this->Controls->Add(this->btnManageStudents);
 			this->Controls->Add(this->lblWelcome);
-			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"AdminDashboardForm";
 			this->Text = L"AdminDashboardForm";
 			this->Load += gcnew System::EventHandler(this, &AdminDashboardForm::AdminDashboardForm_Load);

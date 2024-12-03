@@ -32,7 +32,7 @@ public:
     {
         try {
             // Set up the connection string
-            this->sqlConn->ConnectionString = "datasource=localhost; port=3306; username=root; password=; database=icpfinalproject";
+            this->sqlConn->ConnectionString = "datasource=db4free.net; port=3306; username=kelvina; password=amlev123&&; database=kelvinsites";
 
             // Open the connection
             this->sqlConn->Open();
