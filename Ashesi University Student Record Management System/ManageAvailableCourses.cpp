@@ -1,37 +1,7 @@
 #include "ManageAvailableCourses.h"
 #include "DatabaseManager.h"
 
-System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCourses::LoadCourseCell(DatabaseManager^ db, DataGridViewCellEventArgs^ e)
-{
-    // Ensure the user has selected a row (row index should be >= 0)
-    if (e->RowIndex >= 0)
-    {
-        // Get the selected row from the DataGridView
-        DataGridViewRow^ selectedRow = dataGridViewCourse->Rows[e->RowIndex];
 
-        // Check if the columns are present and fill the corresponding TextBoxes with values
-        if (selectedRow->Cells["CourseName"] != nullptr)
-            textBox1->Text = selectedRow->Cells["CourseName"]->Value->ToString();
-
-        
-
-    }
-}
-
-System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCourses::UpdateCourse(DatabaseManager^ db, Object^ sender, EventArgs^ e)
-{
-    return System::Void();
-}
-
-System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCourses::DeleteCourse(DatabaseManager^ db, Object^ sender, EventArgs^ e)
-{
-    return System::Void();
-}
-
-System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCourses::CreateCourse(DatabaseManager^ db, Object^ sender, EventArgs^ e)
-{
-    return System::Void();
-}
 
 System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCourses::savecourses_Click(System::Object^ sender, System::EventArgs^ e)
 {
@@ -222,21 +192,151 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCours
 
 System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCourses::btnDelete_Click(System::Object^ sender, System::EventArgs^ e)
 {
-    return System::Void();
+    // Ensure a row is selected in the DataGridView
+    if (dataGridViewCourse->SelectedCells->Count > 0)
+    {
+        DataGridViewCell^ selectedCell = dataGridViewCourse->SelectedCells[0];
+        DataGridViewRow^ selectedRow = selectedCell->OwningRow;
+
+        // Get the CourseID from the selected row
+        int courseID = Convert::ToInt32(selectedRow->Cells["CourseID"]->Value);
+
+        // Confirm deletion (custom message box)
+        if (MessageBox::Show("Are you sure you want to delete this course?", "Confirm Deletion", MessageBoxButtons::OKCancel, MessageBoxIcon::Warning) == Windows::Forms::DialogResult::OK)
+        {
+            // Proceed with the deletion logic
+            DatabaseManager^ db = gcnew DatabaseManager();
+            db->ConnectToDatabase();
+
+            String^ query = "DELETE FROM CourseOffering WHERE CourseID = @CourseID;";
+            MySqlCommand^ cmd = gcnew MySqlCommand(query, db->GetConnection());
+            cmd->Parameters->AddWithValue("@CourseID", courseID);
+
+            try
+            {
+                int rowsAffected = cmd->ExecuteNonQuery();
+                if (rowsAffected > 0)
+                {
+                    MessageBox::Show("Course deleted successfully.", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
+                    // Optionally, reload courses to reflect changes
+                    btnviewcourses_Click(sender, e);
+                }
+                else
+                {
+                    MessageBox::Show("No such course exists to delete.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+                }
+            }
+            catch (Exception^ ex)
+            {
+                MessageBox::Show("An error occurred while deleting the course: " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+            }
+
+            db->CloseConnection();
+        }
+    }
+    else
+    {
+        MessageBox::Show("Please select a course to delete.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+    }
 }
+
 
 System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCourses::btnEdit_Click(System::Object^ sender, System::EventArgs^ e)
 {
-    return System::Void();
+    // Ensure a row is selected
+    if (dataGridViewCourse->SelectedCells->Count > 0)
+    {
+        DataGridViewCell^ selectedCell = dataGridViewCourse->SelectedCells[0];
+        DataGridViewRow^ selectedRow = selectedCell->OwningRow;
+
+        // Get the CourseID from the selected row
+        int CourseID = Convert::ToInt32(selectedRow->Cells["CourseID"]->Value);
+
+        // Get the values from TextBoxes and ComboBoxes
+        String^ courseName = textBox1->Text;
+        String^ selectedDepartmentName = comboBox1->SelectedItem->ToString();
+        String^ semester = textBox2->Text;
+        String^ year = textBox4->Text;
+        int maxCapacity = Convert::ToInt32(textBox3->Text);
+        String^ status = comboBox3->SelectedItem->ToString();
+
+        // Retrieve the Department ID corresponding to the selected department name
+        DatabaseManager^ db = gcnew DatabaseManager();
+        db->ConnectToDatabase();
+
+        String^ getDepartmentIDQuery = "SELECT DepartmentID FROM Departments WHERE DepartmentName = @DepartmentName;";
+        MySqlCommand^ getDeptIDCmd = gcnew MySqlCommand(getDepartmentIDQuery, db->GetConnection());
+        getDeptIDCmd->Parameters->AddWithValue("@DepartmentName", selectedDepartmentName);
+
+        Object^ departmentIDObj = getDeptIDCmd->ExecuteScalar();
+        if (departmentIDObj == nullptr)
+        {
+            MessageBox::Show("Department not found.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+            db->CloseConnection();
+            return;
+        }
+
+        int departmentID = Convert::ToInt32(departmentIDObj);
+
+        // SQL query for updating the CourseOffering table
+        String^ updateQuery = R"(
+            UPDATE CourseOffering
+            SET CourseName = @CourseName, DepartmentID = @DepartmentID, Semester = @Semester, Year = @Year,
+                MaxCapacity = @MaxCapacity, Status = @Status
+            WHERE CourseID = @CourseID;
+        )";
+
+        MySqlCommand^ updateCmd = gcnew MySqlCommand(updateQuery, db->GetConnection());
+        updateCmd->Parameters->AddWithValue("@CourseID", CourseID);
+        updateCmd->Parameters->AddWithValue("@CourseName", courseName);
+        updateCmd->Parameters->AddWithValue("@DepartmentID", departmentID);
+        updateCmd->Parameters->AddWithValue("@Semester", semester);
+        updateCmd->Parameters->AddWithValue("@Year", year);
+        updateCmd->Parameters->AddWithValue("@MaxCapacity", maxCapacity);
+        updateCmd->Parameters->AddWithValue("@Status", status);
+
+        try
+        {
+            int rowsAffected = updateCmd->ExecuteNonQuery();
+            if (rowsAffected > 0)
+            {
+                MessageBox::Show("Course offering updated successfully.", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
+                // Optionally reload courses to reflect changes
+                btnviewcourses_Click(sender, e);
+            }
+            else
+            {
+                MessageBox::Show("No changes were made to the database.", "Information", MessageBoxButtons::OK, MessageBoxIcon::Information);
+            }
+        }
+        catch (Exception^ ex)
+        {
+            MessageBox::Show("An error occurred while updating the course offering: " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+        }
+
+        db->CloseConnection();
+    }
+    else
+    {
+        MessageBox::Show("Please select a course from the DataGridView to edit.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+    }
 }
+
 
 System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCourses::dataGridView1_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e)
 {
+    // Ensure the user has selected a row (row index should be >= 0)
+    if (e->RowIndex >= 0)
+    {
+        // Get the selected row from the DataGridView
+        DataGridViewRow^ selectedRow = dataGridViewCourse->Rows[e->RowIndex];
+
+        // Check if the columns are present and fill the corresponding TextBoxes with values
+        if (selectedRow->Cells["CourseName"] != nullptr)
+            textBox1->Text = selectedRow->Cells["CourseName"]->Value->ToString();
+
+
+
+    }
     return System::Void();
 }
-
-System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCourses::LoadCourses(DatabaseManager^ db)
-{
-    return System::Void();
-}
-

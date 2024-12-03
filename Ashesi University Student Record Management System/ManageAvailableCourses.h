@@ -400,10 +400,5 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	private: System::Void btnDelete_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void btnEdit_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void dataGridView1_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e);
-	private: System::Void LoadCourses(DatabaseManager^ db);
-private: System::Void LoadCourseCell(DatabaseManager^ db, DataGridViewCellEventArgs^ e);
-	private: System::Void UpdateCourse(DatabaseManager^ db, Object^ sender, EventArgs^ e);
-	private: System::Void DeleteCourse(DatabaseManager^ db, Object^ sender, EventArgs^ e);
-	private: System::Void CreateCourse(DatabaseManager^ db, Object^ sender, EventArgs^ e);
 	};
 }
