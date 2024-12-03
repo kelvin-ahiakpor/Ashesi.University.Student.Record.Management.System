@@ -30,7 +30,11 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		String^ userRole;
 		int^ studentid;
 		int^ userID;
-	
+
+	public:
+
+	public:
+
 	public:
 		bool isProfileUpdated = false;
 		bool isProfileChanged();
@@ -129,82 +133,78 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// lblFirstName
 			// 
 			this->lblFirstName->AutoSize = true;
-			this->lblFirstName->Location = System::Drawing::Point(26, 47);
-			this->lblFirstName->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->lblFirstName->Location = System::Drawing::Point(35, 58);
 			this->lblFirstName->Name = L"lblFirstName";
-			this->lblFirstName->Size = System::Drawing::Size(57, 13);
+			this->lblFirstName->Size = System::Drawing::Size(72, 16);
 			this->lblFirstName->TabIndex = 0;
 			this->lblFirstName->Text = L"First Name";
 			// 
 			// lblLastName
 			// 
 			this->lblLastName->AutoSize = true;
-			this->lblLastName->Location = System::Drawing::Point(26, 96);
-			this->lblLastName->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->lblLastName->Location = System::Drawing::Point(35, 118);
 			this->lblLastName->Name = L"lblLastName";
-			this->lblLastName->Size = System::Drawing::Size(58, 13);
+			this->lblLastName->Size = System::Drawing::Size(72, 16);
 			this->lblLastName->TabIndex = 1;
 			this->lblLastName->Text = L"Last Name";
 			// 
 			// lblEmail
 			// 
 			this->lblEmail->AutoSize = true;
-			this->lblEmail->Location = System::Drawing::Point(26, 150);
-			this->lblEmail->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->lblEmail->Location = System::Drawing::Point(35, 185);
 			this->lblEmail->Name = L"lblEmail";
-			this->lblEmail->Size = System::Drawing::Size(32, 13);
+			this->lblEmail->Size = System::Drawing::Size(41, 16);
 			this->lblEmail->TabIndex = 2;
 			this->lblEmail->Text = L"Email";
 			// 
 			// lblPassword
 			// 
 			this->lblPassword->AutoSize = true;
-			this->lblPassword->Location = System::Drawing::Point(26, 199);
-			this->lblPassword->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->lblPassword->Location = System::Drawing::Point(35, 245);
 			this->lblPassword->Name = L"lblPassword";
-			this->lblPassword->Size = System::Drawing::Size(53, 13);
+			this->lblPassword->Size = System::Drawing::Size(67, 16);
 			this->lblPassword->TabIndex = 3;
 			this->lblPassword->Text = L"Password";
 			// 
 			// textBox1
 			// 
-			this->textBox1->Location = System::Drawing::Point(28, 61);
-			this->textBox1->Margin = System::Windows::Forms::Padding(2);
+			this->textBox1->Location = System::Drawing::Point(37, 75);
+			this->textBox1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(210, 20);
+			this->textBox1->Size = System::Drawing::Size(279, 22);
 			this->textBox1->TabIndex = 4;
 			// 
 			// textBox2
 			// 
-			this->textBox2->Location = System::Drawing::Point(28, 111);
-			this->textBox2->Margin = System::Windows::Forms::Padding(2);
+			this->textBox2->Location = System::Drawing::Point(37, 137);
+			this->textBox2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(210, 20);
+			this->textBox2->Size = System::Drawing::Size(279, 22);
 			this->textBox2->TabIndex = 5;
 			// 
 			// textBox3
 			// 
-			this->textBox3->Location = System::Drawing::Point(28, 165);
-			this->textBox3->Margin = System::Windows::Forms::Padding(2);
+			this->textBox3->Location = System::Drawing::Point(37, 203);
+			this->textBox3->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->textBox3->Name = L"textBox3";
-			this->textBox3->Size = System::Drawing::Size(210, 20);
+			this->textBox3->Size = System::Drawing::Size(279, 22);
 			this->textBox3->TabIndex = 6;
 			// 
 			// textBox4
 			// 
-			this->textBox4->Location = System::Drawing::Point(28, 214);
-			this->textBox4->Margin = System::Windows::Forms::Padding(2);
+			this->textBox4->Location = System::Drawing::Point(37, 263);
+			this->textBox4->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->textBox4->Name = L"textBox4";
 			this->textBox4->PasswordChar = '*';
-			this->textBox4->Size = System::Drawing::Size(210, 20);
+			this->textBox4->Size = System::Drawing::Size(279, 22);
 			this->textBox4->TabIndex = 7;
 			// 
 			// btnSaveProfile
 			// 
-			this->btnSaveProfile->Location = System::Drawing::Point(28, 253);
-			this->btnSaveProfile->Margin = System::Windows::Forms::Padding(2);
+			this->btnSaveProfile->Location = System::Drawing::Point(37, 311);
+			this->btnSaveProfile->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->btnSaveProfile->Name = L"btnSaveProfile";
-			this->btnSaveProfile->Size = System::Drawing::Size(97, 24);
+			this->btnSaveProfile->Size = System::Drawing::Size(129, 30);
 			this->btnSaveProfile->TabIndex = 8;
 			this->btnSaveProfile->Text = L"Save Profile";
 			this->btnSaveProfile->UseVisualStyleBackColor = true;
@@ -212,10 +212,10 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// btnCancel
 			// 
-			this->btnCancel->Location = System::Drawing::Point(144, 253);
-			this->btnCancel->Margin = System::Windows::Forms::Padding(2);
+			this->btnCancel->Location = System::Drawing::Point(192, 311);
+			this->btnCancel->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->btnCancel->Name = L"btnCancel";
-			this->btnCancel->Size = System::Drawing::Size(94, 24);
+			this->btnCancel->Size = System::Drawing::Size(125, 30);
 			this->btnCancel->TabIndex = 9;
 			this->btnCancel->Text = L"Cancel";
 			this->btnCancel->UseVisualStyleBackColor = true;
@@ -226,9 +226,10 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->lblProfile->AutoSize = true;
 			this->lblProfile->Font = (gcnew System::Drawing::Font(L"Consolas", 15, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->lblProfile->Location = System::Drawing::Point(24, 9);
+			this->lblProfile->Location = System::Drawing::Point(32, 11);
+			this->lblProfile->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->lblProfile->Name = L"lblProfile";
-			this->lblProfile->Size = System::Drawing::Size(87, 23);
+			this->lblProfile->Size = System::Drawing::Size(111, 29);
 			this->lblProfile->TabIndex = 10;
 			this->lblProfile->Text = L"PROFILE";
 			// 
@@ -238,19 +239,20 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->pboxLogo->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pboxLogo.BackgroundImage")));
 			this->pboxLogo->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
 			this->pboxLogo->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pboxLogo.Image")));
-			this->pboxLogo->Location = System::Drawing::Point(208, 9);
+			this->pboxLogo->Location = System::Drawing::Point(277, 11);
+			this->pboxLogo->Margin = System::Windows::Forms::Padding(4);
 			this->pboxLogo->Name = L"pboxLogo";
-			this->pboxLogo->Size = System::Drawing::Size(30, 30);
+			this->pboxLogo->Size = System::Drawing::Size(40, 37);
 			this->pboxLogo->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pboxLogo->TabIndex = 11;
 			this->pboxLogo->TabStop = false;
 			// 
 			// ProfileManagementForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::Linen;
-			this->ClientSize = System::Drawing::Size(264, 291);
+			this->ClientSize = System::Drawing::Size(352, 358);
 			this->Controls->Add(this->pboxLogo);
 			this->Controls->Add(this->lblProfile);
 			this->Controls->Add(this->btnCancel);
@@ -267,7 +269,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 				static_cast<System::Int32>(static_cast<System::Byte>(0)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
-			this->Margin = System::Windows::Forms::Padding(2);
+			this->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->Name = L"ProfileManagementForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
 			this->Text = L"Your Profile";
