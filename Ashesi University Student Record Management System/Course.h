@@ -10,29 +10,48 @@ private:
     String^ departmentID;
     double^ credits;
     String^ description;
-    List<String^>^ prerequisites; 
+    List<String^>^ prerequisites;
     bool isActive;
+
+    int^ year;
+    String^ schedule;
+    int^ maxCapacity;
+    int^ offeringID;
 
 public:
     // Constructor
     Course(int^ id, String^ name, String^ Description, double^ cred)
         : courseID(id), courseName(name), description(Description), credits(cred), isActive(true) {
-        prerequisites = gcnew List<String^>();  
+        prerequisites = gcnew List<String^>();
     }
 
-    // Getters
+    // Existing getters
     int^ getCourseID() { return courseID; }
     String^ getCourseName() { return courseName; }
     double^ getCredits() { return credits; }
     bool getIsActive() { return isActive; }
-	String^ getDescription() { return description; }
+    String^ getDescription() { return description; }
 
-    // Setters
+    // New getters
+    String^ getDepartmentID() { return departmentID; }
+    int^ getYear() { return year; }
+    String^ getSchedule() { return schedule; }
+    int^ getMaxCapacity() { return maxCapacity; }
+    int^ getOfferingID() { return offeringID; }
+
+    // Existing setters
     void setCourseName(String^ name) { courseName = name; }
     void setDescription(String^ desc) { description = desc; }
     void setIsActive(bool active) { isActive = active; }
 
-    // Course management
+    // New setters
+    void setDepartmentID(String^ deptID) { departmentID = deptID; }
+    void setYear(int^ yr) { year = yr; }
+    void setSchedule(String^ sched) { schedule = sched; }
+    void setMaxCapacity(int^ capacity) { maxCapacity = capacity; }
+    void setOfferingID(int^ offID) { offeringID = offID; }
+
+    // Existing course management methods
     bool addPrerequisite(String^ courseID) {
         if (!prerequisites->Contains(courseID)) {
             prerequisites->Add(courseID);

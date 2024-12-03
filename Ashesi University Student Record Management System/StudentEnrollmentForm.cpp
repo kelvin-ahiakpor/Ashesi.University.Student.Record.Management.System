@@ -115,8 +115,19 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentFor
         dataGridView1->Rows->Clear();
         for each (Course ^ course in cachedCourses)
         {
-            dataGridView1->Rows->Add(course->getCourseName(), course->getCourseID(), course->getCredits(),
-                String::Join(", ", course->getPrerequisites()), course->getDescription());
+            dataGridView1->Rows->Add(
+                course->getCourseName(),           // Course Name
+                course->getCourseID(),             // Course ID
+                course->getCredits(),              // Credits
+                String::Join(", ", course->getPrerequisites()), // Prerequisites
+                course->getDescription(),          // Description
+                course->getDepartmentID(),         // Department ID
+                course->getYear(),                 // Year
+                course->getSchedule(),             // Schedule
+                course->getMaxCapacity(),          // Max Capacity
+                course->getOfferingID()            // Offering ID
+            );
+      
         }
     }
     else
@@ -136,8 +147,18 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentFor
         for each (Course ^ course in filteredCourses)
         {
             // Add each filtered course's details to DataGridView
-            dataGridView1->Rows->Add(course->getCourseName(), course->getCourseID(), course->getCredits(),
-                String::Join(", ", course->getPrerequisites()), course->getDescription());
+            dataGridView1->Rows->Add(
+                course->getCourseName(),           // Course Name
+                course->getCourseID(),             // Course ID
+                course->getCredits(),              // Credits
+                String::Join(", ", course->getPrerequisites()), // Prerequisites
+                course->getDescription(),          // Description
+                course->getDepartmentID(),         // Department ID
+                course->getYear(),                 // Year
+                course->getSchedule(),             // Schedule
+                course->getMaxCapacity(),          // Max Capacity
+                course->getOfferingID()            // Offering ID
+            );
         }
     }
 }
@@ -292,16 +313,29 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentFor
     {
         db->ConnectToDatabase();
         String^ query = R"(
-        SELECT CourseID, CourseName, Credits, Prerequisites, Description 
-        FROM Courses 
-        WHERE IsActive = 1
-    )";
+            SELECT 
+                c.CourseID,
+                c.CourseName, 
+                c.Credits, 
+                c.Prerequisites, 
+                c.Description,
+                c.DepartmentID,
+                o.Year, 
+                o.Schedule, 
+                o.MaxCapacity, 
+                o.Status, 
+                o.OfferingID
+            FROM Courses c
+            INNER JOIN CourseOfferings o ON c.CourseID = o.CourseID
+            WHERE c.IsActive = 1
+              AND o.Status = 'Open'
+        )";
         MySqlCommand^ cmd = gcnew MySqlCommand(query, db->GetConnection());
         MySqlDataReader^ reader = cmd->ExecuteReader();
 
         while (reader->Read())
         {
-            // Parse prerequisites if it is a comma-separated list of course IDs
+            // Parse prerequisites
             String^ prerequisitesString = reader["Prerequisites"]->ToString();
             List<String^>^ prerequisitesList = gcnew List<String^>();
 
@@ -310,23 +344,30 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentFor
                 array<String^>^ prerequisiteArray = prerequisitesString->Split(',');
                 for each (String ^ prerequisite in prerequisiteArray)
                 {
-                    prerequisitesList->Add(prerequisite->Trim()); // Trim spaces
+                    prerequisitesList->Add(prerequisite->Trim());
                 }
             }
 
-            // Now create a Course object
+            // Create a more comprehensive Course object
             Course^ course = gcnew Course(
-                Convert::ToInt32(reader["CourseID"]),        // CourseID as int
-                reader["CourseName"]->ToString(),           // CourseName as string
-                reader["Description"]->ToString(),         
-                Convert::ToDouble(reader["Credits"])        // Credits as double
+                Convert::ToInt32(reader["CourseID"]),
+                reader["CourseName"]->ToString(),
+                reader["Description"]->ToString(),
+                Convert::ToDouble(reader["Credits"])
             );
 
-            // Clear existing prerequisites and add the new ones
+            // Additional course details
+			course->setDepartmentID(reader["DepartmentID"]->ToString());
+			course->setYear(Convert::ToInt32(reader["Year"]));
+			course->setSchedule(reader["Schedule"]->ToString());
+			course->setMaxCapacity(Convert::ToInt32(reader["MaxCapacity"]));
+			course->setOfferingID(Convert::ToInt32(reader["OfferingID"]));
+
+            // Clear and repopulate prerequisites
             course->getPrerequisites()->Clear();
             for each (String ^ prerequisite in prerequisitesList)
             {
-                course->getPrerequisites()->Add(prerequisite);
+                course->addPrerequisite(prerequisite);
             }
 
             // Add the course to the cache
@@ -342,7 +383,5 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentFor
     {
         db->CloseConnection();
     }
-
 }
-
 
