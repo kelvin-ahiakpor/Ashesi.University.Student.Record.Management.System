@@ -87,7 +87,3 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyEnrollmentMan
     }
 }
 
-System::Void AshesiUniversityStudentRecordManagementSystem::FacultyEnrollmentManagement::btnCancel_Click(System::Object^ sender, System::EventArgs^ e)
-{
-    return System::Void();
-}
