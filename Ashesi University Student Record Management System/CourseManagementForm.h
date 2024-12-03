@@ -170,7 +170,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
                // 
                // btnSaveCourse
                // 
-               this->btnSaveCourse->Location = System::Drawing::Point(66, 9);
+               this->btnSaveCourse->Location = System::Drawing::Point(510, 9);
                this->btnSaveCourse->Margin = System::Windows::Forms::Padding(2);
                this->btnSaveCourse->Name = L"btnSaveCourse";
                this->btnSaveCourse->Size = System::Drawing::Size(83, 22);
@@ -181,7 +181,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
                // 
                // btnDeleteCourse
                // 
-               this->btnDeleteCourse->Location = System::Drawing::Point(240, 9);
+               this->btnDeleteCourse->Location = System::Drawing::Point(684, 9);
                this->btnDeleteCourse->Margin = System::Windows::Forms::Padding(2);
                this->btnDeleteCourse->Name = L"btnDeleteCourse";
                this->btnDeleteCourse->Size = System::Drawing::Size(83, 22);
@@ -192,7 +192,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
                // 
                // btnEditCourse
                // 
-               this->btnEditCourse->Location = System::Drawing::Point(153, 9);
+               this->btnEditCourse->Location = System::Drawing::Point(597, 9);
                this->btnEditCourse->Margin = System::Windows::Forms::Padding(2);
                this->btnEditCourse->Name = L"btnEditCourse";
                this->btnEditCourse->Size = System::Drawing::Size(83, 22);
@@ -208,7 +208,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
                this->dgvCourses->Margin = System::Windows::Forms::Padding(2);
                this->dgvCourses->Name = L"dgvCourses";
                this->dgvCourses->RowHeadersWidth = 51;
-               this->dgvCourses->Size = System::Drawing::Size(361, 215);
+               this->dgvCourses->Size = System::Drawing::Size(762, 215);
                this->dgvCourses->TabIndex = 9;
                this->dgvCourses->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &CourseManagementForm::dgvCourses_CellClick);
                // 
@@ -256,7 +256,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
                this->groupBoxCourseActions->Controls->Add(this->btnDeleteCourse);
                this->groupBoxCourseActions->Location = System::Drawing::Point(223, 250);
                this->groupBoxCourseActions->Name = L"groupBoxCourseActions";
-               this->groupBoxCourseActions->Size = System::Drawing::Size(371, 35);
+               this->groupBoxCourseActions->Size = System::Drawing::Size(772, 35);
                this->groupBoxCourseActions->TabIndex = 14;
                this->groupBoxCourseActions->TabStop = false;
                this->groupBoxCourseActions->Text = L"Actions";
@@ -267,7 +267,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
                this->groupBoxSelect->Controls->Add(this->dgvCourses);
                this->groupBoxSelect->Location = System::Drawing::Point(223, 12);
                this->groupBoxSelect->Name = L"groupBoxSelect";
-               this->groupBoxSelect->Size = System::Drawing::Size(371, 232);
+               this->groupBoxSelect->Size = System::Drawing::Size(772, 232);
                this->groupBoxSelect->TabIndex = 15;
                this->groupBoxSelect->TabStop = false;
                this->groupBoxSelect->Text = L"Select";
@@ -295,7 +295,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
                // 
                this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
                this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-               this->ClientSize = System::Drawing::Size(611, 301);
+               this->ClientSize = System::Drawing::Size(1007, 301);
                this->Controls->Add(this->groupBoxEdit);
                this->Controls->Add(this->groupBoxSelect);
                this->Controls->Add(this->groupBoxCourseActions);

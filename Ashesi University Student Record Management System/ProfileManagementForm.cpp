@@ -15,7 +15,6 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ProfileManagementFor
 	if (isProfileUpdated) {
 		try
 		{
-		
 			// Obtain database manager instance
 			DatabaseManager^ db = DatabaseManager::GetInstance();
 
@@ -130,5 +129,10 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ProfileManagementFor
 		db->CloseConnection();
 	}
 	
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::ProfileManagementForm::btnCancel_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	this->Close();
 }
 

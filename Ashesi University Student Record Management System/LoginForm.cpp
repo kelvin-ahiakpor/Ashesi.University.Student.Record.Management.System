@@ -1,8 +1,6 @@
 #include "LoginForm.h"
 #include "MainApplicationForm.h"
 #include "DatabaseManager.h"
-#include "StudentDashboardForm.h"
-#include "FacultyDashboardForm.h"
 #include "Student.h"
 #include "ForgotPasswordForm.h"
 

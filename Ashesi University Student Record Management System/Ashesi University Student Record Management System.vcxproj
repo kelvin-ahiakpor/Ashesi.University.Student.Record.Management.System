@@ -28,9 +28,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Admin.h" />
-    <ClInclude Include="AdminDashboardForm.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
     <ClInclude Include="CourseManagementForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -43,9 +40,6 @@
     <ClInclude Include="DatabaseManager.h" />
     <ClInclude Include="Enrollment.h" />
     <ClInclude Include="CourseOffering.h" />
-    <ClInclude Include="FacultyDashboardForm.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
     <ClInclude Include="FacultyEnrollmentManagement.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -79,9 +73,6 @@
     </ClInclude>
     <ClInclude Include="resource.h" />
     <ClInclude Include="Student.h" />
-    <ClInclude Include="StudentDashboardForm.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
     <ClInclude Include="StudentEnrollmentForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -104,11 +95,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AdminDashboardForm.cpp" />
     <ClCompile Include="CourseManagementForm.cpp" />
     <ClCompile Include="EnrollmentHistory.cpp" />
     <ClCompile Include="Faculty.cpp" />
-    <ClCompile Include="FacultyDashboardForm.cpp" />
     <ClCompile Include="FacultyEnrollmentManagement.cpp" />
     <ClCompile Include="FacultyManagementForm.cpp" />
     <ClCompile Include="ForgotPasswordForm.cpp" />
@@ -117,7 +106,6 @@
     <ClCompile Include="MainApplicationForm.cpp" />
     <ClCompile Include="ProfileManagementForm.cpp" />
     <ClCompile Include="Program.cpp" />
-    <ClCompile Include="StudentDashboardForm.cpp" />
     <ClCompile Include="StudentEnrollmentForm.cpp" />
     <ClCompile Include="StudentManagementForm.cpp" />
     <ClCompile Include="TranscriptForm.cpp" />
@@ -126,15 +114,11 @@
     <ClCompile Include="ViewGradesAdmin.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AdminDashboardForm.resx">
-      <DependentUpon>AdminDashboardForm.h</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="CourseManagementForm.resx">
       <DependentUpon>CourseManagementForm.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FacultyDashboardForm.resx">
-      <DependentUpon>FacultyDashboardForm.h</DependentUpon>
+    <EmbeddedResource Include="EnrollmentHistory.resx">
+      <DependentUpon>EnrollmentHistory.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FacultyEnrollmentManagement.resx">
       <DependentUpon>FacultyEnrollmentManagement.h</DependentUpon>
@@ -156,9 +140,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ProfileManagementForm.resx">
       <DependentUpon>ProfileManagementForm.h</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="StudentDashboardForm.resx">
-      <DependentUpon>StudentDashboardForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StudentEnrollmentForm.resx">
       <DependentUpon>StudentEnrollmentForm.h</DependentUpon>

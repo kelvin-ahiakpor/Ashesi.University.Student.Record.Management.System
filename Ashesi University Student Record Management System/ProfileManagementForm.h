@@ -27,6 +27,11 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		String^ userRole;
 		int^ studentid;
 		int^ userID;
+	private: System::Windows::Forms::Button^ btnCancel;
+	public:
+
+	private: System::Windows::Forms::Label^ lblProfile;
+	public:
 		bool isProfileUpdated = false;
 		bool isProfileChanged();
 		ProfileManagementForm(void)
@@ -119,12 +124,14 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
 			this->btnSaveProfile = (gcnew System::Windows::Forms::Button());
+			this->btnCancel = (gcnew System::Windows::Forms::Button());
+			this->lblProfile = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// lblFirstName
 			// 
 			this->lblFirstName->AutoSize = true;
-			this->lblFirstName->Location = System::Drawing::Point(26, 27);
+			this->lblFirstName->Location = System::Drawing::Point(26, 47);
 			this->lblFirstName->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->lblFirstName->Name = L"lblFirstName";
 			this->lblFirstName->Size = System::Drawing::Size(57, 13);
@@ -134,7 +141,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// lblLastName
 			// 
 			this->lblLastName->AutoSize = true;
-			this->lblLastName->Location = System::Drawing::Point(26, 76);
+			this->lblLastName->Location = System::Drawing::Point(26, 96);
 			this->lblLastName->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->lblLastName->Name = L"lblLastName";
 			this->lblLastName->Size = System::Drawing::Size(58, 13);
@@ -144,7 +151,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// lblEmail
 			// 
 			this->lblEmail->AutoSize = true;
-			this->lblEmail->Location = System::Drawing::Point(26, 130);
+			this->lblEmail->Location = System::Drawing::Point(26, 150);
 			this->lblEmail->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->lblEmail->Name = L"lblEmail";
 			this->lblEmail->Size = System::Drawing::Size(32, 13);
@@ -154,7 +161,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// lblPassword
 			// 
 			this->lblPassword->AutoSize = true;
-			this->lblPassword->Location = System::Drawing::Point(26, 179);
+			this->lblPassword->Location = System::Drawing::Point(26, 199);
 			this->lblPassword->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->lblPassword->Name = L"lblPassword";
 			this->lblPassword->Size = System::Drawing::Size(53, 13);
@@ -163,7 +170,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// textBox1
 			// 
-			this->textBox1->Location = System::Drawing::Point(28, 41);
+			this->textBox1->Location = System::Drawing::Point(28, 61);
 			this->textBox1->Margin = System::Windows::Forms::Padding(2);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(210, 20);
@@ -171,7 +178,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// textBox2
 			// 
-			this->textBox2->Location = System::Drawing::Point(28, 91);
+			this->textBox2->Location = System::Drawing::Point(28, 111);
 			this->textBox2->Margin = System::Windows::Forms::Padding(2);
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(210, 20);
@@ -179,7 +186,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// textBox3
 			// 
-			this->textBox3->Location = System::Drawing::Point(28, 145);
+			this->textBox3->Location = System::Drawing::Point(28, 165);
 			this->textBox3->Margin = System::Windows::Forms::Padding(2);
 			this->textBox3->Name = L"textBox3";
 			this->textBox3->Size = System::Drawing::Size(210, 20);
@@ -187,7 +194,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// textBox4
 			// 
-			this->textBox4->Location = System::Drawing::Point(28, 194);
+			this->textBox4->Location = System::Drawing::Point(28, 214);
 			this->textBox4->Margin = System::Windows::Forms::Padding(2);
 			this->textBox4->Name = L"textBox4";
 			this->textBox4->PasswordChar = '*';
@@ -196,20 +203,45 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// btnSaveProfile
 			// 
-			this->btnSaveProfile->Location = System::Drawing::Point(28, 233);
+			this->btnSaveProfile->Location = System::Drawing::Point(28, 253);
 			this->btnSaveProfile->Margin = System::Windows::Forms::Padding(2);
 			this->btnSaveProfile->Name = L"btnSaveProfile";
-			this->btnSaveProfile->Size = System::Drawing::Size(120, 24);
+			this->btnSaveProfile->Size = System::Drawing::Size(97, 24);
 			this->btnSaveProfile->TabIndex = 8;
 			this->btnSaveProfile->Text = L"Save Profile";
 			this->btnSaveProfile->UseVisualStyleBackColor = true;
 			this->btnSaveProfile->Click += gcnew System::EventHandler(this, &ProfileManagementForm::btnSaveProfile_Click);
 			// 
+			// btnCancel
+			// 
+			this->btnCancel->Location = System::Drawing::Point(144, 253);
+			this->btnCancel->Margin = System::Windows::Forms::Padding(2);
+			this->btnCancel->Name = L"btnCancel";
+			this->btnCancel->Size = System::Drawing::Size(94, 24);
+			this->btnCancel->TabIndex = 9;
+			this->btnCancel->Text = L"Cancel";
+			this->btnCancel->UseVisualStyleBackColor = true;
+			this->btnCancel->Click += gcnew System::EventHandler(this, &ProfileManagementForm::btnCancel_Click);
+			// 
+			// lblProfile
+			// 
+			this->lblProfile->AutoSize = true;
+			this->lblProfile->Font = (gcnew System::Drawing::Font(L"Consolas", 15, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->lblProfile->Location = System::Drawing::Point(24, 9);
+			this->lblProfile->Name = L"lblProfile";
+			this->lblProfile->Size = System::Drawing::Size(87, 23);
+			this->lblProfile->TabIndex = 10;
+			this->lblProfile->Text = L"PROFILE";
+			// 
 			// ProfileManagementForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(320, 291);
+			this->BackColor = System::Drawing::Color::Linen;
+			this->ClientSize = System::Drawing::Size(264, 291);
+			this->Controls->Add(this->lblProfile);
+			this->Controls->Add(this->btnCancel);
 			this->Controls->Add(this->btnSaveProfile);
 			this->Controls->Add(this->textBox4);
 			this->Controls->Add(this->textBox3);
@@ -221,7 +253,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->Controls->Add(this->lblFirstName);
 			this->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
 				static_cast<System::Int32>(static_cast<System::Byte>(0)));
-			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"ProfileManagementForm";
@@ -233,5 +265,6 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		}
 #pragma endregion
 	private: System::Void btnSaveProfile_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void btnCancel_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

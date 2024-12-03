@@ -36,5 +36,8 @@ public:
     String^ getPassword() { return password; }  // For demonstration only; consider encryption for security.
 
     Void login() { return; }
-    Void logout() { return; }
+    Void logout() {
+        // Clear sensitive data
+        password = ""; //In future this will be loaded from an environment variable
+    }
 };
