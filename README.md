@@ -95,3 +95,8 @@ This project is licensed under the MIT License.
 
 Feel free to fork this repository and contribute by creating pull requests with enhancements or fixes. For any issues, feel free to raise them via GitHub issues.
 
+
+## HOW TO LOGIN
+For Admin Login: admin@ashesi.edu.gh, Password: admin123
+For Faculty Login: jomens@yahoo.com, Password:password123
+For User Login: hkrmanuel1.0@gmail.com, Password:password123
