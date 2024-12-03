@@ -167,7 +167,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// textStudentID
 			// 
-			this->textStudentID->Location = System::Drawing::Point(101, 29);
+			this->textStudentID->Location = System::Drawing::Point(34, 29);
 			this->textStudentID->Name = L"textStudentID";
 			this->textStudentID->Size = System::Drawing::Size(157, 20);
 			this->textStudentID->TabIndex = 6;
