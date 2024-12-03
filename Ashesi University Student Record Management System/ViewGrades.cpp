@@ -66,6 +66,10 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ViewGrades::btnViewG
         // Handle errors
         MessageBox::Show("Error retrieving grades: " + ex->Message, "Database Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
     }
+	finally {
+		// Close the database connection
+		db->CloseConnection();
+	}
     return System::Void();
 }
 

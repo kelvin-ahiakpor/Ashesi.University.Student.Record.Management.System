@@ -93,6 +93,10 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
         MessageBox::Show("Error creating faculty: " + ex->Message, "Database Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
         db->CloseConnection();
     }
+	finally
+	{
+		db->CloseConnection();
+	}
 }
 
 System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementForm::button2_Click(System::Object^ sender, System::EventArgs^ e)
@@ -161,6 +165,10 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
     {
         MessageBox::Show("Error loading faculty records: " + ex->Message, "Database Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
     }
+	finally
+	{
+		db->CloseConnection();
+	}
 
     return System::Void();
 }
@@ -223,6 +231,10 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
     {
         MessageBox::Show("Error loading users: " + ex->Message, "Database Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
     }
+	finally
+	{
+		db->CloseConnection();
+	}
 
     return System::Void();
 }
@@ -295,6 +307,10 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
         MessageBox::Show("Error deleting faculty: " + ex->Message, "Database Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
         db->CloseConnection();
     }
+	finally
+	{
+		db->CloseConnection();
+	}
 }
 System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementForm::button5_Click(System::Object^ sender, System::EventArgs^ e)
 {
@@ -402,6 +418,10 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
         MessageBox::Show("Error updating faculty: " + ex->Message, "Database Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
         db->CloseConnection();
     }
+	finally
+	{
+		db->CloseConnection();
+	}
 }
 
 System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementForm::dataGridView1_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e)
@@ -470,6 +490,10 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
         {
             MessageBox::Show("Error retrieving department name: " + ex->Message, "Database Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
         }
+		finally
+		{
+			db->CloseConnection();
+		}
     }
 
     return;  // Return void, not System::Void()

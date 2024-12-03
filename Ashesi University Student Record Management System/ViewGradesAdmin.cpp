@@ -132,6 +132,9 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ViewGradesAdmin::btn
 	{
 		MessageBox::Show("Error: " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 	}
+	finally {
+		db->CloseConnection();
+	}
 
 	return System::Void();
 }

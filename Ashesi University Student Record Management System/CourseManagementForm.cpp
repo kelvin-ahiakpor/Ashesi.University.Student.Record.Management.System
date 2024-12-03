@@ -60,6 +60,10 @@ void AshesiUniversityStudentRecordManagementSystem::CourseManagementForm::LoadCo
     {
         MessageBox::Show("Error loading courses: " + ex->Message, "Database Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
     }
+	finally
+	{
+		db->CloseConnection();
+	}
 }
 
 System::Void AshesiUniversityStudentRecordManagementSystem::CourseManagementForm::btnSaveCourse_Click(System::Object^ sender, System::EventArgs^ e)
@@ -129,6 +133,10 @@ System::Void AshesiUniversityStudentRecordManagementSystem::CourseManagementForm
     {
         MessageBox::Show("Error saving course: " + ex->Message, "Database Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
     }
+	finally
+	{
+		db->CloseConnection();
+	}
 }
 
 
@@ -164,6 +172,10 @@ System::Void AshesiUniversityStudentRecordManagementSystem::CourseManagementForm
     {
         MessageBox::Show("Error deleting course: " + ex->Message, "Database Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
     }
+	finally
+	{
+		db->CloseConnection();
+	}
 }
 
 System::Void AshesiUniversityStudentRecordManagementSystem::CourseManagementForm::btnEditCourse_Click(System::Object^ sender, System::EventArgs^ e)
@@ -240,6 +252,10 @@ System::Void AshesiUniversityStudentRecordManagementSystem::CourseManagementForm
     {
         MessageBox::Show("Error updating course: " + ex->Message, "Database Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
     }
+	finally
+	{
+		db->CloseConnection();
+	}
 }
 
 void AshesiUniversityStudentRecordManagementSystem::CourseManagementForm::dgvCourses_CellClick(
