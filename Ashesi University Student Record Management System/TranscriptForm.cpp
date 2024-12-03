@@ -143,7 +143,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::TranscriptForm::GetT
             String^ year = reader["Year"]->ToString();
             String^ schedule = reader["Schedule"]->ToString();
             String^ offeringStatus = reader["OfferingStatus"]->ToString();
-            String^ facultyName = reader["FirstName"]->ToString() + " " + reader["LastName"]->ToString();
+            String^ studentName = reader["FirstName"]->ToString() + " " + reader["LastName"]->ToString();
             String^ grade = reader["Grade"]->ToString();
 
             // Append the transcript details to the RichTextBox
@@ -152,7 +152,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::TranscriptForm::GetT
             richTxtTranscript->AppendText("Semester: " + semester + ", Year: " + year + "\n");
             richTxtTranscript->AppendText("Schedule: " + schedule + "\n");
             richTxtTranscript->AppendText("Offering Status: " + offeringStatus + "\n");
-            richTxtTranscript->AppendText("Faculty: " + facultyName + "\n");
+            richTxtTranscript->AppendText("Student: " + studentName + "\n");
             richTxtTranscript->AppendText("Grade: " + grade + "\n");
             richTxtTranscript->AppendText("-------------------------------\n");
         }
