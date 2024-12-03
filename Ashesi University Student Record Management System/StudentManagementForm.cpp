@@ -1,4 +1,5 @@
 #include "StudentManagementForm.h"
+#include "PasswordManager.h"
 #include "DatabaseManager.h"
 
 using namespace AshesiUniversityStudentRecordManagementSystem;
@@ -22,10 +23,12 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
 
         db->ConnectToDatabase();
 
+		String^ hashedPassword = PasswordManager::HashPassword("password123");
+
         // Insert into Users table
         String^ insertUserQuery = R"(
         INSERT INTO Users (FirstName, LastName, Email, Password, UserType)
-        VALUES (@FirstName, @LastName, @Email, 'password123', 'Student');
+        VALUES (@FirstName, @LastName, @Email, @HashedPassword, 'Student');
         SELECT LAST_INSERT_ID();
         )";
 
@@ -33,6 +36,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
         cmdInsertUser->Parameters->AddWithValue("@FirstName", textBox1->Text);
         cmdInsertUser->Parameters->AddWithValue("@LastName", textBox2->Text);
         cmdInsertUser->Parameters->AddWithValue("@Email", textBox4->Text);
+        cmdInsertUser->Parameters->AddWithValue("@HashedPassword", hashedPassword);
 
         // Execute the command and retrieve the new UserID
         Object^ userIDObj = cmdInsertUser->ExecuteScalar();
@@ -94,6 +98,9 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
         MessageBox::Show("Error creating student: " + ex->Message, "Database Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
         db->CloseConnection();
     }
+	finally {
+		db->CloseConnection();
+	}
 }
 
 
@@ -170,6 +177,9 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
     {
         MessageBox::Show("Error loading users: " + ex->Message, "Database Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
     }
+	finally {
+		db->CloseConnection();
+	}
 
     return System::Void();
 }
@@ -234,6 +244,9 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
     {
         MessageBox::Show("Error loading users: " + ex->Message, "Database Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
     }
+	finally {
+		db->CloseConnection();
+	}
 
     return System::Void();
 }
@@ -305,6 +318,9 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
         MessageBox::Show("Error deleting student: " + ex->Message, "Database Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
         db->CloseConnection();
     }
+	finally {
+		db->CloseConnection();
+	}
 }
 
 
@@ -420,6 +436,9 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
         MessageBox::Show("Error updating student: " + ex->Message, "Database Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
         db->CloseConnection();
     }
+	finally {
+		db->CloseConnection();
+	}
 }
 
 
@@ -505,6 +524,10 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
         {
             MessageBox::Show("Error retrieving department name: " + ex->Message, "Database Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
         }
+		finally
+		{
+			db->CloseConnection();
+		}
     }
 
     return;  // Return void, not System::Void()

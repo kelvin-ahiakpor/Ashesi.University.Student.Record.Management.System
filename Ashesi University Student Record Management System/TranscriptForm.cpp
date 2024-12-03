@@ -110,6 +110,10 @@ System::Void TranscriptForm::btnViewTranscript_Click(System::Object^ sender, Sys
         // Handle errors
         MessageBox::Show("Error retrieving transcript: " + ex->Message, "Database Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
     }
+	finally {
+		// Close the database connection
+		db->CloseConnection();
+	}
 }
 
 System::Void AshesiUniversityStudentRecordManagementSystem::TranscriptForm::btnPrintTranscript_Click(System::Object^ sender, System::EventArgs^ e) {
