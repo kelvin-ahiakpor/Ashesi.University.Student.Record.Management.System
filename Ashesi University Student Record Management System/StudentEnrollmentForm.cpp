@@ -1,10 +1,17 @@
 #include "StudentEnrollmentForm.h"
+#include "Course.h"
 #include "DatabaseManager.h"
 
 using namespace AshesiUniversityStudentRecordManagementSystem;
 using namespace System;
 using namespace System::Windows::Forms;
 using namespace MySql::Data::MySqlClient;
+
+
+System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentForm::StudentEnrollmentForm_Load(System::Object^ sender, System::EventArgs^ e)
+{
+    LoadCoursesToCache();
+}
 
 System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentForm::SearchButton_Click(System::Object^ sender, System::EventArgs^ e)
 {
@@ -93,11 +100,50 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentFor
 //Real time search
 System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentForm::txtBoxSearch_TextChanged(System::Object^ sender, System::EventArgs^ e)
 {
-	//Use caching of courses on Load event to improve speed
-    //SearchButton_Click(sender, e);
+
+    if (dataGridView1->Rows->Count == 0) {
+		SearchButton_Click(sender, e);
+        return;
+    }
+
+    String^ searchTerm = txtBoxSearch->Text->ToLower();  // Case-insensitive search
+
+    // If search term is empty, display all courses
+    if (String::IsNullOrWhiteSpace(searchTerm))
+    {
+        // Clear the DataGridView and display all courses
+        dataGridView1->Rows->Clear();
+        for each (Course ^ course in cachedCourses)
+        {
+            dataGridView1->Rows->Add(course->getCourseName(), course->getCourseID(), course->getCredits(),
+                String::Join(", ", course->getPrerequisites()), course->getDescription());
+        }
+    }
+    else
+    {
+        // Filter courses by search term
+        List<Course^>^ filteredCourses = gcnew List<Course^>();
+        for each (Course ^ course in cachedCourses)
+        {
+            if (course->getCourseName()->ToLower()->Contains(searchTerm))  // Case-insensitive check
+            {
+                filteredCourses->Add(course);
+            }
+        }
+
+        // Clear existing rows and add filtered results
+        dataGridView1->Rows->Clear();
+        for each (Course ^ course in filteredCourses)
+        {
+            // Add each filtered course's details to DataGridView
+            dataGridView1->Rows->Add(course->getCourseName(), course->getCourseID(), course->getCredits(),
+                String::Join(", ", course->getPrerequisites()), course->getDescription());
+        }
+    }
 }
 
-//Helper functions for the StudentEnrollmentForm
+
+//Helper functions for the StudentEnrollmentForm to optimize search and modularize code
 System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentForm::SearchCourses(DatabaseManager^ db, System::Object^ sender, System::EventArgs^ e)
 {
     db->ConnectToDatabase();
@@ -238,3 +284,65 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentFor
         MessageBox::Show("Enrollment failed. No rows were affected.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
     }
 }
+
+System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentForm::LoadCoursesToCache()
+{
+    DatabaseManager^ db = DatabaseManager::GetInstance();
+    try
+    {
+        db->ConnectToDatabase();
+        String^ query = R"(
+        SELECT CourseID, CourseName, Credits, Prerequisites, Description 
+        FROM Courses 
+        WHERE IsActive = 1
+    )";
+        MySqlCommand^ cmd = gcnew MySqlCommand(query, db->GetConnection());
+        MySqlDataReader^ reader = cmd->ExecuteReader();
+
+        while (reader->Read())
+        {
+            // Parse prerequisites if it is a comma-separated list of course IDs
+            String^ prerequisitesString = reader["Prerequisites"]->ToString();
+            List<String^>^ prerequisitesList = gcnew List<String^>();
+
+            if (!String::IsNullOrWhiteSpace(prerequisitesString))
+            {
+                array<String^>^ prerequisiteArray = prerequisitesString->Split(',');
+                for each (String ^ prerequisite in prerequisiteArray)
+                {
+                    prerequisitesList->Add(prerequisite->Trim()); // Trim spaces
+                }
+            }
+
+            // Now create a Course object
+            Course^ course = gcnew Course(
+                Convert::ToInt32(reader["CourseID"]),        // CourseID as int
+                reader["CourseName"]->ToString(),           // CourseName as string
+                reader["Description"]->ToString(),         
+                Convert::ToDouble(reader["Credits"])        // Credits as double
+            );
+
+            // Clear existing prerequisites and add the new ones
+            course->getPrerequisites()->Clear();
+            for each (String ^ prerequisite in prerequisitesList)
+            {
+                course->getPrerequisites()->Add(prerequisite);
+            }
+
+            // Add the course to the cache
+            cachedCourses->Add(course);
+        }
+        reader->Close();
+    }
+    catch (Exception^ ex)
+    {
+        MessageBox::Show("Error loading courses: " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+    }
+    finally
+    {
+        db->CloseConnection();
+    }
+
+}
+
+
