@@ -59,6 +59,7 @@
     <ClInclude Include="MainApplicationForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="PasswordManager.h" />
     <ClInclude Include="StudentManagementForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>

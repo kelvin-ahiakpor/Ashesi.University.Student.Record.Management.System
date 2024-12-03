@@ -1,6 +1,7 @@
 #pragma once
 #include "ProfileManagementForm.h"
 #include "DatabaseManager.h"
+#include "PasswordManager.h"
 
 bool AshesiUniversityStudentRecordManagementSystem::ProfileManagementForm::isProfileChanged()
 {
@@ -94,6 +95,9 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ProfileManagementFor
 		DatabaseManager^ db = DatabaseManager::GetInstance();
 		db->ConnectToDatabase();
 
+		// Hash the new password before updating
+		String^ hashedPassword = PasswordManager::HashPassword(this->textBox4->Text);
+
 		String^ query = R"(
 			UPDATE Users
 			SET FirstName = @firstName,
@@ -107,7 +111,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ProfileManagementFor
 		cmd->Parameters->AddWithValue("@firstName", this->textBox1->Text);
 		cmd->Parameters->AddWithValue("@lastName", this->textBox2->Text);
 		cmd->Parameters->AddWithValue("@Email", this->textBox3->Text);
-		cmd->Parameters->AddWithValue("@Password", this->textBox4->Text);
+		cmd->Parameters->AddWithValue("@Password", hashedPassword);
 		cmd->Parameters->AddWithValue("@userID", userID);
 
 		cmd->ExecuteNonQuery();

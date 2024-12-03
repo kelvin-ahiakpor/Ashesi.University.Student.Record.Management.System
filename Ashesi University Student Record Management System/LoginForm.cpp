@@ -3,6 +3,7 @@
 #include "DatabaseManager.h"
 #include "Student.h"
 #include "ForgotPasswordForm.h"
+#include "PasswordManager.h"
 
 using namespace AshesiUniversityStudentRecordManagementSystem;
 using namespace System;
@@ -13,6 +14,7 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
     // Get the email and password from the textboxes
     String^ email = txtEmail->Text;
     String^ password = txtPassword->Text;
+	String^ hashedPassword = PasswordManager::HashPassword(password);
 
     // Validate the inputs (e.g., check for empty fields)
     if (String::IsNullOrWhiteSpace(email) || String::IsNullOrWhiteSpace(password)) {
@@ -39,7 +41,7 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
 
         // Add parameters to avoid SQL injection
         sqlCmd->Parameters->AddWithValue("@Email", email);
-        sqlCmd->Parameters->AddWithValue("@Password", password);
+        sqlCmd->Parameters->AddWithValue("@Password", hashedPassword);
 
         // Execute the query
         sqlRd = safe_cast<MySqlDataReader^>(sqlCmd->ExecuteReader());
