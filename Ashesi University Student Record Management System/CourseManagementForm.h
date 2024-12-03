@@ -303,6 +303,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
                this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
                this->Margin = System::Windows::Forms::Padding(2);
                this->Name = L"CourseManagementForm";
+               this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
                this->Text = L"Course Management";
                (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvCourses))->EndInit();
                this->groupBoxCourseActions->ResumeLayout(false);
