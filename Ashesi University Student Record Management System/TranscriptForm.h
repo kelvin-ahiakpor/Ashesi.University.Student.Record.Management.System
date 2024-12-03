@@ -41,6 +41,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 				this->student = s;
 				this->globalUser = s;  // Assigning user to globalUser
 				userRole = "Student";
+
+				this->txtStudentID->ReadOnly = true;
 			}
 			else if (Faculty^ f = dynamic_cast<Faculty^>(user)) {
 				this->faculty = f;
@@ -51,6 +53,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 				this->admin = a;
 				this->globalUser = a;  // Assigning user to globalUser
 				userRole = "Administrator";
+
+				this->txtStudentID->ReadOnly = false;
 			}
 			else {
 				throw gcnew System::ArgumentException("Unsupported user type.");
@@ -101,28 +105,27 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// lblStudentID
 			// 
 			this->lblStudentID->AutoSize = true;
-			this->lblStudentID->Location = System::Drawing::Point(31, 12);
-			this->lblStudentID->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
+			this->lblStudentID->Location = System::Drawing::Point(41, 15);
 			this->lblStudentID->Name = L"lblStudentID";
-			this->lblStudentID->Size = System::Drawing::Size(58, 13);
+			this->lblStudentID->Size = System::Drawing::Size(68, 16);
 			this->lblStudentID->TabIndex = 0;
 			this->lblStudentID->Text = L"Student ID";
 			// 
 			// txtStudentID
 			// 
-			this->txtStudentID->Location = System::Drawing::Point(34, 26);
-			this->txtStudentID->Margin = System::Windows::Forms::Padding(2);
+			this->txtStudentID->Location = System::Drawing::Point(45, 32);
+			this->txtStudentID->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->txtStudentID->Name = L"txtStudentID";
-			this->txtStudentID->Size = System::Drawing::Size(157, 20);
+			this->txtStudentID->Size = System::Drawing::Size(208, 22);
 			this->txtStudentID->TabIndex = 1;
 			this->txtStudentID->TextChanged += gcnew System::EventHandler(this, &TranscriptForm::txtStudentID_TextChanged);
 			// 
 			// btnViewTranscript
 			// 
-			this->btnViewTranscript->Location = System::Drawing::Point(388, 23);
-			this->btnViewTranscript->Margin = System::Windows::Forms::Padding(2);
+			this->btnViewTranscript->Location = System::Drawing::Point(517, 28);
+			this->btnViewTranscript->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->btnViewTranscript->Name = L"btnViewTranscript";
-			this->btnViewTranscript->Size = System::Drawing::Size(88, 23);
+			this->btnViewTranscript->Size = System::Drawing::Size(117, 28);
 			this->btnViewTranscript->TabIndex = 2;
 			this->btnViewTranscript->Text = L"View Transcript";
 			this->btnViewTranscript->UseVisualStyleBackColor = true;
@@ -130,20 +133,20 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// richTxtTranscript
 			// 
-			this->richTxtTranscript->Location = System::Drawing::Point(34, 68);
-			this->richTxtTranscript->Margin = System::Windows::Forms::Padding(2);
+			this->richTxtTranscript->Location = System::Drawing::Point(45, 84);
+			this->richTxtTranscript->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->richTxtTranscript->Name = L"richTxtTranscript";
-			this->richTxtTranscript->Size = System::Drawing::Size(549, 301);
+			this->richTxtTranscript->Size = System::Drawing::Size(731, 370);
 			this->richTxtTranscript->TabIndex = 3;
 			this->richTxtTranscript->Text = L"";
 			this->richTxtTranscript->TextChanged += gcnew System::EventHandler(this, &TranscriptForm::richTxtTranscript_TextChanged);
 			// 
 			// btnPrintTranscript
 			// 
-			this->btnPrintTranscript->Location = System::Drawing::Point(480, 23);
-			this->btnPrintTranscript->Margin = System::Windows::Forms::Padding(2);
+			this->btnPrintTranscript->Location = System::Drawing::Point(640, 28);
+			this->btnPrintTranscript->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->btnPrintTranscript->Name = L"btnPrintTranscript";
-			this->btnPrintTranscript->Size = System::Drawing::Size(103, 23);
+			this->btnPrintTranscript->Size = System::Drawing::Size(137, 28);
 			this->btnPrintTranscript->TabIndex = 4;
 			this->btnPrintTranscript->Text = L"Print Transcript";
 			this->btnPrintTranscript->UseVisualStyleBackColor = true;
@@ -151,9 +154,9 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// TranscriptForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(620, 386);
+			this->ClientSize = System::Drawing::Size(827, 475);
 			this->Controls->Add(this->btnPrintTranscript);
 			this->Controls->Add(this->richTxtTranscript);
 			this->Controls->Add(this->btnViewTranscript);
@@ -162,7 +165,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->ForeColor = System::Drawing::Color::Maroon;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
-			this->Margin = System::Windows::Forms::Padding(2);
+			this->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->Name = L"TranscriptForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Transcripts";
