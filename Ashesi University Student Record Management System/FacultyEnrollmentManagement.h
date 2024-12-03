@@ -253,7 +253,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->ViewEnroll->Name = L"ViewEnroll";
 			this->ViewEnroll->Size = System::Drawing::Size(114, 43);
 			this->ViewEnroll->TabIndex = 40;
-			this->ViewEnroll->Text = L"View Enrollements";
+			this->ViewEnroll->Text = L"View Enrollments";
 			this->ViewEnroll->UseVisualStyleBackColor = true;
 			this->ViewEnroll->Click += gcnew System::EventHandler(this, &FacultyEnrollmentManagement::ViewEnroll_Click);
 			// 
@@ -345,6 +345,6 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 #pragma endregion
 	private: System::Void dataGridView1_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
 	}
-	private: System::Void ViewEnroll_Click(System::Object^ sender, System::EventArgs^ e) {};
+	private: System::Void ViewEnroll_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }
