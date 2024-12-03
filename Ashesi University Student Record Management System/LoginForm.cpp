@@ -107,6 +107,45 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
                 adminDashboard->Show();
                 this->Hide();
             }
+            if (userType == "Faculty") {
+                // Query for student details
+                String^ studentQuery = "SELECT f.FacultyID, f.DepartmentID " +
+                    "FROM Faculty f " +
+                    "WHERE f.UserID = @userID";
+
+                // Update the command and parameters
+                sqlCmd->CommandText = studentQuery;
+                sqlCmd->Parameters->Clear();
+                sqlCmd->Parameters->AddWithValue("@userID", userID);
+
+                // Execute the query for student details
+                sqlRd = safe_cast<MySqlDataReader^>(sqlCmd->ExecuteReader());
+
+                if (sqlRd->Read()) {
+                    // Extract StudentID and DepartmentID
+                    int facultyID = (int)sqlRd["FacultyID"];
+                    int^ departmentID = (int)sqlRd["DepartmentID"];
+
+                    // Create the Student object
+                    Faculty^ faculty = gcnew Faculty(
+                        userID, firstName, lastName, email, facultyID, departmentID);
+
+                    // Show a success message
+                    MessageBox::Show("Login successful! Welcome, " + firstName + ".",
+                        "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
+
+                    // Navigate to the student dashboard
+                    MainApplicationForm^ studentDashboard = gcnew MainApplicationForm(faculty);
+                    studentDashboard->Show();
+                    this->Hide();
+                }
+                else {
+                    MessageBox::Show("No Faculty record found for the provided user ID.",
+                        "Login Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+                }
+
+                sqlRd->Close();
+            }
             else {
                 MessageBox::Show("User type not recognized.",
                     "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
