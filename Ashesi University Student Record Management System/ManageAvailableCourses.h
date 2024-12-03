@@ -102,10 +102,12 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	private: System::Windows::Forms::GroupBox^ groupBoxCreateEdit;
 	private: System::Windows::Forms::GroupBox^ groupBoxViewCourse;
 	private: System::Windows::Forms::Label^ staus;
+	private: System::Windows::Forms::ComboBox^ cboxDeptName;
+	private: System::Windows::Forms::ComboBox^ cboxFaculty;
 
-	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::ComboBox^ comboBox1;
-	private: System::Windows::Forms::ComboBox^ comboBox2;
+
+
+
 	private: System::Windows::Forms::ComboBox^ comboBox3;
 	private: System::Windows::Forms::Button^ btnEdit;
 
@@ -139,11 +141,10 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->btnEdit = (gcnew System::Windows::Forms::Button());
 			this->groupBoxCreateEdit = (gcnew System::Windows::Forms::GroupBox());
 			this->comboBox3 = (gcnew System::Windows::Forms::ComboBox());
-			this->comboBox2 = (gcnew System::Windows::Forms::ComboBox());
+			this->cboxFaculty = (gcnew System::Windows::Forms::ComboBox());
 			this->staus = (gcnew System::Windows::Forms::Label());
 			this->groupBoxViewCourse = (gcnew System::Windows::Forms::GroupBox());
-			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
+			this->cboxDeptName = (gcnew System::Windows::Forms::ComboBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridViewCourse))->BeginInit();
 			this->groupBoxCreateEdit->SuspendLayout();
 			this->groupBoxViewCourse->SuspendLayout();
@@ -153,7 +154,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			this->dataGridViewCourse->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridViewCourse->Location = System::Drawing::Point(5, 18);
-			this->dataGridViewCourse->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->dataGridViewCourse->Margin = System::Windows::Forms::Padding(2);
 			this->dataGridViewCourse->Name = L"dataGridViewCourse";
 			this->dataGridViewCourse->RowHeadersWidth = 51;
 			this->dataGridViewCourse->RowTemplate->Height = 24;
@@ -164,7 +165,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// textBox1
 			// 
 			this->textBox1->Location = System::Drawing::Point(73, 25);
-			this->textBox1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->textBox1->Margin = System::Windows::Forms::Padding(2);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(528, 20);
 			this->textBox1->TabIndex = 1;
@@ -182,7 +183,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// textBox2
 			// 
 			this->textBox2->Location = System::Drawing::Point(64, 60);
-			this->textBox2->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->textBox2->Margin = System::Windows::Forms::Padding(2);
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(536, 20);
 			this->textBox2->TabIndex = 6;
@@ -200,7 +201,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// textBox3
 			// 
 			this->textBox3->Location = System::Drawing::Point(75, 169);
-			this->textBox3->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->textBox3->Margin = System::Windows::Forms::Padding(2);
 			this->textBox3->Name = L"textBox3";
 			this->textBox3->Size = System::Drawing::Size(521, 20);
 			this->textBox3->TabIndex = 10;
@@ -218,7 +219,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// textBox4
 			// 
 			this->textBox4->Location = System::Drawing::Point(38, 136);
-			this->textBox4->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->textBox4->Margin = System::Windows::Forms::Padding(2);
 			this->textBox4->Name = L"textBox4";
 			this->textBox4->Size = System::Drawing::Size(558, 20);
 			this->textBox4->TabIndex = 12;
@@ -236,7 +237,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// btnViewCourse
 			// 
 			this->btnViewCourse->Location = System::Drawing::Point(514, 11);
-			this->btnViewCourse->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->btnViewCourse->Margin = System::Windows::Forms::Padding(2);
 			this->btnViewCourse->Name = L"btnViewCourse";
 			this->btnViewCourse->Size = System::Drawing::Size(91, 28);
 			this->btnViewCourse->TabIndex = 14;
@@ -257,7 +258,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// button3
 			// 
 			this->button3->Location = System::Drawing::Point(335, 238);
-			this->button3->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->button3->Margin = System::Windows::Forms::Padding(2);
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(86, 27);
 			this->button3->TabIndex = 19;
@@ -268,7 +269,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// btnDelete
 			// 
 			this->btnDelete->Location = System::Drawing::Point(425, 238);
-			this->btnDelete->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->btnDelete->Margin = System::Windows::Forms::Padding(2);
 			this->btnDelete->Name = L"btnDelete";
 			this->btnDelete->Size = System::Drawing::Size(86, 27);
 			this->btnDelete->TabIndex = 20;
@@ -279,7 +280,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// btnEdit
 			// 
 			this->btnEdit->Location = System::Drawing::Point(515, 238);
-			this->btnEdit->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->btnEdit->Margin = System::Windows::Forms::Padding(2);
 			this->btnEdit->Name = L"btnEdit";
 			this->btnEdit->Size = System::Drawing::Size(86, 27);
 			this->btnEdit->TabIndex = 21;
@@ -290,7 +291,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// groupBoxCreateEdit
 			// 
 			this->groupBoxCreateEdit->Controls->Add(this->comboBox3);
-			this->groupBoxCreateEdit->Controls->Add(this->comboBox2);
+			this->groupBoxCreateEdit->Controls->Add(this->cboxFaculty);
 			this->groupBoxCreateEdit->Controls->Add(this->staus);
 			this->groupBoxCreateEdit->Controls->Add(this->btnEdit);
 			this->groupBoxCreateEdit->Controls->Add(this->btnDelete);
@@ -314,20 +315,21 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// comboBox3
 			// 
 			this->comboBox3->FormattingEnabled = true;
+			this->comboBox3->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Enrolled", L"Pending", L"Withdrawn" });
 			this->comboBox3->Location = System::Drawing::Point(64, 206);
-			this->comboBox3->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->comboBox3->Margin = System::Windows::Forms::Padding(2);
 			this->comboBox3->Name = L"comboBox3";
 			this->comboBox3->Size = System::Drawing::Size(532, 21);
 			this->comboBox3->TabIndex = 27;
 			// 
-			// comboBox2
+			// cboxFaculty
 			// 
-			this->comboBox2->FormattingEnabled = true;
-			this->comboBox2->Location = System::Drawing::Point(73, 102);
-			this->comboBox2->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
-			this->comboBox2->Name = L"comboBox2";
-			this->comboBox2->Size = System::Drawing::Size(524, 21);
-			this->comboBox2->TabIndex = 26;
+			this->cboxFaculty->FormattingEnabled = true;
+			this->cboxFaculty->Location = System::Drawing::Point(73, 102);
+			this->cboxFaculty->Margin = System::Windows::Forms::Padding(2);
+			this->cboxFaculty->Name = L"cboxFaculty";
+			this->cboxFaculty->Size = System::Drawing::Size(524, 21);
+			this->cboxFaculty->TabIndex = 26;
 			// 
 			// staus
 			// 
@@ -349,48 +351,37 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->groupBoxViewCourse->TabStop = false;
 			this->groupBoxViewCourse->Text = L"View";
 			// 
-			// label1
+			// cboxDeptName
 			// 
-			this->label1->AutoSize = true;
-			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 9, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->label1->Location = System::Drawing::Point(332, 19);
-			this->label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(82, 15);
-			this->label1->TabIndex = 24;
-			this->label1->Text = L"Department";
-			// 
-			// comboBox1
-			// 
-			this->comboBox1->FormattingEnabled = true;
-			this->comboBox1->Location = System::Drawing::Point(418, 16);
-			this->comboBox1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
-			this->comboBox1->Name = L"comboBox1";
-			this->comboBox1->Size = System::Drawing::Size(92, 21);
-			this->comboBox1->TabIndex = 25;
+			this->cboxDeptName->FormattingEnabled = true;
+			this->cboxDeptName->Location = System::Drawing::Point(285, 16);
+			this->cboxDeptName->Margin = System::Windows::Forms::Padding(2);
+			this->cboxDeptName->Name = L"cboxDeptName";
+			this->cboxDeptName->Size = System::Drawing::Size(225, 21);
+			this->cboxDeptName->TabIndex = 25;
+			this->cboxDeptName->SelectedIndexChanged += gcnew System::EventHandler(this, &ManageAvailableCourses::cboxDeptName_SelectedIndexChanged);
 			// 
 			// ManageAvailableCourses
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(622, 489);
-			this->Controls->Add(this->comboBox1);
-			this->Controls->Add(this->label1);
+			this->Controls->Add(this->cboxDeptName);
 			this->Controls->Add(this->btnViewCourse);
 			this->Controls->Add(this->groupBoxCreateEdit);
 			this->Controls->Add(this->groupBoxViewCourse);
 			this->ForeColor = System::Drawing::Color::Maroon;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
-			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"ManageAvailableCourses";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Manage Available Courses";
+			this->Load += gcnew System::EventHandler(this, &ManageAvailableCourses::ManageAvailableCourses_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridViewCourse))->EndInit();
 			this->groupBoxCreateEdit->ResumeLayout(false);
 			this->groupBoxCreateEdit->PerformLayout();
 			this->groupBoxViewCourse->ResumeLayout(false);
 			this->ResumeLayout(false);
-			this->PerformLayout();
 
 		}
 
@@ -400,5 +391,9 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	private: System::Void btnDelete_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void btnEdit_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void dataGridView1_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e);
-	};
+	private: System::Void LoadCourses(DatabaseManager^ db);
+	private: System::Void LoadFacultyForSelectedDepartment(Object^ sender, EventArgs^ e);
+	private: System::Void cboxDeptName_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e);
+private: System::Void ManageAvailableCourses_Load(System::Object^ sender, System::EventArgs^ e);
+};
 }

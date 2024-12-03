@@ -2,7 +2,6 @@
 #include "DatabaseManager.h"
 
 
-
 System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCourses::savecourses_Click(System::Object^ sender, System::EventArgs^ e)
 {
     // Validate input fields
@@ -12,7 +11,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCours
         return;
     }
 
-    if (comboBox1->SelectedItem == nullptr)
+    if (cboxDeptName->SelectedItem == nullptr)
     {
         MessageBox::Show("Please select a department.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
         return;
@@ -20,7 +19,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCours
 
     // Get input values
     String^ courseName = textBox1->Text;
-    String^ selectedDepartmentName = comboBox1->SelectedItem->ToString();
+    String^ selectedDepartmentName = cboxDeptName->SelectedItem->ToString();
     String^ semester = textBox2->Text;  // Assuming textBoxSemester for Semester
     String^ year = textBox4->Text;      // Assuming textBoxYear for Year
     int maxCapacity = Convert::ToInt32(textBox3->Text); // Assuming numericUpDownMaxCapacity for Max Capacity
@@ -45,7 +44,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCours
     int departmentID = Convert::ToInt32(departmentIDObj);
 
     // Retrieve the Faculty ID based on the selected faculty name
-    String^ facultyName = comboBox2->SelectedItem->ToString(); // Assuming comboBoxFacultyID for Faculty Name
+    String^ facultyName = cboxFaculty->SelectedItem->ToString(); // Assuming comboBoxFacultyID for Faculty Name
     String^ getFacultyIDQuery = "SELECT FacultyID FROM Faculty WHERE FacultyName = @FacultyName;";
     MySqlCommand^ getFacultyIDCmd = gcnew MySqlCommand(getFacultyIDQuery, db->GetConnection());
     getFacultyIDCmd->Parameters->AddWithValue("@FacultyName", facultyName);
@@ -122,7 +121,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCours
 
 System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCourses::btnviewcourses_Click(System::Object^ sender, System::EventArgs^ e)
 {
-    String^ selectedDepartmentName = comboBox1->SelectedItem->ToString();
+    String^ selectedDepartmentName = cboxDeptName->SelectedItem->ToString();
     if (String::IsNullOrEmpty(selectedDepartmentName))
     {
         MessageBox::Show("Please select a department to view its courses.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -254,7 +253,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCours
 
         // Get the values from TextBoxes and ComboBoxes
         String^ courseName = textBox1->Text;
-        String^ selectedDepartmentName = comboBox1->SelectedItem->ToString();
+        String^ selectedDepartmentName = cboxDeptName->SelectedItem->ToString();
         String^ semester = textBox2->Text;
         String^ year = textBox4->Text;
         int maxCapacity = Convert::ToInt32(textBox3->Text);
@@ -339,4 +338,98 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCours
 
     }
     return System::Void();
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCourses::LoadCourses(DatabaseManager^ db)
+{
+    db->ConnectToDatabase();
+
+    String^ deleteStudentQuery = R"(
+        SELECT DepartmentName FROM Departments;
+		)";
+
+    MySqlCommand^ cmd = gcnew MySqlCommand(deleteStudentQuery, db->GetConnection());
+    MySqlDataReader^ reader = cmd->ExecuteReader();
+
+    cboxDeptName->Items->Clear();
+
+    while (reader->Read())
+    {
+        cboxDeptName->Items->Add(reader["DepartmentName"]->ToString());
+    }
+
+    reader->Close();
+    db->CloseConnection();
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCourses::LoadFacultyForSelectedDepartment(Object^ sender, EventArgs^ e)
+{
+    // Ensure a department is selected
+    if (cboxDeptName->SelectedItem == nullptr)
+    {
+        MessageBox::Show("Please select a department to load its faculty.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+        return;
+    }
+
+    // Retrieve the DepartmentID corresponding to the selected department name
+    String^ selectedDepartmentName = cboxDeptName->SelectedItem->ToString();
+    DatabaseManager^ db = gcnew DatabaseManager();
+    db->ConnectToDatabase();
+
+    String^ query = "SELECT DepartmentID FROM Departments WHERE DepartmentName = @DepartmentName;";
+    MySqlCommand^ cmd = gcnew MySqlCommand(query, db->GetConnection());
+    cmd->Parameters->AddWithValue("@DepartmentName", selectedDepartmentName);
+
+    Object^ departmentIDObj = cmd->ExecuteScalar();
+    if (departmentIDObj == nullptr)
+    {
+        MessageBox::Show("Department not found.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+        db->CloseConnection();
+        return;
+    }
+
+    int departmentID = Convert::ToInt32(departmentIDObj);
+
+    // Retrieve faculty for the selected department
+    String^ queryFaculty = R"(
+    SELECT 
+        u.FirstName, 
+        u.LastName 
+    FROM 
+        Users u 
+    JOIN 
+        Faculty f ON u.UserID = f.UserID 
+    WHERE 
+        f.DepartmentID = @DepartmentID AND f.IsDeleted = 0;
+)";
+
+    MySqlCommand^ cmdFaculty = gcnew MySqlCommand(queryFaculty, db->GetConnection());
+    cmdFaculty->Parameters->AddWithValue("@DepartmentID", departmentID);
+
+    MySqlDataReader^ readerFaculty = cmdFaculty->ExecuteReader();
+
+    // Clear previous items in the ComboBox
+    cboxFaculty->Items->Clear();
+
+    // Populate the faculty ComboBox with full names (FirstName + LastName)
+    while (readerFaculty->Read())
+    {
+        String^ facultyFullName = readerFaculty["FirstName"]->ToString() + " " + readerFaculty["LastName"]->ToString();
+        cboxFaculty->Items->Add(facultyFullName);
+    }
+
+    readerFaculty->Close();
+    db->CloseConnection();
+
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCourses::cboxDeptName_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
+{
+    LoadFacultyForSelectedDepartment(sender, e);
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCourses::ManageAvailableCourses_Load(System::Object^ sender, System::EventArgs^ e)
+{
+	DatabaseManager^ db = gcnew DatabaseManager();
+	LoadCourses(db);
 }
