@@ -20,7 +20,7 @@ System::Void TranscriptForm::btnViewTranscript_Click(System::Object^ sender, Sys
     DatabaseManager^ db = DatabaseManager::GetInstance();
 
     try {
-        GetTranscript(db, sender, e);
+        GetTranscript(db);
     }
     catch (Exception^ ex) {
         // Handle errors
@@ -69,11 +69,12 @@ System::Void AshesiUniversityStudentRecordManagementSystem::TranscriptForm::btnP
 System::Void AshesiUniversityStudentRecordManagementSystem::TranscriptForm::TranscriptForm_Load(System::Object^ sender, System::EventArgs^ e)
 {
     DisablePrintButtonBasedOnUserRole();
+	LoadStudentsToCache();
     
 }
 
 // Helper function to retrieve the transcript information from the database
-System::Void AshesiUniversityStudentRecordManagementSystem::TranscriptForm::GetTranscript(DatabaseManager^ db, Object^ sender, EventArgs^ e)
+System::Void AshesiUniversityStudentRecordManagementSystem::TranscriptForm::GetTranscript(DatabaseManager^ db)
 {
     // Get the database manager instance
 
@@ -82,17 +83,17 @@ System::Void AshesiUniversityStudentRecordManagementSystem::TranscriptForm::GetT
     int userID;
     if (userRole == "Administrator") {
         // Get the UserID from the input field
-        int userID = Convert::ToInt32(txtStudentID->Text);
+        int userID = Convert::ToInt32(textStudentID->Text);
     }
     else {
-        txtStudentID->Text = student->getStudentID()->ToString();
-        int userID = Convert::ToInt32(txtStudentID->Text);
+        textStudentID->Text = student->getStudentID()->ToString();
+        int userID = Convert::ToInt32(textStudentID->Text);
     }
 
 
 
     // Check if the UserID field is empty
-    if (!Int32::TryParse(txtStudentID->Text, userID)) {
+    if (!Int32::TryParse(textStudentID->Text, userID)) {
         MessageBox::Show("Please enter a valid number for the Student ID.", "Input Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
         return;
     }
@@ -168,6 +169,117 @@ System::Void AshesiUniversityStudentRecordManagementSystem::TranscriptForm::GetT
 
     // Close the reader
     reader->Close();
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::TranscriptForm::cboxStudentName_TextChanged(System::Object^ sender, System::EventArgs^ e)
+{
+    // Disable event handlers temporarily
+    cboxStudentName->TextChanged -= gcnew System::EventHandler(this, &TranscriptForm::cboxStudentName_TextChanged);
+
+    String^ searchTerm = cboxStudentName->Text->ToLower();
+
+    // Filter students manually by name
+    List<Student^>^ filteredStudents = gcnew List<Student^>();
+    for each (Student ^ student in cachedStudents)
+    {
+        if (student->getFullName()->ToLower()->Contains(searchTerm))
+        {
+            filteredStudents->Add(student);
+        }
+    }
+
+    // Update the ComboBox items
+    cboxStudentName->Items->Clear();
+    for each (Student ^ student in filteredStudents)
+    {
+        cboxStudentName->Items->Add(student->getFullName());
+    }
+
+    // Preserve the user's input after repopulating
+    cboxStudentName->Text = searchTerm;
+    cboxStudentName->SelectionStart = cboxStudentName->Text->Length;
+
+    // Re-enable event handlers
+    cboxStudentName->TextChanged += gcnew System::EventHandler(this, &TranscriptForm::cboxStudentName_TextChanged);
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::TranscriptForm::LoadStudentsToCache()
+{
+    DatabaseManager^ db = DatabaseManager::GetInstance();
+    try
+    {
+        db->ConnectToDatabase();
+        String^ query = R"(
+            SELECT 
+                s.StudentID, 
+                u.UserID,
+                u.FirstName, 
+                u.LastName, 
+                u.Email,
+                s.DepartmentID
+            FROM 
+                Students s
+            JOIN 
+                Users u ON s.UserID = u.UserID
+            WHERE 
+                s.IsDeleted = 0
+        )";
+
+        MySqlCommand^ cmd = gcnew MySqlCommand(query, db->GetConnection());
+        MySqlDataReader^ reader = cmd->ExecuteReader();
+
+        cachedStudents->Clear();
+        cboxStudentName->Items->Clear();
+
+        while (reader->Read())
+        {
+            int^ studentID = Convert::ToInt32(reader["StudentID"]);
+            int^ userID = Convert::ToInt32(reader["UserID"]);
+            String^ firstName = reader["FirstName"]->ToString();
+            String^ lastName = reader["LastName"]->ToString();
+            String^ email = reader["Email"]->ToString();
+            int^ departmentID = Convert::ToInt32(reader["DepartmentID"]);
+
+            Student^ student = gcnew Student(userID, firstName, lastName, email, studentID, departmentID);
+            cachedStudents->Add(student);
+            cboxStudentName->Items->Add(firstName + " " + lastName);
+        }
+
+        reader->Close();
+    }
+    catch (Exception^ ex)
+    {
+        MessageBox::Show("Error loading students: " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+    }
+    finally
+    {
+        db->CloseConnection();
+    }
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::TranscriptForm::cboxStudentName_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e)
+{
+    if (cboxStudentName->SelectedIndex != -1)
+    {
+        String^ selectedName = cboxStudentName->SelectedItem->ToString();
+        Student^ selectedStudent = nullptr;
+
+        for each (Student ^ student in cachedStudents)
+        {
+            if (student->getFullName() == selectedName)
+            {
+                selectedStudent = student;
+                textStudentID->Text = selectedStudent->getStudentID()->ToString();
+                break;
+            }
+        }
+
+        // Optional: Automatically retrieve transcript when a student is selected
+        if (selectedStudent != nullptr)
+        {   
+			btnViewTranscript_Click(sender, e);
+        }
+    }
 }
 
 
