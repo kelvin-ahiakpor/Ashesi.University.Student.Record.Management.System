@@ -45,7 +45,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCours
 
     // Retrieve the Faculty ID based on the selected faculty name
     String^ facultyName = cboxFaculty->SelectedItem->ToString(); // Assuming comboBoxFacultyID for Faculty Name
-    String^ getFacultyIDQuery = "SELECT FacultyID FROM Faculty WHERE FacultyName = @FacultyName;";
+    String^ getFacultyIDQuery = "SELECT f.FacultyID FROM Faculty f JOIN Users u ON f.UserID = u.UserID WHERE CONCAT(u.FirstName, ' ', u.LastName) = @FacultyName;";
     MySqlCommand^ getFacultyIDCmd = gcnew MySqlCommand(getFacultyIDQuery, db->GetConnection());
     getFacultyIDCmd->Parameters->AddWithValue("@FacultyName", facultyName);
 
@@ -72,13 +72,12 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCours
 
             // SQL query for insert or update into CourseOffering table
             String^ query = R"(
-                INSERT INTO CourseOffering (CourseID, DepartmentID, Semester, FacultyID, Year, MaxCapacity, Status)
-                VALUES (@CourseID, @DepartmentID, @Semester, @FacultyID, @Year, @MaxCapacity, @Status);
+                INSERT INTO CourseOfferings (CourseID, Semester, FacultyID, Year, MaxCapacity, Status)
+                VALUES (@CourseID, @Semester, @FacultyID, @Year, @MaxCapacity, @Status);
             )";
 
             MySqlCommand^ cmd = gcnew MySqlCommand(query, db->GetConnection());
             cmd->Parameters->AddWithValue("@CourseID", CourseID);
-            cmd->Parameters->AddWithValue("@DepartmentID", departmentID);
             cmd->Parameters->AddWithValue("@Semester", semester);
             cmd->Parameters->AddWithValue("@FacultyID", facultyID);
             cmd->Parameters->AddWithValue("@Year", year);
@@ -207,7 +206,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCours
             DatabaseManager^ db = gcnew DatabaseManager();
             db->ConnectToDatabase();
 
-            String^ query = "DELETE FROM CourseOffering WHERE CourseID = @CourseID;";
+            String^ query = "DELETE FROM CourseOfferings WHERE CourseID = @CourseID;";
             MySqlCommand^ cmd = gcnew MySqlCommand(query, db->GetConnection());
             cmd->Parameters->AddWithValue("@CourseID", courseID);
 
@@ -280,7 +279,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCours
         // SQL query for updating the CourseOffering table
         String^ updateQuery = R"(
             UPDATE CourseOffering
-            SET CourseName = @CourseName, DepartmentID = @DepartmentID, Semester = @Semester, Year = @Year,
+            SET CourseName = @CourseName, Semester = @Semester, Year = @Year,
                 MaxCapacity = @MaxCapacity, Status = @Status
             WHERE CourseID = @CourseID;
         )";
@@ -288,7 +287,6 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCours
         MySqlCommand^ updateCmd = gcnew MySqlCommand(updateQuery, db->GetConnection());
         updateCmd->Parameters->AddWithValue("@CourseID", CourseID);
         updateCmd->Parameters->AddWithValue("@CourseName", courseName);
-        updateCmd->Parameters->AddWithValue("@DepartmentID", departmentID);
         updateCmd->Parameters->AddWithValue("@Semester", semester);
         updateCmd->Parameters->AddWithValue("@Year", year);
         updateCmd->Parameters->AddWithValue("@MaxCapacity", maxCapacity);

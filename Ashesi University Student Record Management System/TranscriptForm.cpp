@@ -44,7 +44,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::TranscriptForm::btnP
         SaveFileDialog^ saveFileDialog = gcnew SaveFileDialog();
         saveFileDialog->Filter = "Text Files (*.txt)|*.txt|Word Documents (*.docx)|*.docx|PDF Files (*.pdf)|*.pdf|All Files (*.*)|*.*";
         saveFileDialog->Title = "Save Transcript As";
-        saveFileDialog->FileName = "Transcript.pdf";
+        saveFileDialog->FileName = "Transcript";
 
         // Check if the user selected a file
         if (saveFileDialog->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
