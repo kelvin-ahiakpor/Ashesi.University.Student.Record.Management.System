@@ -28,6 +28,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Admin.h" />
+    <ClInclude Include="ClassRoster.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="CourseManagementForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -98,6 +101,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ClassRoster.cpp" />
     <ClCompile Include="CourseManagementForm.cpp" />
     <ClCompile Include="EnrollmentHistory.cpp" />
     <ClCompile Include="Faculty.cpp" />

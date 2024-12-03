@@ -12,6 +12,7 @@
 #include "LoginForm.h"
 #include "ProfileManagementForm.h"
 #include "GradeManagementForm.h"
+#include "ClassRoster.h"
 
 using namespace AshesiUniversityStudentRecordManagementSystem;
 using namespace System;
@@ -165,6 +166,7 @@ void MainApplicationForm::UpdateMenuForRole(String^ userRole) {
     facultyToolStripMenuItem->Enabled = (userRole == "Administrator");
     gradesToolStripMenuItem1->Enabled= (userRole == "Faculty");
     generateTranscriptToolStripMenuItem->Enabled = (userRole != "Faculty");
+    classRosterToolStripMenuItem->Enabled = (userRole == "Faculty");
 
 
 }
@@ -193,5 +195,11 @@ System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm:
 System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm::gradesToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e)
 {
     OpenChildForm(GradeManagementForm::typeid, globalUser);
+    return System::Void();
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm::classRosterToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+{
+    OpenChildForm(ClassRoster::typeid, globalUser);
     return System::Void();
 }
