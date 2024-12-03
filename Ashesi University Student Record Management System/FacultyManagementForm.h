@@ -1,4 +1,5 @@
 #pragma once
+#include "DatabaseManager.h"
 
 namespace AshesiUniversityStudentRecordManagementSystem {
 
@@ -86,10 +87,12 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	private: System::Windows::Forms::Label^ lblFaculty;
 
 	private: System::Windows::Forms::Button^ button3;
-	private: System::Windows::Forms::Button^ button4;
+	private: System::Windows::Forms::Button^ btnDelete;
+
 	private: System::Windows::Forms::GroupBox^ groupBoxCreateEdit;
 	private: System::Windows::Forms::GroupBox^ groupBoxViewFaculty;
-	private: System::Windows::Forms::Button^ button5;
+	private: System::Windows::Forms::Button^ btnEdit;
+
 
 
 	private:
@@ -119,8 +122,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
 			this->lblFaculty = (gcnew System::Windows::Forms::Label());
 			this->button3 = (gcnew System::Windows::Forms::Button());
-			this->button4 = (gcnew System::Windows::Forms::Button());
-			this->button5 = (gcnew System::Windows::Forms::Button());
+			this->btnDelete = (gcnew System::Windows::Forms::Button());
+			this->btnEdit = (gcnew System::Windows::Forms::Button());
 			this->groupBoxCreateEdit = (gcnew System::Windows::Forms::GroupBox());
 			this->groupBoxViewFaculty = (gcnew System::Windows::Forms::GroupBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridViewFaculty))->BeginInit();
@@ -270,32 +273,32 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->button3->UseVisualStyleBackColor = true;
 			this->button3->Click += gcnew System::EventHandler(this, &FacultyManagementForm::button3_Click);
 			// 
-			// button4
+			// btnDelete
 			// 
-			this->button4->Location = System::Drawing::Point(425, 238);
-			this->button4->Margin = System::Windows::Forms::Padding(2);
-			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(86, 27);
-			this->button4->TabIndex = 20;
-			this->button4->Text = L"Delete Faculty";
-			this->button4->UseVisualStyleBackColor = true;
-			this->button4->Click += gcnew System::EventHandler(this, &FacultyManagementForm::button4_Click);
+			this->btnDelete->Location = System::Drawing::Point(425, 238);
+			this->btnDelete->Margin = System::Windows::Forms::Padding(2);
+			this->btnDelete->Name = L"btnDelete";
+			this->btnDelete->Size = System::Drawing::Size(86, 27);
+			this->btnDelete->TabIndex = 20;
+			this->btnDelete->Text = L"Delete Faculty";
+			this->btnDelete->UseVisualStyleBackColor = true;
+			this->btnDelete->Click += gcnew System::EventHandler(this, &FacultyManagementForm::btnDelete_Click);
 			// 
-			// button5
+			// btnEdit
 			// 
-			this->button5->Location = System::Drawing::Point(515, 238);
-			this->button5->Margin = System::Windows::Forms::Padding(2);
-			this->button5->Name = L"button5";
-			this->button5->Size = System::Drawing::Size(86, 27);
-			this->button5->TabIndex = 21;
-			this->button5->Text = L"Edit Faculty";
-			this->button5->UseVisualStyleBackColor = true;
-			this->button5->Click += gcnew System::EventHandler(this, &FacultyManagementForm::button5_Click);
+			this->btnEdit->Location = System::Drawing::Point(515, 238);
+			this->btnEdit->Margin = System::Windows::Forms::Padding(2);
+			this->btnEdit->Name = L"btnEdit";
+			this->btnEdit->Size = System::Drawing::Size(86, 27);
+			this->btnEdit->TabIndex = 21;
+			this->btnEdit->Text = L"Edit Faculty";
+			this->btnEdit->UseVisualStyleBackColor = true;
+			this->btnEdit->Click += gcnew System::EventHandler(this, &FacultyManagementForm::btnEdit_Click);
 			// 
 			// groupBoxCreateEdit
 			// 
-			this->groupBoxCreateEdit->Controls->Add(this->button5);
-			this->groupBoxCreateEdit->Controls->Add(this->button4);
+			this->groupBoxCreateEdit->Controls->Add(this->btnEdit);
+			this->groupBoxCreateEdit->Controls->Add(this->btnDelete);
 			this->groupBoxCreateEdit->Controls->Add(this->textBox1);
 			this->groupBoxCreateEdit->Controls->Add(this->button3);
 			this->groupBoxCreateEdit->Controls->Add(this->dateTimePicker1);
@@ -350,11 +353,14 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 #pragma endregion
 	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e);
-	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e);
-	private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e);
-	private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void btnDelete_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void btnEdit_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void dataGridView1_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e);
 	private: System::Void LoadFaculty(DatabaseManager^ db);
+	private: System::Void LoadFacultyCell(DatabaseManager^ db, DataGridViewCellEventArgs^ e);
+	private: System::Void UpdateFaculty(DatabaseManager^ db, Object^ sender, EventArgs^ e);
+	private: System::Void DeleteFaculty(DatabaseManager^ db, Object^ sender, EventArgs^ e);
+	private: System::Void CreateFaculty(DatabaseManager^ db, Object^ sender, EventArgs^ e);
 };
 }
 

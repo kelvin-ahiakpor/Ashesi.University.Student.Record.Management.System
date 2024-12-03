@@ -135,10 +135,10 @@ System::Void AshesiUniversityStudentRecordManagementSystem::CourseManagementForm
     }
 	finally
 	{
+
 		db->CloseConnection();
 	}
 }
-
 
 System::Void AshesiUniversityStudentRecordManagementSystem::CourseManagementForm::btnDeleteCourse_Click(System::Object^ sender, System::EventArgs^ e)
 {
@@ -258,9 +258,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::CourseManagementForm
 	}
 }
 
-void AshesiUniversityStudentRecordManagementSystem::CourseManagementForm::dgvCourses_CellClick(
-    System::Object^ sender,
-    System::Windows::Forms::DataGridViewCellEventArgs^ e)
+void AshesiUniversityStudentRecordManagementSystem::CourseManagementForm::dgvCourses_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e)
 {
     DatabaseManager^ db = DatabaseManager::GetInstance();
 

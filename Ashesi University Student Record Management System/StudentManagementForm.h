@@ -63,7 +63,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	private: System::Windows::Forms::DateTimePicker^ dateTimePicker1;
 	private: System::Windows::Forms::DateTimePicker^ dateTimePicker2;
 	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::Button^ button1;
+
 	private: System::Windows::Forms::TextBox^ textBox2;
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Label^ label3;
@@ -78,12 +78,16 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	private: System::Windows::Forms::TextBox^ textBox5;
 	private: System::Windows::Forms::Label^ label8;
 	private: System::Windows::Forms::Button^ btnCreateStudent;
+	private: System::Windows::Forms::Button^ btnDelete;
 
-	private: System::Windows::Forms::Button^ button4;
+
 	private: System::Windows::Forms::GroupBox^ groupBoxActions;
 	private: System::Windows::Forms::GroupBox^ groupBox1;
+	private: System::Windows::Forms::Button^ btnEdit;
 
-	private: System::Windows::Forms::Button^ button5;
+
+
+
 
 
 	private:
@@ -103,7 +107,6 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->dateTimePicker1 = (gcnew System::Windows::Forms::DateTimePicker());
 			this->dateTimePicker2 = (gcnew System::Windows::Forms::DateTimePicker());
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
@@ -118,8 +121,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
 			this->label8 = (gcnew System::Windows::Forms::Label());
 			this->btnCreateStudent = (gcnew System::Windows::Forms::Button());
-			this->button4 = (gcnew System::Windows::Forms::Button());
-			this->button5 = (gcnew System::Windows::Forms::Button());
+			this->btnDelete = (gcnew System::Windows::Forms::Button());
+			this->btnEdit = (gcnew System::Windows::Forms::Button());
 			this->groupBoxActions = (gcnew System::Windows::Forms::GroupBox());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
@@ -174,17 +177,6 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->label1->TabIndex = 4;
 			this->label1->Text = L"First Name";
 			this->label1->Click += gcnew System::EventHandler(this, &StudentManagementForm::label1_Click);
-			// 
-			// button1
-			// 
-			this->button1->Location = System::Drawing::Point(530, 13);
-			this->button1->Margin = System::Windows::Forms::Padding(2);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(108, 27);
-			this->button1->TabIndex = 5;
-			this->button1->Text = L"View Student Users";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &StudentManagementForm::button1_Click);
 			// 
 			// textBox2
 			// 
@@ -266,7 +258,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(440, 13);
+			this->button2->Location = System::Drawing::Point(552, 13);
 			this->button2->Margin = System::Windows::Forms::Padding(2);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(86, 27);
@@ -324,33 +316,33 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->btnCreateStudent->UseVisualStyleBackColor = true;
 			this->btnCreateStudent->Click += gcnew System::EventHandler(this, &StudentManagementForm::btnCreateStudent_Click);
 			// 
-			// button4
+			// btnDelete
 			// 
-			this->button4->Location = System::Drawing::Point(418, 7);
-			this->button4->Margin = System::Windows::Forms::Padding(2);
-			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(86, 26);
-			this->button4->TabIndex = 20;
-			this->button4->Text = L"Delete Student";
-			this->button4->UseVisualStyleBackColor = true;
-			this->button4->Click += gcnew System::EventHandler(this, &StudentManagementForm::button4_Click);
+			this->btnDelete->Location = System::Drawing::Point(418, 7);
+			this->btnDelete->Margin = System::Windows::Forms::Padding(2);
+			this->btnDelete->Name = L"btnDelete";
+			this->btnDelete->Size = System::Drawing::Size(86, 26);
+			this->btnDelete->TabIndex = 20;
+			this->btnDelete->Text = L"Delete Student";
+			this->btnDelete->UseVisualStyleBackColor = true;
+			this->btnDelete->Click += gcnew System::EventHandler(this, &StudentManagementForm::btnDelete_Click);
 			// 
-			// button5
+			// btnEdit
 			// 
-			this->button5->Location = System::Drawing::Point(508, 7);
-			this->button5->Margin = System::Windows::Forms::Padding(2);
-			this->button5->Name = L"button5";
-			this->button5->Size = System::Drawing::Size(94, 26);
-			this->button5->TabIndex = 21;
-			this->button5->Text = L"Edit Student Info";
-			this->button5->UseVisualStyleBackColor = true;
-			this->button5->Click += gcnew System::EventHandler(this, &StudentManagementForm::button5_Click);
+			this->btnEdit->Location = System::Drawing::Point(508, 7);
+			this->btnEdit->Margin = System::Windows::Forms::Padding(2);
+			this->btnEdit->Name = L"btnEdit";
+			this->btnEdit->Size = System::Drawing::Size(94, 26);
+			this->btnEdit->TabIndex = 21;
+			this->btnEdit->Text = L"Edit Student Info";
+			this->btnEdit->UseVisualStyleBackColor = true;
+			this->btnEdit->Click += gcnew System::EventHandler(this, &StudentManagementForm::btnEdit_Click);
 			// 
 			// groupBoxActions
 			// 
-			this->groupBoxActions->Controls->Add(this->button5);
+			this->groupBoxActions->Controls->Add(this->btnEdit);
 			this->groupBoxActions->Controls->Add(this->btnCreateStudent);
-			this->groupBoxActions->Controls->Add(this->button4);
+			this->groupBoxActions->Controls->Add(this->btnDelete);
 			this->groupBoxActions->Location = System::Drawing::Point(14, 554);
 			this->groupBoxActions->Name = L"groupBoxActions";
 			this->groupBoxActions->Size = System::Drawing::Size(624, 35);
@@ -389,7 +381,6 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(654, 601);
 			this->Controls->Add(this->button2);
-			this->Controls->Add(this->button1);
 			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->groupBoxActions);
 			this->Controls->Add(this->groupBox1);
@@ -409,9 +400,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 #pragma endregion
 	private: System::Void btnCreateStudent_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e);
-private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e);
-private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e);
-private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void btnDelete_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void btnEdit_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void dataGridView1_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e);
 private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
 }
@@ -430,6 +420,9 @@ private: System::Void label5_Click(System::Object^ sender, System::EventArgs^ e)
 private: System::Void textBox4_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 
-	   private: System::Void LoadStudents(DatabaseManager^ db);
+private: System::Void LoadStudents(DatabaseManager^ db);
+private: System::Void CreateStudent(DatabaseManager^ db, Object^ sender, EventArgs^ e);
+private: System::Void EditStudent(DatabaseManager^ db, Object^ sender, EventArgs^ e);
+private: System::Void DeleteStudent(DatabaseManager^ db, Object^ sender, EventArgs^ e);
 };
 }

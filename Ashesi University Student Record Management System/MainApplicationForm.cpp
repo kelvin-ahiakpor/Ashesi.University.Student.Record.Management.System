@@ -203,3 +203,10 @@ System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm:
     OpenChildForm(ClassRoster::typeid, globalUser);
     return System::Void();
 }
+
+System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm::MainApplicationForm_MdiChildActivate(System::Object^ sender, System::EventArgs^ e)
+{
+    lblMotivation->Visible = false;
+    lblGetGoing->Visible = false;
+}
+

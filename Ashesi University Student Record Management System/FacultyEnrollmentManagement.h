@@ -1,6 +1,8 @@
 #pragma once
 #include "User.h"
 #include "Faculty.h"
+#include "DatabaseManager.h"
+
 namespace AshesiUniversityStudentRecordManagementSystem {
 
 	using namespace System;
@@ -422,5 +424,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 private: System::Void CourseName_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void btnSave_Click(System::Object^ sender, System::EventArgs^ e);
-};
+
+private: System::Void ViewEnrollments(DatabaseManager^ db, System::Object^ sender, System::EventArgs^ e);
+	   };
 }
