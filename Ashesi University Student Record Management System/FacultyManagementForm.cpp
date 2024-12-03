@@ -219,7 +219,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
                 String^ departmentName = reader["DepartmentName"]->ToString();
 
                 // Display the department name in textBox3
-                textBox3->Text = departmentName;
+                cboxDeptName->Text = departmentName;
             }
 
             reader->Close();
@@ -255,7 +255,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
     String^ lastName = textBox2->Text;
     String^ email = textBox4->Text;
     String^ dateOfAppointment = dateTimePicker1->Value.ToString("yyyy-MM-dd");
-    String^ departmentName = textBox3->Text;
+    String^ departmentName = cboxDeptName->Text;
 
     db->ConnectToDatabase();
 
@@ -438,7 +438,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
         )";
 
     MySqlCommand^ departmentCmd = gcnew MySqlCommand(getDepartmentIDQuery, db->GetConnection());
-    departmentCmd->Parameters->AddWithValue("@DepartmentName", textBox3->Text);
+    departmentCmd->Parameters->AddWithValue("@DepartmentName", cboxDeptName->Text);
 
     Object^ departmentIDObj = departmentCmd->ExecuteScalar();
     if (departmentIDObj == nullptr)
@@ -472,6 +472,34 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
         MessageBox::Show("Failed to add faculty to the Faculty table.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
     }
 
+    db->CloseConnection();
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementForm::FacultyManagementForm_Load(System::Object^ sender, System::EventArgs^ e)
+{
+    DatabaseManager^ db = DatabaseManager::GetInstance();
+    LoadCourses(db);
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementForm::LoadCourses(DatabaseManager^ db)
+{
+    db->ConnectToDatabase();
+
+    String^ deleteStudentQuery = R"(
+        SELECT DepartmentName FROM Departments;
+		)";
+
+    MySqlCommand^ cmd = gcnew MySqlCommand(deleteStudentQuery, db->GetConnection());
+    MySqlDataReader^ reader = cmd->ExecuteReader();
+
+    cboxDeptName->Items->Clear();
+
+    while (reader->Read())
+    {
+        cboxDeptName->Items->Add(reader["DepartmentName"]->ToString());
+    }
+
+    reader->Close();
     db->CloseConnection();
 }
 
