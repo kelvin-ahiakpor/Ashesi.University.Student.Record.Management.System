@@ -25,11 +25,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		Faculty^ faculty;
 		Admin^ admin;
 		String^ userRole;
-	private: System::Windows::Forms::PictureBox^ pboxLogo;
-	public:
-	private: System::Windows::Forms::Button^ btnCancel;
-	private: System::Windows::Forms::Label^ lblProfile;
-		   int^ studentid;
+
+		int^ studentid;
 
 		EnrollmentHistory(void)
 		{
@@ -66,6 +63,12 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			//TODO: Add the constructor code here
 			//
 		}
+
+	private: System::Windows::Forms::PictureBox^ pboxLogo;
+	public:
+	private: System::Windows::Forms::Button^ btnCancel;
+	private: System::Windows::Forms::Label^ lblProfile;
+
 
 	protected:
 		/// <summary>
@@ -196,5 +199,5 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	private: System::Void richTxtGrades_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void btnCancel_Click(System::Object^ sender, System::EventArgs^ e);
-};
+	};
 }
