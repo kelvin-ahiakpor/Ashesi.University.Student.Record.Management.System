@@ -72,7 +72,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		}
 	private: System::Windows::Forms::ToolStripMenuItem^ viewToolStripMenuItem;
 	public:
-	private: System::Windows::Forms::ToolStripMenuItem^ coursesToolStripMenuItem1;
+
 	private: System::Windows::Forms::ToolStripMenuItem^ gradesToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ profileToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ enrollmentsToolStripMenuItem;
@@ -135,7 +135,6 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->reportsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->generateTranscriptToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->viewToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->coursesToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->gradesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->enrollmentHistoryToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->profileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -192,28 +191,28 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// studentsToolStripMenuItem
 			// 
 			this->studentsToolStripMenuItem->Name = L"studentsToolStripMenuItem";
-			this->studentsToolStripMenuItem->Size = System::Drawing::Size(170, 26);
+			this->studentsToolStripMenuItem->Size = System::Drawing::Size(224, 26);
 			this->studentsToolStripMenuItem->Text = L"Students";
 			this->studentsToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainApplicationForm::studentsToolStripMenuItem_Click);
 			// 
 			// facultyToolStripMenuItem
 			// 
 			this->facultyToolStripMenuItem->Name = L"facultyToolStripMenuItem";
-			this->facultyToolStripMenuItem->Size = System::Drawing::Size(170, 26);
+			this->facultyToolStripMenuItem->Size = System::Drawing::Size(224, 26);
 			this->facultyToolStripMenuItem->Text = L"Faculty";
 			this->facultyToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainApplicationForm::facultyToolStripMenuItem_Click);
 			// 
 			// coursesToolStripMenuItem
 			// 
 			this->coursesToolStripMenuItem->Name = L"coursesToolStripMenuItem";
-			this->coursesToolStripMenuItem->Size = System::Drawing::Size(170, 26);
+			this->coursesToolStripMenuItem->Size = System::Drawing::Size(224, 26);
 			this->coursesToolStripMenuItem->Text = L"Courses";
 			this->coursesToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainApplicationForm::coursesToolStripMenuItem_Click);
 			// 
 			// enrollmentsToolStripMenuItem
 			// 
 			this->enrollmentsToolStripMenuItem->Name = L"enrollmentsToolStripMenuItem";
-			this->enrollmentsToolStripMenuItem->Size = System::Drawing::Size(170, 26);
+			this->enrollmentsToolStripMenuItem->Size = System::Drawing::Size(224, 26);
 			this->enrollmentsToolStripMenuItem->Text = L"Enrollments";
 			this->enrollmentsToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainApplicationForm::enrollmentsToolStripMenuItem_Click);
 			// 
@@ -227,26 +226,19 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// generateTranscriptToolStripMenuItem
 			// 
 			this->generateTranscriptToolStripMenuItem->Name = L"generateTranscriptToolStripMenuItem";
-			this->generateTranscriptToolStripMenuItem->Size = System::Drawing::Size(220, 26);
+			this->generateTranscriptToolStripMenuItem->Size = System::Drawing::Size(224, 26);
 			this->generateTranscriptToolStripMenuItem->Text = L"Generate Transcript";
 			this->generateTranscriptToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainApplicationForm::generateTranscriptToolStripMenuItem_Click);
 			// 
 			// viewToolStripMenuItem
 			// 
-			this->viewToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
-				this->coursesToolStripMenuItem1,
-					this->gradesToolStripMenuItem, this->enrollmentHistoryToolStripMenuItem
+			this->viewToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->gradesToolStripMenuItem,
+					this->enrollmentHistoryToolStripMenuItem
 			});
 			this->viewToolStripMenuItem->Name = L"viewToolStripMenuItem";
 			this->viewToolStripMenuItem->Size = System::Drawing::Size(55, 24);
 			this->viewToolStripMenuItem->Text = L"View";
-			// 
-			// coursesToolStripMenuItem1
-			// 
-			this->coursesToolStripMenuItem1->Name = L"coursesToolStripMenuItem1";
-			this->coursesToolStripMenuItem1->Size = System::Drawing::Size(224, 26);
-			this->coursesToolStripMenuItem1->Text = L"Enrollments";
-			this->coursesToolStripMenuItem1->Click += gcnew System::EventHandler(this, &MainApplicationForm::coursesToolStripMenuItem1_Click);
 			// 
 			// gradesToolStripMenuItem
 			// 

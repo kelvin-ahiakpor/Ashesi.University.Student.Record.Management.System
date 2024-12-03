@@ -60,7 +60,6 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 
 		FacultyEnrollmentManagement(User^ user)
 		{
-			InitializeComponent();
 			// Perform dynamic casting once and then check the user type
 			if (Faculty^ f = dynamic_cast<Faculty^>(user)) {
 				this->faculty = f;
@@ -70,6 +69,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			else {
 				throw gcnew System::ArgumentException("Unsupported user type.");
 			}
+
+			InitializeComponent();
 		}
 
 		protected:
@@ -342,6 +343,6 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 #pragma endregion
 	private: System::Void dataGridView1_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
 	}
-private: System::Void ViewEnroll_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void ViewEnroll_Click(System::Object^ sender, System::EventArgs^ e) {};
 };
 }
