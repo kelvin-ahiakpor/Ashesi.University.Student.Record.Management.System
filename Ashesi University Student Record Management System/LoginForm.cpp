@@ -31,7 +31,7 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
         db->ConnectToDatabase();
 
         // Create the SQL query
-        String^ query = "SELECT u.UserID, u.FirstName, u.LastName, u.Email, u.UserType " +
+        String^ query = "SELECT u.UserID, u.FirstName, u.LastName, u.Email, u.UserType, u.SecurityAnswer " +
             "FROM Users u " +
             "WHERE u.Email = @Email AND u.Password = @Password";
 
@@ -53,6 +53,7 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
             String^ firstName = sqlRd["FirstName"]->ToString();
             String^ lastName = sqlRd["LastName"]->ToString();
             String^ userType = sqlRd["UserType"]->ToString();
+			String^ securityAnswer = sqlRd["SecurityAnswer"]->ToString();
 
             // Close the current reader before executing another query
             sqlRd->Close();
@@ -81,6 +82,7 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
                         userID, firstName, lastName, email, studentID, major);
 
 					currentStudent->setPassword(password);
+					currentStudent->setSecurityAnswer(securityAnswer);
 
                     // Show a success message
                     MessageBox::Show("Login successful! Welcome, " + firstName + ".",
@@ -103,6 +105,7 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
                 Admin^ admin = gcnew Admin(userID, firstName, lastName, email);
 
                 admin->setPassword(password);
+				admin->setSecurityAnswer(securityAnswer);
 
                 MessageBox::Show("Login successful! Welcome, " + firstName + ".",
                     "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
@@ -135,6 +138,7 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
                         userID, firstName, lastName, email, facultyID, departmentID);
 
                     faculty->setPassword(password);
+					faculty->setSecurityAnswer(securityAnswer);
 
                     // Show a success message
                     MessageBox::Show("Login successful! Welcome, " + firstName + ".",
@@ -186,8 +190,23 @@ System::Void LoginForm::LoginForm_Load(System::Object^ sender, System::EventArgs
 }
 
 System::Void AshesiUniversityStudentRecordManagementSystem::LoginForm::lnklblPasswordReset_LinkClicked(System::Object^ sender, System::Windows::Forms::LinkLabelLinkClickedEventArgs^ e) {
-    ForgotPasswordForm^ passwordReset = gcnew ForgotPasswordForm(txtEmail->Text);
-    passwordReset->ShowDialog();
+    // Check if the email text box is empty or only contains spaces
+    if (txtEmail->Text->Trim() == "") {
+        lblError->Text = "Enter email to reset password";  // Show error if the email is empty
+    }
+    else {
+        // Hide the current login form
+        this->Hide();
+
+        // Create an instance of ForgotPasswordForm, passing the email address
+        ForgotPasswordForm^ passwordReset = gcnew ForgotPasswordForm(txtEmail->Text);
+
+        // Show the ForgotPasswordForm
+        passwordReset->ShowDialog();
+
+        // Optionally, you could show the LoginForm again when the password reset form is closed
+        this->Show();
+    }
 }
 
 System::Void AshesiUniversityStudentRecordManagementSystem::LoginForm::btnCancel_Click(System::Object^ sender, System::EventArgs^ e)

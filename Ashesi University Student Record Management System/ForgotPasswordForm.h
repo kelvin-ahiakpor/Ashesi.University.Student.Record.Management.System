@@ -1,5 +1,8 @@
 #pragma once
-#include "EmailManager.h"
+#include "User.h"
+#include "Student.h"
+#include "Faculty.h"
+#include "Admin.h"
 
 namespace AshesiUniversityStudentRecordManagementSystem {
 
@@ -16,16 +19,26 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	public ref class ForgotPasswordForm : public System::Windows::Forms::Form
 	{
 	public:
+		User^ globalUser;
+		Student^ student;
+		Faculty^ faculty;
+		Admin^ admin;
+		String^ userRole;
+		String^ userEmail;
+
 		ForgotPasswordForm(String^ email)
 		{
-			//EmailManager^ emailmanage = gcnew EmailManager();
-			//emailmanage->SendEmail(email, emailmanage->GenerateRandomCode(8));
-
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
+			this->userEmail = email;
+
 		}
+
+		// Method to fetch the security question answer from the database using the user email
+		String^ GetSecurityAnswerFromDB();
+
+		// Method to compare the entered answer with the stored answer
+		bool VerifySecurityAnswer(String^ enteredAnswer);
+
 
 	protected:
 		/// <summary>
@@ -39,20 +52,14 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			}
 		}
 	private: System::Windows::Forms::TextBox^ textBox1;
-	protected:
 	private: System::Windows::Forms::TextBox^ textBox2;
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Button^ btnChangePassword;
-
-
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::PictureBox^ pboxLogo;
 	private: System::Windows::Forms::Label^ lblProfile;
 	private: System::Windows::Forms::Button^ btnCancel;
-
-	protected:
-
 	private:
 		/// <summary>
 		/// Required designer variable.
@@ -92,6 +99,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->textBox2->Location = System::Drawing::Point(29, 149);
 			this->textBox2->Margin = System::Windows::Forms::Padding(2);
 			this->textBox2->Name = L"textBox2";
+			this->textBox2->PasswordChar = '*';
 			this->textBox2->Size = System::Drawing::Size(254, 20);
 			this->textBox2->TabIndex = 1;
 			// 
@@ -101,9 +109,9 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->label1->Location = System::Drawing::Point(26, 89);
 			this->label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(60, 13);
+			this->label1->Size = System::Drawing::Size(168, 13);
 			this->label1->TabIndex = 2;
-			this->label1->Text = L"Enter Code";
+			this->label1->Text = L"What is the name of your first pet\?";
 			// 
 			// label2
 			// 
@@ -132,9 +140,9 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->label4->Location = System::Drawing::Point(27, 58);
 			this->label4->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(213, 13);
+			this->label4->Size = System::Drawing::Size(264, 13);
 			this->label4->TabIndex = 6;
-			this->label4->Text = L"A code has been sent to your email address";
+			this->label4->Text = L"Kindly follow the steps below to recover your password";
 			// 
 			// pboxLogo
 			// 
@@ -200,16 +208,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 
 		}
 #pragma endregion
-	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
-	private: System::Void label2_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
-	private: System::Void label1_Click_1(System::Object^ sender, System::EventArgs^ e) {
-	}
-private: System::Void label3_Click(System::Object^ sender, System::EventArgs^ e) {
-}
 private: System::Void btnCancel_Click(System::Object^ sender, System::EventArgs^ e);
-
 private: System::Void btnChangePassword_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }
