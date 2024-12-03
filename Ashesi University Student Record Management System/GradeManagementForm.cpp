@@ -11,7 +11,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::GradeManagementForm:
     DatabaseManager^ db = DatabaseManager::GetInstance();
 
     try {
-        
+		LoadGrades(db, sender, e); 
     }
     catch (Exception^ ex) {
         // Handle any exceptions that may occur
