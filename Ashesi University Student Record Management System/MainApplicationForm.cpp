@@ -11,6 +11,7 @@
 #include "EnrollmentHistory.h"
 #include "LoginForm.h"
 #include "ProfileManagementForm.h"
+#include "GradeManagementForm.h"
 
 using namespace AshesiUniversityStudentRecordManagementSystem;
 using namespace System;
@@ -155,12 +156,15 @@ System::Void MainApplicationForm::generateTranscriptToolStripMenuItem_Click(Syst
 
 void MainApplicationForm::UpdateMenuForRole(String^ userRole) {
     // Disable specific menu items based on user role
-    studentsToolStripMenuItem->Enabled = (userRole == "Administrator" || userRole == "Faculty");
-    coursesToolStripMenuItem->Enabled = (userRole != "Student");
+    studentsToolStripMenuItem->Enabled = (userRole == "Administrator");
+    coursesToolStripMenuItem->Enabled = (userRole == "Administrator" );
     viewToolStripMenuItem->Enabled = (userRole == "Administrator" || userRole == "Faculty" || userRole == "Student");
     enrollmentsToolStripMenuItem->Enabled = (userRole == "Student"|| userRole == "Faculty");
     enrollmentHistoryToolStripMenuItem->Enabled = (userRole == "Student");
-    facultyToolStripMenuItem->Enabled = (userRole != "Student");
+    gradesToolStripMenuItem->Enabled = (userRole == "Student");
+    facultyToolStripMenuItem->Enabled = (userRole == "Administrator");
+    gradesToolStripMenuItem1->Enabled= (userRole == "Faculty");
+    generateTranscriptToolStripMenuItem->Enabled = (userRole != "Faculty");
 
 
 }
@@ -184,4 +188,10 @@ System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm:
 
         globalUser = nullptr;
     }
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm::gradesToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e)
+{
+    OpenChildForm(GradeManagementForm::typeid, globalUser);
+    return System::Void();
 }
