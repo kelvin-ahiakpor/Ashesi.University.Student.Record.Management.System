@@ -15,6 +15,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentFor
     }
     catch (Exception^ ex)
     {
+        db->CloseConnection(); 
         MessageBox::Show(
             "Error fetching courses: " + ex->Message,
             "Database Error",
@@ -24,7 +25,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentFor
     }
     finally
     {
-        db->CloseConnection(); // Ensure the database connection is closed
+        db->CloseConnection();
     }
 }
 
@@ -63,79 +64,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentFor
 
     try
     {
-        // Additional null check for StudentID
-        if (StudentID == nullptr)
-        {
-            MessageBox::Show("Student ID is not set. Please log in again.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-            return;
-        }
-
-        db->ConnectToDatabase();
-
-        // Validate inputs
-        if (String::IsNullOrWhiteSpace(textBox2->Text) ||
-            String::IsNullOrWhiteSpace(textBox4->Text) ||
-            dataGridView1->SelectedRows->Count == 0)
-        {
-            MessageBox::Show("Please select a course offering to enroll in.", "Input Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
-            return;
-        }
-
-        // Convert OfferingID to int
-        int offeringID;
-        if (!Int32::TryParse(
-            dataGridView1->SelectedRows[0]->Cells["OfferingID"]->Value->ToString(),
-            offeringID))
-        {
-            MessageBox::Show("Invalid Course Offering ID.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-            return;
-        }
-
-        String^ enrollmentDate = DateTime::Now.ToString("yyyy-MM-dd");
-        double defaultGradePoints = 0.0;
-
-        // Check for duplicate enrollment
-        String^ checkQuery = R"(
-            SELECT COUNT(*) AS Count 
-            FROM Enrollments 
-            WHERE StudentID = @StudentID AND OfferingID = @OfferingID
-        )";
-
-        MySqlCommand^ checkCmd = gcnew MySqlCommand(checkQuery, db->GetConnection());
-        checkCmd->Parameters->AddWithValue("@StudentID", StudentID);
-        checkCmd->Parameters->AddWithValue("@OfferingID", offeringID);
-
-        Object^ countResult = checkCmd->ExecuteScalar();
-        int enrollmentCount = countResult != nullptr ? Convert::ToInt32(countResult) : 0;
-
-        if (enrollmentCount > 0)
-        {
-            MessageBox::Show("You are already enrolled in this course offering.", "Enrollment Error", MessageBoxButtons::OK, MessageBoxIcon::Information);
-            return;
-        }
-
-        // Insert the enrollment record
-        String^ insertQuery = R"(
-            INSERT INTO Enrollments (StudentID, CourseID, OfferingID, EnrollmentDate, GradePoints)
-            VALUES (@StudentID, @CourseID, @OfferingID, @EnrollmentDate, @GradePoints)
-        )";
-
-        MySqlCommand^ insertCmd = gcnew MySqlCommand(insertQuery, db->GetConnection());
-        insertCmd->Parameters->AddWithValue("@StudentID", StudentID);
-        insertCmd->Parameters->AddWithValue("@CourseID", Int32::Parse(courseIdbox->Text));
-        insertCmd->Parameters->AddWithValue("@OfferingID", offeringID);
-        insertCmd->Parameters->AddWithValue("@EnrollmentDate", enrollmentDate);
-        insertCmd->Parameters->AddWithValue("@GradePoints", defaultGradePoints);
-
-        int rowsAffected = insertCmd->ExecuteNonQuery();
-        if (rowsAffected > 0)
-        {
-            MessageBox::Show("Enrollment successful!", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
-        }
-        else
-        {
-            MessageBox::Show("Enrollment failed. No rows were affected.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-        }
+        EnrollStudent(db, sender, e);
     }
     catch (MySqlException^ ex)
     {
@@ -168,6 +97,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentFor
     //SearchButton_Click(sender, e);
 }
 
+//Helper functions for the StudentEnrollmentForm
 System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentForm::SearchCourses(DatabaseManager^ db, System::Object^ sender, System::EventArgs^ e)
 {
     db->ConnectToDatabase();
@@ -230,4 +160,81 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentFor
     }
 
     reader->Close(); // Close the reader
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentForm::EnrollStudent(DatabaseManager^ db, System::Object^ sender, System::EventArgs^ e)
+{
+    // Additional null check for StudentID
+    if (StudentID == nullptr)
+    {
+        MessageBox::Show("Student ID is not set. Please log in again.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+        return;
+    }
+
+    db->ConnectToDatabase();
+
+    // Validate inputs
+    if (String::IsNullOrWhiteSpace(textBox2->Text) ||
+        String::IsNullOrWhiteSpace(textBox4->Text) ||
+        dataGridView1->SelectedRows->Count == 0)
+    {
+        MessageBox::Show("Please select a course offering to enroll in.", "Input Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+        return;
+    }
+
+    // Convert OfferingID to int
+    int offeringID;
+    if (!Int32::TryParse(
+        dataGridView1->SelectedRows[0]->Cells["OfferingID"]->Value->ToString(),
+        offeringID))
+    {
+        MessageBox::Show("Invalid Course Offering ID.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+        return;
+    }
+
+    String^ enrollmentDate = DateTime::Now.ToString("yyyy-MM-dd");
+    double defaultGradePoints = 0.0;
+
+    // Check for duplicate enrollment
+    String^ checkQuery = R"(
+            SELECT COUNT(*) AS Count 
+            FROM Enrollments 
+            WHERE StudentID = @StudentID AND OfferingID = @OfferingID
+        )";
+
+    MySqlCommand^ checkCmd = gcnew MySqlCommand(checkQuery, db->GetConnection());
+    checkCmd->Parameters->AddWithValue("@StudentID", StudentID);
+    checkCmd->Parameters->AddWithValue("@OfferingID", offeringID);
+
+    Object^ countResult = checkCmd->ExecuteScalar();
+    int enrollmentCount = countResult != nullptr ? Convert::ToInt32(countResult) : 0;
+
+    if (enrollmentCount > 0)
+    {
+        MessageBox::Show("You are already enrolled in this course offering.", "Enrollment Error", MessageBoxButtons::OK, MessageBoxIcon::Information);
+        return;
+    }
+
+    // Insert the enrollment record
+    String^ insertQuery = R"(
+            INSERT INTO Enrollments (StudentID, CourseID, OfferingID, EnrollmentDate, GradePoints)
+            VALUES (@StudentID, @CourseID, @OfferingID, @EnrollmentDate, @GradePoints)
+        )";
+
+    MySqlCommand^ insertCmd = gcnew MySqlCommand(insertQuery, db->GetConnection());
+    insertCmd->Parameters->AddWithValue("@StudentID", StudentID);
+    insertCmd->Parameters->AddWithValue("@CourseID", Int32::Parse(courseIdbox->Text));
+    insertCmd->Parameters->AddWithValue("@OfferingID", offeringID);
+    insertCmd->Parameters->AddWithValue("@EnrollmentDate", enrollmentDate);
+    insertCmd->Parameters->AddWithValue("@GradePoints", defaultGradePoints);
+
+    int rowsAffected = insertCmd->ExecuteNonQuery();
+    if (rowsAffected > 0)
+    {
+        MessageBox::Show("Enrollment successful!", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
+    }
+    else
+    {
+        MessageBox::Show("Enrollment failed. No rows were affected.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+    }
 }

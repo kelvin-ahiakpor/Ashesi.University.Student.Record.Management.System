@@ -408,6 +408,7 @@ private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e)
 }
 private: System::Void txtBoxSearch_TextChanged(System::Object^ sender, System::EventArgs^ e);
 private: System::Void SearchCourses(DatabaseManager^ db, System::Object^ sender, System::EventArgs^ e);
+private: System::Void EnrollStudent(DatabaseManager^ db, System::Object^ sender, System::EventArgs^ e);
 };
 	
 
