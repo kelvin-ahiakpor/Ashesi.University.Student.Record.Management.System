@@ -354,6 +354,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void dataGridView1_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e);
+	private: System::Void LoadFaculty(DatabaseManager^ db);
 };
 }
 

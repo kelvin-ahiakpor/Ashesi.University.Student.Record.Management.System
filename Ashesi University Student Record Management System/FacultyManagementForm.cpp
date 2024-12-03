@@ -95,6 +95,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
     }
 	finally
 	{
+        LoadFaculty(db);
 		db->CloseConnection();
 	}
 }
@@ -104,63 +105,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
     DatabaseManager^ db = DatabaseManager::GetInstance();
     try
     {
-        db->ConnectToDatabase();
-
-        // SQL query to retrieve user and faculty details by joining Users and Faculty tables
-        String^ query = R"(
-        SELECT
-            Users.UserID,
-            Users.FirstName,
-            Users.LastName,
-            Users.Email,
-            Users.UserType,
-            Faculty.FacultyID,
-            Faculty.DepartmentID,
-            Faculty.DateOfAppointment
-        FROM
-            Faculty
-        INNER JOIN
-            Users ON Faculty.UserID = Users.UserID
-        WHERE Users.IsDeleted = 0;
-        )";
-
-        // Create a MySQL command using the query and the database connection
-        MySqlCommand^ cmd = gcnew MySqlCommand(query, db->GetConnection());
-
-        // Execute the query and get the results in a data reader
-        MySqlDataReader^ reader = cmd->ExecuteReader();
-
-        // Clear any existing rows and columns in the DataGridView
-        dataGridViewFaculty->Rows->Clear();
-        dataGridViewFaculty->Columns->Clear();
-
-        // Add the columns to the DataGridView (match the SQL query)
-        dataGridViewFaculty->Columns->Add("UserID", "User ID");
-        dataGridViewFaculty->Columns->Add("FirstName", "First Name");
-        dataGridViewFaculty->Columns->Add("LastName", "Last Name");
-        dataGridViewFaculty->Columns->Add("Email", "Email");
-        dataGridViewFaculty->Columns->Add("UserType", "User Type");
-        dataGridViewFaculty->Columns->Add("FacultyID", "Faculty ID");
-        dataGridViewFaculty->Columns->Add("DepartmentID", "Department ID");
-        dataGridViewFaculty->Columns->Add("DateOfAppointment", "Date of Appointment");
-
-        // Iterate through the result set and populate the DataGridView
-        while (reader->Read())
-        {
-            dataGridViewFaculty->Rows->Add(
-                reader["UserID"]->ToString(),
-                reader["FirstName"]->ToString(),
-                reader["LastName"]->ToString(),
-                reader["Email"]->ToString(),
-                reader["UserType"]->ToString(),
-                reader["FacultyID"]->ToString(),
-                reader["DepartmentID"]->ToString(),
-                reader["DateOfAppointment"]->ToString()
-            );
-        }
-
-        reader->Close();
-        db->CloseConnection();
+        LoadFaculty(db);
     }
     catch (Exception^ ex)
     {
@@ -500,6 +445,67 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
     }
 
     return;  // Return void, not System::Void()
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementForm::LoadFaculty(DatabaseManager^ db)
+{
+    db->ConnectToDatabase();
+
+    // SQL query to retrieve user and faculty details by joining Users and Faculty tables
+    String^ query = R"(
+        SELECT
+            Users.UserID,
+            Users.FirstName,
+            Users.LastName,
+            Users.Email,
+            Users.UserType,
+            Faculty.FacultyID,
+            Faculty.DepartmentID,
+            Faculty.DateOfAppointment
+        FROM
+            Faculty
+        INNER JOIN
+            Users ON Faculty.UserID = Users.UserID
+        WHERE Users.IsDeleted = 0;
+        )";
+
+    // Create a MySQL command using the query and the database connection
+    MySqlCommand^ cmd = gcnew MySqlCommand(query, db->GetConnection());
+
+    // Execute the query and get the results in a data reader
+    MySqlDataReader^ reader = cmd->ExecuteReader();
+
+    // Clear any existing rows and columns in the DataGridView
+    dataGridViewFaculty->Rows->Clear();
+    dataGridViewFaculty->Columns->Clear();
+
+    // Add the columns to the DataGridView (match the SQL query)
+    dataGridViewFaculty->Columns->Add("UserID", "User ID");
+    dataGridViewFaculty->Columns->Add("FirstName", "First Name");
+    dataGridViewFaculty->Columns->Add("LastName", "Last Name");
+    dataGridViewFaculty->Columns->Add("Email", "Email");
+    dataGridViewFaculty->Columns->Add("UserType", "User Type");
+    dataGridViewFaculty->Columns->Add("FacultyID", "Faculty ID");
+    dataGridViewFaculty->Columns->Add("DepartmentID", "Department ID");
+    dataGridViewFaculty->Columns->Add("DateOfAppointment", "Date of Appointment");
+
+    // Iterate through the result set and populate the DataGridView
+    while (reader->Read())
+    {
+        dataGridViewFaculty->Rows->Add(
+            reader["UserID"]->ToString(),
+            reader["FirstName"]->ToString(),
+            reader["LastName"]->ToString(),
+            reader["Email"]->ToString(),
+            reader["UserType"]->ToString(),
+            reader["FacultyID"]->ToString(),
+            reader["DepartmentID"]->ToString(),
+            reader["DateOfAppointment"]->ToString()
+        );
+    }
+
+    reader->Close();
+    db->CloseConnection();
 }
 
 
