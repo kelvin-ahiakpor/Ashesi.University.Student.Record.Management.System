@@ -23,6 +23,9 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		User^ globalUser;
 		Student^ student;
 		Admin^ admin;
+	private: System::Windows::Forms::ComboBox^ cboxCourses;
+	private: System::Windows::Forms::ComboBox^ cboxStudentName;
+	public:
 		Faculty^ faculty;
 
 		GradeManagementForm(User^ user)
@@ -52,7 +55,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	public:
 	private: System::Windows::Forms::Label^ lblProfile;
 	private: System::Windows::Forms::Button^ btnCancel;
-	private: System::Windows::Forms::TextBox^ CourseNameBox;
+
 		   String^ userRole;
 		GradeManagementForm(void)
 		{
@@ -78,7 +81,9 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	private: System::Windows::Forms::Label^ lblCourses;
 	private: System::Windows::Forms::Label^ lblGrade;
 
-	private: System::Windows::Forms::TextBox^ txtStudentID;
+
+
+
 	private: System::Windows::Forms::ComboBox^ cboxGrades;
 	private: System::Windows::Forms::Button^ btnSubmitGrade;
 
@@ -99,67 +104,61 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->lblStudentID = (gcnew System::Windows::Forms::Label());
 			this->lblCourses = (gcnew System::Windows::Forms::Label());
 			this->lblGrade = (gcnew System::Windows::Forms::Label());
-			this->txtStudentID = (gcnew System::Windows::Forms::TextBox());
 			this->cboxGrades = (gcnew System::Windows::Forms::ComboBox());
 			this->btnSubmitGrade = (gcnew System::Windows::Forms::Button());
 			this->pboxLogo = (gcnew System::Windows::Forms::PictureBox());
 			this->lblProfile = (gcnew System::Windows::Forms::Label());
 			this->btnCancel = (gcnew System::Windows::Forms::Button());
-			this->CourseNameBox = (gcnew System::Windows::Forms::TextBox());
+			this->cboxCourses = (gcnew System::Windows::Forms::ComboBox());
+			this->cboxStudentName = (gcnew System::Windows::Forms::ComboBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pboxLogo))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// lblStudentID
 			// 
 			this->lblStudentID->AutoSize = true;
-			this->lblStudentID->Location = System::Drawing::Point(69, 89);
+			this->lblStudentID->Location = System::Drawing::Point(52, 72);
+			this->lblStudentID->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->lblStudentID->Name = L"lblStudentID";
-			this->lblStudentID->Size = System::Drawing::Size(68, 16);
+			this->lblStudentID->Size = System::Drawing::Size(75, 13);
 			this->lblStudentID->TabIndex = 0;
-			this->lblStudentID->Text = L"Student ID";
+			this->lblStudentID->Text = L"Student Name";
 			// 
 			// lblCourses
 			// 
 			this->lblCourses->AutoSize = true;
-			this->lblCourses->Location = System::Drawing::Point(69, 151);
+			this->lblCourses->Location = System::Drawing::Point(52, 123);
+			this->lblCourses->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->lblCourses->Name = L"lblCourses";
-			this->lblCourses->Size = System::Drawing::Size(90, 16);
+			this->lblCourses->Size = System::Drawing::Size(71, 13);
 			this->lblCourses->TabIndex = 1;
 			this->lblCourses->Text = L"Course Name";
 			// 
 			// lblGrade
 			// 
 			this->lblGrade->AutoSize = true;
-			this->lblGrade->Location = System::Drawing::Point(69, 215);
+			this->lblGrade->Location = System::Drawing::Point(52, 175);
+			this->lblGrade->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->lblGrade->Name = L"lblGrade";
-			this->lblGrade->Size = System::Drawing::Size(45, 16);
+			this->lblGrade->Size = System::Drawing::Size(36, 13);
 			this->lblGrade->TabIndex = 2;
 			this->lblGrade->Text = L"Grade";
-			// 
-			// txtStudentID
-			// 
-			this->txtStudentID->Location = System::Drawing::Point(73, 106);
-			this->txtStudentID->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->txtStudentID->Name = L"txtStudentID";
-			this->txtStudentID->Size = System::Drawing::Size(152, 22);
-			this->txtStudentID->TabIndex = 5;
-			this->txtStudentID->TextChanged += gcnew System::EventHandler(this, &GradeManagementForm::txtStudentID_TextChanged);
 			// 
 			// cboxGrades
 			// 
 			this->cboxGrades->FormattingEnabled = true;
-			this->cboxGrades->Location = System::Drawing::Point(73, 234);
-			this->cboxGrades->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->cboxGrades->Location = System::Drawing::Point(55, 190);
+			this->cboxGrades->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->cboxGrades->Name = L"cboxGrades";
-			this->cboxGrades->Size = System::Drawing::Size(303, 24);
+			this->cboxGrades->Size = System::Drawing::Size(228, 21);
 			this->cboxGrades->TabIndex = 6;
 			// 
 			// btnSubmitGrade
 			// 
-			this->btnSubmitGrade->Location = System::Drawing::Point(73, 286);
-			this->btnSubmitGrade->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->btnSubmitGrade->Location = System::Drawing::Point(55, 232);
+			this->btnSubmitGrade->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->btnSubmitGrade->Name = L"btnSubmitGrade";
-			this->btnSubmitGrade->Size = System::Drawing::Size(117, 30);
+			this->btnSubmitGrade->Size = System::Drawing::Size(88, 24);
 			this->btnSubmitGrade->TabIndex = 7;
 			this->btnSubmitGrade->Text = L"Submit Grade";
 			this->btnSubmitGrade->UseVisualStyleBackColor = true;
@@ -171,10 +170,9 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->pboxLogo->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pboxLogo.BackgroundImage")));
 			this->pboxLogo->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
 			this->pboxLogo->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pboxLogo.Image")));
-			this->pboxLogo->Location = System::Drawing::Point(339, 25);
-			this->pboxLogo->Margin = System::Windows::Forms::Padding(4);
+			this->pboxLogo->Location = System::Drawing::Point(254, 20);
 			this->pboxLogo->Name = L"pboxLogo";
-			this->pboxLogo->Size = System::Drawing::Size(40, 37);
+			this->pboxLogo->Size = System::Drawing::Size(30, 30);
 			this->pboxLogo->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
 			this->pboxLogo->TabIndex = 13;
 			this->pboxLogo->TabStop = false;
@@ -184,45 +182,54 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->lblProfile->AutoSize = true;
 			this->lblProfile->Font = (gcnew System::Drawing::Font(L"Consolas", 15, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->lblProfile->Location = System::Drawing::Point(68, 25);
-			this->lblProfile->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->lblProfile->Location = System::Drawing::Point(51, 20);
 			this->lblProfile->Name = L"lblProfile";
-			this->lblProfile->Size = System::Drawing::Size(97, 29);
+			this->lblProfile->Size = System::Drawing::Size(76, 23);
 			this->lblProfile->TabIndex = 12;
 			this->lblProfile->Text = L"GRADES";
 			// 
 			// btnCancel
 			// 
-			this->btnCancel->Location = System::Drawing::Point(260, 286);
-			this->btnCancel->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->btnCancel->Location = System::Drawing::Point(195, 232);
+			this->btnCancel->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->btnCancel->Name = L"btnCancel";
-			this->btnCancel->Size = System::Drawing::Size(117, 30);
+			this->btnCancel->Size = System::Drawing::Size(88, 24);
 			this->btnCancel->TabIndex = 14;
 			this->btnCancel->Text = L"Cancel";
 			this->btnCancel->UseVisualStyleBackColor = true;
 			this->btnCancel->Click += gcnew System::EventHandler(this, &GradeManagementForm::btnCancel_Click);
 			// 
-			// CourseNameBox
+			// cboxCourses
 			// 
-			this->CourseNameBox->Location = System::Drawing::Point(72, 180);
-			this->CourseNameBox->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
-			this->CourseNameBox->Name = L"CourseNameBox";
-			this->CourseNameBox->Size = System::Drawing::Size(153, 22);
-			this->CourseNameBox->TabIndex = 15;
+			this->cboxCourses->FormattingEnabled = true;
+			this->cboxCourses->Location = System::Drawing::Point(55, 138);
+			this->cboxCourses->Margin = System::Windows::Forms::Padding(2);
+			this->cboxCourses->Name = L"cboxCourses";
+			this->cboxCourses->Size = System::Drawing::Size(228, 21);
+			this->cboxCourses->TabIndex = 16;
+			// 
+			// cboxStudentName
+			// 
+			this->cboxStudentName->FormattingEnabled = true;
+			this->cboxStudentName->Location = System::Drawing::Point(55, 87);
+			this->cboxStudentName->Margin = System::Windows::Forms::Padding(2);
+			this->cboxStudentName->Name = L"cboxStudentName";
+			this->cboxStudentName->Size = System::Drawing::Size(228, 21);
+			this->cboxStudentName->TabIndex = 17;
 			// 
 			// GradeManagementForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::Linen;
-			this->ClientSize = System::Drawing::Size(452, 357);
-			this->Controls->Add(this->CourseNameBox);
+			this->ClientSize = System::Drawing::Size(339, 290);
+			this->Controls->Add(this->cboxStudentName);
+			this->Controls->Add(this->cboxCourses);
 			this->Controls->Add(this->btnCancel);
 			this->Controls->Add(this->pboxLogo);
 			this->Controls->Add(this->lblProfile);
 			this->Controls->Add(this->btnSubmitGrade);
 			this->Controls->Add(this->cboxGrades);
-			this->Controls->Add(this->txtStudentID);
 			this->Controls->Add(this->lblGrade);
 			this->Controls->Add(this->lblCourses);
 			this->Controls->Add(this->lblStudentID);
@@ -230,7 +237,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 				static_cast<System::Int32>(static_cast<System::Byte>(0)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
-			this->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->Name = L"GradeManagementForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Grade Management";

@@ -48,71 +48,77 @@ System::Void AshesiUniversityStudentRecordManagementSystem::GradeManagementForm:
     // Assuming facultyID is stored in a variable or passed into the form
     int^ facultyid = faculty->getFacultyID();
 
-    // SQL query to check if a student is enrolled in the course, if a grade exists, and only show courses for the faculty
-    String^ query = R"(
-    SELECT
+    // SQL query to fetch courses taught by the faculty
+    String^ queryCourses = R"(
+    SELECT 
+        c.CourseID, 
         c.CourseName
-    FROM
+    FROM 
         Courses c
-    INNER JOIN
-        Enrollments e ON c.CourseID = e.CourseID
-    INNER JOIN
-        CourseOfferings co ON e.CourseID = co.CourseID
+    INNER JOIN 
+        CourseOfferings co ON c.CourseID = co.CourseID
     WHERE
-        co.facultyID = @facultyID;
-)";
+        co.FacultyID = @facultyID;
+    )";
 
+    // SQL query to fetch all possible grades (you could hardcode them or fetch from a database if needed)
+    List<String^>^ grades = gcnew List<String^>();
+    grades->Add("A+");
+    grades->Add("A");
+    grades->Add("B+");
+    grades->Add("B");
+    grades->Add("C+");
+    grades->Add("C");
+    grades->Add("D+");
+    grades->Add("D");
+    grades->Add("E");
+    grades->Add("F");
 
-    // Create a command and set the facultyID parameter
-    MySqlCommand^ command = gcnew MySqlCommand(query, db->GetConnection());
-    command->Parameters->AddWithValue("@facultyID", facultyid);
+    // Create a command and set the facultyID parameter for courses taught
+    MySqlCommand^ commandCourses = gcnew MySqlCommand(queryCourses, db->GetConnection());
+    commandCourses->Parameters->AddWithValue("@facultyID", facultyid);
 
-    MySqlDataReader^ reader = command->ExecuteReader();
-    if (reader->Read())
+    MySqlDataReader^ readerCourses = commandCourses->ExecuteReader();
+
+    // Clear ComboBox items before populating them
+    cboxCourses->Items->Clear();
+
+    // Populate the cboxCourses with course names
+    while (readerCourses->Read())
     {
-        String^ courseName = reader["CourseName"]->ToString();
-
-        // Populate ComboBox with grade options
-        cboxGrades->Items->Clear();  // Clear existing items (if any)
-        cboxGrades->Items->Add("A+");
-        cboxGrades->Items->Add("A");
-        cboxGrades->Items->Add("B+");
-        cboxGrades->Items->Add("B");
-        cboxGrades->Items->Add("C+");
-        cboxGrades->Items->Add("C");
-        cboxGrades->Items->Add("D+");
-        cboxGrades->Items->Add("D");
-        cboxGrades->Items->Add("E");
-        cboxGrades->Items->Add("F");
-
-        this->CourseNameBox->Text = courseName;
+        String^ courseName = readerCourses["CourseName"]->ToString();
+        cboxCourses->Items->Add(courseName);  // Adding each course taught by the lecturer
     }
-    else
+
+    readerCourses->Close(); // Close the reader for courses
+
+    // Populate the cboxGrades ComboBox with all available grades
+    cboxGrades->Items->Clear();
+    for each (String ^ grade in grades)
     {
-        MessageBox::Show("No profile found for the specified user ID.", "Info", MessageBoxButtons::OK, MessageBoxIcon::Information);
+        cboxGrades->Items->Add(grade); // Adding grades to ComboBox
     }
-
-    // Close the reader after processing the data
-    reader->Close();
 }
+
 
 System::Void AshesiUniversityStudentRecordManagementSystem::GradeManagementForm::SubmitGrade(DatabaseManager^ db, Object^ sender, EventArgs^ e)
 {
     String^ updatedGrade = cboxGrades->SelectedItem->ToString();
-    String^ studentID = txtStudentID->Text;
-    String^ courseName = CourseNameBox->Text;
+    String^ studentID = cboxStudentName->Text;
+    String^ courseName = cboxCourses->SelectedItem->ToString();  // Get course from ComboBox
 
     String^ query = R"(
     UPDATE Enrollments
     SET Grade = @grade
-    WHERE studentID = @studentID AND courseID = (
+    WHERE StudentID = @studentID 
+      AND CourseID = (
         SELECT c.CourseID 
         FROM Courses c 
         INNER JOIN CourseOfferings co ON c.CourseID = co.CourseID 
-        WHERE c.CourseName = @courseName AND co.facultyID = @facultyID
+        WHERE c.CourseName = @courseName 
+          AND co.FacultyID = @facultyID
     );
 )";
-
 
     MySqlCommand^ command = gcnew MySqlCommand(query, db->GetConnection());
     command->Parameters->AddWithValue("@grade", updatedGrade);
@@ -120,15 +126,18 @@ System::Void AshesiUniversityStudentRecordManagementSystem::GradeManagementForm:
     command->Parameters->AddWithValue("@courseName", courseName);
     command->Parameters->AddWithValue("@facultyID", faculty->getFacultyID());
 
-    int result = command->ExecuteNonQuery();
-
-    if (result > 0) {
-        MessageBox::Show("Grade updated successfully.");
+    try {
+        int result = command->ExecuteNonQuery();
+        if (result > 0) {
+            MessageBox::Show("Grade updated successfully.");
+        }
+        else {
+            MessageBox::Show("No changes made, or grade already assigned.");
+        }
     }
-    else {
-        MessageBox::Show("No changes made, or grade already assigned.");
+    catch (Exception^ ex) {
+        MessageBox::Show("Error updating grade: " + ex->Message, "Database Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
     }
 }
-
 
 
