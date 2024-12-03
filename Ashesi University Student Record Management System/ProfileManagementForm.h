@@ -27,6 +27,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		String^ userRole;
 		int^ studentid;
 		int^ userID;
+		bool isProfileUpdated = false;
+		bool isProfileChanged();
 		ProfileManagementForm(void)
 		{
 			InitializeComponent();
@@ -165,7 +167,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// textBox1
 			// 
 			this->textBox1->Location = System::Drawing::Point(28, 41);
-			this->textBox1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->textBox1->Margin = System::Windows::Forms::Padding(2);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(210, 20);
 			this->textBox1->TabIndex = 4;
@@ -173,7 +175,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// textBox2
 			// 
 			this->textBox2->Location = System::Drawing::Point(28, 91);
-			this->textBox2->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->textBox2->Margin = System::Windows::Forms::Padding(2);
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(210, 20);
 			this->textBox2->TabIndex = 5;
@@ -181,7 +183,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// textBox3
 			// 
 			this->textBox3->Location = System::Drawing::Point(28, 145);
-			this->textBox3->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->textBox3->Margin = System::Windows::Forms::Padding(2);
 			this->textBox3->Name = L"textBox3";
 			this->textBox3->Size = System::Drawing::Size(210, 20);
 			this->textBox3->TabIndex = 6;
@@ -189,7 +191,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// textBox4
 			// 
 			this->textBox4->Location = System::Drawing::Point(28, 194);
-			this->textBox4->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->textBox4->Margin = System::Windows::Forms::Padding(2);
 			this->textBox4->Name = L"textBox4";
 			this->textBox4->PasswordChar = '*';
 			this->textBox4->Size = System::Drawing::Size(210, 20);
@@ -198,7 +200,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// btnSaveProfile
 			// 
 			this->btnSaveProfile->Location = System::Drawing::Point(28, 233);
-			this->btnSaveProfile->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->btnSaveProfile->Margin = System::Windows::Forms::Padding(2);
 			this->btnSaveProfile->Name = L"btnSaveProfile";
 			this->btnSaveProfile->Size = System::Drawing::Size(120, 24);
 			this->btnSaveProfile->TabIndex = 8;
@@ -224,10 +226,10 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 				static_cast<System::Int32>(static_cast<System::Byte>(0)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
-			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"ProfileManagementForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
-			this->Text = L"ProfileManagement";
+			this->Text = L"Your Profile";
 			this->ResumeLayout(false);
 			this->PerformLayout();
 

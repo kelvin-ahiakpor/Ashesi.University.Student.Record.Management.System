@@ -80,6 +80,8 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
                     Student^ currentStudent = gcnew Student(
                         userID, firstName, lastName, email, studentID, major);
 
+					currentStudent->setPassword(password);
+
                     // Show a success message
                     MessageBox::Show("Login successful! Welcome, " + firstName + ".",
                         "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
