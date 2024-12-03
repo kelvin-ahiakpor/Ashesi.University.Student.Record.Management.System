@@ -52,7 +52,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 
 				this->lblStudentID->Enabled = true;
 				this->lblStudentID->Text = "Student ID";
-				this->textStudentID->Enabled = true;
+				this->textStudentID->Enabled = false;
 				this->cboxStudentName->Enabled = false;
 			}
 			else if (Faculty^ f = dynamic_cast<Faculty^>(user)) {
