@@ -15,7 +15,6 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
 	{
 		CreateStudent(db, sender, e);
         LoadStudents(db);
-        
     }
     catch (Exception^ ex)
     {
@@ -160,7 +159,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
                 String^ DepartmentName = reader["DepartmentName"]->ToString();
 
                 // Display the department name in textBox3
-                textBox3->Text = DepartmentName;
+                cboxDeptName->Text = DepartmentName;
             }
 
             reader->Close();
@@ -248,7 +247,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
 {
     // Validate input fields
     if (String::IsNullOrWhiteSpace(textBox1->Text) || String::IsNullOrWhiteSpace(textBox2->Text) ||
-        String::IsNullOrWhiteSpace(textBox4->Text) || String::IsNullOrWhiteSpace(textBox3->Text))
+        String::IsNullOrWhiteSpace(textBox4->Text) || String::IsNullOrWhiteSpace(cboxDeptName->Text))
     {
         MessageBox::Show("Please fill in all required fields.", "Validation Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
         return;
@@ -289,7 +288,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
         )";
 
     MySqlCommand^ departmentCmd = gcnew MySqlCommand(getDepartmentIDQuery, db->GetConnection());
-    departmentCmd->Parameters->AddWithValue("@DepartmentName", textBox3->Text);
+    departmentCmd->Parameters->AddWithValue("@DepartmentName", cboxDeptName->Text);
 
     Object^ departmentIDObj = departmentCmd->ExecuteScalar();
     if (departmentIDObj == nullptr)
@@ -348,7 +347,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
     String^ dateOfBirth = dateTimePicker1->Value.ToString("yyyy-MM-dd");
     String^ enrollmentDate = dateTimePicker2->Value.ToString("yyyy-MM-dd");
     String^ expectedGraduation = dateTimePicker3->Value.ToString("yyyy-MM-dd");
-    String^ departmentName = textBox3->Text;
+    String^ departmentName = cboxDeptName->Text;
 
     db->ConnectToDatabase();
 
@@ -489,6 +488,34 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
     }
 
     db->CloseConnection();
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementForm::LoadCourses(DatabaseManager^ db)
+{
+    db->ConnectToDatabase();
+
+    String^ deleteStudentQuery = R"(
+        SELECT DepartmentName FROM Departments;
+		)";
+
+	MySqlCommand^ cmd = gcnew MySqlCommand(deleteStudentQuery, db->GetConnection());
+	MySqlDataReader^ reader = cmd->ExecuteReader();
+
+	cboxDeptName->Items->Clear();
+
+	while (reader->Read())
+	{
+		cboxDeptName->Items->Add(reader["DepartmentName"]->ToString());
+	}
+
+	reader->Close();
+	db->CloseConnection();
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementForm::StudentManagementForm_Load(System::Object^ sender, System::EventArgs^ e)
+{
+	DatabaseManager^ db = DatabaseManager::GetInstance();
+    LoadCourses(db);
 }
 
 
