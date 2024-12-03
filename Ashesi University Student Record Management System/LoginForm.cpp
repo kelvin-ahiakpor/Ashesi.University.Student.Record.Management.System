@@ -31,7 +31,7 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
         db->ConnectToDatabase();
 
         // Create the SQL query
-        String^ query = "SELECT u.UserID, u.FirstName, u.LastName, u.Email, u.UserType, u.SecurityAnswer " +
+        String^ query = "SELECT u.UserID, u.FirstName, u.LastName, u.Email, u.UserType, u.SecurityAnswer, u.Image " +
             "FROM Users u " +
             "WHERE u.Email = @Email AND u.Password = @Password";
 
@@ -53,6 +53,7 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
             String^ firstName = sqlRd["FirstName"]->ToString();
             String^ lastName = sqlRd["LastName"]->ToString();
             String^ userType = sqlRd["UserType"]->ToString();
+			String^ image = sqlRd["Image"]->ToString();
 			String^ securityAnswer = sqlRd["SecurityAnswer"]->ToString();
 
             // Close the current reader before executing another query
@@ -83,6 +84,7 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
 
 					currentStudent->setPassword(password);
 					currentStudent->setSecurityAnswer(securityAnswer);
+                    currentStudent->setProfilePicturePath(image);
 
                     // Show a success message
                     MessageBox::Show("Login successful! Welcome, " + firstName + ".",
@@ -106,6 +108,7 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
 
                 admin->setPassword(password);
 				admin->setSecurityAnswer(securityAnswer);
+                admin->setProfilePicturePath(image);
 
                 MessageBox::Show("Login successful! Welcome, " + firstName + ".",
                     "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
@@ -139,6 +142,7 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
 
                     faculty->setPassword(password);
 					faculty->setSecurityAnswer(securityAnswer);
+                    faculty->setProfilePicturePath(image);
 
                     // Show a success message
                     MessageBox::Show("Login successful! Welcome, " + firstName + ".",

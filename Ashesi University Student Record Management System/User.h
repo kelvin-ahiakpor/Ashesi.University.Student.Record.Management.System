@@ -9,6 +9,7 @@ protected:
     String^ email;         // Managed string type
     String^ password;      // Managed string type
 	String^ securityAnswer; // Managed string type
+	String^ profilePicturePath; // Managed string type
 
     enum class UserType { Student, Faculty, Administrator };
 
@@ -30,12 +31,14 @@ public:
     String^ getFullName() {
         return this->getFirstName() + " " + this->getLastName();
     }
+	String^ getProfilePicturePath() { return profilePicturePath; }
 
     // Setters
     void setFirstName(String^ fname) { firstName = fname; }
     void setLastName(String^ lname) { lastName = lname; }
     void setEmail(String^ newEmail) { email = newEmail; }
     void setSecurityAnswer(String^ answer) { securityAnswer = answer; }
+	void setProfilePicturePath(String^ path) { profilePicturePath = path; }
 
     // Password management (if needed)
     void setPassword(String^ newPassword) { password = newPassword; }
