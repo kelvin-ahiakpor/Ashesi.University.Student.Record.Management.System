@@ -299,6 +299,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
                this->Controls->Add(this->groupBoxEdit);
                this->Controls->Add(this->groupBoxSelect);
                this->Controls->Add(this->groupBoxCourseActions);
+               this->ForeColor = System::Drawing::Color::Maroon;
                this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
                this->Margin = System::Windows::Forms::Padding(2);
                this->Name = L"CourseManagementForm";

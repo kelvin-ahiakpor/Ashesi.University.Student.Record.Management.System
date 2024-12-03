@@ -58,7 +58,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->ClientSize = System::Drawing::Size(284, 261);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"ViewCoursesAdmin";
-			this->Text = L"ViewCoursesAdmin";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
+			this->Text = L"View Courses";
 			this->ResumeLayout(false);
 
 		}

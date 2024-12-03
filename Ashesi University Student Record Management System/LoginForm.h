@@ -21,6 +21,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		DataTable^ sqlDt;
 	private: System::Windows::Forms::Label^ lblError;
 	private: System::Windows::Forms::PictureBox^ pboxLogo;
+
 		   MySqlDataAdapter^ sqlDtA;
 
 	public:
@@ -176,7 +177,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->pboxLogo->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pboxLogo.BackgroundImage")));
 			this->pboxLogo->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
 			this->pboxLogo->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pboxLogo.Image")));
-			this->pboxLogo->Location = System::Drawing::Point(179, 12);
+			this->pboxLogo->Location = System::Drawing::Point(181, 12);
 			this->pboxLogo->Name = L"pboxLogo";
 			this->pboxLogo->Size = System::Drawing::Size(30, 30);
 			this->pboxLogo->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
@@ -200,7 +201,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->Controls->Add(this->lblError);
 			this->Controls->Add(this->lblPassword);
 			this->Controls->Add(this->lblEmail);
-			this->ForeColor = System::Drawing::Color::Maroon;
+			this->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
+				static_cast<System::Int32>(static_cast<System::Byte>(0)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Margin = System::Windows::Forms::Padding(2);

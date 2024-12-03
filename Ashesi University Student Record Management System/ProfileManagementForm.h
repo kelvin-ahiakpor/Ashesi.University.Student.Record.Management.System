@@ -31,6 +31,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	public:
 
 	private: System::Windows::Forms::Label^ lblProfile;
+	private: System::Windows::Forms::PictureBox^ pboxLogo;
 	public:
 		bool isProfileUpdated = false;
 		bool isProfileChanged();
@@ -126,6 +127,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->btnSaveProfile = (gcnew System::Windows::Forms::Button());
 			this->btnCancel = (gcnew System::Windows::Forms::Button());
 			this->lblProfile = (gcnew System::Windows::Forms::Label());
+			this->pboxLogo = (gcnew System::Windows::Forms::PictureBox());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pboxLogo))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// lblFirstName
@@ -234,12 +237,26 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->lblProfile->TabIndex = 10;
 			this->lblProfile->Text = L"PROFILE";
 			// 
+			// pboxLogo
+			// 
+			this->pboxLogo->BackColor = System::Drawing::Color::Transparent;
+			this->pboxLogo->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pboxLogo.BackgroundImage")));
+			this->pboxLogo->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
+			this->pboxLogo->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pboxLogo.Image")));
+			this->pboxLogo->Location = System::Drawing::Point(208, 9);
+			this->pboxLogo->Name = L"pboxLogo";
+			this->pboxLogo->Size = System::Drawing::Size(30, 30);
+			this->pboxLogo->SizeMode = System::Windows::Forms::PictureBoxSizeMode::Zoom;
+			this->pboxLogo->TabIndex = 11;
+			this->pboxLogo->TabStop = false;
+			// 
 			// ProfileManagementForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::Linen;
 			this->ClientSize = System::Drawing::Size(264, 291);
+			this->Controls->Add(this->pboxLogo);
 			this->Controls->Add(this->lblProfile);
 			this->Controls->Add(this->btnCancel);
 			this->Controls->Add(this->btnSaveProfile);
@@ -251,7 +268,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->Controls->Add(this->lblEmail);
 			this->Controls->Add(this->lblLastName);
 			this->Controls->Add(this->lblFirstName);
-			this->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
+			this->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
 				static_cast<System::Int32>(static_cast<System::Byte>(0)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
@@ -259,6 +276,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->Name = L"ProfileManagementForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
 			this->Text = L"Your Profile";
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pboxLogo))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 

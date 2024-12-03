@@ -19,7 +19,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		Faculty^ faculty;
 		User^ globalUser;
 	private: System::Windows::Forms::Button^ btnCancel;
-	private: System::Windows::Forms::GroupBox^ groupBox1;
+	private: System::Windows::Forms::GroupBox^ groupBoxDetails;
+
 	public:
 
 
@@ -128,9 +129,9 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->EnrollmentDate = (gcnew System::Windows::Forms::Label());
 			this->Semester = (gcnew System::Windows::Forms::Label());
 			this->btnCancel = (gcnew System::Windows::Forms::Button());
-			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->groupBoxDetails = (gcnew System::Windows::Forms::GroupBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
-			this->groupBox1->SuspendLayout();
+			this->groupBoxDetails->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// btnSave
@@ -349,26 +350,26 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->btnCancel->UseVisualStyleBackColor = true;
 			this->btnCancel->Click += gcnew System::EventHandler(this, &FacultyEnrollmentManagement::btnCancel_Click);
 			// 
-			// groupBox1
+			// groupBoxDetails
 			// 
-			this->groupBox1->Controls->Add(this->Department);
-			this->groupBox1->Controls->Add(this->textBox4);
-			this->groupBox1->Controls->Add(this->textBox2);
-			this->groupBox1->Controls->Add(this->Semester);
-			this->groupBox1->Controls->Add(this->textBox1);
-			this->groupBox1->Controls->Add(this->textBox5);
-			this->groupBox1->Controls->Add(this->CourseName);
-			this->groupBox1->Controls->Add(this->dateTimePicker3);
-			this->groupBox1->Controls->Add(this->btnSave);
-			this->groupBox1->Controls->Add(this->btnCancel);
-			this->groupBox1->Controls->Add(this->EnrollmentDate);
-			this->groupBox1->Controls->Add(this->Student_Name);
-			this->groupBox1->Location = System::Drawing::Point(16, 218);
-			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(623, 204);
-			this->groupBox1->TabIndex = 47;
-			this->groupBox1->TabStop = false;
-			this->groupBox1->Text = L"Edit";
+			this->groupBoxDetails->Controls->Add(this->Department);
+			this->groupBoxDetails->Controls->Add(this->textBox4);
+			this->groupBoxDetails->Controls->Add(this->textBox2);
+			this->groupBoxDetails->Controls->Add(this->Semester);
+			this->groupBoxDetails->Controls->Add(this->textBox1);
+			this->groupBoxDetails->Controls->Add(this->textBox5);
+			this->groupBoxDetails->Controls->Add(this->CourseName);
+			this->groupBoxDetails->Controls->Add(this->dateTimePicker3);
+			this->groupBoxDetails->Controls->Add(this->btnSave);
+			this->groupBoxDetails->Controls->Add(this->btnCancel);
+			this->groupBoxDetails->Controls->Add(this->EnrollmentDate);
+			this->groupBoxDetails->Controls->Add(this->Student_Name);
+			this->groupBoxDetails->Location = System::Drawing::Point(16, 218);
+			this->groupBoxDetails->Name = L"groupBoxDetails";
+			this->groupBoxDetails->Size = System::Drawing::Size(623, 204);
+			this->groupBoxDetails->TabIndex = 47;
+			this->groupBoxDetails->TabStop = false;
+			this->groupBoxDetails->Text = L"Details";
 			// 
 			// FacultyEnrollmentManagement
 			// 
@@ -385,14 +386,15 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->dataGridView1);
-			this->Controls->Add(this->groupBox1);
+			this->Controls->Add(this->groupBoxDetails);
+			this->ForeColor = System::Drawing::Color::Maroon;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"FacultyEnrollmentManagement";
 			this->Text = L"Enroll Students";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
-			this->groupBox1->ResumeLayout(false);
-			this->groupBox1->PerformLayout();
+			this->groupBoxDetails->ResumeLayout(false);
+			this->groupBoxDetails->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
