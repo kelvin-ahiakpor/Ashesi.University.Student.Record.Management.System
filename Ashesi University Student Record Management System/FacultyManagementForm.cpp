@@ -1,5 +1,6 @@
 #include "FacultyManagementForm.h"
 #include "DatabaseManager.h"
+#include "PasswordManager.h"
 
 using namespace AshesiUniversityStudentRecordManagementSystem;
 using namespace System;
@@ -408,14 +409,16 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
     // Insert into Users table
     String^ insertUserQuery = R"(
         INSERT INTO Users (FirstName, LastName, Email, Password, UserType)
-        VALUES (@FirstName, @LastName, @Email, 'password123', 'Faculty');
+        VALUES (@FirstName, @LastName, @Email, @HashedPassword, 'Faculty');
         SELECT LAST_INSERT_ID();
         )";
 
+	String^ hashedPassword = PasswordManager::HashPassword("Password123");
     MySqlCommand^ cmdInsertUser = gcnew MySqlCommand(insertUserQuery, db->GetConnection());
     cmdInsertUser->Parameters->AddWithValue("@FirstName", textBox1->Text);
     cmdInsertUser->Parameters->AddWithValue("@LastName", textBox2->Text);
     cmdInsertUser->Parameters->AddWithValue("@Email", textBox4->Text);
+    cmdInsertUser->Parameters->AddWithValue("@HashedPassword", hashedPassword);
 
     // Execute the command and retrieve the new UserID
     Object^ userIDObj = cmdInsertUser->ExecuteScalar();
