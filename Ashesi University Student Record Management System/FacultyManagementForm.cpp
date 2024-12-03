@@ -260,106 +260,15 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
 		db->CloseConnection();
 	}
 }
+
+//Update Faculty
 System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementForm::button5_Click(System::Object^ sender, System::EventArgs^ e)
 {
     DatabaseManager^ db = DatabaseManager::GetInstance();
 
     try
     {
-        // Ensure all necessary fields are filled before updating
-        if (String::IsNullOrWhiteSpace(textBox1->Text) ||
-            String::IsNullOrWhiteSpace(textBox2->Text) ||
-            String::IsNullOrWhiteSpace(textBox4->Text) ||
-            String::IsNullOrWhiteSpace(textBox5->Text))
-        {
-            MessageBox::Show("Please fill in all required fields.", "Validation Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
-            return;
-        }
-
-        // Retrieve updated data from the form
-        String^ facultyID = textBox5->Text;
-
-        String^ firstName = textBox1->Text;
-        String^ lastName = textBox2->Text;
-        String^ email = textBox4->Text;
-        String^ dateOfAppointment = dateTimePicker1->Value.ToString("yyyy-MM-dd");
-        String^ departmentName = textBox3->Text;
-
-        db->ConnectToDatabase();
-
-        // Get the DepartmentID from the department name
-        String^ getDepartmentIDQuery = R"(
-        SELECT DepartmentID FROM Departments
-        WHERE DepartmentName = @DepartmentName;
-        )";
-
-        MySqlCommand^ departmentCmd = gcnew MySqlCommand(getDepartmentIDQuery, db->GetConnection());
-        departmentCmd->Parameters->AddWithValue("@DepartmentName", departmentName);
-
-        Object^ departmentIDObj = departmentCmd->ExecuteScalar();
-        if (departmentIDObj == nullptr)
-        {
-            MessageBox::Show("Invalid department name.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-            db->CloseConnection();
-            return;
-        }
-
-        int departmentID = (int)departmentIDObj;
-
-        // Update the Users table
-        String^ updateUserQuery = R"(
-        UPDATE Users
-        SET
-            FirstName = @FirstName,
-            LastName = @LastName,
-            Email = @Email
-        WHERE
-            UserID = (
-                SELECT UserID FROM Faculty WHERE FacultyID = @FacultyID AND IsDeleted = 0
-            );
-        )";
-
-        MySqlCommand^ updateUserCmd = gcnew MySqlCommand(updateUserQuery, db->GetConnection());
-        updateUserCmd->Parameters->AddWithValue("@FirstName", firstName);
-        updateUserCmd->Parameters->AddWithValue("@LastName", lastName);
-        updateUserCmd->Parameters->AddWithValue("@Email", email);
-        updateUserCmd->Parameters->AddWithValue("@FacultyID", facultyID);
-
-        int rowsAffectedUsers = updateUserCmd->ExecuteNonQuery();
-
-        // Update the Faculty table
-        String^ updateFacultyQuery = R"(
-        UPDATE Faculty
-        SET
-            DepartmentID = @DepartmentID,
-            DateOfAppointment = @DateOfAppointment
-        WHERE
-            FacultyID = @FacultyID AND IsDeleted = 0;
-        )";
-
-        MySqlCommand^ updateFacultyCmd = gcnew MySqlCommand(updateFacultyQuery, db->GetConnection());
-        updateFacultyCmd->Parameters->AddWithValue("@DepartmentID", departmentID);
-        updateFacultyCmd->Parameters->AddWithValue("@DateOfAppointment", dateOfAppointment);
-        updateFacultyCmd->Parameters->AddWithValue("@FacultyID", facultyID);
-
-        int rowsAffectedFaculty = updateFacultyCmd->ExecuteNonQuery();
-
-        // Check the results of the updates
-        if (rowsAffectedUsers > 0 && rowsAffectedFaculty > 0)
-        {
-            MessageBox::Show("Faculty record updated successfully!", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
-            button1_Click(sender, e); // Refresh the DataGridView
-        }
-        else if (rowsAffectedUsers == 0)
-        {
-            MessageBox::Show("No changes were made to the Users table.", "Warning", MessageBoxButtons::OK, MessageBoxIcon::Warning);
-        }
-        else if (rowsAffectedFaculty == 0)
-        {
-            MessageBox::Show("No changes were made to the Faculty table.", "Warning", MessageBoxButtons::OK, MessageBoxIcon::Warning);
-        }
-
-        db->CloseConnection();
+		UpdateFaculty(db, sender, e);
     }
     catch (Exception^ ex)
     {
@@ -376,73 +285,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
 {
     DatabaseManager^ db = DatabaseManager::GetInstance();
 
-    // Ensure the user has selected a row (row index should be >= 0)
-    if (e->RowIndex >= 0)
-    {
-        // Get the selected row from the DataGridView
-        DataGridViewRow^ selectedRow = dataGridViewFaculty->Rows[e->RowIndex];
-
-        // Check if the columns are present and fill the corresponding TextBoxes with values
-        if (selectedRow->Cells["FacultyID"] != nullptr)
-            textBox5->Text = selectedRow->Cells["FacultyID"]->Value->ToString();
-
-        if (selectedRow->Cells["FirstName"] != nullptr)
-            textBox1->Text = selectedRow->Cells["FirstName"]->Value->ToString();
-
-        if (selectedRow->Cells["LastName"] != nullptr)
-            textBox2->Text = selectedRow->Cells["LastName"]->Value->ToString();
-
-        if (selectedRow->Cells["Email"] != nullptr)
-            textBox4->Text = selectedRow->Cells["Email"]->Value->ToString();
-
-        if (selectedRow->Cells["DateOfAppointment"] != nullptr)
-        {
-            // Assuming the value from the DataGridView cell is a DateTime
-            String^ dateOfAppointmentString = selectedRow->Cells["DateOfAppointment"]->Value->ToString();
-            dateTimePicker1->Value = System::DateTime::Parse(dateOfAppointmentString);  // Assuming a different DateTimePicker (dateTimePicker2) for Date of Appointment
-        }
-
-        try
-        {
-            db->ConnectToDatabase();
-
-            String^ query = R"(
-    SELECT DepartmentName FROM Departments
-    WHERE DepartmentID = @DepartmentID;
-    )";
-
-            // Get the DepartmentID from the selected row
-            String^ departmentID = selectedRow->Cells["DepartmentID"]->Value->ToString();
-
-            // Create MySQL command and add the parameter
-            MySqlCommand^ sqlCmd = gcnew MySqlCommand(query, db->GetConnection());
-            sqlCmd->Parameters->AddWithValue("@DepartmentID", departmentID);
-
-            // Execute the query and get the result
-            MySqlDataReader^ reader = sqlCmd->ExecuteReader();
-
-            // Check if the query returned any result
-            if (reader->Read())
-            {
-                // Get the DepartmentName from the reader
-                String^ departmentName = reader["DepartmentName"]->ToString();
-
-                // Display the department name in textBox3
-                textBox3->Text = departmentName;
-            }
-
-            reader->Close();
-            db->CloseConnection();
-        }
-        catch (Exception^ ex)
-        {
-            MessageBox::Show("Error retrieving department name: " + ex->Message, "Database Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-        }
-		finally
-		{
-			db->CloseConnection();
-		}
-    }
+	LoadFacultyCell(db, e);
 
     return;  // Return void, not System::Void()
 }
@@ -505,6 +348,175 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
     }
 
     reader->Close();
+    db->CloseConnection();
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementForm::LoadFacultyCell(DatabaseManager^ db, DataGridViewCellEventArgs^ e)
+{
+    // Ensure the user has selected a row (row index should be >= 0)
+    if (e->RowIndex >= 0)
+    {
+        // Get the selected row from the DataGridView
+        DataGridViewRow^ selectedRow = dataGridViewFaculty->Rows[e->RowIndex];
+
+        // Check if the columns are present and fill the corresponding TextBoxes with values
+        if (selectedRow->Cells["FacultyID"] != nullptr)
+            textBox5->Text = selectedRow->Cells["FacultyID"]->Value->ToString();
+
+        if (selectedRow->Cells["FirstName"] != nullptr)
+            textBox1->Text = selectedRow->Cells["FirstName"]->Value->ToString();
+
+        if (selectedRow->Cells["LastName"] != nullptr)
+            textBox2->Text = selectedRow->Cells["LastName"]->Value->ToString();
+
+        if (selectedRow->Cells["Email"] != nullptr)
+            textBox4->Text = selectedRow->Cells["Email"]->Value->ToString();
+
+        if (selectedRow->Cells["DateOfAppointment"] != nullptr)
+        {
+            // Assuming the value from the DataGridView cell is a DateTime
+            String^ dateOfAppointmentString = selectedRow->Cells["DateOfAppointment"]->Value->ToString();
+            dateTimePicker1->Value = System::DateTime::Parse(dateOfAppointmentString);  // Assuming a different DateTimePicker (dateTimePicker2) for Date of Appointment
+        }
+
+        try
+        {
+            db->ConnectToDatabase();
+
+            String^ query = R"(
+    SELECT DepartmentName FROM Departments
+    WHERE DepartmentID = @DepartmentID;
+    )";
+
+            // Get the DepartmentID from the selected row
+            String^ departmentID = selectedRow->Cells["DepartmentID"]->Value->ToString();
+
+            // Create MySQL command and add the parameter
+            MySqlCommand^ sqlCmd = gcnew MySqlCommand(query, db->GetConnection());
+            sqlCmd->Parameters->AddWithValue("@DepartmentID", departmentID);
+
+            // Execute the query and get the result
+            MySqlDataReader^ reader = sqlCmd->ExecuteReader();
+
+            // Check if the query returned any result
+            if (reader->Read())
+            {
+                // Get the DepartmentName from the reader
+                String^ departmentName = reader["DepartmentName"]->ToString();
+
+                // Display the department name in textBox3
+                textBox3->Text = departmentName;
+            }
+
+            reader->Close();
+            db->CloseConnection();
+        }
+        catch (Exception^ ex)
+        {
+            MessageBox::Show("Error retrieving department name: " + ex->Message, "Database Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+        }
+        finally
+        {
+            db->CloseConnection();
+        }
+    }
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementForm::UpdateFaculty(DatabaseManager^ db, Object^ sender, EventArgs^ e)
+{
+    // Ensure all necessary fields are filled before updating
+    if (String::IsNullOrWhiteSpace(textBox1->Text) ||
+        String::IsNullOrWhiteSpace(textBox2->Text) ||
+        String::IsNullOrWhiteSpace(textBox4->Text) ||
+        String::IsNullOrWhiteSpace(textBox5->Text))
+    {
+        MessageBox::Show("Please fill in all required fields.", "Validation Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+        return;
+    }
+
+    // Retrieve updated data from the form
+    String^ facultyID = textBox5->Text;
+
+    String^ firstName = textBox1->Text;
+    String^ lastName = textBox2->Text;
+    String^ email = textBox4->Text;
+    String^ dateOfAppointment = dateTimePicker1->Value.ToString("yyyy-MM-dd");
+    String^ departmentName = textBox3->Text;
+
+    db->ConnectToDatabase();
+
+    // Get the DepartmentID from the department name
+    String^ getDepartmentIDQuery = R"(
+        SELECT DepartmentID FROM Departments
+        WHERE DepartmentName = @DepartmentName;
+        )";
+
+    MySqlCommand^ departmentCmd = gcnew MySqlCommand(getDepartmentIDQuery, db->GetConnection());
+    departmentCmd->Parameters->AddWithValue("@DepartmentName", departmentName);
+
+    Object^ departmentIDObj = departmentCmd->ExecuteScalar();
+    if (departmentIDObj == nullptr)
+    {
+        MessageBox::Show("Invalid department name.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+        db->CloseConnection();
+        return;
+    }
+
+    int departmentID = (int)departmentIDObj;
+
+    // Update the Users table
+    String^ updateUserQuery = R"(
+        UPDATE Users
+        SET
+            FirstName = @FirstName,
+            LastName = @LastName,
+            Email = @Email
+        WHERE
+            UserID = (
+                SELECT UserID FROM Faculty WHERE FacultyID = @FacultyID AND IsDeleted = 0
+            );
+        )";
+
+    MySqlCommand^ updateUserCmd = gcnew MySqlCommand(updateUserQuery, db->GetConnection());
+    updateUserCmd->Parameters->AddWithValue("@FirstName", firstName);
+    updateUserCmd->Parameters->AddWithValue("@LastName", lastName);
+    updateUserCmd->Parameters->AddWithValue("@Email", email);
+    updateUserCmd->Parameters->AddWithValue("@FacultyID", facultyID);
+
+    int rowsAffectedUsers = updateUserCmd->ExecuteNonQuery();
+
+    // Update the Faculty table
+    String^ updateFacultyQuery = R"(
+        UPDATE Faculty
+        SET
+            DepartmentID = @DepartmentID,
+            DateOfAppointment = @DateOfAppointment
+        WHERE
+            FacultyID = @FacultyID AND IsDeleted = 0;
+        )";
+
+    MySqlCommand^ updateFacultyCmd = gcnew MySqlCommand(updateFacultyQuery, db->GetConnection());
+    updateFacultyCmd->Parameters->AddWithValue("@DepartmentID", departmentID);
+    updateFacultyCmd->Parameters->AddWithValue("@DateOfAppointment", dateOfAppointment);
+    updateFacultyCmd->Parameters->AddWithValue("@FacultyID", facultyID);
+
+    int rowsAffectedFaculty = updateFacultyCmd->ExecuteNonQuery();
+
+    // Check the results of the updates
+    if (rowsAffectedUsers > 0 && rowsAffectedFaculty > 0)
+    {
+        MessageBox::Show("Faculty record updated successfully!", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
+        button1_Click(sender, e); // Refresh the DataGridView
+    }
+    else if (rowsAffectedUsers == 0)
+    {
+        MessageBox::Show("No changes were made to the Users table.", "Warning", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+    }
+    else if (rowsAffectedFaculty == 0)
+    {
+        MessageBox::Show("No changes were made to the Faculty table.", "Warning", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+    }
+
     db->CloseConnection();
 }
 
