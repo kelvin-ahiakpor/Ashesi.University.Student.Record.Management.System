@@ -27,6 +27,8 @@ System::Void AshesiUniversityStudentRecordManagementSystem::GradeManagementForm:
 {
     DatabaseManager^ db = DatabaseManager::GetInstance();
 
+    db->ConnectToDatabase();
+
     try {
         SubmitGrade(db, sender, e);
     }
