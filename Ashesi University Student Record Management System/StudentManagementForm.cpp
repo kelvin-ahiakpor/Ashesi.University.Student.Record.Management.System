@@ -271,7 +271,8 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
 
         // SQL query to delete from the Students table
         String^ deleteStudentQuery = R"(
-        DELETE FROM Students
+        UPDATE Students
+        SET IsDeleted = 1
         WHERE UserID = @UserID;
         )";
 

@@ -63,10 +63,10 @@ System::Void AshesiUniversityStudentRecordManagementSystem::GradeManagementForm:
         // Handle any exceptions that may occur
         MessageBox::Show("Error: " + ex->Message);
     }
-	finally {
-		// Close the database connection
-		db->CloseConnection();
-
+    finally {
+        // Close the database connection
+        db->CloseConnection();
+    }
 }
 
 
