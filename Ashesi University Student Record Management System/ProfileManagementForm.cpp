@@ -4,10 +4,10 @@
 
 bool AshesiUniversityStudentRecordManagementSystem::ProfileManagementForm::isProfileChanged()
 {
-	return (this->textBox1->Text != student->getFirstName() ||
-		this->textBox2->Text != student->getLastName() ||
-		this->textBox3->Text != student->getEmail() ||
-		this->textBox4->Text != student->getPassword());
+	return (this->textBox1->Text != globalUser->getFirstName() ||
+		this->textBox2->Text != globalUser->getLastName() ||
+		this->textBox3->Text != globalUser->getEmail() ||
+		this->textBox4->Text != globalUser->getPassword());
 }
 
 System::Void AshesiUniversityStudentRecordManagementSystem::ProfileManagementForm::LoadAdminProfile()
@@ -78,10 +78,10 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ProfileManagementFor
 		}
 	}
 	else {
-		this->textBox1->Text = student->getFirstName();
-		this->textBox2->Text = student->getLastName();
-		this->textBox3->Text = student->getEmail();
-		this->textBox4->Text = student->getPassword();
+		this->textBox1->Text = globalUser->getFirstName();
+		this->textBox2->Text = globalUser->getLastName();
+		this->textBox3->Text = globalUser->getEmail();
+		this->textBox4->Text = globalUser->getPassword();
 	}
    
 }
