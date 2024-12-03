@@ -7,7 +7,7 @@ using namespace System;
 using namespace System::Windows::Forms;
 using namespace MySql::Data::MySqlClient;
 
-System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementForm::button3_Click(System::Object^ sender, System::EventArgs^ e)
+System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementForm::btnCreateStudent_Click(System::Object^ sender, System::EventArgs^ e)
 {
     DatabaseManager^ db = DatabaseManager::GetInstance();
 
@@ -99,79 +99,19 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
         db->CloseConnection();
     }
 	finally {
+        LoadStudents(db);
 		db->CloseConnection();
 	}
 }
 
 
-
 System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementForm::button2_Click(System::Object^ sender, System::EventArgs^ e)
 {
     DatabaseManager^ db = DatabaseManager::GetInstance();
+    
     try
     {
-        db->ConnectToDatabase();
-
-        // SQL query to retrieve user and student details by joining Users and Students tables
-        String^ query = R"(
-        SELECT
-            Users.UserID,
-            Users.FirstName,
-            Users.LastName,
-            Users.Email,
-            Users.UserType,
-            Students.StudentID,
-            Students.DateOfBirth,
-            Students.DepartmentID,
-            Students.EnrollmentDate,
-            Students.ExpectedGraduation
-        FROM
-            Students
-        INNER JOIN
-            Users ON Students.UserID = Users.UserID;
-        )";
-
-        // Create a MySQL command using the query and the database connection
-        MySqlCommand^ cmd = gcnew MySqlCommand(query, db->GetConnection());
-
-        // Execute the query and get the results in a data reader
-        MySqlDataReader^ reader = cmd->ExecuteReader();
-
-        // Clear any existing rows and columns in the DataGridView
-        dataGridView1->Rows->Clear();
-        dataGridView1->Columns->Clear();
-
-        // Add the columns to the DataGridView (match the SQL query)
-        dataGridView1->Columns->Add("UserID", "User ID");
-        dataGridView1->Columns->Add("FirstName", "First Name");
-        dataGridView1->Columns->Add("LastName", "Last Name");
-        dataGridView1->Columns->Add("Email", "Email");
-        dataGridView1->Columns->Add("UserType", "User Type");
-        dataGridView1->Columns->Add("StudentID", "Student ID");
-        dataGridView1->Columns->Add("DateOfBirth", "Date of Birth");
-        dataGridView1->Columns->Add("DepartmentID", "Department ID");
-        dataGridView1->Columns->Add("EnrollmentDate", "Enrollment Date");
-        dataGridView1->Columns->Add("ExpectedGraduation", "Expected Graduation");
-
-        // Iterate through the result set and populate the DataGridView
-        while (reader->Read())
-        {
-            dataGridView1->Rows->Add(
-                reader["UserID"]->ToString(),
-                reader["FirstName"]->ToString(),
-                reader["LastName"]->ToString(),
-                reader["Email"]->ToString(),
-                reader["UserType"]->ToString(),
-                reader["StudentID"]->ToString(),
-                reader["DateOfBirth"]->ToString(),
-                reader["DepartmentID"]->ToString(),
-                reader["EnrollmentDate"]->ToString(),
-                reader["ExpectedGraduation"]->ToString()
-            );
-        }
-
-        reader->Close();
-        db->CloseConnection();
+        LoadStudents(db);
     }
     catch (Exception^ ex)
     {
@@ -180,7 +120,6 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
 	finally {
 		db->CloseConnection();
 	}
-
     return System::Void();
 }
 
@@ -287,7 +226,8 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
         {
             // SQL query to delete from the Users table
             String^ deleteUserQuery = R"(
-            DELETE FROM Users
+            UPDATE Users
+            SET IsDeleted = 1
             WHERE UserID = @UserID;
             )";
 
@@ -533,4 +473,73 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
 
     return;  // Return void, not System::Void()
 }
+
+System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementForm::LoadStudents(DatabaseManager^ db)
+{
+    db->ConnectToDatabase();
+
+    // SQL query to retrieve user and student details by joining Users and Students tables
+    String^ query = R"(
+        SELECT
+            Users.UserID,
+            Users.FirstName,
+            Users.LastName,
+            Users.Email,
+            Users.UserType,
+            Students.StudentID,
+            Students.DateOfBirth,
+            Students.DepartmentID,
+            Students.EnrollmentDate,
+            Students.ExpectedGraduation
+        FROM
+            Students
+        INNER JOIN
+            Users ON Students.UserID = Users.UserID
+        WHERE Users.IsDeleted = 0;
+        )";
+
+    // Create a MySQL command using the query and the database connection
+    MySqlCommand^ cmd = gcnew MySqlCommand(query, db->GetConnection());
+
+    // Execute the query and get the results in a data reader
+    MySqlDataReader^ reader = cmd->ExecuteReader();
+
+    // Clear any existing rows and columns in the DataGridView
+    dataGridView1->Rows->Clear();
+    dataGridView1->Columns->Clear();
+
+    // Add the columns to the DataGridView (match the SQL query)
+    dataGridView1->Columns->Add("UserID", "User ID");
+    dataGridView1->Columns->Add("FirstName", "First Name");
+    dataGridView1->Columns->Add("LastName", "Last Name");
+    dataGridView1->Columns->Add("Email", "Email");
+    dataGridView1->Columns->Add("UserType", "User Type");
+    dataGridView1->Columns->Add("StudentID", "Student ID");
+    dataGridView1->Columns->Add("DateOfBirth", "Date of Birth");
+    dataGridView1->Columns->Add("DepartmentID", "Department ID");
+    dataGridView1->Columns->Add("EnrollmentDate", "Enrollment Date");
+    dataGridView1->Columns->Add("ExpectedGraduation", "Expected Graduation");
+
+    // Iterate through the result set and populate the DataGridView
+    while (reader->Read())
+    {
+        dataGridView1->Rows->Add(
+            reader["UserID"]->ToString(),
+            reader["FirstName"]->ToString(),
+            reader["LastName"]->ToString(),
+            reader["Email"]->ToString(),
+            reader["UserType"]->ToString(),
+            reader["StudentID"]->ToString(),
+            reader["DateOfBirth"]->ToString(),
+            reader["DepartmentID"]->ToString(),
+            reader["EnrollmentDate"]->ToString(),
+            reader["ExpectedGraduation"]->ToString()
+        );
+    }
+
+    reader->Close();
+    db->CloseConnection();
+}
+
+
 

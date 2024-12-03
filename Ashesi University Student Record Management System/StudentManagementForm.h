@@ -1,4 +1,5 @@
 #pragma once
+#include "DatabaseManager.h"
 
 namespace AshesiUniversityStudentRecordManagementSystem {
 
@@ -76,7 +77,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	private: System::Windows::Forms::DateTimePicker^ dateTimePicker3;
 	private: System::Windows::Forms::TextBox^ textBox5;
 	private: System::Windows::Forms::Label^ label8;
-	private: System::Windows::Forms::Button^ button3;
+	private: System::Windows::Forms::Button^ btnCreateStudent;
+
 	private: System::Windows::Forms::Button^ button4;
 	private: System::Windows::Forms::GroupBox^ groupBoxActions;
 	private: System::Windows::Forms::GroupBox^ groupBox1;
@@ -115,7 +117,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->dateTimePicker3 = (gcnew System::Windows::Forms::DateTimePicker());
 			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
 			this->label8 = (gcnew System::Windows::Forms::Label());
-			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->btnCreateStudent = (gcnew System::Windows::Forms::Button());
 			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->groupBoxActions = (gcnew System::Windows::Forms::GroupBox());
@@ -311,16 +313,16 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->label8->Text = L"StudentID";
 			this->label8->Click += gcnew System::EventHandler(this, &StudentManagementForm::label8_Click);
 			// 
-			// button3
+			// btnCreateStudent
 			// 
-			this->button3->Location = System::Drawing::Point(328, 7);
-			this->button3->Margin = System::Windows::Forms::Padding(2);
-			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(86, 26);
-			this->button3->TabIndex = 19;
-			this->button3->Text = L"Create Student";
-			this->button3->UseVisualStyleBackColor = true;
-			this->button3->Click += gcnew System::EventHandler(this, &StudentManagementForm::button3_Click);
+			this->btnCreateStudent->Location = System::Drawing::Point(328, 7);
+			this->btnCreateStudent->Margin = System::Windows::Forms::Padding(2);
+			this->btnCreateStudent->Name = L"btnCreateStudent";
+			this->btnCreateStudent->Size = System::Drawing::Size(86, 26);
+			this->btnCreateStudent->TabIndex = 19;
+			this->btnCreateStudent->Text = L"Create Student";
+			this->btnCreateStudent->UseVisualStyleBackColor = true;
+			this->btnCreateStudent->Click += gcnew System::EventHandler(this, &StudentManagementForm::btnCreateStudent_Click);
 			// 
 			// button4
 			// 
@@ -347,7 +349,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// groupBoxActions
 			// 
 			this->groupBoxActions->Controls->Add(this->button5);
-			this->groupBoxActions->Controls->Add(this->button3);
+			this->groupBoxActions->Controls->Add(this->btnCreateStudent);
 			this->groupBoxActions->Controls->Add(this->button4);
 			this->groupBoxActions->Location = System::Drawing::Point(14, 554);
 			this->groupBoxActions->Name = L"groupBoxActions";
@@ -405,7 +407,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		}
 
 #pragma endregion
-	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e);
+	private: System::Void btnCreateStudent_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e);
@@ -427,5 +429,7 @@ private: System::Void label5_Click(System::Object^ sender, System::EventArgs^ e)
 }
 private: System::Void textBox4_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 }
+
+	   private: System::Void LoadStudents(DatabaseManager^ db);
 };
 }
