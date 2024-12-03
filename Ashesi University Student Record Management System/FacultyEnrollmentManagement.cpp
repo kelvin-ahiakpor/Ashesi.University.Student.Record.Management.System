@@ -92,6 +92,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyEnrollmentMan
         if (rowsAffected > 0)
         {
             MessageBox::Show("Status updated successfully!");
+            db->CloseConnection();
             ViewEnroll_Click(sender, e); // Refresh the enrollment view
         }
         else

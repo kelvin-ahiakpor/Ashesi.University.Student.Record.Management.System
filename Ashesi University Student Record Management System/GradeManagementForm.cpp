@@ -39,6 +39,11 @@ System::Void AshesiUniversityStudentRecordManagementSystem::GradeManagementForm:
 
 System::Void AshesiUniversityStudentRecordManagementSystem::GradeManagementForm::btnSubmitGrade_Click(System::Object^ sender, System::EventArgs^ e)
 {
+	if (cboxCourses->SelectedIndex == -1 || cboxStudentName->SelectedIndex == -1 || cboxGrades->SelectedIndex == -1)
+	{
+		MessageBox::Show("Please select a course, student, and grade.");
+		return;
+	}
     DatabaseManager^ db = DatabaseManager::GetInstance();
 
     db->ConnectToDatabase();
