@@ -147,6 +147,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::TranscriptForm::btnP
 System::Void AshesiUniversityStudentRecordManagementSystem::TranscriptForm::TranscriptForm_Load(System::Object^ sender, System::EventArgs^ e)
 {
     DisablePrintButtonBasedOnUserRole();
+    
 }
 
 

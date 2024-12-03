@@ -466,7 +466,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
         {
             // Assuming the value from the DataGridView cell is a DateTime
             String^ graduationDateString = selectedRow->Cells["ExpectedGraduation"]->Value->ToString();
-            dateTimePicker3->Value = System::DateTime::Parse(graduationDateString);  // Assuming a different DateTimePicker (dateTimePicker3) for Expected Graduation Date
+            dateTimePicker3->Value = System::DateTime::Parse(graduationDateString);
         }
 
         try
