@@ -102,6 +102,8 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
                 // Handle Administrator login
                 Admin^ admin = gcnew Admin(userID, firstName, lastName, email);
 
+                admin->setPassword(password);
+
                 MessageBox::Show("Login successful! Welcome, " + firstName + ".",
                     "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
 
@@ -131,6 +133,8 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
                     // Create the Student object
                     Faculty^ faculty = gcnew Faculty(
                         userID, firstName, lastName, email, facultyID, departmentID);
+
+                    faculty->setPassword(password);
 
                     // Show a success message
                     MessageBox::Show("Login successful! Welcome, " + firstName + ".",

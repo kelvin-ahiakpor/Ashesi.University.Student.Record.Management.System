@@ -38,7 +38,6 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ProfileManagementFor
 			// Create SQL command
 			MySqlCommand^ cmd = gcnew MySqlCommand(query, db->GetConnection());
 
-			// Assuming userID is a member variable of the class
 			cmd->Parameters->AddWithValue("@userID", userID);
 
 			// Execute the query and read results
@@ -116,10 +115,10 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ProfileManagementFor
 		MessageBox::Show("Profile updated successfully.", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
 		
 		// Update the student object with new values
-		student->setFirstName(this->textBox1->Text);
-		student->setLastName(this->textBox2->Text);
-		student->setEmail(this->textBox3->Text);
-		student->setPassword(this->textBox4->Text);
+		globalUser->setFirstName(this->textBox1->Text);
+		globalUser->setLastName(this->textBox2->Text);
+		globalUser->setEmail(this->textBox3->Text);
+		globalUser->setPassword(this->textBox4->Text);
 
 		isProfileUpdated = true;
 	}
