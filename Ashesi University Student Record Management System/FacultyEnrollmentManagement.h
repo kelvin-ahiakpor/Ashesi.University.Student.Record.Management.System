@@ -256,7 +256,6 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->textBox1->Location = System::Drawing::Point(109, 17);
 			this->textBox1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->ReadOnly = true;
 			this->textBox1->Size = System::Drawing::Size(713, 22);
 			this->textBox1->TabIndex = 23;
 			// 
@@ -270,6 +269,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->dataGridView1->RowTemplate->Height = 24;
 			this->dataGridView1->Size = System::Drawing::Size(829, 210);
 			this->dataGridView1->TabIndex = 22;
+			this->dataGridView1->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &FacultyEnrollmentManagement::dataGridView1_CellClick);
 			// 
 			// ViewEnroll
 			// 

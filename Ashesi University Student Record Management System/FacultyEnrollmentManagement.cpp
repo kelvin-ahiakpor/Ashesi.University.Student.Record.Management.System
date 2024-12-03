@@ -18,9 +18,8 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyEnrollmentMan
         String^ enrollString = selectedRow->Cells["EnrollmentDate"]->Value ? selectedRow->Cells["EnrollmentDate"]->Value->ToString() : "";
         dateTimePicker3->Value = String::IsNullOrEmpty(enrollString) ? System::DateTime::Now : System::DateTime::Parse(enrollString);
 
-        // Display the status in a TextBox instead of ComboBox
         String^ status = selectedRow->Cells["Status"]->Value ? selectedRow->Cells["Status"]->Value->ToString() : "";
-        textBoxStatus->Text = status; // Assuming you have a TextBox named textBoxStatus for the status
+        textBoxStatus->Text = status; 
     }
 }
 
