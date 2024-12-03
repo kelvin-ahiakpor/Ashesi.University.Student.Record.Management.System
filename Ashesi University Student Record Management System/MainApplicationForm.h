@@ -4,9 +4,6 @@
 #include "Faculty.h"
 #include "Admin.h"
 #include "TranscriptForm.h"
-#include "Student.h"
-#include "Admin.h"
-#include "Faculty.h"
 
 
 namespace AshesiUniversityStudentRecordManagementSystem {
