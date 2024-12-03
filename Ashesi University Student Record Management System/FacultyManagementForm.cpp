@@ -120,7 +120,8 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
         FROM
             Faculty
         INNER JOIN
-            Users ON Faculty.UserID = Users.UserID;
+            Users ON Faculty.UserID = Users.UserID
+        WHERE Users.IsDeleted = 0;
         )";
 
         // Create a MySQL command using the query and the database connection
@@ -260,7 +261,8 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
 
         // SQL query to delete from the Faculty table
         String^ deleteFacultyQuery = R"(
-        DELETE FROM Faculty
+        UPDATE Faculty
+        SET IsDeleted = 1
         WHERE UserID = @UserID;
         )";
 
@@ -275,7 +277,8 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
         {
             // SQL query to delete from the Users table
             String^ deleteUserQuery = R"(
-            DELETE FROM Users
+            UPDATE Users
+            SET IsDeleted = 1
             WHERE UserID = @UserID;
             )";
 
@@ -367,7 +370,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
             Email = @Email
         WHERE
             UserID = (
-                SELECT UserID FROM Faculty WHERE FacultyID = @FacultyID
+                SELECT UserID FROM Faculty WHERE FacultyID = @FacultyID AND IsDeleted = 0
             );
         )";
 
@@ -386,7 +389,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
             DepartmentID = @DepartmentID,
             DateOfAppointment = @DateOfAppointment
         WHERE
-            FacultyID = @FacultyID;
+            FacultyID = @FacultyID AND IsDeleted = 0;
         )";
 
         MySqlCommand^ updateFacultyCmd = gcnew MySqlCommand(updateFacultyQuery, db->GetConnection());
