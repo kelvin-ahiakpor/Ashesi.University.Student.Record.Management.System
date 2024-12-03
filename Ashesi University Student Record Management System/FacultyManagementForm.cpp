@@ -403,13 +403,6 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
         MessageBox::Show("Please fill in all required fields.", "Validation Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
         return;
     }
-
-    //More validation. Appointment date should not be in the future
-    if (dateTimePicker1->Value >= DateTime::Now)
-    {
-        MessageBox::Show("Appointment date cannot be in the future.", "Validation Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
-        return;
-    }
     
     db->ConnectToDatabase();
 
