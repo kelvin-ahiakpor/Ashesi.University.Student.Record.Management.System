@@ -23,6 +23,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		User^ globalUser;
 		Student^ student;
 		Admin^ admin;
+		List<Student^>^ cachedStudents = gcnew List<Student^>();
+
 	private: System::Windows::Forms::ComboBox^ cboxCourses;
 	private: System::Windows::Forms::ComboBox^ cboxStudentName;
 	public:
@@ -148,7 +150,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			this->cboxGrades->FormattingEnabled = true;
 			this->cboxGrades->Location = System::Drawing::Point(55, 190);
-			this->cboxGrades->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->cboxGrades->Margin = System::Windows::Forms::Padding(2);
 			this->cboxGrades->Name = L"cboxGrades";
 			this->cboxGrades->Size = System::Drawing::Size(228, 21);
 			this->cboxGrades->TabIndex = 6;
@@ -156,7 +158,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// btnSubmitGrade
 			// 
 			this->btnSubmitGrade->Location = System::Drawing::Point(55, 232);
-			this->btnSubmitGrade->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->btnSubmitGrade->Margin = System::Windows::Forms::Padding(2);
 			this->btnSubmitGrade->Name = L"btnSubmitGrade";
 			this->btnSubmitGrade->Size = System::Drawing::Size(88, 24);
 			this->btnSubmitGrade->TabIndex = 7;
@@ -191,7 +193,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// btnCancel
 			// 
 			this->btnCancel->Location = System::Drawing::Point(195, 232);
-			this->btnCancel->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->btnCancel->Margin = System::Windows::Forms::Padding(2);
 			this->btnCancel->Name = L"btnCancel";
 			this->btnCancel->Size = System::Drawing::Size(88, 24);
 			this->btnCancel->TabIndex = 14;
@@ -216,6 +218,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->cboxStudentName->Name = L"cboxStudentName";
 			this->cboxStudentName->Size = System::Drawing::Size(228, 21);
 			this->cboxStudentName->TabIndex = 17;
+			this->cboxStudentName->SelectedIndexChanged += gcnew System::EventHandler(this, &GradeManagementForm::cboxStudentName_SelectedIndexChanged);
+			this->cboxStudentName->TextChanged += gcnew System::EventHandler(this, &GradeManagementForm::cboxStudentName_TextChanged);
 			// 
 			// GradeManagementForm
 			// 
@@ -237,7 +241,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 				static_cast<System::Int32>(static_cast<System::Byte>(0)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
-			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"GradeManagementForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Grade Management";
@@ -255,5 +259,8 @@ private: System::Void txtStudentID_TextChanged(System::Object^ sender, System::E
 }
 private: System::Void LoadGrades(DatabaseManager^ db, Object^ sender, EventArgs^ e);
 private: System::Void SubmitGrade(DatabaseManager^ db, Object^ sender, EventArgs^ e);
+private: System::Void cboxStudentName_TextChanged(System::Object^ sender, System::EventArgs^ e);
+private: System::Void LoadStudentsToCache(DatabaseManager^ db, Object^ sender, EventArgs^ e);
+private: System::Void cboxStudentName_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e);
 };
 }

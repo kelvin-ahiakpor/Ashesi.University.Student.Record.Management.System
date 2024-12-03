@@ -75,7 +75,7 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
                 if (sqlRd->Read()) {
                     // Extract StudentID and DepartmentID
                     int studentID = (int)sqlRd["StudentID"];
-                    String^ major = sqlRd["DepartmentID"]->ToString();
+                    int^ major = (int)sqlRd["DepartmentID"];
 
                     // Create the Student object
                     Student^ currentStudent = gcnew Student(

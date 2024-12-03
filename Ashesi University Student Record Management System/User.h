@@ -27,6 +27,9 @@ public:
     String^ getLastName() { return lastName; }
     String^ getEmail() { return email; }
     String^ getSecurityAnswer() { return securityAnswer; }
+    String^ getFullName() {
+        return this->getFirstName() + " " + this->getLastName();
+    }
 
     // Setters
     void setFirstName(String^ fname) { firstName = fname; }
