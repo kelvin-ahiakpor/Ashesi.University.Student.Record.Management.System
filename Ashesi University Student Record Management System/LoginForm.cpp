@@ -109,7 +109,7 @@ System::Void LoginForm::btnLogin_Click(System::Object^ sender, System::EventArgs
                 adminDashboard->Show();
                 this->Hide();
             }
-            if (userType == "Faculty") {
+            else if (userType == "Faculty") {
                 // Query for student details
                 String^ studentQuery = "SELECT f.FacultyID, f.DepartmentID " +
                     "FROM Faculty f " +
