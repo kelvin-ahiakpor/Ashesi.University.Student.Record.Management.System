@@ -13,7 +13,8 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
 
     try
 	{
-		CreateStudents(db, sender, e);
+		CreateStudent(db, sender, e);
+        LoadStudents(db);
         
     }
     catch (Exception^ ex)
@@ -56,6 +57,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
     try
     {
 		DeleteStudent(db, sender, e);
+        LoadStudents(db); // Refresh the DataGridView
     }
     catch (Exception^ ex)
     {
@@ -75,6 +77,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
     try
     {
 		EditStudent(db, sender, e);
+        LoadStudents(db); // Refresh the DataGridView
     }
     catch (Exception^ ex)
     {
@@ -241,7 +244,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
     db->CloseConnection();
 }
 
-System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementForm::CreateStudents(DatabaseManager^ db, Object^ sender, EventArgs^ e)
+System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementForm::CreateStudent(DatabaseManager^ db, Object^ sender, EventArgs^ e)
 {
     // Validate input fields
     if (String::IsNullOrWhiteSpace(textBox1->Text) || String::IsNullOrWhiteSpace(textBox2->Text) ||
@@ -414,7 +417,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
     if (rowsAffectedUsers > 0 && rowsAffectedStudents > 0)
     {
         MessageBox::Show("Student record updated successfully!", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
-        LoadStudents(db); // Refresh the DataGridView
+        
     }
     else if (rowsAffectedUsers == 0)
     {
@@ -474,7 +477,6 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
         if (userRowsAffected > 0)
         {
             MessageBox::Show("Student deleted successfully!", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
-            LoadStudents(db);
         }
         else
         {

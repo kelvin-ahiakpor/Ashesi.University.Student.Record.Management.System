@@ -14,6 +14,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
     try
     {
 		CreateFaculty(db, sender, e);
+        LoadFaculty(db); // Refresh the DataGridView
     }
     catch (Exception^ ex)
     {
@@ -56,6 +57,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
     try
     {
 		DeleteFaculty(db, sender, e);
+        LoadFaculty(db); 
     }
     catch (Exception^ ex)
     {
@@ -76,6 +78,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
     try
     {
 		UpdateFaculty(db, sender, e);
+		LoadFaculty(db);
     }
     catch (Exception^ ex)
     {
@@ -316,7 +319,6 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
     if (rowsAffectedUsers > 0 && rowsAffectedFaculty > 0)
     {
         MessageBox::Show("Faculty record updated successfully!", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
-		LoadFaculty(db);
     }
     else if (rowsAffectedUsers == 0)
     {
@@ -376,7 +378,6 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
         if (userRowsAffected > 0)
         {
             MessageBox::Show("Faculty deleted successfully!", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
-            LoadFaculty(db); // Refresh the DataGridView
         }
         else
         {

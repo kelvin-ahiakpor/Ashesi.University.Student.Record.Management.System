@@ -421,7 +421,7 @@ private: System::Void textBox4_TextChanged(System::Object^ sender, System::Event
 }
 
 private: System::Void LoadStudents(DatabaseManager^ db);
-private: System::Void CreateStudents(DatabaseManager^ db, Object^ sender, EventArgs^ e);
+private: System::Void CreateStudent(DatabaseManager^ db, Object^ sender, EventArgs^ e);
 private: System::Void EditStudent(DatabaseManager^ db, Object^ sender, EventArgs^ e);
 private: System::Void DeleteStudent(DatabaseManager^ db, Object^ sender, EventArgs^ e);
 };
