@@ -24,7 +24,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentFor
         // Define SQL query to fetch course offerings
         String^ query = R"(
             SELECT c.CourseName, c.Credits, c.Prerequisites, c.Description, 
-                   o.Year, o.Schedule, o.MaxCapacity, o.Status, o.OfferingID
+                   o.Year, o.Schedule, o.MaxCapacity, o.Status, o.OfferingID, o.CourseID
             FROM Courses c
             INNER JOIN CourseOfferings o ON c.CourseID = o.CourseID
             WHERE c.CourseName LIKE @CourseName
@@ -44,6 +44,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentFor
         // Set up DataGridView columns
         dataGridView1->Columns->Add("CourseName", "Course Name");
         dataGridView1->Columns->Add("OfferingID", "OfferingID");
+        dataGridView1->Columns->Add("CourseID", "CourseID");
         dataGridView1->Columns->Add("Credits", "Credits");
         dataGridView1->Columns->Add("Prerequisites", "Prerequisites");
         dataGridView1->Columns->Add("Description", "Description");
@@ -58,6 +59,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentFor
             dataGridView1->Rows->Add(
                 reader["CourseName"]->ToString(),
                 reader["Credits"]->ToString(),
+                reader["CourseID"]->ToString(),
                 reader["OfferingID"]->ToString(),
                 reader["Prerequisites"] != DBNull::Value ? reader["Prerequisites"]->ToString() : "None",
                 reader["Description"] != DBNull::Value ? reader["Description"]->ToString() : "No description available",
@@ -94,6 +96,9 @@ void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentForm::dataG
         DataGridViewRow^ selectedRow = dataGridView1->Rows[e->RowIndex];
         textBox2->Text = selectedRow->Cells["CourseName"]->Value != nullptr
             ? selectedRow->Cells["CourseName"]->Value->ToString()
+            : "";
+        courseIdbox->Text = selectedRow->Cells["CourseID"]->Value != nullptr
+            ? selectedRow->Cells["CourseID"]->Value->ToString()
             : "";
         textBox3->Text = selectedRow->Cells["Credits"]->Value != nullptr
             ? selectedRow->Cells["Credits"]->Value->ToString()
@@ -172,12 +177,13 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentFor
 
         // Insert the enrollment record
         String^ insertQuery = R"(
-    INSERT INTO Enrollments (StudentID, OfferingID, EnrollmentDate,GradePoints)
-    VALUES (@StudentID, @OfferingID, @EnrollmentDate, @GradePoints)
-)";
+            INSERT INTO Enrollments (StudentID, CourseID, OfferingID, EnrollmentDate, GradePoints)
+            VALUES (@StudentID, @CourseID, @OfferingID, @EnrollmentDate, @GradePoints)
+        )";
 
         MySqlCommand^ insertCmd = gcnew MySqlCommand(insertQuery, db->GetConnection());
         insertCmd->Parameters->AddWithValue("@StudentID", StudentID);
+        insertCmd->Parameters->AddWithValue("@CourseID", Int32::Parse(courseIdbox->Text));
         insertCmd->Parameters->AddWithValue("@OfferingID", offeringID);
         insertCmd->Parameters->AddWithValue("@EnrollmentDate", enrollmentDate);
         insertCmd->Parameters->AddWithValue("@GradePoints", defaultGradePoints);
@@ -194,9 +200,8 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentFor
     }
     catch (MySqlException^ ex)
     {
-        // More specific MySQL error handling
         MessageBox::Show(
-            "MySQL Error [" + ex->Number + "]: " + ex->Message,
+            "MySQL Error [" + ex->ErrorCode + "]: " + ex->Message,
             "Database Error",
             MessageBoxButtons::OK,
             MessageBoxIcon::Error
@@ -205,7 +210,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentFor
     catch (Exception^ ex)
     {
         MessageBox::Show(
-            "Unexpected error enrolling in course: " + ex->Message,
+            "Unexpected error: " + ex->Message,
             "Error",
             MessageBoxButtons::OK,
             MessageBoxIcon::Error
@@ -213,6 +218,6 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentFor
     }
     finally
     {
-        db->CloseConnection(); // Ensure the database connection is closed
+        db->CloseConnection(); // Always close the connection
     }
 }
