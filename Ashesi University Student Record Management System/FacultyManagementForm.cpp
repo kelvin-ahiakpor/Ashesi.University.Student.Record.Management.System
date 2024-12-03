@@ -175,7 +175,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
 
         // Check if the columns are present and fill the corresponding TextBoxes with values
         if (selectedRow->Cells["FacultyID"] != nullptr)
-            textBox5->Text = selectedRow->Cells["FacultyID"]->Value->ToString();
+            textFacultyID->Text = selectedRow->Cells["FacultyID"]->Value->ToString();
 
         if (selectedRow->Cells["FirstName"] != nullptr)
             textBox1->Text = selectedRow->Cells["FirstName"]->Value->ToString();
@@ -242,14 +242,14 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
     if (String::IsNullOrWhiteSpace(textBox1->Text) ||
         String::IsNullOrWhiteSpace(textBox2->Text) ||
         String::IsNullOrWhiteSpace(textBox4->Text) ||
-        String::IsNullOrWhiteSpace(textBox5->Text))
+        String::IsNullOrWhiteSpace(textFacultyID->Text))
     {
         MessageBox::Show("Please fill in all required fields.", "Validation Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
         return;
     }
 
     // Retrieve updated data from the form
-    String^ facultyID = textBox5->Text;
+    String^ facultyID = textFacultyID->Text;
 
     String^ firstName = textBox1->Text;
     String^ lastName = textBox2->Text;
@@ -398,12 +398,19 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
 {
     // Validate input fields
     if (String::IsNullOrWhiteSpace(textBox1->Text) || String::IsNullOrWhiteSpace(textBox2->Text) ||
-        String::IsNullOrWhiteSpace(textBox4->Text) || String::IsNullOrWhiteSpace(textBox5->Text))
+        String::IsNullOrWhiteSpace(textBox4->Text) || String::IsNullOrWhiteSpace(textFacultyID->Text))
     {
         MessageBox::Show("Please fill in all required fields.", "Validation Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
         return;
     }
 
+    //More validation. Appointment date should not be in the future
+    if (dateTimePicker1->Value >= DateTime::Now)
+    {
+        MessageBox::Show("Appointment date cannot be in the future.", "Validation Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+        return;
+    }
+    
     db->ConnectToDatabase();
 
     // Insert into Users table
@@ -452,15 +459,14 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
 
     // Insert into Faculty table
     String^ insertFacultyQuery = R"(
-        INSERT INTO Faculty (UserID, DepartmentID, DateOfAppointment, FacultyID)
-        VALUES (@UserID, @DepartmentID, @DateOfAppointment, @FacultyID);
+        INSERT INTO Faculty (UserID, DepartmentID, DateOfAppointment)
+        VALUES (@UserID, @DepartmentID, @DateOfAppointment);
         )";
 
     MySqlCommand^ cmdInsertFaculty = gcnew MySqlCommand(insertFacultyQuery, db->GetConnection());
     cmdInsertFaculty->Parameters->AddWithValue("@UserID", userID);
     cmdInsertFaculty->Parameters->AddWithValue("@DepartmentID", departmentID);
     cmdInsertFaculty->Parameters->AddWithValue("@DateOfAppointment", dateTimePicker1->Value.ToString("yyyy-MM-dd"));
-    cmdInsertFaculty->Parameters->AddWithValue("@FacultyID", textBox5->Text);
 
     int rowsAffected = cmdInsertFaculty->ExecuteNonQuery();
     if (rowsAffected > 0)
@@ -479,6 +485,9 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
 {
     DatabaseManager^ db = DatabaseManager::GetInstance();
     LoadCourses(db);
+    
+    textFacultyID->Enabled = false;
+    textFacultyID->Text = "Auto-Generated";
 }
 
 System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementForm::LoadCourses(DatabaseManager^ db)

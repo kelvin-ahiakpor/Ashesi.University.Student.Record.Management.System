@@ -75,7 +75,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::Label^ label7;
 	private: System::Windows::Forms::DateTimePicker^ dateTimePicker3;
-	private: System::Windows::Forms::TextBox^ textBox5;
+	private: System::Windows::Forms::TextBox^ textFacultyID;
+
 	private: System::Windows::Forms::Label^ label8;
 	private: System::Windows::Forms::Button^ btnCreateStudent;
 	private: System::Windows::Forms::Button^ btnDelete;
@@ -118,7 +119,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->dateTimePicker3 = (gcnew System::Windows::Forms::DateTimePicker());
-			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
+			this->textFacultyID = (gcnew System::Windows::Forms::TextBox());
 			this->label8 = (gcnew System::Windows::Forms::Label());
 			this->btnCreateStudent = (gcnew System::Windows::Forms::Button());
 			this->btnDelete = (gcnew System::Windows::Forms::Button());
@@ -278,14 +279,14 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->dateTimePicker3->Size = System::Drawing::Size(476, 20);
 			this->dateTimePicker3->TabIndex = 15;
 			// 
-			// textBox5
+			// textFacultyID
 			// 
-			this->textBox5->Location = System::Drawing::Point(77, 103);
-			this->textBox5->Margin = System::Windows::Forms::Padding(2);
-			this->textBox5->Name = L"textBox5";
-			this->textBox5->Size = System::Drawing::Size(540, 20);
-			this->textBox5->TabIndex = 17;
-			this->textBox5->TextChanged += gcnew System::EventHandler(this, &StudentManagementForm::textBox5_TextChanged);
+			this->textFacultyID->Location = System::Drawing::Point(77, 103);
+			this->textFacultyID->Margin = System::Windows::Forms::Padding(2);
+			this->textFacultyID->Name = L"textFacultyID";
+			this->textFacultyID->Size = System::Drawing::Size(540, 20);
+			this->textFacultyID->TabIndex = 17;
+			this->textFacultyID->TextChanged += gcnew System::EventHandler(this, &StudentManagementForm::textBox5_TextChanged);
 			// 
 			// label8
 			// 
@@ -348,7 +349,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->groupBox1->Controls->Add(this->cboxDeptName);
 			this->groupBox1->Controls->Add(this->label8);
 			this->groupBox1->Controls->Add(this->label5);
-			this->groupBox1->Controls->Add(this->textBox5);
+			this->groupBox1->Controls->Add(this->textFacultyID);
 			this->groupBox1->Controls->Add(this->textBox1);
 			this->groupBox1->Controls->Add(this->label7);
 			this->groupBox1->Controls->Add(this->dateTimePicker1);

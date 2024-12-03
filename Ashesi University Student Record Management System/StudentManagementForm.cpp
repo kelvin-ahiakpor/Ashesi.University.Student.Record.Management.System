@@ -100,7 +100,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
 
         // Check if the columns are present and fill the corresponding TextBoxes with values
         if (selectedRow->Cells["StudentID"] != nullptr)
-            textBox5->Text = selectedRow->Cells["StudentID"]->Value->ToString();
+            textFacultyID->Text = selectedRow->Cells["StudentID"]->Value->ToString();
 
         if (selectedRow->Cells["FirstName"] != nullptr)
             textBox1->Text = selectedRow->Cells["FirstName"]->Value->ToString();
@@ -253,6 +253,20 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
         return;
     }
 
+    //More validation
+	if (dateTimePicker1->Value >= DateTime::Now)
+	{
+		MessageBox::Show("Date of birth cannot be in the future.", "Validation Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+		return;
+	}
+    // Validate enrollment date enrollment date cannot be before birthday
+	if (dateTimePicker2->Value <= dateTimePicker1->Value)
+	{
+		MessageBox::Show("Enrollment date cannot be before date of birth.", "Validation Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
+		return;
+	}
+	// Validate expected graduation date
+	if (dateTimePicker3->Value <= dateTimePicker2->Value)
     db->ConnectToDatabase();
 
     String^ hashedPassword = PasswordManager::HashPassword("password123");
@@ -332,14 +346,14 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
     if (String::IsNullOrWhiteSpace(textBox1->Text) ||
         String::IsNullOrWhiteSpace(textBox2->Text) ||
         String::IsNullOrWhiteSpace(textBox4->Text) ||
-        String::IsNullOrWhiteSpace(textBox5->Text))
+        String::IsNullOrWhiteSpace(textFacultyID->Text))
     {
         MessageBox::Show("Please fill in all required fields.", "Validation Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
         return;
     }
 
     // Retrieve updated data from the form
-    int^ studentID = Convert::ToInt32(textBox5->Text);
+    int^ studentID = Convert::ToInt32(textFacultyID->Text);
 
     String^ firstName = textBox1->Text;
     String^ lastName = textBox2->Text;
@@ -516,6 +530,8 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
 {
 	DatabaseManager^ db = DatabaseManager::GetInstance();
     LoadCourses(db);
+    textFacultyID->Text = "Auto-Generated";
+	textFacultyID->Enabled = false;
 }
 
 
