@@ -3,6 +3,7 @@
 #include "Student.h"
 #include "Faculty.h"
 #include "Admin.h"
+#include "DatabaseManager.h"
 
 namespace AshesiUniversityStudentRecordManagementSystem {
 
@@ -60,9 +61,6 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			//TODO: Add the constructor code here
 			//
 		}
-
-
-		
 
 	protected:
 		/// <summary>
@@ -248,5 +246,7 @@ private: System::Void btnCancel_Click(System::Object^ sender, System::EventArgs^
 private: System::Void GradeManagementForm_Load(System::Object^ sender, System::EventArgs^ e);
 private: System::Void txtStudentID_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 }
+private: System::Void LoadGrades(DatabaseManager^ db, Object^ sender, EventArgs^ e);
+private: System::Void SubmitGrade(DatabaseManager^ db, Object^ sender, EventArgs^ e);
 };
 }

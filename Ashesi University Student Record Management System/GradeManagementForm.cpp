@@ -11,14 +11,43 @@ System::Void AshesiUniversityStudentRecordManagementSystem::GradeManagementForm:
     DatabaseManager^ db = DatabaseManager::GetInstance();
 
     try {
-        // Establish a connection to the database
-        db->ConnectToDatabase();
+        
+    }
+    catch (Exception^ ex) {
+        // Handle any exceptions that may occur
+        MessageBox::Show("Error: " + ex->Message);
+    }
+    finally {
+        // Close the database connection
+        db->CloseConnection();
+    }
+}
 
-        // Assuming facultyID is stored in a variable or passed into the form
-        int^ facultyid = faculty->getFacultyID(); // Replace with actual faculty ID (e.g., from the logged-in session)
+System::Void AshesiUniversityStudentRecordManagementSystem::GradeManagementForm::btnSubmitGrade_Click(System::Object^ sender, System::EventArgs^ e)
+{
+    DatabaseManager^ db = DatabaseManager::GetInstance();
 
-        // SQL query to check if a student is enrolled in the course, if a grade exists, and only show courses for the faculty
-        String^ query = R"(
+    try {
+        SubmitGrade(db, sender, e);
+    }
+    catch (Exception^ ex) {
+        MessageBox::Show("Error: " + ex->Message);
+    }
+    finally {
+        db->CloseConnection();
+    }
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::GradeManagementForm::LoadGrades(DatabaseManager^ db, Object^ sender, EventArgs^ e)
+{
+    // Establish a connection to the database
+    db->ConnectToDatabase();
+
+    // Assuming facultyID is stored in a variable or passed into the form
+    int^ facultyid = faculty->getFacultyID();
+
+    // SQL query to check if a student is enrolled in the course, if a grade exists, and only show courses for the faculty
+    String^ query = R"(
     SELECT
         c.CourseName
     FROM
@@ -32,54 +61,46 @@ System::Void AshesiUniversityStudentRecordManagementSystem::GradeManagementForm:
 )";
 
 
-        // Create a command and set the facultyID parameter
-        MySqlCommand^ command = gcnew MySqlCommand(query, db->GetConnection());
-        command->Parameters->AddWithValue("@facultyID", facultyid);
+    // Create a command and set the facultyID parameter
+    MySqlCommand^ command = gcnew MySqlCommand(query, db->GetConnection());
+    command->Parameters->AddWithValue("@facultyID", facultyid);
 
-        MySqlDataReader^ reader = command->ExecuteReader();
-        if (reader->Read())
-        {
-            String^ courseName = reader["CourseName"]->ToString();
+    MySqlDataReader^ reader = command->ExecuteReader();
+    if (reader->Read())
+    {
+        String^ courseName = reader["CourseName"]->ToString();
 
-            // Populate ComboBox with grade options
-            cboxGrades->Items->Clear();  // Clear existing items (if any)
-            cboxGrades->Items->Add("A");  // Example grade options, add more if needed
-            cboxGrades->Items->Add("B");
-            cboxGrades->Items->Add("C");
-            cboxGrades->Items->Add("D");
-            cboxGrades->Items->Add("F");
+        // Populate ComboBox with grade options
+        cboxGrades->Items->Clear();  // Clear existing items (if any)
+        cboxGrades->Items->Add("A+");
+        cboxGrades->Items->Add("A");
+        cboxGrades->Items->Add("B+");
+        cboxGrades->Items->Add("B");
+        cboxGrades->Items->Add("C+");
+        cboxGrades->Items->Add("C");
+        cboxGrades->Items->Add("D+");
+        cboxGrades->Items->Add("D");
+        cboxGrades->Items->Add("E");
+        cboxGrades->Items->Add("F");
 
-            this->CourseNameBox->Text = courseName;
-        }
-        else
-        {
-            MessageBox::Show("No profile found for the specified user ID.", "Info", MessageBoxButtons::OK, MessageBoxIcon::Information);
-        }
-
-        // Close the reader after processing the data
-        reader->Close();
+        this->CourseNameBox->Text = courseName;
     }
-    catch (Exception^ ex) {
-        // Handle any exceptions that may occur
-        MessageBox::Show("Error: " + ex->Message);
+    else
+    {
+        MessageBox::Show("No profile found for the specified user ID.", "Info", MessageBoxButtons::OK, MessageBoxIcon::Information);
     }
-    finally {
-        // Close the database connection
-        db->CloseConnection();
-    }
+
+    // Close the reader after processing the data
+    reader->Close();
 }
 
-
-System::Void AshesiUniversityStudentRecordManagementSystem::GradeManagementForm::btnSubmitGrade_Click(System::Object^ sender, System::EventArgs^ e)
+System::Void AshesiUniversityStudentRecordManagementSystem::GradeManagementForm::SubmitGrade(DatabaseManager^ db, Object^ sender, EventArgs^ e)
 {
-    DatabaseManager^ db = DatabaseManager::GetInstance();
+    String^ updatedGrade = cboxGrades->SelectedItem->ToString();
+    String^ studentID = txtStudentID->Text;
+    String^ courseName = CourseNameBox->Text;
 
-    try {
-        String^ updatedGrade = cboxGrades->SelectedItem->ToString();
-        String^ studentID = txtStudentID->Text; 
-        String^ courseName = CourseNameBox->Text; 
-
-        String^ query = R"(
+    String^ query = R"(
     UPDATE Enrollments
     SET Grade = @grade
     WHERE studentID = @studentID AND courseID = (
@@ -91,25 +112,21 @@ System::Void AshesiUniversityStudentRecordManagementSystem::GradeManagementForm:
 )";
 
 
-        MySqlCommand^ command = gcnew MySqlCommand(query, db->GetConnection());
-        command->Parameters->AddWithValue("@grade", updatedGrade);
-        command->Parameters->AddWithValue("@studentID", studentID);
-        command->Parameters->AddWithValue("@courseName", courseName);
-        command->Parameters->AddWithValue("@facultyID", faculty->getFacultyID()); 
+    MySqlCommand^ command = gcnew MySqlCommand(query, db->GetConnection());
+    command->Parameters->AddWithValue("@grade", updatedGrade);
+    command->Parameters->AddWithValue("@studentID", studentID);
+    command->Parameters->AddWithValue("@courseName", courseName);
+    command->Parameters->AddWithValue("@facultyID", faculty->getFacultyID());
 
-        int result = command->ExecuteNonQuery();
+    int result = command->ExecuteNonQuery();
 
-        if (result > 0) {
-            MessageBox::Show("Grade updated successfully.");
-        }
-        else {
-            MessageBox::Show("No changes made, or grade already assigned.");
-        }
+    if (result > 0) {
+        MessageBox::Show("Grade updated successfully.");
     }
-    catch (Exception^ ex) {
-        MessageBox::Show("Error: " + ex->Message);
+    else {
+        MessageBox::Show("No changes made, or grade already assigned.");
     }
-	finally {
-		db->CloseConnection();
-	}
 }
+
+
+

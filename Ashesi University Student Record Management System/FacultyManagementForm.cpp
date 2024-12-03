@@ -48,7 +48,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
 }
 
 //Delete Faculty
-System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementForm::button4_Click(System::Object^ sender, System::EventArgs^ e)
+System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementForm::btnDelete_Click(System::Object^ sender, System::EventArgs^ e)
 {
     // Delete faculty record
     DatabaseManager^ db = DatabaseManager::GetInstance();
@@ -69,7 +69,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
 }
 
 //Update Faculty
-System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementForm::button5_Click(System::Object^ sender, System::EventArgs^ e)
+System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementForm::btnEdit_Click(System::Object^ sender, System::EventArgs^ e)
 {
     DatabaseManager^ db = DatabaseManager::GetInstance();
 
@@ -376,7 +376,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
         if (userRowsAffected > 0)
         {
             MessageBox::Show("Faculty deleted successfully!", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
-            button1_Click(sender, e); // Refresh the DataGridView
+            LoadFaculty(db); // Refresh the DataGridView
         }
         else
         {
