@@ -30,6 +30,7 @@ String^ AshesiUniversityStudentRecordManagementSystem::SecurityQuestionForm::Get
 			storedAnswer = reader["SecurityAnswer"]->ToString();  // Fetch the stored hashed answer
 		}
 		reader->Close();
+		db->CloseConnection();
 	}
 	catch (Exception^ ex)
 	{
@@ -56,15 +57,11 @@ void AshesiUniversityStudentRecordManagementSystem::SecurityQuestionForm::SetSec
 
 		cmd->ExecuteNonQuery();
 		MessageBox::Show("Security question set successfully.", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
+		db->CloseConnection();
 	}
 	catch (Exception^ ex)
 	{
 		MessageBox::Show("Error while setting security question: " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-	}
-	finally
-	{
-		DatabaseManager^ db = DatabaseManager::GetInstance();
-		db->CloseConnection();
 	}
 }
 

@@ -3,6 +3,7 @@
 #include "Student.h"
 #include "Faculty.h"
 #include "Admin.h"
+#include "DatabaseManager.h"
 
 namespace AshesiUniversityStudentRecordManagementSystem {
 
@@ -179,6 +180,7 @@ private: System::Void txtStudentID_TextChanged(System::Object^ sender, System::E
 private: System::Void richTxtTranscript_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void TranscriptForm_Load(System::Object^ sender, System::EventArgs^ e);
+private: System::Void GetTranscript(DatabaseManager^ db, Object^ sender, EventArgs^ e);
 	   
 };
 }

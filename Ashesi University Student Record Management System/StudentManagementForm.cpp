@@ -167,10 +167,6 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
         {
             MessageBox::Show("Error retrieving department name: " + ex->Message, "Database Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
         }
-		finally
-		{
-			db->CloseConnection();
-		}
     }
 
     return;  // Return void, not System::Void()
