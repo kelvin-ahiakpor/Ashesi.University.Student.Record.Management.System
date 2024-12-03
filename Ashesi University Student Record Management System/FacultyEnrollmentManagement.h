@@ -21,7 +21,9 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	private: System::Windows::Forms::Button^ btnCancel;
 	private: System::Windows::Forms::GroupBox^ groupBoxDetails;
 	private: System::Windows::Forms::Label^ label9;
-	private: System::Windows::Forms::ComboBox^ statusBox1;
+	private: System::Windows::Forms::TextBox^ textBoxStatus;
+
+
 
 
 	public:
@@ -133,8 +135,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->Semester = (gcnew System::Windows::Forms::Label());
 			this->btnCancel = (gcnew System::Windows::Forms::Button());
 			this->groupBoxDetails = (gcnew System::Windows::Forms::GroupBox());
-			this->statusBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->label9 = (gcnew System::Windows::Forms::Label());
+			this->textBoxStatus = (gcnew System::Windows::Forms::TextBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->groupBoxDetails->SuspendLayout();
 			this->SuspendLayout();
@@ -346,7 +348,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// groupBoxDetails
 			// 
-			this->groupBoxDetails->Controls->Add(this->statusBox1);
+			this->groupBoxDetails->Controls->Add(this->textBoxStatus);
 			this->groupBoxDetails->Controls->Add(this->label9);
 			this->groupBoxDetails->Controls->Add(this->Department);
 			this->groupBoxDetails->Controls->Add(this->textBox4);
@@ -367,14 +369,6 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->groupBoxDetails->TabStop = false;
 			this->groupBoxDetails->Text = L"Details";
 			// 
-			// statusBox1
-			// 
-			this->statusBox1->FormattingEnabled = true;
-			this->statusBox1->Location = System::Drawing::Point(109, 223);
-			this->statusBox1->Name = L"statusBox1";
-			this->statusBox1->Size = System::Drawing::Size(722, 24);
-			this->statusBox1->TabIndex = 48;
-			// 
 			// label9
 			// 
 			this->label9->AutoSize = true;
@@ -383,6 +377,13 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->label9->Size = System::Drawing::Size(44, 16);
 			this->label9->TabIndex = 46;
 			this->label9->Text = L"Status";
+			// 
+			// textBoxStatus
+			// 
+			this->textBoxStatus->Location = System::Drawing::Point(109, 229);
+			this->textBoxStatus->Name = L"textBoxStatus";
+			this->textBoxStatus->Size = System::Drawing::Size(722, 22);
+			this->textBoxStatus->TabIndex = 48;
 			// 
 			// FacultyEnrollmentManagement
 			// 
