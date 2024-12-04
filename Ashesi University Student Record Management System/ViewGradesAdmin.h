@@ -171,6 +171,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
             this->ForeColor = System::Drawing::Color::Maroon;
             this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
             this->Name = L"ViewGradesAdmin";
+            this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
             this->Text = L"View Grades";
             (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dgvStudentList))->EndInit();
             this->groupBoxSelect->ResumeLayout(false);

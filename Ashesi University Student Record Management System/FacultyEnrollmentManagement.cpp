@@ -19,7 +19,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyEnrollmentMan
         dateTimePicker3->Value = String::IsNullOrEmpty(enrollString) ? System::DateTime::Now : System::DateTime::Parse(enrollString);
 
         String^ status = selectedRow->Cells["Status"]->Value ? selectedRow->Cells["Status"]->Value->ToString() : "";
-        textBoxStatus->Text = status; 
+        cboxStatus->Text = status;
     }
 }
 
@@ -49,6 +49,13 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyEnrollmentMan
 
 System::Void AshesiUniversityStudentRecordManagementSystem::FacultyEnrollmentManagement::btnSave_Click(System::Object^ sender, System::EventArgs^ e)
 {
+    //Validate status
+	if (cboxStatus->Text != "Enrolled" || cboxStatus->Text != "Pending" || cboxStatus->Text != "Withdrawn")
+	{
+		MessageBox::Show("Please enter a valid status.");
+		return;
+	}
+
     DatabaseManager^ db = DatabaseManager::GetInstance();
 
     try
@@ -73,7 +80,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyEnrollmentMan
         String^ enrollmentID = selectedRow->Cells["EnrollmentID"]->Value->ToString();
 
         // Get the new status from the TextBox instead of the ComboBox
-        String^ newStatus = textBoxStatus->Text; // Assuming textBoxStatus holds the status value
+        String^ newStatus = cboxStatus->Text; // Assuming textBoxStatus holds the status value
 
         if (String::IsNullOrEmpty(newStatus))
         {

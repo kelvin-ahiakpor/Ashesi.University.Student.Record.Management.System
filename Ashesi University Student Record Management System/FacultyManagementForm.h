@@ -80,10 +80,11 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	private: System::Windows::Forms::Label^ lblDepartmentName;
 
 	private: System::Windows::Forms::Button^ btnViewFaculty;
+	private: System::Windows::Forms::TextBox^ textFacultyID;
 
 
 
-	private: System::Windows::Forms::TextBox^ textBox5;
+
 	private: System::Windows::Forms::Label^ lblFaculty;
 
 	private: System::Windows::Forms::Button^ button3;
@@ -119,7 +120,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
 			this->lblDepartmentName = (gcnew System::Windows::Forms::Label());
 			this->btnViewFaculty = (gcnew System::Windows::Forms::Button());
-			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
+			this->textFacultyID = (gcnew System::Windows::Forms::TextBox());
 			this->lblFaculty = (gcnew System::Windows::Forms::Label());
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->btnDelete = (gcnew System::Windows::Forms::Button());
@@ -237,13 +238,13 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->btnViewFaculty->UseVisualStyleBackColor = true;
 			this->btnViewFaculty->Click += gcnew System::EventHandler(this, &FacultyManagementForm::button2_Click);
 			// 
-			// textBox5
+			// textFacultyID
 			// 
-			this->textBox5->Location = System::Drawing::Point(58, 102);
-			this->textBox5->Margin = System::Windows::Forms::Padding(2);
-			this->textBox5->Name = L"textBox5";
-			this->textBox5->Size = System::Drawing::Size(543, 20);
-			this->textBox5->TabIndex = 17;
+			this->textFacultyID->Location = System::Drawing::Point(58, 102);
+			this->textFacultyID->Margin = System::Windows::Forms::Padding(2);
+			this->textFacultyID->Name = L"textFacultyID";
+			this->textFacultyID->Size = System::Drawing::Size(543, 20);
+			this->textFacultyID->TabIndex = 17;
 			// 
 			// lblFaculty
 			// 
@@ -298,7 +299,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->groupBoxCreateEdit->Controls->Add(this->dateTimePicker1);
 			this->groupBoxCreateEdit->Controls->Add(this->lblFaculty);
 			this->groupBoxCreateEdit->Controls->Add(this->lblFirstName);
-			this->groupBoxCreateEdit->Controls->Add(this->textBox5);
+			this->groupBoxCreateEdit->Controls->Add(this->textFacultyID);
 			this->groupBoxCreateEdit->Controls->Add(this->textBox2);
 			this->groupBoxCreateEdit->Controls->Add(this->lblLastName);
 			this->groupBoxCreateEdit->Controls->Add(this->lblDepartmentName);
@@ -342,6 +343,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"FacultyManagementForm";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Manage Faculty";
 			this->Load += gcnew System::EventHandler(this, &FacultyManagementForm::FacultyManagementForm_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridViewFaculty))->EndInit();

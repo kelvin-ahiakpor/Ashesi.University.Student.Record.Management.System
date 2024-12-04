@@ -23,7 +23,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	private: System::Windows::Forms::Button^ btnCancel;
 	private: System::Windows::Forms::GroupBox^ groupBoxDetails;
 	private: System::Windows::Forms::Label^ label9;
-	private: System::Windows::Forms::TextBox^ textBoxStatus;
+	private: System::Windows::Forms::ComboBox^ cboxStatus;
+
 
 
 
@@ -137,8 +138,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->Semester = (gcnew System::Windows::Forms::Label());
 			this->btnCancel = (gcnew System::Windows::Forms::Button());
 			this->groupBoxDetails = (gcnew System::Windows::Forms::GroupBox());
-			this->textBoxStatus = (gcnew System::Windows::Forms::TextBox());
 			this->label9 = (gcnew System::Windows::Forms::Label());
+			this->cboxStatus = (gcnew System::Windows::Forms::ComboBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->groupBoxDetails->SuspendLayout();
 			this->SuspendLayout();
@@ -146,7 +147,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// btnSave
 			// 
 			this->btnSave->Location = System::Drawing::Point(553, 436);
-			this->btnSave->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->btnSave->Margin = System::Windows::Forms::Padding(2);
 			this->btnSave->Name = L"btnSave";
 			this->btnSave->Size = System::Drawing::Size(86, 23);
 			this->btnSave->TabIndex = 39;
@@ -167,7 +168,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// textBox5
 			// 
 			this->textBox5->Location = System::Drawing::Point(73, 81);
-			this->textBox5->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->textBox5->Margin = System::Windows::Forms::Padding(2);
 			this->textBox5->Name = L"textBox5";
 			this->textBox5->ReadOnly = true;
 			this->textBox5->Size = System::Drawing::Size(545, 20);
@@ -196,7 +197,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// textBox4
 			// 
 			this->textBox4->Location = System::Drawing::Point(88, 111);
-			this->textBox4->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->textBox4->Margin = System::Windows::Forms::Padding(2);
 			this->textBox4->Name = L"textBox4";
 			this->textBox4->ReadOnly = true;
 			this->textBox4->Size = System::Drawing::Size(530, 20);
@@ -245,7 +246,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// textBox2
 			// 
 			this->textBox2->Location = System::Drawing::Point(82, 48);
-			this->textBox2->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->textBox2->Margin = System::Windows::Forms::Padding(2);
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->ReadOnly = true;
 			this->textBox2->Size = System::Drawing::Size(536, 20);
@@ -264,7 +265,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// textBox1
 			// 
 			this->textBox1->Location = System::Drawing::Point(82, 14);
-			this->textBox1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->textBox1->Margin = System::Windows::Forms::Padding(2);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(536, 20);
 			this->textBox1->TabIndex = 23;
@@ -275,7 +276,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridView1->Location = System::Drawing::Point(17, 42);
-			this->dataGridView1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->dataGridView1->Margin = System::Windows::Forms::Padding(2);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->RowHeadersWidth = 51;
 			this->dataGridView1->RowTemplate->Height = 24;
@@ -286,7 +287,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// ViewEnroll
 			// 
 			this->ViewEnroll->Location = System::Drawing::Point(520, 11);
-			this->ViewEnroll->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->ViewEnroll->Margin = System::Windows::Forms::Padding(2);
 			this->ViewEnroll->Name = L"ViewEnroll";
 			this->ViewEnroll->Size = System::Drawing::Size(119, 26);
 			this->ViewEnroll->TabIndex = 40;
@@ -297,7 +298,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// dateTimePicker3
 			// 
 			this->dateTimePicker3->Location = System::Drawing::Point(90, 142);
-			this->dateTimePicker3->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->dateTimePicker3->Margin = System::Windows::Forms::Padding(2);
 			this->dateTimePicker3->Name = L"dateTimePicker3";
 			this->dateTimePicker3->Size = System::Drawing::Size(528, 20);
 			this->dateTimePicker3->TabIndex = 35;
@@ -364,7 +365,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// groupBoxDetails
 			// 
-			this->groupBoxDetails->Controls->Add(this->textBoxStatus);
+			this->groupBoxDetails->Controls->Add(this->cboxStatus);
 			this->groupBoxDetails->Controls->Add(this->label9);
 			this->groupBoxDetails->Controls->Add(this->Department);
 			this->groupBoxDetails->Controls->Add(this->textBox4);
@@ -378,18 +379,10 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->groupBoxDetails->Controls->Add(this->Student_Name);
 			this->groupBoxDetails->Location = System::Drawing::Point(16, 218);
 			this->groupBoxDetails->Name = L"groupBoxDetails";
-			this->groupBoxDetails->Size = System::Drawing::Size(623, 204);
+			this->groupBoxDetails->Size = System::Drawing::Size(623, 213);
 			this->groupBoxDetails->TabIndex = 47;
 			this->groupBoxDetails->TabStop = false;
 			this->groupBoxDetails->Text = L"Details";
-			// 
-			// textBoxStatus
-			// 
-			this->textBoxStatus->Location = System::Drawing::Point(82, 186);
-			this->textBoxStatus->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
-			this->textBoxStatus->Name = L"textBoxStatus";
-			this->textBoxStatus->Size = System::Drawing::Size(542, 20);
-			this->textBoxStatus->TabIndex = 48;
 			// 
 			// label9
 			// 
@@ -400,6 +393,15 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->label9->Size = System::Drawing::Size(37, 13);
 			this->label9->TabIndex = 46;
 			this->label9->Text = L"Status";
+			// 
+			// cboxStatus
+			// 
+			this->cboxStatus->FormattingEnabled = true;
+			this->cboxStatus->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Enrolled", L"Pending", L"Withdrawn" });
+			this->cboxStatus->Location = System::Drawing::Point(90, 185);
+			this->cboxStatus->Name = L"cboxStatus";
+			this->cboxStatus->Size = System::Drawing::Size(528, 21);
+			this->cboxStatus->TabIndex = 48;
 			// 
 			// FacultyEnrollmentManagement
 			// 
@@ -421,8 +423,9 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->Controls->Add(this->groupBoxDetails);
 			this->ForeColor = System::Drawing::Color::Maroon;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
-			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"FacultyEnrollmentManagement";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Enroll Students";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->groupBoxDetails->ResumeLayout(false);
