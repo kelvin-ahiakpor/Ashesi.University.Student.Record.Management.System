@@ -95,6 +95,31 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 				delete components;
 			}
 		}
+
+
+	protected:
+		virtual bool ProcessCmdKey(Message% msg, Keys keyData) override
+		{
+			if (keyData == Keys::Escape)
+			{
+				// First check if there's an active MDI child
+				if (this->ActiveMdiChild != nullptr)
+				{
+					this->ActiveMdiChild->Close();
+
+					// After closing, check if there are no more MDI children
+					if (this->MdiChildren->Length == 0)
+					{
+						lblMotivation->Visible = true;
+						lblGetGoing->Visible = true;
+					}
+				}
+
+				return true;
+			}
+			return Form::ProcessCmdKey(msg, keyData);
+		}
+
 	private: System::Windows::Forms::MenuStrip^ menuStrip1;
 	private: System::Windows::Forms::ToolStripMenuItem^ fileToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ exitToolStripMenuItem;

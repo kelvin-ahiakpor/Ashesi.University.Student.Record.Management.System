@@ -65,18 +65,15 @@ System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm:
 
 System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm::gradesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
     if (userRole == "Administrator") {
-        ViewGradesAdmin^ adminview = gcnew ViewGradesAdmin();
-        adminview->ShowDialog();
+		OpenChildForm(ViewGradesAdmin::typeid, globalUser);
     }
     else if (userRole == "Student") {
-        ViewGrades^ studentview = gcnew ViewGrades(globalUser);
-        studentview->ShowDialog();
+        OpenChildForm(ViewGrades::typeid, globalUser);
     }
 }
 
 System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm::profileToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-        ProfileManagementForm^ profile = gcnew ProfileManagementForm(globalUser);
-        profile->ShowDialog();
+	OpenChildForm(ProfileManagementForm::typeid, globalUser);
 }
 
 System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm::coursesToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e)
