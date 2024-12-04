@@ -13,10 +13,12 @@
 #include "ProfileManagementForm.h"
 #include "GradeManagementForm.h"
 #include "ClassRoster.h"
+#include "CourseMaterialManagement.h"
 
 using namespace AshesiUniversityStudentRecordManagementSystem;
 using namespace System;
 using namespace System::Windows::Forms;
+
 
 void MainApplicationForm::OpenChildForm(Type^ formType, Object^ parameter) {
     // Ensure that the parameter is of type User
@@ -208,5 +210,12 @@ System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm:
 {
     lblMotivation->Visible = false;
     lblGetGoing->Visible = false;
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm::courseMaterialsToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+{
+    OpenChildForm(CourseMaterialManagement::typeid, globalUser);
+
+    return System::Void();
 }
 

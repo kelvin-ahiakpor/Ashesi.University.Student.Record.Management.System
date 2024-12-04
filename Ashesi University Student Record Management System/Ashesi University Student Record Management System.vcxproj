@@ -129,6 +129,9 @@
     <EmbeddedResource Include="CourseManagementForm.resx">
       <DependentUpon>CourseManagementForm.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CourseMaterialManagement.resx">
+      <DependentUpon>CourseMaterialManagement.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EnrollmentHistory.resx">
       <DependentUpon>EnrollmentHistory.h</DependentUpon>
     </EmbeddedResource>
