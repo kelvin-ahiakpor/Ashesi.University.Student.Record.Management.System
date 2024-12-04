@@ -37,6 +37,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	private: System::Windows::Forms::Label^ lblMotivation;
 	private: System::Windows::Forms::Label^ lblGetGoing;
 	private: System::Windows::Forms::ToolStripMenuItem^ courseMaterialsToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ availableCoursesToolStripMenuItem;
 
 
 
@@ -166,6 +167,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->coursesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->enrollmentsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->gradesToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->courseMaterialsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->reportsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->generateTranscriptToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->viewToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -180,7 +182,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->tsbtnLogOut = (gcnew System::Windows::Forms::ToolStripButton());
 			this->lblMotivation = (gcnew System::Windows::Forms::Label());
 			this->lblGetGoing = (gcnew System::Windows::Forms::Label());
-			this->courseMaterialsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->availableCoursesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->menuStrip1->SuspendLayout();
 			this->statusStrip1->SuspendLayout();
 			this->toolStrip1->SuspendLayout();
@@ -217,10 +219,10 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// manageToolStripMenuItem
 			// 
-			this->manageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(6) {
+			this->manageToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(7) {
 				this->studentsToolStripMenuItem,
 					this->facultyToolStripMenuItem, this->coursesToolStripMenuItem, this->enrollmentsToolStripMenuItem, this->gradesToolStripMenuItem1,
-					this->courseMaterialsToolStripMenuItem
+					this->courseMaterialsToolStripMenuItem, this->availableCoursesToolStripMenuItem
 			});
 			this->manageToolStripMenuItem->Name = L"manageToolStripMenuItem";
 			this->manageToolStripMenuItem->Size = System::Drawing::Size(77, 24);
@@ -262,6 +264,13 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->gradesToolStripMenuItem1->Text = L"Grades";
 			this->gradesToolStripMenuItem1->Click += gcnew System::EventHandler(this, &MainApplicationForm::gradesToolStripMenuItem1_Click);
 			// 
+			// courseMaterialsToolStripMenuItem
+			// 
+			this->courseMaterialsToolStripMenuItem->Name = L"courseMaterialsToolStripMenuItem";
+			this->courseMaterialsToolStripMenuItem->Size = System::Drawing::Size(224, 26);
+			this->courseMaterialsToolStripMenuItem->Text = L"Course Materials";
+			this->courseMaterialsToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainApplicationForm::courseMaterialsToolStripMenuItem_Click);
+			// 
 			// reportsToolStripMenuItem
 			// 
 			this->reportsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->generateTranscriptToolStripMenuItem });
@@ -289,21 +298,21 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// gradesToolStripMenuItem
 			// 
 			this->gradesToolStripMenuItem->Name = L"gradesToolStripMenuItem";
-			this->gradesToolStripMenuItem->Size = System::Drawing::Size(224, 26);
+			this->gradesToolStripMenuItem->Size = System::Drawing::Size(215, 26);
 			this->gradesToolStripMenuItem->Text = L"Grades";
 			this->gradesToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainApplicationForm::gradesToolStripMenuItem_Click);
 			// 
 			// enrollmentHistoryToolStripMenuItem
 			// 
 			this->enrollmentHistoryToolStripMenuItem->Name = L"enrollmentHistoryToolStripMenuItem";
-			this->enrollmentHistoryToolStripMenuItem->Size = System::Drawing::Size(224, 26);
+			this->enrollmentHistoryToolStripMenuItem->Size = System::Drawing::Size(215, 26);
 			this->enrollmentHistoryToolStripMenuItem->Text = L"Enrollment History";
 			this->enrollmentHistoryToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainApplicationForm::enrollmentHistoryToolStripMenuItem_Click);
 			// 
 			// classRosterToolStripMenuItem
 			// 
 			this->classRosterToolStripMenuItem->Name = L"classRosterToolStripMenuItem";
-			this->classRosterToolStripMenuItem->Size = System::Drawing::Size(224, 26);
+			this->classRosterToolStripMenuItem->Size = System::Drawing::Size(215, 26);
 			this->classRosterToolStripMenuItem->Text = L"Class Roster";
 			this->classRosterToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainApplicationForm::classRosterToolStripMenuItem_Click);
 			// 
@@ -393,12 +402,12 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->lblGetGoing->TabIndex = 11;
 			this->lblGetGoing->Text = L"What are we doing today\?";
 			// 
-			// courseMaterialsToolStripMenuItem
+			// availableCoursesToolStripMenuItem
 			// 
-			this->courseMaterialsToolStripMenuItem->Name = L"courseMaterialsToolStripMenuItem";
-			this->courseMaterialsToolStripMenuItem->Size = System::Drawing::Size(224, 26);
-			this->courseMaterialsToolStripMenuItem->Text = L"Course Materials";
-			this->courseMaterialsToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainApplicationForm::courseMaterialsToolStripMenuItem_Click);
+			this->availableCoursesToolStripMenuItem->Name = L"availableCoursesToolStripMenuItem";
+			this->availableCoursesToolStripMenuItem->Size = System::Drawing::Size(224, 26);
+			this->availableCoursesToolStripMenuItem->Text = L"Available Courses";
+			this->availableCoursesToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainApplicationForm::availableCoursesToolStripMenuItem_Click);
 			// 
 			// MainApplicationForm
 			// 
@@ -463,5 +472,6 @@ private: System::Void gradesToolStripMenuItem1_Click(System::Object^ sender, Sys
 private: System::Void classRosterToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void MainApplicationForm_MdiChildActivate(System::Object^ sender, System::EventArgs^ e);
 private: System::Void courseMaterialsToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void availableCoursesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

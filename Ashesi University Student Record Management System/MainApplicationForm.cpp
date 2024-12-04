@@ -218,3 +218,9 @@ System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm:
     return System::Void();
 }
 
+System::Void AshesiUniversityStudentRecordManagementSystem::MainApplicationForm::availableCoursesToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e)
+{
+    OpenChildForm(ManageAvailableCourses::typeid, globalUser);
+    return System::Void();
+}
+
