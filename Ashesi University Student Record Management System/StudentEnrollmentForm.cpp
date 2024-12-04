@@ -282,17 +282,15 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentFor
         return;
     }
 
-    // Insert the enrollment record
     String^ insertQuery = R"(
-            INSERT INTO Enrollments (StudentID, CourseID, OfferingID, EnrollmentDate, GradePoints)
-            VALUES (@StudentID, @CourseID, @OfferingID, @EnrollmentDate, @GradePoints)
-        )";
+    INSERT INTO Enrollments (StudentID, CourseID, OfferingID, EnrollmentDate, GradePoints, Status)
+    VALUES (@StudentID, @CourseID, @OfferingID, NOW(), @GradePoints, 'Pending')
+)";
 
     MySqlCommand^ insertCmd = gcnew MySqlCommand(insertQuery, db->GetConnection());
     insertCmd->Parameters->AddWithValue("@StudentID", StudentID);
     insertCmd->Parameters->AddWithValue("@CourseID", Int32::Parse(courseIdbox->Text));
     insertCmd->Parameters->AddWithValue("@OfferingID", offeringID);
-    insertCmd->Parameters->AddWithValue("@EnrollmentDate", enrollmentDate);
     insertCmd->Parameters->AddWithValue("@GradePoints", defaultGradePoints);
 
     int rowsAffected = insertCmd->ExecuteNonQuery();
