@@ -13,10 +13,10 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	/// <summary>
 	/// Summary for ManageAvailableCoursesForm
 	/// </summary>
-	public ref class ManageAvailableCoursesForm : public System::Windows::Forms::Form
+	public ref class ManageAvailableCourses : public System::Windows::Forms::Form
 	{
 	public:
-		ManageAvailableCoursesForm(void)
+		ManageAvailableCourses(void)
 		{
 			InitializeComponent();
 			//
@@ -28,7 +28,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		/// <summary>
 		/// Clean up any resources being used.
 		/// </summary>
-		~ManageAvailableCoursesForm()
+		~ManageAvailableCourses()
 		{
 			if (components)
 			{
@@ -158,7 +158,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->dataGridViewCourse->RowTemplate->Height = 24;
 			this->dataGridViewCourse->Size = System::Drawing::Size(793, 171);
 			this->dataGridViewCourse->TabIndex = 0;
-			this->dataGridViewCourse->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &ManageAvailableCoursesForm::dataGridView1_CellClick);
+			this->dataGridViewCourse->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &ManageAvailableCourses::dataGridView1_CellClick);
 			// 
 			// textBox1
 			// 
@@ -237,7 +237,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->btnViewCourse->TabIndex = 14;
 			this->btnViewCourse->Text = L"View Courses";
 			this->btnViewCourse->UseVisualStyleBackColor = true;
-			this->btnViewCourse->Click += gcnew System::EventHandler(this, &ManageAvailableCoursesForm::btnviewcourses_Click);
+			this->btnViewCourse->Click += gcnew System::EventHandler(this, &ManageAvailableCourses::btnviewcourses_Click);
 			// 
 			// lblCourseName
 			// 
@@ -257,7 +257,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->button3->TabIndex = 19;
 			this->button3->Text = L"Save Course";
 			this->button3->UseVisualStyleBackColor = true;
-			this->button3->Click += gcnew System::EventHandler(this, &ManageAvailableCoursesForm::savecourses_Click);
+			this->button3->Click += gcnew System::EventHandler(this, &ManageAvailableCourses::savecourses_Click);
 			// 
 			// btnDelete
 			// 
@@ -268,7 +268,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->btnDelete->TabIndex = 20;
 			this->btnDelete->Text = L"Delete Course";
 			this->btnDelete->UseVisualStyleBackColor = true;
-			this->btnDelete->Click += gcnew System::EventHandler(this, &ManageAvailableCoursesForm::btnDelete_Click);
+			this->btnDelete->Click += gcnew System::EventHandler(this, &ManageAvailableCourses::btnDelete_Click);
 			// 
 			// btnEdit
 			// 
@@ -279,7 +279,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->btnEdit->TabIndex = 21;
 			this->btnEdit->Text = L"Edit Course";
 			this->btnEdit->UseVisualStyleBackColor = true;
-			this->btnEdit->Click += gcnew System::EventHandler(this, &ManageAvailableCoursesForm::btnEdit_Click);
+			this->btnEdit->Click += gcnew System::EventHandler(this, &ManageAvailableCourses::btnEdit_Click);
 			// 
 			// groupBoxCreateEdit
 			// 
@@ -385,13 +385,13 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		}
 
 #pragma endregion
-	private: System::Void savecourses_Click(System::Object^ sender, System::EventArgs^ e, DataGridViewCellEventArgs^ g);
+	private: System::Void savecourses_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void btnviewcourses_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void btnDelete_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void btnEdit_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void dataGridView1_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e);
 	private: System::Void LoadCourses(DatabaseManager^ db);
-	private: System::Void LoadCourseCell(DatabaseManager^ db, DataGridViewCellEventArgs^ e);
+private: System::Void LoadCourseCell(DatabaseManager^ db, DataGridViewCellEventArgs^ e);
 	private: System::Void UpdateCourse(DatabaseManager^ db, Object^ sender, EventArgs^ e);
 	private: System::Void DeleteCourse(DatabaseManager^ db, Object^ sender, EventArgs^ e);
 	private: System::Void CreateCourse(DatabaseManager^ db, Object^ sender, EventArgs^ e);

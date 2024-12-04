@@ -1,7 +1,7 @@
 #include "ManageAvailableCourses.h"
 #include "DatabaseManager.h"
 
-System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCoursesForm::LoadCourseCell(DatabaseManager^ db, DataGridViewCellEventArgs^ e)
+System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCourses::LoadCourseCell(DatabaseManager^ db, DataGridViewCellEventArgs^ e)
 {
     // Ensure the user has selected a row (row index should be >= 0)
     if (e->RowIndex >= 0)
@@ -18,7 +18,22 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCours
     }
 }
 
-System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCoursesForm::savecourses_Click(System::Object^ sender, System::EventArgs^ e, DataGridViewCellEventArgs^ g)
+System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCourses::UpdateCourse(DatabaseManager^ db, Object^ sender, EventArgs^ e)
+{
+    return System::Void();
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCourses::DeleteCourse(DatabaseManager^ db, Object^ sender, EventArgs^ e)
+{
+    return System::Void();
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCourses::CreateCourse(DatabaseManager^ db, Object^ sender, EventArgs^ e)
+{
+    return System::Void();
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCourses::savecourses_Click(System::Object^ sender, System::EventArgs^ e)
 {
     // Validate input fields
     if (String::IsNullOrEmpty(textBox1->Text))
@@ -37,7 +52,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCours
     String^ courseName = textBox1->Text;
     String^ selectedDepartmentName = comboBox1->SelectedItem->ToString();
     String^ semester = textBox2->Text;  // Assuming textBoxSemester for Semester
-    String^ year = textBox4->Text;          // Assuming textBoxYear for Year
+    String^ year = textBox4->Text;      // Assuming textBoxYear for Year
     int maxCapacity = Convert::ToInt32(textBox3->Text); // Assuming numericUpDownMaxCapacity for Max Capacity
     String^ status = comboBox3->SelectedItem->ToString(); // Assuming comboBoxStatus for Status (e.g., "Active", "Inactive")
 
@@ -75,55 +90,67 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCours
 
     int facultyID = Convert::ToInt32(facultyIDObj);
 
-    int^ CourseID;
-    if (g->RowIndex >= 0)
+    // Ensure a row is selected
+    if (dataGridViewCourse->SelectedCells->Count > 0)
     {
-        // Get the selected row from the DataGridView
-        DataGridViewRow^ selectedRow = dataGridViewCourse->Rows[g->RowIndex];
+        DataGridViewCell^ selectedCell = dataGridViewCourse->SelectedCells[0];
+        DataGridViewRow^ selectedRow = selectedCell->OwningRow;
 
+        // Get the CourseID from the selected row
         if (selectedRow->Cells["CourseID"] != nullptr)
-            CourseID = Convert::ToInt32(selectedRow->Cells["CourseID"]->Value);
-    }
-
-    // SQL query for insert or update into CourseOffering table
-    String^ query = R"(
-        INSERT INTO CourseOffering (CourseID, DepartmentID, Semester, FacultyID, Year, MaxCapacity, Status)
-        VALUES (@CourseID, @DepartmentID, @Semester, @FacultyID, @Year, @MaxCapacity, @Status);
-    )";
-
-    MySqlCommand^ cmd = gcnew MySqlCommand(query, db->GetConnection());
-    cmd->Parameters->AddWithValue("@CourseID", CourseID);
-    cmd->Parameters->AddWithValue("@DepartmentID", departmentID);
-    cmd->Parameters->AddWithValue("@Semester", semester);
-    cmd->Parameters->AddWithValue("@FacultyID", facultyID);
-    cmd->Parameters->AddWithValue("@Year", year);
-    cmd->Parameters->AddWithValue("@MaxCapacity", maxCapacity);
-    cmd->Parameters->AddWithValue("@Status", status);
-
-    // Execute the query
-    try
-    {
-        int rowsAffected = cmd->ExecuteNonQuery();
-        if (rowsAffected > 0)
         {
-            MessageBox::Show("Course offering saved successfully.", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
-            // Optionally reload courses to reflect changes
-            btnviewcourses_Click(sender, e);
+            int CourseID = Convert::ToInt32(selectedRow->Cells["CourseID"]->Value);
+
+            // SQL query for insert or update into CourseOffering table
+            String^ query = R"(
+                INSERT INTO CourseOffering (CourseID, DepartmentID, Semester, FacultyID, Year, MaxCapacity, Status)
+                VALUES (@CourseID, @DepartmentID, @Semester, @FacultyID, @Year, @MaxCapacity, @Status);
+            )";
+
+            MySqlCommand^ cmd = gcnew MySqlCommand(query, db->GetConnection());
+            cmd->Parameters->AddWithValue("@CourseID", CourseID);
+            cmd->Parameters->AddWithValue("@DepartmentID", departmentID);
+            cmd->Parameters->AddWithValue("@Semester", semester);
+            cmd->Parameters->AddWithValue("@FacultyID", facultyID);
+            cmd->Parameters->AddWithValue("@Year", year);
+            cmd->Parameters->AddWithValue("@MaxCapacity", maxCapacity);
+            cmd->Parameters->AddWithValue("@Status", status);
+
+            // Execute the query
+            try
+            {
+                int rowsAffected = cmd->ExecuteNonQuery();
+                if (rowsAffected > 0)
+                {
+                    MessageBox::Show("Course offering saved successfully.", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
+                    // Optionally reload courses to reflect changes
+                    btnviewcourses_Click(sender, e);
+                }
+                else
+                {
+                    MessageBox::Show("No changes were made to the database.", "Information", MessageBoxButtons::OK, MessageBoxIcon::Information);
+                }
+            }
+            catch (Exception^ ex)
+            {
+                MessageBox::Show("An error occurred while saving the course offering: " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+            }
         }
         else
         {
-            MessageBox::Show("No changes were made to the database.", "Information", MessageBoxButtons::OK, MessageBoxIcon::Information);
+            MessageBox::Show("Course ID is missing from the selected row.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
         }
     }
-    catch (Exception^ ex)
+    else
     {
-        MessageBox::Show("An error occurred while saving the course offering: " + ex->Message, "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+        MessageBox::Show("Please select a row from the DataGridView to proceed.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
     }
 
     db->CloseConnection();
 }
 
-System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCoursesForm::btnviewcourses_Click(System::Object^ sender, System::EventArgs^ e)
+
+System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCourses::btnviewcourses_Click(System::Object^ sender, System::EventArgs^ e)
 {
     String^ selectedDepartmentName = comboBox1->SelectedItem->ToString();
     if (String::IsNullOrEmpty(selectedDepartmentName))
@@ -191,5 +218,25 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCours
 
     reader->Close();
     db->CloseConnection();
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCourses::btnDelete_Click(System::Object^ sender, System::EventArgs^ e)
+{
+    return System::Void();
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCourses::btnEdit_Click(System::Object^ sender, System::EventArgs^ e)
+{
+    return System::Void();
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCourses::dataGridView1_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e)
+{
+    return System::Void();
+}
+
+System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCourses::LoadCourses(DatabaseManager^ db)
+{
+    return System::Void();
 }
 

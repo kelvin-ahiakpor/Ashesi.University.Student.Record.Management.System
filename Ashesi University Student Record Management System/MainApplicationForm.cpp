@@ -14,6 +14,7 @@
 #include "GradeManagementForm.h"
 #include "ClassRoster.h"
 #include "CourseMaterialManagement.h"
+#include "ManageAvailableCourses.h"
 
 using namespace AshesiUniversityStudentRecordManagementSystem;
 using namespace System;
