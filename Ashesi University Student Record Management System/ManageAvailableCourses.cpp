@@ -20,7 +20,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCours
     // Get input values
     String^ courseName = textBox1->Text;
     String^ selectedDepartmentName = cboxDeptName->SelectedItem->ToString();
-    String^ semester = textBox2->Text;  // Assuming textBoxSemester for Semester
+    String^ semester = comboBox1->SelectedItem->ToString();  // Assuming textBoxSemester for Semester
     String^ year = textBox4->Text;      // Assuming textBoxYear for Year
     int maxCapacity = Convert::ToInt32(textBox3->Text); // Assuming numericUpDownMaxCapacity for Max Capacity
     String^ status = comboBox3->SelectedItem->ToString(); // Assuming comboBoxStatus for Status (e.g., "Active", "Inactive")
@@ -254,7 +254,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCours
         // Get the values from TextBoxes and ComboBoxes
         String^ courseName = textBox1->Text;
         String^ selectedDepartmentName = cboxDeptName->SelectedItem->ToString();
-        String^ semester = textBox2->Text;
+        String^ semester = comboBox1->SelectedItem->ToString();
         String^ year = textBox4->Text;
         int maxCapacity = Convert::ToInt32(textBox3->Text);
         String^ status = comboBox3->SelectedItem->ToString();
