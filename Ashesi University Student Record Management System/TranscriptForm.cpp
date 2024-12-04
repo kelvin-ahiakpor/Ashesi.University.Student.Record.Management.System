@@ -79,8 +79,16 @@ System::Void AshesiUniversityStudentRecordManagementSystem::TranscriptForm::GetT
 
     db->ConnectToDatabase();
 
-    // Get the UserID from the input field
-    int userID = Convert::ToInt32(txtStudentID->Text);
+    int userID;
+    if (userRole == "Administrator") {
+        // Get the UserID from the input field
+        int userID = Convert::ToInt32(txtStudentID->Text);
+    }
+    else {
+        txtStudentID->Text = student->getStudentID()->ToString();
+        int userID = Convert::ToInt32(txtStudentID->Text);
+    }
+
 
 
     // Check if the UserID field is empty
