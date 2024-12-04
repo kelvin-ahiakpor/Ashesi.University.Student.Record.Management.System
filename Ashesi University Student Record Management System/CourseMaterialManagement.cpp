@@ -7,12 +7,51 @@ using namespace System::Windows::Forms;
 
 System::Void AshesiUniversityStudentRecordManagementSystem::CourseMaterialManagement::treeViewMaterials_AfterSelect(System::Object^ sender, System::Windows::Forms::TreeViewEventArgs^ e)
 {
-    if (e->Node->Parent != nullptr && e->Node->Parent->Parent != nullptr) {
-        txtBookTitle->Text = e->Node->Text;
-        comboMaterialType->SelectedItem = e->Node->Parent->Text;
+    // Check if a valid material node is selected
+    if (e->Node != nullptr && e->Node->Parent != nullptr && e->Node->Parent->Parent != nullptr)
+    {
+        // Retrieve MaterialID from the selected node's Tag
+        int materialID = Convert::ToInt32(e->Node->Tag);
+
+        // Query the database to retrieve Description and Material Link
+        DatabaseManager^ db = DatabaseManager::GetInstance();
+        db->ConnectToDatabase();
+
+        // SQL query to fetch material details using the MaterialID
+        String^ query = R"(
+            SELECT Type, Title, Description, FilePath
+            FROM CourseMaterials
+            WHERE MaterialID = @materialID
+        )";
+
+        MySqlCommand^ cmd = gcnew MySqlCommand(query, db->GetConnection());
+        cmd->Parameters->AddWithValue("@materialID", materialID);
+
+        MySqlDataReader^ reader = cmd->ExecuteReader();
+
+        // If material is found, display its details in the textboxes
+        if (reader->Read())
+        {
+            // Set the Description and FilePath (Material Link) in the respective textboxes
+			// Set the Material Type and Book Title in the respective combobox and textbox
+			comboMaterialType->Text = reader["Type"]->ToString();
+			txtBookTitle->Text = reader["Title"]->ToString();
+            txtDescription->Text = reader["Description"]->ToString();
+            txtmaterialLink->Text = reader["FilePath"]->ToString();
+        }
+        else
+        {
+            // Clear the textboxes if no material is found
+            txtDescription->Clear();
+            txtmaterialLink->Clear();
+        }
+
+        // Clean up
+        reader->Close();
+        db->CloseConnection();
     }
-    return System::Void();
 }
+
 
 System::Void AshesiUniversityStudentRecordManagementSystem::CourseMaterialManagement::btnAddMaterial_Click(System::Object^ sender, System::EventArgs^ e)
 {
