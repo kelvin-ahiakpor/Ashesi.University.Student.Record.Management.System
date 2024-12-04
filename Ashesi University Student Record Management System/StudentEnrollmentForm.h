@@ -1,6 +1,7 @@
 #pragma once
 #include "Student.h"
 #include "User.h"
+#include "Course.h"
 #include "DatabaseManager.h"
 
 namespace AshesiUniversityStudentRecordManagementSystem {
@@ -20,7 +21,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	public:
 		int^ StudentID;
 		User^ globalUser;
-
+		List<Course^>^ cachedCourses = gcnew List<Course^>();
 		StudentEnrollmentForm(void)
 		{
 			InitializeComponent();
@@ -48,7 +49,6 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		}
 
 	private: System::Windows::Forms::Label^ label9;
-	public:
 	private: System::Windows::Forms::TextBox^ courseIdbox;
 		   Student^ student;
 
@@ -393,6 +393,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			   this->Name = L"StudentEnrollmentForm";
 			   this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
 			   this->Text = L"Student Enrollment";
+			   this->Load += gcnew System::EventHandler(this, &StudentEnrollmentForm::StudentEnrollmentForm_Load);
 			   (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			   this->ResumeLayout(false);
 			   this->PerformLayout();
@@ -409,6 +410,8 @@ private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e)
 private: System::Void txtBoxSearch_TextChanged(System::Object^ sender, System::EventArgs^ e);
 private: System::Void SearchCourses(DatabaseManager^ db, System::Object^ sender, System::EventArgs^ e);
 private: System::Void EnrollStudent(DatabaseManager^ db, System::Object^ sender, System::EventArgs^ e);
+private: System::Void LoadCoursesToCache();
+private: System::Void StudentEnrollmentForm_Load(System::Object^ sender, System::EventArgs^ e);
 };
 	
 
