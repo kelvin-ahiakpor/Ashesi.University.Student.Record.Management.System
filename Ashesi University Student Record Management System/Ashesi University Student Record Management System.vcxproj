@@ -64,6 +64,9 @@
     <ClInclude Include="MainApplicationForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="ManageAvailableCourses.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="PasswordManager.h" />
     <ClInclude Include="SecurityQuestionForm.h">
       <FileType>CppForm</FileType>
@@ -115,6 +118,7 @@
     <ClCompile Include="GradeManagementForm.cpp" />
     <ClCompile Include="LoginForm.cpp" />
     <ClCompile Include="MainApplicationForm.cpp" />
+    <ClCompile Include="ManageAvailableCourses.cpp" />
     <ClCompile Include="ProfileManagementForm.cpp" />
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="SecurityQuestionForm.cpp" />
@@ -152,6 +156,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainApplicationForm.resx">
       <DependentUpon>MainApplicationForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManageAvailableCourses.resx">
+      <DependentUpon>ManageAvailableCourses.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProfileManagementForm.resx">
       <DependentUpon>ProfileManagementForm.h</DependentUpon>

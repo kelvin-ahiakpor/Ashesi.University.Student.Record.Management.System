@@ -102,6 +102,9 @@
     <ClInclude Include="SecurityQuestionForm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ManageAvailableCourses.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CourseManagementForm.cpp">
@@ -163,6 +166,9 @@
     </ClCompile>
     <ClCompile Include="SecurityQuestionForm.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ManageAvailableCourses.cpp">
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
