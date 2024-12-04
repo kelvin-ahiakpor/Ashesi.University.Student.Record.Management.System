@@ -68,7 +68,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::Label^ label4;
-	private: System::Windows::Forms::TextBox^ textBox3;
+
 	private: System::Windows::Forms::Label^ label5;
 	private: System::Windows::Forms::TextBox^ textBox4;
 	private: System::Windows::Forms::Label^ label6;
@@ -83,6 +83,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 
 	private: System::Windows::Forms::GroupBox^ groupBoxActions;
 	private: System::Windows::Forms::GroupBox^ groupBox1;
+	private: System::Windows::Forms::ComboBox^ cboxDeptName;
 	private: System::Windows::Forms::Button^ btnEdit;
 
 
@@ -111,7 +112,6 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->label4 = (gcnew System::Windows::Forms::Label());
-			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
 			this->label6 = (gcnew System::Windows::Forms::Label());
@@ -125,6 +125,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->btnEdit = (gcnew System::Windows::Forms::Button());
 			this->groupBoxActions = (gcnew System::Windows::Forms::GroupBox());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->cboxDeptName = (gcnew System::Windows::Forms::ComboBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->groupBoxActions->SuspendLayout();
 			this->groupBox1->SuspendLayout();
@@ -217,14 +218,6 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->label4->Size = System::Drawing::Size(82, 13);
 			this->label4->TabIndex = 9;
 			this->label4->Text = L"Enrollment Date";
-			// 
-			// textBox3
-			// 
-			this->textBox3->Location = System::Drawing::Point(110, 172);
-			this->textBox3->Margin = System::Windows::Forms::Padding(2);
-			this->textBox3->Name = L"textBox3";
-			this->textBox3->Size = System::Drawing::Size(508, 20);
-			this->textBox3->TabIndex = 10;
 			// 
 			// label5
 			// 
@@ -352,6 +345,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			// 
 			// groupBox1
 			// 
+			this->groupBox1->Controls->Add(this->cboxDeptName);
 			this->groupBox1->Controls->Add(this->label8);
 			this->groupBox1->Controls->Add(this->label5);
 			this->groupBox1->Controls->Add(this->textBox5);
@@ -366,7 +360,6 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->groupBox1->Controls->Add(this->textBox4);
 			this->groupBox1->Controls->Add(this->label2);
 			this->groupBox1->Controls->Add(this->label3);
-			this->groupBox1->Controls->Add(this->textBox3);
 			this->groupBox1->Controls->Add(this->label4);
 			this->groupBox1->Location = System::Drawing::Point(16, 220);
 			this->groupBox1->Name = L"groupBox1";
@@ -374,6 +367,14 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->groupBox1->TabIndex = 23;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Details";
+			// 
+			// cboxDeptName
+			// 
+			this->cboxDeptName->FormattingEnabled = true;
+			this->cboxDeptName->Location = System::Drawing::Point(103, 172);
+			this->cboxDeptName->Name = L"cboxDeptName";
+			this->cboxDeptName->Size = System::Drawing::Size(513, 21);
+			this->cboxDeptName->TabIndex = 19;
 			// 
 			// StudentManagementForm
 			// 
@@ -389,6 +390,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"StudentManagementForm";
 			this->Text = L"StudentManagementForm";
+			this->Load += gcnew System::EventHandler(this, &StudentManagementForm::StudentManagementForm_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->groupBoxActions->ResumeLayout(false);
 			this->groupBox1->ResumeLayout(false);
@@ -424,5 +426,7 @@ private: System::Void LoadStudents(DatabaseManager^ db);
 private: System::Void CreateStudent(DatabaseManager^ db, Object^ sender, EventArgs^ e);
 private: System::Void EditStudent(DatabaseManager^ db, Object^ sender, EventArgs^ e);
 private: System::Void DeleteStudent(DatabaseManager^ db, Object^ sender, EventArgs^ e);
+private: System::Void LoadCourses(DatabaseManager^ db);
+private: System::Void StudentManagementForm_Load(System::Object^ sender, System::EventArgs^ e);
 };
 }
