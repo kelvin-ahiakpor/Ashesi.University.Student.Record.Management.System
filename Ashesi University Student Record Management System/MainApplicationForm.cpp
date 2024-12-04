@@ -169,6 +169,7 @@ void MainApplicationForm::UpdateMenuForRole(String^ userRole) {
     gradesToolStripMenuItem1->Enabled= (userRole == "Faculty");
     generateTranscriptToolStripMenuItem->Enabled = (userRole != "Faculty");
     classRosterToolStripMenuItem->Enabled = (userRole == "Faculty");
+    courseMaterialsToolStripMenuItem->Enabled= (userRole == "Faculty");
 
 
 }
