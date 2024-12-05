@@ -21,6 +21,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 	public:
 		int^ StudentID;
 		User^ globalUser;
+
+	public:
 		List<Course^>^ cachedCourses = gcnew List<Course^>();
 		StudentEnrollmentForm(void)
 		{
@@ -223,7 +225,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			   // label3
 			   // 
 			   this->label3->AutoSize = true;
-			   this->label3->Location = System::Drawing::Point(525, 173);
+			   this->label3->Location = System::Drawing::Point(527, 284);
 			   this->label3->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			   this->label3->Name = L"label3";
 			   this->label3->Size = System::Drawing::Size(60, 13);
@@ -233,7 +235,7 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			   // label4
 			   // 
 			   this->label4->AutoSize = true;
-			   this->label4->Location = System::Drawing::Point(525, 284);
+			   this->label4->Location = System::Drawing::Point(527, 173);
 			   this->label4->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			   this->label4->Name = L"label4";
 			   this->label4->Size = System::Drawing::Size(67, 13);
@@ -345,9 +347,9 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			   this->label9->Location = System::Drawing::Point(525, 91);
 			   this->label9->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			   this->label9->Name = L"label9";
-			   this->label9->Size = System::Drawing::Size(51, 13);
+			   this->label9->Size = System::Drawing::Size(46, 13);
 			   this->label9->TabIndex = 26;
-			   this->label9->Text = L"CourseID";
+			   this->label9->Text = L"Lecturer";
 			   // 
 			   // courseIdbox
 			   // 

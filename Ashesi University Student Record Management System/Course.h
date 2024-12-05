@@ -7,7 +7,9 @@ public ref class Course {
 private:
     int^ courseID;
     String^ courseName;
+    String^ lecturerName;
     String^ departmentID;
+    String^ status;
     double^ credits;
     String^ description;
     List<String^>^ prerequisites;
@@ -17,7 +19,7 @@ private:
     String^ schedule;
     int^ maxCapacity;
     int^ offeringID;
-
+   
 public:
     // Constructor
     Course(int^ id, String^ name, String^ Description, double^ cred)
@@ -28,9 +30,11 @@ public:
     // Existing getters
     int^ getCourseID() { return courseID; }
     String^ getCourseName() { return courseName; }
+	String^ getLecturerName() { return lecturerName; }
     double^ getCredits() { return credits; }
     bool getIsActive() { return isActive; }
     String^ getDescription() { return description; }
+	String^ getStatus() { return status; }
 
     // New getters
     String^ getDepartmentID() { return departmentID; }
@@ -43,6 +47,7 @@ public:
     void setCourseName(String^ name) { courseName = name; }
     void setDescription(String^ desc) { description = desc; }
     void setIsActive(bool active) { isActive = active; }
+	void setLecturerName(String^ lecturer) { lecturerName = lecturer; }
 
     // New setters
     void setDepartmentID(String^ deptID) { departmentID = deptID; }
@@ -50,6 +55,8 @@ public:
     void setSchedule(String^ sched) { schedule = sched; }
     void setMaxCapacity(int^ capacity) { maxCapacity = capacity; }
     void setOfferingID(int^ offID) { offeringID = offID; }
+	void setStatus(String^ stat) { status = stat; }
+	void setCourseID(int^ id) { courseID = id; }
 
     // Existing course management methods
     bool addPrerequisite(String^ courseID) {

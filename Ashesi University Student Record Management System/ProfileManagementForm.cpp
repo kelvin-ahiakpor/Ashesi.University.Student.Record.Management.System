@@ -183,7 +183,6 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ProfileManagementFor
 		MessageBox::Show("Please set your security question and answer.", "Info", MessageBoxButtons::OK, MessageBoxIcon::Information);
 		SecurityQuestionForm^ securityForm = gcnew SecurityQuestionForm(globalUser);
 		securityForm->ShowDialog(); // Show the form and wait for the user to complete it
-		this->Close();  // Close the profile form until the question is set
 	}
 	pictureBox1->ImageLocation = globalUser->getProfilePicturePath();
 }

@@ -49,13 +49,6 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyEnrollmentMan
 
 System::Void AshesiUniversityStudentRecordManagementSystem::FacultyEnrollmentManagement::btnSave_Click(System::Object^ sender, System::EventArgs^ e)
 {
-    //Validate status
-	if (cboxStatus->Text != "Enrolled" || cboxStatus->Text != "Pending" || cboxStatus->Text != "Withdrawn")
-	{
-		MessageBox::Show("Please enter a valid status.");
-		return;
-	}
-
     DatabaseManager^ db = DatabaseManager::GetInstance();
 
     try
@@ -131,9 +124,20 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyEnrollmentMan
 
     // SQL query to retrieve enrollment data
     String^ query = R"(
-    SELECT e.EnrollmentID, c.CourseName, d.DepartmentName, u.FirstName, u.LastName, c.Credits, c.Description, c.Prerequisites, co.Semester, e.EnrollmentDate, e.Status 
+    SELECT 
+        e.EnrollmentID, 
+        c.CourseName, 
+        d.DepartmentName, 
+        u.FirstName, 
+        u.LastName, 
+        c.Credits, 
+        c.Description, 
+        c.Prerequisites, 
+        co.Semester, 
+        e.EnrollmentDate, 
+        e.Status 
     FROM Enrollments e
-    INNER JOIN CourseOfferings co ON e.CourseID = co.CourseID
+    INNER JOIN CourseOfferings co ON e.OfferingID = co.OfferingID
     INNER JOIN Courses c ON co.CourseID = c.CourseID
     INNER JOIN Departments d ON c.DepartmentID = d.DepartmentID
     INNER JOIN Faculty f ON co.FacultyID = f.FacultyID
@@ -141,6 +145,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyEnrollmentMan
     INNER JOIN Users u ON s.UserID = u.UserID
     WHERE f.FacultyID = @facultyid;
 )";
+
 
 
     MySqlCommand^ cmd = gcnew MySqlCommand(query, db->GetConnection());
@@ -169,6 +174,9 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyEnrollmentMan
         dataGridView1->Columns->Add("EnrollmentDate", "EnrollmentDate");
         dataGridView1->Columns->Add("Status", "Status");
     }
+
+	// Clear old data
+	dataGridView1->Rows->Clear();
 
     // Populate DataGridView with data
     while (reader->Read())

@@ -191,31 +191,39 @@ System::Void AshesiUniversityStudentRecordManagementSystem::GradeManagementForm:
 
 System::Void AshesiUniversityStudentRecordManagementSystem::GradeManagementForm::LoadStudentsToCache(DatabaseManager^ db, Object^ sender, EventArgs^ e)
 {
+    // return if students have already been cached
+	if (cachedStudents->Count > 0)
+	{
+		return;
+	}
+
     db->ConnectToDatabase();
 
     int^ facultyid = faculty->getFacultyID();
 
-    // Update query to filter students where the departmentID matches the faculty's department
     String^ queryStudents = R"(
     SELECT 
-        s.StudentID,
-        u.UserID, 
-        u.FirstName, 
-        u.LastName, 
-        u.Email,
-        s.DepartmentID  -- Fetch the DepartmentID
-    FROM 
-        Students s
-    INNER JOIN 
-        Enrollments e ON s.StudentID = e.StudentID
-    INNER JOIN 
-        CourseOfferings co ON e.OfferingID = co.OfferingID
-    INNER JOIN 
-        Users u ON s.UserID = u.UserID
-    WHERE 
-        co.FacultyID = @facultyID
-        AND s.IsDeleted = 0
-        AND s.DepartmentID = (SELECT DepartmentID FROM Faculty WHERE FacultyID = @facultyID)  -- Matching the department
+    s.StudentID,
+    u.UserID,
+    u.FirstName,
+    u.LastName,
+    u.Email,
+    s.DepartmentID,
+    co.CourseID,
+    co.Semester,
+    co.Year
+FROM 
+    Students s
+INNER JOIN 
+    Enrollments e ON s.StudentID = e.StudentID
+INNER JOIN 
+    CourseOfferings co ON e.OfferingID = co.OfferingID
+INNER JOIN 
+    Users u ON s.UserID = u.UserID
+WHERE 
+    co.FacultyID = @facultyID
+    AND s.IsDeleted = 0
+    AND e.Status = 'Enrolled';  
     )";
 
     MySqlCommand^ commandStudents = gcnew MySqlCommand(queryStudents, db->GetConnection());
@@ -232,12 +240,22 @@ System::Void AshesiUniversityStudentRecordManagementSystem::GradeManagementForm:
 		int^ userID = Convert::ToInt32(readerStudents["UserID"]);
         String^ firstName = readerStudents["FirstName"]->ToString();
         String^ lastName = readerStudents["LastName"]->ToString();
+
 		String^ email = readerStudents["Email"]->ToString();
         int^ departmentID = Convert::ToInt32(readerStudents["DepartmentID"]);  // Get the department ID
 
         // Create student object, note that the major is no longer needed, so we can leave it out
         Student^ student = gcnew Student(userID, firstName, lastName, email, studentID, departmentID);
         cachedStudents->Add(student);
+        
+        String^ fullStudentName;
+		fullStudentName = firstName + " " + lastName;
+
+		if (cboxStudentName->Items->Contains(fullStudentName))
+		{
+			continue;
+		}
+
         cboxStudentName->Items->Add(firstName + " " + lastName);  // Add the full name to the ComboBox
     }
 

@@ -132,6 +132,9 @@
     <ClCompile Include="ViewGradesAdmin.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ClassRoster.resx">
+      <DependentUpon>ClassRoster.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CourseManagementForm.resx">
       <DependentUpon>CourseManagementForm.h</DependentUpon>
     </EmbeddedResource>
