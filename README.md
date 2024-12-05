@@ -4,6 +4,9 @@
 
 This project is a University Student Management System developed using Visual C++ on Microsoft Visual Studio platform. The system supports the management of student records, course enrollment, faculty management, grade tracking, and more. It provides an intuitive user interface (UI) with multiple forms and tools, as well as the ability to interact with a backend database. The project also follows key security, performance, and usability standards.
 
+## Demo
+Watch the [demo](https://youtu.be/DzYxCfjFrTg)
+
 ## Functional Requirements
 
 ### 1. User Authentication
