@@ -29,23 +29,15 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCours
     DatabaseManager^ db = gcnew DatabaseManager();
     db->ConnectToDatabase();
 
-    String^ getDepartmentIDQuery = "SELECT DepartmentID FROM Departments WHERE DepartmentName = @DepartmentName;";
-    MySqlCommand^ getDeptIDCmd = gcnew MySqlCommand(getDepartmentIDQuery, db->GetConnection());
-    getDeptIDCmd->Parameters->AddWithValue("@DepartmentName", selectedDepartmentName);
-
-    Object^ departmentIDObj = getDeptIDCmd->ExecuteScalar();
-    if (departmentIDObj == nullptr)
-    {
-        MessageBox::Show("Department not found.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-        db->CloseConnection();
-        return;
-    }
-
-    int departmentID = Convert::ToInt32(departmentIDObj);
-
     // Retrieve the Faculty ID based on the selected faculty name
     String^ facultyName = cboxFaculty->SelectedItem->ToString(); // Assuming comboBoxFacultyID for Faculty Name
-    String^ getFacultyIDQuery = "SELECT FacultyID FROM Faculty WHERE FacultyName = @FacultyName;";
+    String^ getFacultyIDQuery = R"(
+        SELECT f.FacultyID 
+        FROM Faculty f
+        INNER JOIN Users u ON f.UserID = u.UserID
+        WHERE CONCAT(u.FirstName, ' ', u.LastName) = @FacultyName;
+    )";
+
     MySqlCommand^ getFacultyIDCmd = gcnew MySqlCommand(getFacultyIDQuery, db->GetConnection());
     getFacultyIDCmd->Parameters->AddWithValue("@FacultyName", facultyName);
 
@@ -72,13 +64,12 @@ System::Void AshesiUniversityStudentRecordManagementSystem::ManageAvailableCours
 
             // SQL query for insert or update into CourseOffering table
             String^ query = R"(
-                INSERT INTO CourseOffering (CourseID, DepartmentID, Semester, FacultyID, Year, MaxCapacity, Status)
-                VALUES (@CourseID, @DepartmentID, @Semester, @FacultyID, @Year, @MaxCapacity, @Status);
+                INSERT INTO CourseOfferings (CourseID, FacultyID, Semester, Year, MaxCapacity, Status)
+                VALUES (@CourseID, @FacultyID, @Semester, @Year, @MaxCapacity, @Status);
             )";
 
             MySqlCommand^ cmd = gcnew MySqlCommand(query, db->GetConnection());
             cmd->Parameters->AddWithValue("@CourseID", CourseID);
-            cmd->Parameters->AddWithValue("@DepartmentID", departmentID);
             cmd->Parameters->AddWithValue("@Semester", semester);
             cmd->Parameters->AddWithValue("@FacultyID", facultyID);
             cmd->Parameters->AddWithValue("@Year", year);
