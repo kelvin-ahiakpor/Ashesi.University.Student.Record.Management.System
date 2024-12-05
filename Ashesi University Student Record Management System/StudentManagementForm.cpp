@@ -253,20 +253,6 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentManagementFor
         return;
     }
 
-    //More validation
-	if (dateTimePicker1->Value >= DateTime::Now)
-	{
-		MessageBox::Show("Date of birth cannot be in the future.", "Validation Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
-		return;
-	}
-    // Validate enrollment date enrollment date cannot be before birthday
-	if (dateTimePicker2->Value <= dateTimePicker1->Value)
-	{
-		MessageBox::Show("Enrollment date cannot be before date of birth.", "Validation Error", MessageBoxButtons::OK, MessageBoxIcon::Warning);
-		return;
-	}
-	// Validate expected graduation date
-	if (dateTimePicker3->Value <= dateTimePicker2->Value)
     db->ConnectToDatabase();
 
     String^ hashedPassword = PasswordManager::HashPassword("password123");
