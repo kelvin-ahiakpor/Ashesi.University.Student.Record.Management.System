@@ -420,7 +420,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::FacultyManagementFor
         SELECT LAST_INSERT_ID();
         )";
 
-	String^ hashedPassword = PasswordManager::HashPassword("Password123");
+	String^ hashedPassword = PasswordManager::HashPassword("password123");
     MySqlCommand^ cmdInsertUser = gcnew MySqlCommand(insertUserQuery, db->GetConnection());
     cmdInsertUser->Parameters->AddWithValue("@FirstName", textBox1->Text);
     cmdInsertUser->Parameters->AddWithValue("@LastName", textBox2->Text);

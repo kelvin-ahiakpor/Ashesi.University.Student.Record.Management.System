@@ -4,6 +4,7 @@
 #include "Faculty.h"
 #include "Admin.h"
 #include <string>
+#include "DatabaseManager.h"
 
 namespace AshesiUniversityStudentRecordManagementSystem {
 
@@ -27,6 +28,8 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		String^ userRole;
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Button^ btnCancel;
+	private: System::Windows::Forms::ComboBox^ cboxCourses;
+
 
 	public:
 		int^ studentid;
@@ -99,11 +102,11 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(ClassRoster::typeid));
 			this->btnClassRoster = (gcnew System::Windows::Forms::Button());
 			this->richTxtTranscript = (gcnew System::Windows::Forms::RichTextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->btnCancel = (gcnew System::Windows::Forms::Button());
+			this->cboxCourses = (gcnew System::Windows::Forms::ComboBox());
 			this->SuspendLayout();
 			// 
 			// btnClassRoster
@@ -148,12 +151,23 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->btnCancel->UseVisualStyleBackColor = true;
 			this->btnCancel->Click += gcnew System::EventHandler(this, &ClassRoster::btnCancel_Click);
 			// 
+			// cboxCourses
+			// 
+			this->cboxCourses->FormattingEnabled = true;
+			this->cboxCourses->Location = System::Drawing::Point(389, 12);
+			this->cboxCourses->Name = L"cboxCourses";
+			this->cboxCourses->Size = System::Drawing::Size(171, 21);
+			this->cboxCourses->TabIndex = 7;
+			this->cboxCourses->Text = L"Select Course";
+			this->cboxCourses->SelectedIndexChanged += gcnew System::EventHandler(this, &ClassRoster::cboxCourses_SelectedIndexChanged);
+			// 
 			// ClassRoster
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::Linen;
 			this->ClientSize = System::Drawing::Size(574, 358);
+			this->Controls->Add(this->cboxCourses);
 			this->Controls->Add(this->btnCancel);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->richTxtTranscript);
@@ -161,7 +175,6 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 			this->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(88)), static_cast<System::Int32>(static_cast<System::Byte>(0)),
 				static_cast<System::Int32>(static_cast<System::Byte>(0)));
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
-			//this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"ClassRoster";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
@@ -172,10 +185,10 @@ namespace AshesiUniversityStudentRecordManagementSystem {
 
 		}
 #pragma endregion
-	private: System::Void ClassRoster_Load(System::Object^ sender, System::EventArgs^ e) {
-
-	}
+	private: System::Void ClassRoster_Load(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void btnClassRoster_Click(System::Object^ sender, System::EventArgs^ e);
 	private: System::Void btnCancel_Click(System::Object^ sender, System::EventArgs^ e);
-	};
+	private: System::Void LoadLecturerCourses(DatabaseManager^ db);
+	private: System::Void cboxCourses_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e);
+};
 }
