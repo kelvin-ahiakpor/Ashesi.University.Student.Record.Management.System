@@ -18,6 +18,11 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentFor
     DatabaseManager^ db = DatabaseManager::GetInstance();
     try
     {
+        if (SearchButton->Text == "Refresh") {
+            txtBoxSearch->Text = "";
+            SearchButton_Click(sender, e);
+            return;
+        }
         SearchCourses(db, sender, e);
     }
     catch (Exception^ ex)
@@ -44,8 +49,8 @@ void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentForm::dataG
         textBox2->Text = selectedRow->Cells["CourseName"]->Value != nullptr
             ? selectedRow->Cells["CourseName"]->Value->ToString()
             : "";
-        courseIdbox->Text = selectedRow->Cells["CourseID"]->Value != nullptr
-            ? selectedRow->Cells["CourseID"]->Value->ToString()
+        courseIdbox->Text = selectedRow->Cells["Lecturer"]->Value != nullptr
+            ? selectedRow->Cells["Lecturer"]->Value->ToString()
             : "";
         textBox3->Text = selectedRow->Cells["Credits"]->Value != nullptr
             ? selectedRow->Cells["Credits"]->Value->ToString()
@@ -56,6 +61,9 @@ void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentForm::dataG
         richTextBox1->Text = selectedRow->Cells["Description"]->Value != nullptr
             ? selectedRow->Cells["Description"]->Value->ToString()
             : "No description available";
+		richTextBox3->Text = selectedRow->Cells["Schedule"]->Value != nullptr
+			? selectedRow->Cells["Schedule"]->Value->ToString()
+			: "";
         textBox4->Text = selectedRow->Cells["MaxCapacity"]->Value != nullptr
             ? selectedRow->Cells["MaxCapacity"]->Value->ToString()
             : "";
@@ -108,6 +116,16 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentFor
 
     String^ searchTerm = txtBoxSearch->Text->ToLower();  // Case-insensitive search
 
+	// Change button text to refresh if search term is not empty
+	if (String::IsNullOrWhiteSpace(searchTerm))
+	{
+		SearchButton->Text = "Search";
+	}
+	else
+	{
+        SearchButton->Text = "Refresh";
+	}
+
     // If search term is empty, display all courses
     if (String::IsNullOrWhiteSpace(searchTerm))
     {
@@ -117,15 +135,16 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentFor
         {
             dataGridView1->Rows->Add(
                 course->getCourseName(),           // Course Name
-                course->getCourseID(),             // Course ID
+                course->getLecturerName(),             // Lecturer Name
                 course->getCredits(),              // Credits
                 String::Join(", ", course->getPrerequisites()), // Prerequisites
                 course->getDescription(),          // Description
-                course->getDepartmentID(),         // Department ID
                 course->getYear(),                 // Year
                 course->getSchedule(),             // Schedule
                 course->getMaxCapacity(),          // Max Capacity
-                course->getOfferingID()            // Offering ID
+                course->getStatus(),            // Status
+				course->getOfferingID(),           // Offering ID
+				course->getCourseID()			  // Course ID
             );
       
         }
@@ -149,15 +168,16 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentFor
             // Add each filtered course's details to DataGridView
             dataGridView1->Rows->Add(
                 course->getCourseName(),           // Course Name
-                course->getCourseID(),             // Course ID
+                course->getLecturerName(),             // Lecturer Name
                 course->getCredits(),              // Credits
                 String::Join(", ", course->getPrerequisites()), // Prerequisites
                 course->getDescription(),          // Description
-                course->getDepartmentID(),         // Department ID
                 course->getYear(),                 // Year
                 course->getSchedule(),             // Schedule
                 course->getMaxCapacity(),          // Max Capacity
-                course->getOfferingID()            // Offering ID
+                course->getStatus(),            // Status 
+				course->getOfferingID(),           // Offering ID
+				course->getCourseID()			  // Course ID
             );
         }
     }
@@ -180,9 +200,11 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentFor
     // Define SQL query to fetch course offerings
     String^ query = R"(
             SELECT c.CourseName, c.Credits, c.Prerequisites, c.Description, 
-                   o.Year, o.Schedule, o.MaxCapacity, o.Status, o.OfferingID, o.CourseID
+                   o.Year, o.Schedule, o.MaxCapacity, o.Status, o.OfferingID, o.CourseID, u.FirstName, u.LastName
             FROM Courses c
             INNER JOIN CourseOfferings o ON c.CourseID = o.CourseID
+            INNER JOIN Faculty f ON o.FacultyID = f.FacultyID
+			INNER JOIN Users u ON f.UserID = u.UserID
             WHERE c.CourseName LIKE @CourseName
               AND c.IsActive = 1
               AND o.Status = 'Open'
@@ -199,8 +221,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentFor
 
     // Set up DataGridView columns
     dataGridView1->Columns->Add("CourseName", "Course Name");
-    dataGridView1->Columns->Add("OfferingID", "OfferingID");
-    dataGridView1->Columns->Add("CourseID", "CourseID");
+    dataGridView1->Columns->Add("Lecturer", "Lecturer");
     dataGridView1->Columns->Add("Credits", "Credits");
     dataGridView1->Columns->Add("Prerequisites", "Prerequisites");
     dataGridView1->Columns->Add("Description", "Description");
@@ -208,21 +229,24 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentFor
     dataGridView1->Columns->Add("Schedule", "Schedule");
     dataGridView1->Columns->Add("MaxCapacity", "Max Capacity");
     dataGridView1->Columns->Add("Status", "Status");
+	dataGridView1->Columns->Add("OfferingID", "Offering ID");
+    dataGridView1->Columns->Add("CourseID", "Course ID");
 
     // Populate DataGridView rows with query results
     while (reader->Read())
-    {
+    { 
         dataGridView1->Rows->Add(
             reader["CourseName"]->ToString(),
+            reader["FirstName"]->ToString() + " " + reader["LastName"]->ToString(),
             reader["Credits"]->ToString(),
-            reader["CourseID"]->ToString(),
-            reader["OfferingID"]->ToString(),
             reader["Prerequisites"] != DBNull::Value ? reader["Prerequisites"]->ToString() : "None",
             reader["Description"] != DBNull::Value ? reader["Description"]->ToString() : "No description available",
             reader["Year"]->ToString(),
             reader["Schedule"]->ToString(),
             reader["MaxCapacity"]->ToString(),
-            reader["Status"]->ToString()
+            reader["Status"]->ToString(),
+			reader["OfferingID"]->ToString(),
+            reader["CourseID"]->ToString()
         );
     }
 
@@ -259,19 +283,28 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentFor
         return;
     }
 
+    int courseID;
+    if (!Int32::TryParse(
+        dataGridView1->SelectedRows[0]->Cells["CourseID"]->Value->ToString(),
+        courseID))
+    {
+        MessageBox::Show("Invalid Course ID");
+        return;
+    }
+
     String^ enrollmentDate = DateTime::Now.ToString("yyyy-MM-dd");
     double defaultGradePoints = 0.0;
-
+        
     // Check for duplicate enrollment
     String^ checkQuery = R"(
             SELECT COUNT(*) AS Count 
             FROM Enrollments 
-            WHERE StudentID = @StudentID AND OfferingID = @OfferingID
+            WHERE StudentID = @StudentID AND CourseID = @CourseID
         )";
 
     MySqlCommand^ checkCmd = gcnew MySqlCommand(checkQuery, db->GetConnection());
     checkCmd->Parameters->AddWithValue("@StudentID", StudentID);
-    checkCmd->Parameters->AddWithValue("@OfferingID", offeringID);
+    checkCmd->Parameters->AddWithValue("@CourseID", courseID);
 
     Object^ countResult = checkCmd->ExecuteScalar();
     int enrollmentCount = countResult != nullptr ? Convert::ToInt32(countResult) : 0;
@@ -289,7 +322,7 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentFor
 
     MySqlCommand^ insertCmd = gcnew MySqlCommand(insertQuery, db->GetConnection());
     insertCmd->Parameters->AddWithValue("@StudentID", StudentID);
-    insertCmd->Parameters->AddWithValue("@CourseID", Int32::Parse(courseIdbox->Text));
+    insertCmd->Parameters->AddWithValue("@CourseID", courseID);
     insertCmd->Parameters->AddWithValue("@OfferingID", offeringID);
     insertCmd->Parameters->AddWithValue("@GradePoints", defaultGradePoints);
 
@@ -322,9 +355,13 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentFor
                 o.Schedule, 
                 o.MaxCapacity, 
                 o.Status, 
-                o.OfferingID
+                o.OfferingID,
+                u.FirstName,
+                u.LastName
             FROM Courses c
             INNER JOIN CourseOfferings o ON c.CourseID = o.CourseID
+            INNER JOIN Faculty f ON o.FacultyID = f.FacultyID
+			INNER JOIN Users u ON f.UserID = u.UserID
             WHERE c.IsActive = 1
               AND o.Status = 'Open'
         )";
@@ -356,10 +393,13 @@ System::Void AshesiUniversityStudentRecordManagementSystem::StudentEnrollmentFor
 
             // Additional course details
 			course->setDepartmentID(reader["DepartmentID"]->ToString());
+			course->setLecturerName(reader["FirstName"]->ToString() + " " + reader["LastName"]->ToString());
 			course->setYear(Convert::ToInt32(reader["Year"]));
 			course->setSchedule(reader["Schedule"]->ToString());
 			course->setMaxCapacity(Convert::ToInt32(reader["MaxCapacity"]));
-			course->setOfferingID(Convert::ToInt32(reader["OfferingID"]));
+			course->setStatus(reader["Status"]->ToString());
+            course->setOfferingID(Convert::ToInt32(reader["OfferingID"]));
+			course->setCourseID(Convert::ToInt32(reader["CourseID"]));
 
             // Clear and repopulate prerequisites
             course->getPrerequisites()->Clear();
